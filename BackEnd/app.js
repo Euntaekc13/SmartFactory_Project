@@ -8,7 +8,12 @@ const cors = require("cors");
 
 dotenv.config({ path: "./config/.env" });
 
-// const indexRouter = require("./routes");
+const authRouter = require("./routes/auth");
+const processManagementRouter = require("./routes/processManagement");
+const mornitoringRouter = require("./routes/mornitoring");
+const 설계ManagementRouter = require("./routes/설계Management");
+const softwareHistoryRouter = require("./routes/softwareHistory");
+const productionHistoryRouter = require("./routes/productionHistory");
 
 const { sequelize } = require("./models");
 
@@ -48,8 +53,12 @@ app.use(
   })
 );
 
-
-// app.use("/", indexRouter);
+app.use("/~~~", authRouter);
+app.use("/~~~", processManagementRouter);
+app.use("/~~~", mornitoringRouter);
+app.use("/~~~", 설계ManagementRouter);
+app.use("/~~~", softwareHistoryRouter);
+app.use("/~~~", productionHistoryRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

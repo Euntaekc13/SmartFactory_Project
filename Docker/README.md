@@ -12,22 +12,22 @@ mqtt 통신을 위한 broker를 docker를 이용해서 실행한다.
 
 ## broker 실행 순서
 1. download docker desktop </br>
-도커를 실행하기 위해서 docker desktop을 다운받고 기본 설정을 한다.</br>
-사이트 : https://www.docker.com/products/docker-desktop/
+  도커를 실행하기 위해서 docker desktop을 다운받고 기본 설정을 한다.</br>
+  사이트 : https://www.docker.com/products/docker-desktop/ </br>
 
 
 2. download docker file </br>
-Github에 있는 docker 폴더를 다운 받는다.
+  Github에 있는 docker 폴더를 다운 받는다.</br>
 
 3. docker run </br>
-broker가 도커에서 실행되게 하기 위해서 docker Container에 등록한다.</br>
-docker 파일이 설치되어 있는 곳에서 cmd를 열고 아래 명령어를 작성한다.
-```
-docker-compose up -d
-```
+  broker가 도커에서 실행되게 하기 위해서 docker Container에 등록한다.</br>
+  docker 파일이 설치되어 있는 곳에서 cmd를 열고 아래 명령어를 작성한다. </br>
+  ```
+   docker-compose up -d
+  ```
 
 4. docker desktop </br>
-docker desktop에서 Containers에 있는 mosquitto 이미지를 실행한다.
+  docker desktop에서 Containers에 있는 mosquitto 이미지를 실행한다.
 
 </br>
 </br>

@@ -1,0 +1,313 @@
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.exe
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\EdgeConfigFile.json
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.deps.json
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.json
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.dev.json
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.pdb
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Collections.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Common.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Compilation.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.ComponentModel.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.SocketIO.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.PowerCollections.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Reflection.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Security.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Serialization.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.SmartFormat.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Lokad.ILPack.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\M2Mqtt.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\MoreLinq.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Context.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Coordination.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Interop.WaitHandles.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Oop.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Tasks.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Cancellation.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Collections.Deque.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Disposables.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\RestSharp.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.AssemblyReference.cache
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfoInputs.cache
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfo.cs
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CoreCompileInputs.cache
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.sourcelink.json
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CopyComplete
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.dll
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.pdb
+C:\Users\LeeHuyun\Desktop\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.genruntimeconfig.cache
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.exe
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Collections.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Common.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Compilation.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.ComponentModel.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.SocketIO.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.PowerCollections.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Reflection.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Security.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Serialization.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.SmartFormat.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Lokad.ILPack.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\M2Mqtt.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\MoreLinq.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Context.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Coordination.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Interop.WaitHandles.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Oop.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Tasks.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Cancellation.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Collections.Deque.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Disposables.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\RestSharp.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.AssemblyReference.cache
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfoInputs.cache
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfo.cs
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CoreCompileInputs.cache
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.sourcelink.json
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CopyComplete
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.dll
+C:\Users\LeeHuyun\Desktop\[MetaCamp] Flexing Edukit Manual\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.pdb
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.exe
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\EdgeConfigFile.json
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.deps.json
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.json
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.dev.json
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.pdb
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Collections.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Common.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Compilation.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.ComponentModel.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.SocketIO.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.PowerCollections.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Reflection.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Security.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Serialization.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.SmartFormat.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Lokad.ILPack.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\M2Mqtt.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\MoreLinq.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Context.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Coordination.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Interop.WaitHandles.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Oop.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Tasks.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Cancellation.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Collections.Deque.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Disposables.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\RestSharp.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.AssemblyReference.cache
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.GeneratedMSBuildEditorConfig.editorconfig
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfoInputs.cache
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfo.cs
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CoreCompileInputs.cache
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.sourcelink.json
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CopyComplete
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.dll
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.pdb
+E:\1.교육사업 자료\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.genruntimeconfig.cache
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.exe
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\EdgeConfigFile.json
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.deps.json
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.json
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.dev.json
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.pdb
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Collections.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Common.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Compilation.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.ComponentModel.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.SocketIO.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.PowerCollections.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Reflection.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Security.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Serialization.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.SmartFormat.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Lokad.ILPack.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\M2Mqtt.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\MoreLinq.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Context.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Coordination.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Interop.WaitHandles.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Oop.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Tasks.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Cancellation.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Collections.Deque.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Disposables.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\RestSharp.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.AssemblyReference.cache
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfoInputs.cache
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfo.cs
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CoreCompileInputs.cache
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.sourcelink.json
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CopyComplete
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.dll
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.pdb
+D:\Projects\교육사업\0.20221121_스마트팩토리_교육\MetaCamp\FlexingEdukit\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.genruntimeconfig.cache
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.exe
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\EdgeConfigFile.json
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.deps.json
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.json
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.runtimeconfig.dev.json
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\SmartConnector.pdb
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Collections.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Common.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Compilation.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.ComponentModel.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Net.SocketIO.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.PowerCollections.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Reflection.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Security.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.Serialization.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Ecng.SmartFormat.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Lokad.ILPack.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\M2Mqtt.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\MoreLinq.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Context.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Coordination.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Interop.WaitHandles.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Oop.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.AsyncEx.Tasks.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Cancellation.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Collections.Deque.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\Nito.Disposables.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\RestSharp.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.AssemblyInfo.cs
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.sourcelink.json
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.csproj.CopyComplete
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.dll
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.pdb
+C:\Users\User\Desktop\에듀킷\SmartConnector\obj\Debug\netcoreapp3.1\SmartConnector.genruntimeconfig.cache

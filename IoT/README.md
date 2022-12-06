@@ -32,12 +32,12 @@ PLC와 다른 프레임을 연결 해주기 위한 Connector 역할을 한다. <
 ## 실행 순서 
 
 1. PLC와 PC 연결 </br>
-   PLC와 PC의 통신을 위해서 서로를 LAN선으로 연결한다.   
-
+   PLC와 PC의 통신을 위해서 서로를 LAN선으로 연결한다. </br></br>
+   
 2. .net core 3.1 설치 </br>
    코드를 실행하기 위해선 C#에서 .net core 3.1을 필수적으로 설치해야 한다. </br>
-   사이트 : https://dotnet.microsoft.com/en-us/download/dotnet/3.1
-
+   사이트 : https://dotnet.microsoft.com/en-us/download/dotnet/3.1 </br></br>
+   
 3. EdgeConfigFile 설정
    ```C#
     "EdukitId": "topic",  // 사용할 topic 설정
@@ -49,6 +49,7 @@ PLC와 다른 프레임을 연결 해주기 위한 Connector 역할을 한다. <
     "DelayTime": "1000",   // 반복 시간
     "DebugType": "Debug"
    ```
+</br>
 
 4. 코드 실행 </br>
    SmartConnector 실행 (F5)

@@ -7,27 +7,27 @@
         </div>
 
         <div class="login__content">
-          <span style="font-size: 40px; font-weight: 900">Create new account<span style="color: #5bc0de">.</span></span
+          <span style="font-size: 40px; font-weight: 900">Welcome<span style="color: #5bc0de">.</span></span
           ><br />
           <div class="center__content">
-            <span style="color: gray">Already A Member? </span>
-            <span class="loginString"> Log in</span>
+            <span style="color: gray">Login to your Account </span>
+            <!-- <span class="loginString"> Log in</span> -->
           </div>
           <v-form ref="form" class="login__form">
             <!-- <v-text-field label="Name" outlined background-color="#ffffff" class="textfield_"></v-text-field>
             <v-text-field label="E-mail" outlined background-color="#ffffff" filled></v-text-field>
             <v-text-field label="Password" outlined background-color="#ffffff" type="password"></v-text-field> -->
-            <div class="row">
+            <!-- <div class="row">
               <span>
                 <input id="class" class="gate" type="text" placeholder="Name" /><label for="class"
                   >&nbsp;&nbsp;Name&nbsp;&nbsp;</label
                 >
               </span>
-            </div>
+            </div> -->
             <div class="row">
               <span>
-                <input id="class" class="gate" type="text" placeholder="Email" /><label for="class"
-                  >&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;</label
+                <input id="class" class="gate" type="text" placeholder="Employee number" /><label for="class"
+                  >&nbsp;Number&nbsp;</label
                 >
               </span>
             </div>
@@ -55,9 +55,8 @@
 </template>
 
 <script>
-import { auth } from '@/api/auth'
+import { auth } from '@/api/index'
 export default {
-  name:'login',
   methods: {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)
@@ -134,6 +133,7 @@ export default {
 .createBtn {
   display: flex;
   flex-direction: row-reverse;
+  margin-top: 2rem;
 }
 
 .raiseBtn:hover,
@@ -261,6 +261,10 @@ span:nth-child(2) .gate:active {
   // background: #032429;
 
   text-align: center;
+
+  &:first-child {
+    // padding: 40px 30px;
+  }
 
   span {
     position: relative;

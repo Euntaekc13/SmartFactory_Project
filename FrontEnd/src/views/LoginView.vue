@@ -57,6 +57,7 @@
 <script>
 import { auth } from '@/api/auth'
 export default {
+  name:'login',
   methods: {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)

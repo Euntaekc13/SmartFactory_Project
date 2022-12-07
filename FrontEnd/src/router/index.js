@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import EXView from '../views/EX.vue'
 // import Sample from '../views/Sample.vue'
 
 Vue.use(VueRouter)
@@ -15,10 +14,8 @@ const requireAuth = (to, from, next) => {
 const routes = [
   {
     path: '/',
-    name: 'EX',
-    component: EXView,
-    // 네비게이션 가드가 필요한 부분에서 beforeEnter를 이용해서 쓰면 된다.
-    beforeEnter: requireAuth
+    name: 'line',
+    component: () => import('../views/LoginView.vue')
   },
   {
     path: '/login',
@@ -26,10 +23,20 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
+    path: '/monitoring',
+    name: 'monitoring',
+    component: () => import('../views/Monitoring.vue')
+  },
+  {
+    path: '/machine',
+    name: 'machine',
+    component: () => import('../views/Machine.vue')
+  },
+  {
     // board를 통해서 동적 라우팅을 응용하자.
-    path: '/sampleview',
-    name: 'sampleview',
-    component: () => import('../views/SampleView.vue'),
+    path: '/history',
+    name: 'history',
+    component: () => import('../views/History.vue'),
   },
   {
     path: '/*',

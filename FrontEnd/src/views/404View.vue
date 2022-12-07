@@ -5,7 +5,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name:'404page',
+  data(){
+  return {
+    
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

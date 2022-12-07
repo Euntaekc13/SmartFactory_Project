@@ -3,6 +3,7 @@
 
 200
 success
+insufficient : 보낼 data가 없거나 부족할 때
 
 404
 invalide : invalid email
@@ -11,7 +12,7 @@ invalidu : invalid user
 invalidt : invalid token
 different : different UserId
 expired : token 만료
-notenough : 원하는 data가 req에 아예 없거나 부족할 때
+notenough : 원하는 data가 param이나 req에 아예 없거나 부족할 때
 
 500
 server error
@@ -21,6 +22,10 @@ const resStatus = {
   success: {
     code: 200,
     message: "success",
+  },
+  insufficient: {
+    code: 200,
+    message: "nothing",
   },
   invalide: {
     code: 404,

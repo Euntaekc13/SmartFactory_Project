@@ -4,9 +4,9 @@ const { verifyToken } = require("../controllers/middlewares");
 
 const Machine = require("../models/machine");
 
-// 공정 전체 정보 GET
-router.GET("/~~~~", verifyToken, async (req, res, next) => {
-  console.log("GET /~~~~ 진입");
+// 공정 전체 정보 조회
+router.GET("/", verifyToken, async (req, res, next) => {
+  console.log("GET / 진입");
   const machine = await Machine.findAll;
   try {
     return res.status(resStatus.success.code).json({

@@ -1,9 +1,7 @@
 <template>
   <div class="home">
-    <div class="sideBar">
-      <Navbar></Navbar>
-    </div>
-    <div class="contents">ㅎ2222222222222222222</div>
+    <Navbar></Navbar>
+    <v-main> ㅎ2222222222222222222 </v-main>
   </div>
 </template>
 
@@ -21,8 +19,5 @@ export default {
 .home {
 }
 .sideBar {
-}
-.contents {
-  padding-left: 65px;
 }
 </style>

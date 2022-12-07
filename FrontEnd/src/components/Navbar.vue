@@ -1,24 +1,25 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    class="drawer"
     app
-    clipped-left
-    flat
     :mini-variant.sync="sideBarOpen"
     permanent
     dark
-    position:fixed
+    position:absolute
     height="100vh"
   >
     <!-- Once User information is set, this part will be rerendered based on the information -->
     <div class="UserInfo">
-      <v-list-item-avatar>
-        <v-img src="https://randomuser.me/api/portraits/women/25.jpg">
-          <v-btn icon @click.stop="sideBarOpen = !sideBarOpen">
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-        </v-img>
+      <v-list-item-avatar v-if="sideBarOpen" size="42">
+        <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
+          <v-img src="https://randomuser.me/api/portraits/women/25.jpg"> </v-img>
+        </v-btn>
+      </v-list-item-avatar>
+
+      <v-list-item-avatar v-else size="96">
+        <v-btn size="80" icon @click.stop="sideBarOpen = !sideBarOpen">
+          <v-img src="https://randomuser.me/api/portraits/women/25.jpg"> </v-img>
+        </v-btn>
       </v-list-item-avatar>
     </div>
 
@@ -31,7 +32,7 @@
       </v-list-item>
     </v-list>
 
-    <div v-show="!sideBarOpen" class="sideBarBottom" dense>
+    <div v-show="!sideBarOpen" class="controlBar" dense>
       <router-link to="/mypage">
         <button>
           <v-icon>
@@ -57,7 +58,7 @@
 
     <v-divider></v-divider>
 
-    <v-list v-show="!sideBarOpen" dense rounded>
+    <v-list v-show="!sideBarOpen" dense rounded class="SideBarList">
       <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -70,8 +71,6 @@
     </v-list>
 
     <v-divider></v-divider>
-
-    <v-spacer></v-spacer>
   </v-navigation-drawer>
 </template>
 
@@ -80,6 +79,7 @@ export default {
   data() {
     return {
       drawer: true,
+      src: 'https://randomuser.me/api/portraits/women/25.jpg',
       currentUserInfo: {
         employeeNumber: '',
         email: '',
@@ -128,12 +128,7 @@ export default {
       }
     },
     logout() {
-      // this.localStorage.removeItem('employeeNumber')
-      // this.localStorage.removeItem('email')
-      // this.localStorage.removeItem('name')
-      // this.currentUserInfo.employeeNumber = ''
-      // this.currentUserInfo.email = ''
-      // this.currentUserInfo.name = ''
+      console.log('Try logout')
     }
   }
   //
@@ -144,17 +139,17 @@ export default {
 .UserInfo {
   display: flex;
   justify-content: center;
+  font-family: 'Raleway', sans-serif;
+  align-items: center;
 }
-.sideBarBottom {
+.SideBarList {
+  font-family: 'Raleway', sans-serif;
+}
+.controlBar {
   display: flex;
   // flex-direction: column-reverse;
   justify-content: space-evenly;
   margin-bottom: 15px;
-}
-.drawer {
-  display: grid;
-}
-.test {
-  align-self: flex-end;
+  font-family: 'Raleway', sans-serif;
 }
 </style>

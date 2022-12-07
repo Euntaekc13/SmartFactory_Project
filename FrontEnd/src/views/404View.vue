@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div><Navbar></Navbar></div>
-    <div><h1>404 Pageeeeeeeeeeeeeee</h1></div>
+    <Navbar></Navbar>
+    <v-main>
+      <h1>404 Pageeeeeeeeeeeeeee</h1>
+    </v-main>
   </div>
 </template>
 

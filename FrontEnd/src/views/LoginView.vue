@@ -13,27 +13,36 @@
             <span style="color: gray">Login to your Account </span>
 
           </div>
-          <v-form ref="form" class="login__form">
+          <ValidationObserver ref="loginForm" v-slot="{ handleSubmit, invalid, validate }">
+          <form  @submit.prevent="handleSubmit(login)" class="login__form">
 
             <div class="row">
               <span>
-                <input id="class1" class="gate" type="text" placeholder="Employee number" v-model="employee_number"/><label for="class"
+                <ValidationProvider v-slot="v" name="사번" rules="required|numeric">
+                <input id="class1" class="gate" type="text" label="사번" placeholder="Employee number" v-model="employee_number" /><label for="class"
                   >&nbsp;Number&nbsp;</label
                 >
+                <span>&nbsp;{{ v.errors[0] }}</span>
+                </ValidationProvider>
               </span>
             </div>
             <div class="row">
               <span>
-                <input id="class2" class="gate" type="password" placeholder="Password" autocomplete="off" v-model="password"/><label for="class"
+                <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
+                <input id="class2" class="gate" type="password" label="비밀번호" placeholder="Password" autocomplete="off" v-model="password" /><label for="class"
                   >Password</label
                 >
+                <span>&nbsp;{{ v.errors[0] }}</span>
+                </ValidationProvider>
+                
               </span>
             </div>
-
             <div class="createBtn">
-              <button type="button" class="raiseBtn" @click="login">Create account</button>
+              <button type="button" class="raiseBtn" @click="login" :disabled="invalid || !validate">Create account</button>
             </div>
-          </v-form>
+          </form>
+          </ValidationObserver>
+
 
         </div>
       </div>
@@ -42,9 +51,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapActions } from 'vuex'
+import Validate from '@/mixins/Validate.vue'
 
 export default {
+  mixins: [Validate],
   data () {
     return {
       employee_number : '',
@@ -55,11 +67,18 @@ export default {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)
     ...mapActions('Auth',['LOGIN_AUTH']) ,
-    login() {
+    async login() {
       console.log('로그인 버튼');
       console.log(this.employee_number, this.password);
       
-      this.LOGIN_AUTH({ employee_number : this.employee_number, password : this.password})
+      // await axios.post(process.env.VUE_APP_API_DOMAIN + '/login',{
+      //   employee_number : this.employee_number,
+      //   password : this.password
+      // }).then(res=>console.log(res))
+
+      this.LOGIN_AUTH({ employee_number : this.employee_number, password : this.password}).then(()=>{
+        this.$router.push('/')
+      })
       // console.log(this.LOGIN_AUTH(id,password));
     }
   }
@@ -271,7 +290,10 @@ span:nth-child(2) .gate:active {
   span {
     position: relative;
     display: inline-block;
-    margin: 10px 0px 15px 0px;
+    margin: 10px 0px 0px 0px;
   }
+  .err {
+  color: red;
+}
 }
 </style>

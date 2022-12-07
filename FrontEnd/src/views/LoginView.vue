@@ -11,43 +11,30 @@
           ><br />
           <div class="center__content">
             <span style="color: gray">Login to your Account </span>
-            <!-- <span class="loginString"> Log in</span> -->
+
           </div>
           <v-form ref="form" class="login__form">
-            <!-- <v-text-field label="Name" outlined background-color="#ffffff" class="textfield_"></v-text-field>
-            <v-text-field label="E-mail" outlined background-color="#ffffff" filled></v-text-field>
-            <v-text-field label="Password" outlined background-color="#ffffff" type="password"></v-text-field> -->
-            <!-- <div class="row">
-              <span>
-                <input id="class" class="gate" type="text" placeholder="Name" /><label for="class"
-                  >&nbsp;&nbsp;Name&nbsp;&nbsp;</label
-                >
-              </span>
-            </div> -->
+
             <div class="row">
               <span>
-                <input id="class" class="gate" type="text" placeholder="Employee number" /><label for="class"
+                <input id="class1" class="gate" type="text" placeholder="Employee number" v-model="employee_number"/><label for="class"
                   >&nbsp;Number&nbsp;</label
                 >
               </span>
             </div>
             <div class="row">
               <span>
-                <input id="class" class="gate" type="password" placeholder="Password" /><label for="class"
+                <input id="class2" class="gate" type="password" placeholder="Password" autocomplete="off" v-model="password"/><label for="class"
                   >Password</label
                 >
               </span>
             </div>
 
             <div class="createBtn">
-              <button class="raiseBtn">Create account</button>
+              <button type="button" class="raiseBtn" @click="login">Create account</button>
             </div>
           </v-form>
-          <!-- <div class="row">
-            <span>
-              <input id="class" class="gate" type="text" placeholder="Wizard!" /><label for="class">Class</label>
-            </span>
-          </div> -->
+
         </div>
       </div>
     </div>
@@ -55,11 +42,26 @@
 </template>
 
 <script>
-import { auth } from '@/api/index'
+import { mapActions } from 'vuex'
+
 export default {
+  data () {
+    return {
+      employee_number : '',
+      password : '',
+    }
+  },
   methods: {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)
+    ...mapActions('Auth',['LOGIN_AUTH']) ,
+    login() {
+      console.log('로그인 버튼');
+      console.log(this.employee_number, this.password);
+      
+      this.LOGIN_AUTH({ employee_number : this.employee_number, password : this.password})
+      // console.log(this.LOGIN_AUTH(id,password));
+    }
   }
 }
 </script>

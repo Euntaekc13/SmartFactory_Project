@@ -1,14 +1,39 @@
 const express = require("express");
 const router = express.Router();
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { resStatus } = require("../lib/responseStatus");
 
+// 로그인을 위한 회원가입(관리자만 접근)
+router.post("/join", async (req, res, next) => {
+  console.log("POST /login/join 진입");
+  console.log(req.body);
+  try {
+    const { employee_number, email, name, password, authorization } = req.body;
+
+    const hash = await bcrypt.hash(password, 12);
+    await User.create({
+      employee_number,
+      email,
+      name,
+      password: hash,
+      authorization,
+    });
+
+    return res.status(resStatus.success.code).json({
+      // 200
+      message: resStatus.success.message, // success
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 // 로그인
-router.GET("/", async (req, res, next) => {
-  console.log("GET /login 진입");
+router.post("/", async (req, res, next) => {
+  console.log("POST /login 진입");
   console.log(req.body);
   try {
     const { employee_number, password } = req.body;
@@ -25,19 +50,10 @@ router.GET("/", async (req, res, next) => {
         message: resStatus.invalid.message, // (204) req로 받은 data가 유효하지 않을 때
       });
     } else {
-      const token = jwt.sign(
-        {
-          employee_number: user.employee_number,
-          email: user.email,
-          name: user.name,
-          authorization: user.authorization,
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "60m",
-          issuer: "KYOL",
-        }
-      );
+      const token = jwt.sign({}, process.env.JWT_SECRET, {
+        expiresIn: "60m",
+        issuer: "KYOL",
+      });
       const user = await User.findOne({
         where: { employee_number },
         attributes: ["id", "employee_number", "email", "name", "authorization"],
@@ -54,3 +70,5 @@ router.GET("/", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

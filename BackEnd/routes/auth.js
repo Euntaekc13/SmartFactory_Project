@@ -13,7 +13,7 @@ router.GET("/login", async (req, res, next) => {
   const { employee_number, password } = req.body;
   const user = await User.findOne({ where: { employee_number } });
   try {
-    if (!user || !password) {
+    if (!employee_number || !password) {
       return res.status(resStatus.notenough.code).json({
         message: resStatus.notenough.message, // (404) 원하는 data가 req에 아예 없거나 부족할 때
       });
@@ -41,7 +41,7 @@ router.GET("/login", async (req, res, next) => {
       return res.status(resStatus.success.code).json({
         message: resStatus.success.message, // (200) success
         token,
-        user: exUser,
+        data: { user },
       });
     }
   } catch (error) {

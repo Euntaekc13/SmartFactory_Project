@@ -1,4 +1,5 @@
 import { request } from "./index"
+import axios from 'axios'
 
 export const auth = {
   login(id, password) {

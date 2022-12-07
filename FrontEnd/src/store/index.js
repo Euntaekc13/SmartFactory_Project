@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-
+import { setAuthInHeader } from '../api/auth'
 import {Machine} from './Machine'
 import {Auth} from './auth'
 import { SampleStore } from './SampleStore'

@@ -7,8 +7,8 @@ const User = require("../models/user");
 const { resStatus } = require("../lib/responseStatus");
 
 // 로그인
-router.GET("/~~", async (req, res, next) => {
-  console.log("GET /~~~ 진입");
+router.GET("/login", async (req, res, next) => {
+  console.log("GET /login 진입");
   console.log(req.body);
   const { employee_number, password } = req.body;
   const user = await User.findOne({ where: { employee_number } });

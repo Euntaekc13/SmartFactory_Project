@@ -1,15 +1,160 @@
 <template>
-  <!-- 넷바 부분이다 -->
-  <div>
-    <nav>
-      <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |
-      <router-link to="/login">login</router-link> | <router-link to="/board/1">board</router-link>
-    </nav>
-  </div>
+  <v-navigation-drawer
+    v-model="drawer"
+    class="drawer"
+    app
+    clipped-left
+    flat
+    :mini-variant.sync="sideBarOpen"
+    permanent
+    dark
+    position:fixed
+    height="100vh"
+  >
+    <!-- Once User information is set, this part will be rerendered based on the information -->
+    <div class="UserInfo">
+      <v-list-item-avatar>
+        <v-img src="https://randomuser.me/api/portraits/women/25.jpg">
+          <v-btn icon @click.stop="sideBarOpen = !sideBarOpen">
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+        </v-img>
+      </v-list-item-avatar>
+    </div>
+
+    <v-list v-show="!sideBarOpen">
+      <v-list-item class="UserInfo">
+        <span>{{ currentUserInfo.name }}</span>
+      </v-list-item>
+      <v-list-item class="UserInfo"
+        ><span>{{ currentUserInfo.employeeNumber }}</span>
+      </v-list-item>
+    </v-list>
+
+    <div v-show="!sideBarOpen" class="sideBarBottom" dense>
+      <router-link to="/mypage">
+        <button>
+          <v-icon>
+            {{ myPageIcon.icon }}
+          </v-icon>
+        </button>
+      </router-link>
+      <router-link to="/login" @click="logout">
+        <button>
+          <v-icon>
+            {{ logOutIcon.icon }}
+          </v-icon>
+        </button>
+      </router-link>
+      <router-link to="/configuration">
+        <button>
+          <v-icon>
+            {{ configurationIcon.icon }}
+          </v-icon>
+        </button>
+      </router-link>
+    </div>
+
+    <v-divider></v-divider>
+
+    <v-list v-show="!sideBarOpen" dense rounded>
+      <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
+    <v-divider></v-divider>
+
+    <v-spacer></v-spacer>
+  </v-navigation-drawer>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      drawer: true,
+      currentUserInfo: {
+        employeeNumber: '',
+        email: '',
+        name: '',
+        authorization: 'level A'
+      },
+      contentsList: [
+        { title: 'Line Management', icon: 'mdi-factory', route: 'monitoring' },
+        { title: 'Process Management', icon: 'mdi-view-dashboard', route: 'machine' },
+        { title: 'Production History', icon: 'mdi-clipboard-text', route: 'history' }
+      ],
+      logOutIcon: {
+        title: 'logout',
+        icon: 'mdi-logout'
+      },
+      myPageIcon: {
+        title: 'myPage',
+        icon: 'mdi-account-circle'
+      },
+      configurationIcon: {
+        title: 'configuration',
+        icon: 'mdi-octagram'
+      },
+      sideBarOpen: true
+    }
+  },
+  mounted() {
+    this.CurrentUserInfo()
+  },
+  methods: {
+    CurrentUserInfo() {
+      const employeeNumber = localStorage.getItem('employeeNumber')
+      const email = localStorage.getItem('email')
+      const name = localStorage.getItem('name')
+      this.currentUserInfo.employeeNumber = employeeNumber
+      this.currentUserInfo.email = email
+      this.currentUserInfo.name = name
+    },
+    routing(route) {
+      console.log(`${window.location.href}`)
+      console.log(`${route}`)
+      if (window.location.href.split('/')[3] !== route) {
+        this.$router.push(`${route}`)
+      } else {
+        console.log('same page')
+      }
+    },
+    logout() {
+      // this.localStorage.removeItem('employeeNumber')
+      // this.localStorage.removeItem('email')
+      // this.localStorage.removeItem('name')
+      // this.currentUserInfo.employeeNumber = ''
+      // this.currentUserInfo.email = ''
+      // this.currentUserInfo.name = ''
+    }
+  }
+  //
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.UserInfo {
+  display: flex;
+  justify-content: center;
+}
+.sideBarBottom {
+  display: flex;
+  // flex-direction: column-reverse;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+}
+.drawer {
+  display: grid;
+}
+.test {
+  align-self: flex-end;
+}
+</style>

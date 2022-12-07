@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1>404 Page</h1>
+    <div><Navbar></Navbar></div>
+    <div><h1>404 Pageeeeeeeeeeeeeee</h1></div>
   </div>
 </template>
 
 <script>
-export default {}
+import Navbar from '@/components/Navbar.vue'
+export default {
+  components: {
+    Navbar
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

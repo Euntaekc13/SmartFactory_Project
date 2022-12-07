@@ -28,6 +28,3 @@ export const request = (method, url, data) => {
 //     return request('get', '/board')
 //   }
 // }
-
-
-

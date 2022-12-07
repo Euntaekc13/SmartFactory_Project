@@ -29,7 +29,7 @@ const routes = [
     // board를 통해서 동적 라우팅을 응용하자.
     path: '/sampleview',
     name: 'sampleview',
-    component: () => import('../views/SampleView.vue'),
+    component: () => import('../views/SampleView.vue')
   },
   {
     path: '/*',
@@ -43,8 +43,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-
-
 
 export default router

@@ -1,7 +1,12 @@
 const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
-// const User = require("./user");
+const Machine = require("./machine");
+const Part_default = require("./part_default");
+const Part = require("./part");
+const Software_history = require("./software_history");
+const Test_result = require("./test_result");
+const User = require("./user");
 
 const db = {};
 const sequelize = new Sequelize(

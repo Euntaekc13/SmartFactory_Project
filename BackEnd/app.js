@@ -11,7 +11,7 @@ dotenv.config({ path: "./config/.env" });
 const authRouter = require("./routes/auth");
 const lineRouter = require("./routes/line");
 const monitoringRouter = require("./routes/monitoring");
-// const machineManagementRouter = require("./routes/machineManagement");
+const machineManagementRouter = require("./routes/machineManagement");
 // const productionHistoryRouter = require("./routes/productionHistory");
 
 const { sequelize } = require("./models");
@@ -55,7 +55,7 @@ app.use(
 app.use("/login", authRouter);
 app.use("/", lineRouter);
 app.use("/monitoring", monitoringRouter);
-// app.use("/machine", machineManagementRouter);
+app.use("/machine", machineManagementRouter);
 // app.use("/history", productionHistoryRouter);
 
 app.use((req, res, next) => {

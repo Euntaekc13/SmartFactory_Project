@@ -5,7 +5,7 @@ const { verifyToken } = require("../controllers/middlewares");
 const { Machine } = require("../models");
 
 // 공정 전체 정보 조회
-router.GET("/", verifyToken, async (req, res, next) => {
+router.get("/", verifyToken, async (req, res, next) => {
   console.log("GET / 진입");
   try {
     const machine = await Machine.findAll();
@@ -23,3 +23,5 @@ router.GET("/", verifyToken, async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

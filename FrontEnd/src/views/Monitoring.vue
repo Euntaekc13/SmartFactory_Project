@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h3>Monitoring Page</h3>
   </div>
 </template>
 

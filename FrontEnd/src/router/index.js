@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'line',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/Line.vue')
   },
   {
     path: '/login',
@@ -25,7 +25,8 @@ const routes = [
   {
     path: '/monitoring',
     name: 'monitoring',
-    component: () => import('../views/Monitoring.vue')
+    component: () => import('../views/Monitoring.vue'),
+    requireAuth
   },
   {
     path: '/machine',

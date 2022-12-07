@@ -1,20 +1,12 @@
-import {auth} from '../api/auth'
-
+// import { auth } from '../api/auth'
 
 export const Auth = {
   namespaced: true,
 
-  state: {
-    
-  },
-  getters:{
+  state: {},
+  // getters:{
 
-  },
-  mutations:{
-
-  },
-  actions:{
-
-  }
-
-} 
+  // },
+  mutations: {},
+  actions: {}
+}

@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h3>Machine Page</h3>
   </div>
 </template>
 

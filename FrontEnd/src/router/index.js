@@ -10,17 +10,22 @@ const requireAuth = (to, from, next) => {
   const loginPath = `/login?rPath=${encodeURIComponent(to.path)}`
   isAuth ? next() : next(loginPath)
 }
+const requireLine = (to, from, next) => {
+  next({ path: '/line' })
+}
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    beforeEnter: requireLine
   },
   {
     path: '/line',
     name: 'line',
-    component: () => import('../views/Line.vue')
+    component: () => import('../views/Line.vue'),
+    beforeEnter: requireAuth
   },
   {
     path: '/login',

@@ -3,25 +3,24 @@ import { setAuthInHeader } from '../api/auth'
 
 // 유저 정보 수정 필요
 const InitTokenUser = {
-    id: null,
-    employee_number: null,
-    name: null,
-    email: null,
-    authorization: null
+  id: null,
+  employee_number: null,
+  name: null,
+  email: null,
+  authorization: null
 }
-
 
 export const Auth = {
   namespaced: true,
 
   state: {
-    TokenUser : InitTokenUser
+    TokenUser: InitTokenUser
   },
-  getters:{
-    TokenUser : state => state.TokenUser
+  getters: {
+    TokenUser: state => state.TokenUser
   },
   mutations: {
-    LOGIN (state, data) {
+    LOGIN(state, data) {
       if (!data.token) return
       // 여기 아래 user에 대한 내용을 넣어야 한다.
       state.TokenUser = data.user //token 갱신
@@ -31,14 +30,18 @@ export const Auth = {
     }
   },
   actions: {
-    LOGIN_AUTH({commit}, {employee_number, password}) {
-      return auth.login(employee_number,password).then((res)=>{
-        console.log('Login 성공 : ', res);
-      }).catch((res)=>{
-        console.log('Login 실패 : ', res);
-      }).finally(()=>{
-        console.log('final');
-      })
+    LOGIN_AUTH({ commit }, { employee_number, password }) {
+      return auth
+        .login(employee_number, password)
+        .then(res => {
+          console.log('Login 성공 : ', res)
+        })
+        .catch(res => {
+          console.log('Login 실패 : ', res)
+        })
+        .finally(() => {
+          console.log('final')
+        })
     }
   }
 }

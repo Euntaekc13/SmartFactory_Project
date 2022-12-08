@@ -3,20 +3,22 @@ import axios from 'axios'
 import router from '../router'
 
 // const DOMAIN = process.env.API_DOMAIN
-const DOMAIN = "192.168.0.16:3001"
+const DOMAIN = '192.168.0.16:3001'
 const UNAUTHORIZED = 401
 const onUnauthorized = () => {
   router.push('/login')
 }
 
 export const request = (method, url, data) => {
-  console.log(`##################33${DOMAIN + url}`);
+  console.log(`##################33${DOMAIN + url}`)
   return axios({
     method,
     url: DOMAIN + url,
     data
   })
-    .then(result => {result.data})
+    .then(result => {
+      result.data
+    })
     .catch(result => {
       const { status } = result.response
       // if (status === UNAUTHORIZED) return onUnauthorized()

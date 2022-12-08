@@ -8,16 +8,12 @@
 </template>
 
 <script>
-  export default {
-    name:'history',
-    data(){
-      return {
-
-      }
-    },
+export default {
+  name: 'History',
+  data() {
+    return {}
   }
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

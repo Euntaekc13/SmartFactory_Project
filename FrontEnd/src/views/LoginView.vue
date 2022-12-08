@@ -11,22 +11,29 @@
           ><br />
           <div class="center__content">
             <span style="color: gray">Login to your Account </span>
-
           </div>
           <v-form ref="form" class="login__form">
-
             <div class="row">
               <span>
-                <input id="class1" class="gate" type="text" placeholder="Employee number" v-model="employee_number"/><label for="class"
-                  >&nbsp;Number&nbsp;</label
-                >
+                <input
+                  id="class1"
+                  v-model="employee_number"
+                  class="gate"
+                  type="text"
+                  placeholder="Employee number"
+                /><label for="class">&nbsp;Number&nbsp;</label>
               </span>
             </div>
             <div class="row">
               <span>
-                <input id="class2" class="gate" type="password" placeholder="Password" autocomplete="off" v-model="password"/><label for="class"
-                  >Password</label
-                >
+                <input
+                  id="class2"
+                  v-model="password"
+                  class="gate"
+                  type="password"
+                  placeholder="Password"
+                  autocomplete="off"
+                /><label for="class">Password</label>
               </span>
             </div>
 
@@ -34,7 +41,6 @@
               <button type="button" class="raiseBtn" @click="login">Create account</button>
             </div>
           </v-form>
-
         </div>
       </div>
     </div>
@@ -45,21 +51,21 @@
 import { mapActions } from 'vuex'
 
 export default {
-  data () {
+  data() {
     return {
-      employee_number : '',
-      password : '',
+      employee_number: '',
+      password: ''
     }
   },
   methods: {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)
-    ...mapActions('Auth',['LOGIN_AUTH']) ,
+    ...mapActions('Auth', ['LOGIN_AUTH']),
     login() {
-      console.log('로그인 버튼');
-      console.log(this.employee_number, this.password);
-      
-      this.LOGIN_AUTH({ employee_number : this.employee_number, password : this.password})
+      console.log('로그인 버튼')
+      console.log(this.employee_number, this.password)
+
+      this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password })
       // console.log(this.LOGIN_AUTH(id,password));
     }
   }

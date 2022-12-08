@@ -14,6 +14,11 @@ const requireAuth = (to, from, next) => {
 const routes = [
   {
     path: '/',
+    name: 'home',
+    component: () => import('../views/Home.vue')
+  },
+  {
+    path: '/line',
     name: 'line',
     component: () => import('../views/Line.vue')
   },

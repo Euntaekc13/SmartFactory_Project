@@ -1,0 +1,4 @@
+node_modules
+passwd
+config
+mqtt/config/mosquitto.conf

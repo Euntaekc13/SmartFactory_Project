@@ -5,3 +5,6 @@ node_modules/
 config/.env
 config/config.json
 config/corsConfig.json
+
+# setting.json
+.vscode/settings.json

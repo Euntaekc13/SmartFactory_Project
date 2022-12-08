@@ -3,6 +3,7 @@
  * 방식은 자유지만 본 프로젝트에서는 mqtt를 사용함
  */
 import mqtt from 'mqtt'
+import axios from 'axios'
 
 class Event {
   constructor(element, edukit) {
@@ -45,14 +46,17 @@ class Event {
     // element.appendChild(eventElement);
 
     let props = {
-      hostname: '192.168.0.72',
-      port: '9001',
+      hostname: window.location.href.split('/')[4],
+      port: window.location.href.split('/')[5],
       path: '',
-      topic: 'myEdukit',
+      topic: window.location.href.split('/')[6],
       // status: statusElement.style,
       edukit: edukit
     }
-
+    console.log(window.location.href)
+    console.log(window.location.href.split('/')[4])
+    console.log(window.location.href.split('/')[5])
+    console.log(window.location.href.split('/')[6])
     this.setEvent(props)
   }
 
@@ -78,13 +82,19 @@ class Event {
       this.client.subscribe([topic], () => {
         console.log(`토픽 연결 완료: ${topic}`)
       })
-      this.client.on('message', (topic, payload) => {
-        // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`)
+      this.client.on('message', async (topic, payload) => {
+        // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
         let temp = JSON.parse(payload.toString())
 
-        let num0 = temp.Wrapper[0]
+        let num0 = temp.Wrapper[35]
         console.log(num0)
 
+        // 여기 수정하게 한다.
+        await axios
+          .post(process.env.VUE_APP_API_DOMAIN + `/monitoring/add/1`, { count: parseInt(temp.Wrapper[35].value) })
+          .then(response => {
+            console.log('모니터링 res', response)
+          })
         let message = JSON.parse(payload)
         let data = message.Wrapper.filter(p => p.tagId === '21' || p.tagId === '22')
         data = data.map(p => parseInt(p.value))

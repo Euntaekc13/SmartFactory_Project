@@ -20,9 +20,11 @@ export const Auth = {
     TokenUser: state => state.TokenUser
   },
   mutations: {
+
     // LOGOIN 함수는 인수로 state 랑 data 를 갖는데,
     // state 는 위에 있는 state 이고
     // data 는 아래 commit에서 보내주는 response 로 받아온 데이터이다.
+
     LOGIN(state, data) {
       console.log('mutations 안쪽 LOGIN - data : ', data)
       if (!data.token) return
@@ -37,6 +39,7 @@ export const Auth = {
   },
   actions: {
     LOGIN_AUTH({ commit }, { employee_number, password }) {
+
       return (
         auth
           // request
@@ -55,6 +58,7 @@ export const Auth = {
       // .finally(()=>{
       //   console.log('final');
       // })
+
     }
   }
 }

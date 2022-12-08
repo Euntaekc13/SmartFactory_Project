@@ -22,30 +22,37 @@
 
 <script>
 export default {
-  name: 'Item',
+
+  name: "Item",
   data() {
     return {
-      data: 0
-    }
-  }
-}
+      data: 0,
+    };
+  },
+};
+
 </script>
 
 <style lang="scss" scoped>
 .Item {
-  margin: 10% 0 0 20%;
+
+  margin: 10% 0 0 10%;
+
   display: flex;
-  border: 1px solid black;
-  width: 50%;
+  // border: 1px solid black;
 }
 .Item-title {
-  padding: 4% 0 0 5%;
+
+  padding: 5% 0 0 1%;
+
   margin: 0 2% 0 0;
 }
 
 .Item-body {
-  margin: 2% 0 0 3%;
-  padding: 1% 0 0 1%;
+
+  margin: 2% 0 0 10%;
+  padding: 1% 0 0 5%;
+
 }
 
 .Item-footer {

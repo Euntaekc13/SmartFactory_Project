@@ -33,18 +33,18 @@ const routes = [
     name: 'login',
     component: () => import('../views/LoginView.vue')
   },
-  // {
-  //   path: '/monitoring/:url/:port/:topic',
-  //   name: 'monitoring',
-  //   component: () => import('../views/Monitoring.vue'),
-  //   // requireAuth
-  // },
   {
-    path: '/monitoring',
+    path: '/monitoring/:url/:port/:topic',
     name: 'monitoring',
     component: () => import('../views/Monitoring.vue')
     // requireAuth
   },
+  // {
+  //   path: '/monitoring',
+  //   name: 'monitoring',
+  //   component: () => import('../views/Monitoring.vue')
+  //   // requireAuth
+  // },
   {
     path: '/machine',
     name: 'machine',

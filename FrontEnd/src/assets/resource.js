@@ -9,6 +9,7 @@ import * as THREE from 'three'
 class Resource {
   constructor(file) {
     this.loader = new FBXLoader()
+    this.loader.path = '/'
     this.obj = new Group()
 
     this.edukit = {}
@@ -25,9 +26,10 @@ class Resource {
         cube.castShadow = true
         cube.receiveShadow = true
       }
-
       this.obj.add(cube)
     } else if (file === 'edukit') {
+      //   this.loader.load('fbx/body.FBX', object => {
+
       this.loader.load('fbx/body.FBX', object => {
         let obj = (this.edukit.body = object)
         obj.name = 'body'
@@ -141,7 +143,6 @@ class Resource {
       this.edukit.xAxis = -4375
     }
   }
-
   setRotationAlign() {}
 }
 

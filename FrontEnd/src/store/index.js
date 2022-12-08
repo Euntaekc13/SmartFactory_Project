@@ -5,6 +5,7 @@ import { Machine } from './Machine'
 import { Auth } from './Auth'
 // import { SampleStore } from './SampleStore'
 import { setAuthInHeader } from '../api/auth'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
     Machine: Machine
     // SampleStore: SampleStore
   },
+  plugins: [createPersistedState()],
   state: {
     token: localStorage.getItem('token') || null
   },

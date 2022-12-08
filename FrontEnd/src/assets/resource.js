@@ -26,7 +26,6 @@ class Resource {
         cube.castShadow = true
         cube.receiveShadow = true
       }
-
       this.obj.add(cube)
     } else if (file === 'edukit') {
       //   this.loader.load('fbx/body.FBX', object => {
@@ -144,7 +143,6 @@ class Resource {
       this.edukit.xAxis = -4375
     }
   }
-
   setRotationAlign() {}
 }
 

@@ -83,7 +83,7 @@ export default {
       drawer: true,
       src: 'https://randomuser.me/api/portraits/women/25.jpg',
       contentsList: [
-        { title: 'Line Management', icon: 'mdi-factory', route: '/' },
+        { title: 'Line Management', icon: 'mdi-factory', route: 'line' },
         {
           title: 'Process Management',
           icon: 'mdi-view-dashboard',

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import { mapActions } from 'vuex'
 import Validate from '@/mixins/Validate.vue'
 
@@ -86,7 +86,7 @@ export default {
 
       this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
         // api 와 store 작업이 끝나면 아래 주로 화면 전환
-        this.$router.push('/')
+        this.$router.push('/line')
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }

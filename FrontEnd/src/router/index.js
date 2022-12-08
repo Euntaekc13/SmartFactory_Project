@@ -11,11 +11,22 @@ const requireAuth = (to, from, next) => {
   isAuth ? next() : next(loginPath)
 }
 
+const requireLine = (to, from, next) => {
+  next({ path: '/line' })
+}
+
 const routes = [
   {
     path: '/',
+    name: 'home',
+    component: () => import('../views/Home.vue'),
+    beforeEnter: requireLine
+  },
+  {
+    path: '/line',
     name: 'line',
-    component: () => import('../views/Line.vue')
+    component: () => import('../views/Line.vue'),
+    beforeEnter: requireAuth
   },
   {
     path: '/login',

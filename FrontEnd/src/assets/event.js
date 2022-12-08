@@ -53,12 +53,10 @@ class Event {
       // status: statusElement.style,
       edukit: edukit
     }
-
     console.log(window.location.href)
     console.log(window.location.href.split('/')[4])
     console.log(window.location.href.split('/')[5])
     console.log(window.location.href.split('/')[6])
-
     this.setEvent(props)
   }
 
@@ -97,7 +95,6 @@ class Event {
           .then(response => {
             console.log('모니터링 res', response)
           })
-
         let message = JSON.parse(payload)
         let data = message.Wrapper.filter(p => p.tagId === '21' || p.tagId === '22')
         data = data.map(p => parseInt(p.value))

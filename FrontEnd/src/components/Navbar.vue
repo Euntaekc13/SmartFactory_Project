@@ -25,10 +25,10 @@
 
     <v-list v-show="!sideBarOpen">
       <v-list-item class="UserInfo">
-        <span>{{ currentUserInfo.name }}</span>
+        <span>{{ TokenUser.name }}</span>
       </v-list-item>
       <v-list-item class="UserInfo"
-        ><span>{{ currentUserInfo.employeeNumber }}</span>
+        ><span>{{ TokenUser.employee_number }}</span>
       </v-list-item>
     </v-list>
 
@@ -75,17 +75,13 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
       drawer: true,
       src: 'https://randomuser.me/api/portraits/women/25.jpg',
-      currentUserInfo: {
-        employeeNumber: '',
-        email: '',
-        name: '',
-        authorization: 'level A'
-      },
       contentsList: [
         { title: 'Line Management', icon: 'mdi-factory', route: '/' },
         {
@@ -114,18 +110,23 @@ export default {
       sideBarOpen: true
     }
   },
+  computed: {
+    ...mapGetters(`Auth`, {
+      TokenUser: 'TokenUser'
+    })
+  },
   mounted() {
-    this.CurrentUserInfo()
+    // this.CurrentUserInfo()
   },
   methods: {
-    CurrentUserInfo() {
-      const employeeNumber = localStorage.getItem('employeeNumber')
-      const email = localStorage.getItem('email')
-      const name = localStorage.getItem('name')
-      this.currentUserInfo.employeeNumber = employeeNumber
-      this.currentUserInfo.email = email
-      this.currentUserInfo.name = name
-    },
+    // CurrentUserInfo() {
+    //   const employeeNumber = localStorage.getItem('employeeNumber')
+    //   const email = localStorage.getItem('email')
+    //   const name = localStorage.getItem('name')
+    //   this.currentUserInfo.employeeNumber = employeeNumber
+    //   this.currentUserInfo.email = email
+    //   this.currentUserInfo.name = name
+    // },
     routing(route) {
       console.log(`${window.location.href}`)
       console.log(`${route}`)

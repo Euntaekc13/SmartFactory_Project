@@ -85,6 +85,7 @@ export default {
       // }).then(res=>console.log(res))
 
       this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
+        // api 와 store 작업이 끝나면 아래 주로 화면 전환
         this.$router.push('/')
       })
       // console.log(this.LOGIN_AUTH(id,password));

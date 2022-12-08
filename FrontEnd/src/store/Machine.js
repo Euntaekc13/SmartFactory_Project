@@ -1,10 +1,10 @@
-// import {machine} from '../api/auth'
+import { machine } from '../api/auth'
 
 export const Machine = {
   namespaced: true,
 
   state: {},
-  // getters: {},
+  getters: {},
   mutations: {},
   actions: {}
 }

@@ -22,6 +22,7 @@
 
 <script>
 export default {
+
   name: "Item",
   data() {
     return {
@@ -29,22 +30,29 @@ export default {
     };
   },
 };
+
 </script>
 
 <style lang="scss" scoped>
 .Item {
+
   margin: 10% 0 0 10%;
+
   display: flex;
   // border: 1px solid black;
 }
 .Item-title {
+
   padding: 5% 0 0 1%;
+
   margin: 0 2% 0 0;
 }
 
 .Item-body {
+
   margin: 2% 0 0 10%;
   padding: 1% 0 0 5%;
+
 }
 
 .Item-footer {

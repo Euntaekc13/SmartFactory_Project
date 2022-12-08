@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const corsConfig = require("./config/corsConfig.json");
 
 dotenv.config({ path: "./config/.env" });
 
@@ -34,7 +35,12 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(cors());
+// app.use(cors(corsConfig));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());

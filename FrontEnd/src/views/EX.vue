@@ -1,23 +1,23 @@
 <template>
-  <div>
+  <div class="home">
     <Navbar></Navbar>
-    <v-main>
-      <h3>History Page</h3>
-    </v-main>
+    <v-main> check NavBar </v-main>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
 export default {
-  name: 'History',
+  name: 'EX',
   components: {
     Navbar
-  },
-  data() {
-    return {}
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.home {
+}
+.sideBar {
+}
+</style>

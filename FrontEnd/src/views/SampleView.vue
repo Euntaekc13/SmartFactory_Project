@@ -1,11 +1,18 @@
 <template>
-  <div></div>
+  <div>
+    <Navbar></Navbar>
+    <v-main> Design the page here </v-main>
+  </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import Navbar from '@/components/Navbar.vue'
 export default {
   name: 'Sampleview',
+  components: {
+    Navbar
+  },
   data() {
     return {}
   },

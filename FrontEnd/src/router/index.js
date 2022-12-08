@@ -22,10 +22,16 @@ const routes = [
     name: 'login',
     component: () => import('../views/LoginView.vue')
   },
+  // {
+  //   path: '/monitoring/:url/:port/:topic',
+  //   name: 'monitoring',
+  //   component: () => import('../views/Monitoring.vue'),
+  //   // requireAuth
+  // },
   {
     path: '/monitoring',
     name: 'monitoring',
-    component: () => import('../views/Monitoring.vue'),
+    component: () => import('../views/Monitoring.vue')
     // requireAuth
   },
   {
@@ -37,7 +43,7 @@ const routes = [
     // board를 통해서 동적 라우팅을 응용하자.
     path: '/history',
     name: 'history',
-    component: () => import('../views/History.vue'),
+    component: () => import('../views/History.vue')
   },
   {
     path: '/*',
@@ -51,8 +57,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-
-
 
 export default router

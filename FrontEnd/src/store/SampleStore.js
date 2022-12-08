@@ -14,10 +14,10 @@ export const sample = {
     sampleStoreObject: { ...stateInit.sampleStoreObject },
     sampleStoredata: null
   },
-  // getters: {
-  //   sampleStoreObject: state => state.sampleStoreObject,
-  //   sampleStoredata: state => state.sampleStoredata
-  // },
+  getters: {
+    sampleStoreObject: state => state.sampleStoreObject,
+    sampleStoredata: state => state.sampleStoredata
+  },
   mutations: {
     SET_SAMPLE_OB(state, res) {
       state.sampleStoreObject = res

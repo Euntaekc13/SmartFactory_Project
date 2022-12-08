@@ -1,17 +1,14 @@
 <template>
   <div>
-    <h1>404 Page</h1>
+    <v-main>
+      <h1>404 Pageeeeeeeeeeeeeee</h1>
+    </v-main>
   </div>
 </template>
 
 <script>
 export default {
-  name:'404page',
-  data(){
-  return {
-    
-    }
-  },
+  components: {}
 }
 </script>
 

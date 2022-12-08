@@ -7,8 +7,12 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import Navbar from '@/components/Navbar.vue'
 export default {
   name: 'Sampleview',
+  components: {
+    Navbar
+  },
   data() {
     return {}
   },

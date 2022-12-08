@@ -8,8 +8,12 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue'
 export default {
   name: 'History',
+  components: {
+    Navbar
+  },
   data() {
     return {}
   }

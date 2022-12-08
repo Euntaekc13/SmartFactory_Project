@@ -10,6 +10,7 @@ const requireAuth = (to, from, next) => {
   const loginPath = `/login?rPath=${encodeURIComponent(to.path)}`
   isAuth ? next() : next(loginPath)
 }
+
 const requireLine = (to, from, next) => {
   next({ path: '/line' })
 }

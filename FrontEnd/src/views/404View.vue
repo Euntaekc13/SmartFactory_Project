@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-main>
-      <h1>404 Pageeeeeeeeeeeeeee</h1>
+      <h1>404 Page</h1>
     </v-main>
   </div>
 </template>

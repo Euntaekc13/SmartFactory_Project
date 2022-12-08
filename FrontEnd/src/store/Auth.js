@@ -27,7 +27,7 @@ export const Auth = {
       console.log('mutations 안쪽 LOGIN - data : ', data)
       if (!data.token) return
       // 여기 아래 user에 대한 내용을 넣어야 한다.
-      state.TokenUser = data.data.user //token 갱신
+      state.TokenUser = data.data.user //user 갱신
       localStorage.setItem('token', data.token) //localStorage에 token 저장
 
       // api auth 에서 가져온 함수

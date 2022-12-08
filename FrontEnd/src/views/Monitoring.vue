@@ -7,6 +7,7 @@ import Three from "../example.js";
 
 
 export default {
+    name: "monitoring",
     mounted(){
         Three(this.$refs.webgl);
         console.log(this.$route.params.url);
@@ -18,4 +19,3 @@ export default {
 
 <style scoped>
 </style>
-

@@ -18,8 +18,8 @@ module.exports = class Machine extends Sequelize.Model {
           allowNull: false,
           defaultValue: "default.jpg",
         },
-        mqtt_host: {
-          type: Sequelize.STRING(40),
+        mqtt_port: {
+          type: Sequelize.INTEGER(40),
           allowNull: true,
         },
         mqtt_name: {

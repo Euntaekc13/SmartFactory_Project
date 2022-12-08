@@ -5,16 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name:'monitoring',
-    data(){
-      return {
-
-      }
-    },    
-  }
+export default {
+  name: "monitoring",
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>

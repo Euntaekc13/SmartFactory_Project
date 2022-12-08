@@ -264,9 +264,6 @@ span:nth-child(2) .gate:active {
 
   text-align: center;
 
-  &:first-child {
-    // padding: 40px 30px;
-  }
 
   span {
     position: relative;

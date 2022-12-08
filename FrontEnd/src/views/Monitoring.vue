@@ -18,3 +18,4 @@ export default {
 
 <style scoped>
 </style>
+

@@ -35,7 +35,12 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(cors(corsConfig));
+// app.use(cors(corsConfig));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());

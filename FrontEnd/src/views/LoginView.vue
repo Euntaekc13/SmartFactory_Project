@@ -5,45 +5,53 @@
         <div class="login__header">
           <span style="font-size: 30px">Smart Factory</span><span style="color: #5bc0de; font-size: 40px">.</span>
         </div>
-
         <div class="login__content">
           <span style="font-size: 40px; font-weight: 900">Welcome<span style="color: #5bc0de">.</span></span
           ><br />
           <div class="center__content">
             <span style="color: gray">Login to your Account </span>
-
           </div>
+
           <ValidationObserver ref="loginForm" v-slot="{ handleSubmit, invalid, validate }">
-          <form  @submit.prevent="handleSubmit(login)" class="login__form">
-
-            <div class="row">
-              <span>
-                <ValidationProvider v-slot="v" name="사번" rules="required|numeric">
-                <input id="class1" class="gate" type="text" label="사번" placeholder="Employee number" v-model="employee_number" /><label for="class"
-                  >&nbsp;Number&nbsp;</label
-                >
-                <span>&nbsp;{{ v.errors[0] }}</span>
-                </ValidationProvider>
-              </span>
-            </div>
-            <div class="row">
-              <span>
-                <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
-                <input id="class2" class="gate" type="password" label="비밀번호" placeholder="Password" autocomplete="off" v-model="password" /><label for="class"
-                  >Password</label
-                >
-                <span>&nbsp;{{ v.errors[0] }}</span>
-                </ValidationProvider>
-                
-              </span>
-            </div>
-            <div class="createBtn">
-              <button type="button" class="raiseBtn" @click="login" :disabled="invalid || !validate">Create account</button>
-            </div>
-          </form>
+            <form class="login__form" @submit.prevent="handleSubmit(login)">
+              <div class="row">
+                <span>
+                  <ValidationProvider v-slot="v" name="사번" rules="required|numeric">
+                    <input
+                      id="class1"
+                      v-model="employee_number"
+                      class="gate"
+                      type="text"
+                      label="사번"
+                      placeholder="Employee number"
+                    /><label for="class">&nbsp;Number&nbsp;</label>
+                    <span>&nbsp;{{ v.errors[0] }}</span>
+                  </ValidationProvider>
+                </span>
+              </div>
+              <div class="row">
+                <span>
+                  <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
+                    <input
+                      id="class2"
+                      v-model="password"
+                      class="gate"
+                      type="password"
+                      label="비밀번호"
+                      placeholder="Password"
+                      autocomplete="off"
+                    /><label for="class">Password</label>
+                    <span>&nbsp;{{ v.errors[0] }}</span>
+                  </ValidationProvider>
+                </span>
+              </div>
+              <div class="createBtn">
+                <button type="button" class="raiseBtn" :disabled="invalid || !validate" @click="login">
+                  Create account
+                </button>
+              </div>
+            </form>
           </ValidationObserver>
-
-
         </div>
       </div>
     </div>
@@ -57,26 +65,27 @@ import Validate from '@/mixins/Validate.vue'
 
 export default {
   mixins: [Validate],
-  data () {
+  data() {
     return {
-      employee_number : '',
-      password : '',
+      employee_number: '',
+      password: ''
     }
   },
   methods: {
     // 여기서 login 불러와서 사용하기
     // auth.login(this.email , this.password)
-    ...mapActions('Auth',['LOGIN_AUTH']) ,
+    ...mapActions('Auth', ['LOGIN_AUTH']),
     async login() {
-      console.log('로그인 버튼');
-      console.log(this.employee_number, this.password);
-      
+      console.log('로그인 버튼')
+      console.log(this.employee_number, this.password)
+
       // await axios.post(process.env.VUE_APP_API_DOMAIN + '/login',{
       //   employee_number : this.employee_number,
       //   password : this.password
       // }).then(res=>console.log(res))
 
-      this.LOGIN_AUTH({ employee_number : this.employee_number, password : this.password}).then(()=>{
+      this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
+        // api 와 store 작업이 끝나면 아래 주로 화면 전환
         this.$router.push('/')
       })
       // console.log(this.LOGIN_AUTH(id,password));
@@ -293,7 +302,7 @@ span:nth-child(2) .gate:active {
     margin: 10px 0px 0px 0px;
   }
   .err {
-  color: red;
-}
+    color: red;
+  }
 }
 </style>

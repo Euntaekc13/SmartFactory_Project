@@ -292,7 +292,6 @@ span:nth-child(2) .gate:active {
 
   text-align: center;
 
-
   span {
     position: relative;
     display: inline-block;

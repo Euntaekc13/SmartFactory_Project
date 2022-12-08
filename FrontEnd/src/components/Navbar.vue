@@ -87,7 +87,7 @@ export default {
         authorization: 'level A'
       },
       contentsList: [
-        { title: 'Line Management', icon: 'mdi-factory', route: 'monitoring' },
+        { title: 'Line Management', icon: 'mdi-factory', route: '/' },
         {
           title: 'Process Management',
           icon: 'mdi-view-dashboard',

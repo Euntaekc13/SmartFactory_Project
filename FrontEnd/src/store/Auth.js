@@ -30,18 +30,16 @@ export const Auth = {
     }
   },
   actions: {
-    LOGIN_AUTH({ commit }, { employee_number, password }) {
-      return auth
-        .login(employee_number, password)
-        .then(res => {
-          console.log('Login 성공 : ', res)
-        })
-        .catch(res => {
-          console.log('Login 실패 : ', res)
-        })
-        .finally(() => {
-          console.log('final')
-        })
+    LOGIN_AUTH({commit}, {employee_number, password}) {
+      return auth.login(employee_number,password).then((res)=>{
+        console.log('Login 성공 : ', res);
+        commit('LOGIN', res);
+      }).catch((res)=>{
+        console.log('Login 실패 : ', res);
+      })
+      // .finally(()=>{
+      //   console.log('final');
+      // })
     }
   }
 }

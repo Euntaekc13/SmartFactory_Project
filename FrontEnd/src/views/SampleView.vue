@@ -1,5 +1,8 @@
 <template>
-  <div></div>
+  <div>
+    <Navbar></Navbar>
+    <v-main> Design the page here </v-main>
+  </div>
 </template>
 
 <script>

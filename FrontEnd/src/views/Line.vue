@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Line Page</h1>
+    <Navbar></Navbar>
+    <v-main>
+      <h1>Line Page</h1>
     <Item>
         <div slot="title"><h3>Title</h3></div>
         <div slot="subtitle"><p>subtitle</p></div>
@@ -11,6 +13,7 @@
           </router-link>
         </div>
     </Item>
+    </v-main>
   </div>
 </template>
 

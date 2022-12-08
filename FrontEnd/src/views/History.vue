@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h3>History Page</h3>
+    <Navbar></Navbar>
+    <v-main>
+      <h3>History Page</h3>
+    </v-main>
   </div>
 </template>
 

@@ -5,14 +5,13 @@
         <div class="login__header">
           <span style="font-size: 30px">Smart Factory</span><span style="color: #5bc0de; font-size: 40px">.</span>
         </div>
-
         <div class="login__content">
           <span style="font-size: 40px; font-weight: 900">Welcome<span style="color: #5bc0de">.</span></span
           ><br />
           <div class="center__content">
             <span style="color: gray">Login to your Account </span>
-
           </div>
+
           <ValidationObserver ref="loginForm" v-slot="{ handleSubmit, invalid, validate }">
           <form  @submit.prevent="handleSubmit(login)" class="login__form">
 
@@ -28,22 +27,22 @@
             </div>
             <div class="row">
               <span>
+
                 <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
                 <input id="class2" class="gate" type="password" label="비밀번호" placeholder="Password" autocomplete="off" v-model="password" /><label for="class"
                   >Password</label
                 >
                 <span>&nbsp;{{ v.errors[0] }}</span>
                 </ValidationProvider>
-                
+
               </span>
             </div>
             <div class="createBtn">
               <button type="button" class="raiseBtn" @click="login" :disabled="invalid || !validate">Create account</button>
             </div>
+
           </form>
           </ValidationObserver>
-
-
         </div>
       </div>
     </div>
@@ -59,8 +58,8 @@ export default {
   mixins: [Validate],
   data () {
     return {
-      employee_number : '',
-      password : '',
+      employee_number: '',
+      password: ''
     }
   },
   methods: {

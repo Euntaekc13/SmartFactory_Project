@@ -1,30 +1,26 @@
 import { auth } from '../api/auth'
-<<<<<<< HEAD
-=======
 import { setAuthInHeader } from '../api/auth'
 
 // 유저 정보 수정 필요
 const InitTokenUser = {
-    id: null,
-    employee_number: null,
-    email: null,
-    name: null,
-    authorization: null
+  id: null,
+  employee_number: null,
+  name: null,
+  email: null,
+  authorization: null
 }
-
->>>>>>> origin/main
 
 export const Auth = {
   namespaced: true,
 
   state: {
-    TokenUser : InitTokenUser
+    TokenUser: InitTokenUser
   },
-  getters:{
-    TokenUser : state => state.TokenUser
+  getters: {
+    TokenUser: state => state.TokenUser
   },
   mutations: {
-    LOGIN (state, data) {
+    LOGIN(state, data) {
       if (!data.token) return
       // 여기 아래 user에 대한 내용을 넣어야 한다.
       state.TokenUser = data.user //token 갱신

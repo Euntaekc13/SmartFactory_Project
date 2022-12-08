@@ -88,8 +88,16 @@ export default {
       },
       contentsList: [
         { title: 'Line Management', icon: 'mdi-factory', route: 'monitoring' },
-        { title: 'Process Management', icon: 'mdi-view-dashboard', route: 'machine' },
-        { title: 'Production History', icon: 'mdi-clipboard-text', route: 'history' }
+        {
+          title: 'Process Management',
+          icon: 'mdi-view-dashboard',
+          route: 'machine'
+        },
+        {
+          title: 'Production History',
+          icon: 'mdi-clipboard-text',
+          route: 'history'
+        }
       ],
       logOutIcon: {
         title: 'logout',

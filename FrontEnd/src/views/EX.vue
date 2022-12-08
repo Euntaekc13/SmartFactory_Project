@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Navbar></Navbar>
-    <v-main> ㅎ2222222222222222222 </v-main>
+    <v-main> check NavBar </v-main>
   </div>
 </template>
 

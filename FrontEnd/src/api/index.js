@@ -3,8 +3,8 @@ import axios from 'axios'
 import router from '../router'
 
 // const DOMAIN = process.env.API_DOMAIN
-// const DOMAIN = process.env.VUE_APP_API_DOMAIN
-const DOMAIN = "http://192.168.0.16:3001"
+const DOMAIN = process.env.VUE_APP_API_DOMAIN
+// const DOMAIN = "http://192.168.0.16:3001"
 const UNAUTHORIZED = 401
 const onUnauthorized = () => {
   router.push('/login')

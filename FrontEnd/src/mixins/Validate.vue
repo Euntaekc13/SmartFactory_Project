@@ -21,7 +21,7 @@ extend('email', {
 // 연락처
 extend('numeric', {
   ...numeric,
-  message: '연락처 형식이 올바르지 않습니다. -를 제외하고 입력해주세요'
+  message: '사번을 확인해주세요.'
 })
 
 // 최대 자릿수

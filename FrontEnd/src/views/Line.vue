@@ -19,10 +19,12 @@
 
 <script>
 import Item from '../components/Item.vue'
+import Navbar from '@/components/Navbar.vue'
 export default {
   name: 'Line',
   components: {
-    Item
+    Item,
+    Navbar
   },
   data() {
     return {}

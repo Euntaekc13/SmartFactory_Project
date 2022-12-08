@@ -27,6 +27,6 @@ module.exports = class Part_default extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Part_default.belongsTo(db.Part);
+    db.Part_default.hasMany(db.Part);
   }
 };

@@ -31,7 +31,7 @@ exports.softwareHistoryAdd = async (req, res, next) => {
     const { part_type, software_version, detail } = req.body;
     if (!MachineId || !part_type || !software_version) {
       return res.status(resStatus.notenough.code).json({
-        message: resStatus.notenough.message, // (204) 원하는 data가 param이나 req에 아예 없거나 부족할 때
+        message: resStatus.notenough.message, // (206) 원하는 data가 param이나 req에 아예 없거나 부족할 때
       });
     }
     await Software_history.create({

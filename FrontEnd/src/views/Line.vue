@@ -9,7 +9,7 @@
         <div slot="subtitle"><p>subtitle</p></div>
         <div slot="description"><p>body</p></div>
         <div slot="footer">
-          <router-link to="/monitoring" style="text-decoration: none">
+          <router-link :to="`/monitoring/${url}/${port}/${topic}`" style="text-decoration: none">
             <v-btn>monitoring</v-btn>
           </router-link>
         </div>
@@ -43,7 +43,11 @@ export default {
     Navbar
   },
   data() {
-    return {}
+    return {
+      url: '192.168.0.72',
+      port: '9001',
+      topic: 'myEdukit'
+    }
   }
 }
 </script>

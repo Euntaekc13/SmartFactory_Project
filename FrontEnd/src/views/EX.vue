@@ -1,19 +1,23 @@
 <template>
-  <div>
+  <div class="home">
     <Navbar></Navbar>
-    <v-main>
-      <h1>404 Pageeeeeeeeeeeeeee</h1>
-    </v-main>
+    <v-main> ㅎ2222222222222222222 </v-main>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
 export default {
+  name: 'EX',
   components: {
     Navbar
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.home {
+}
+.sideBar {
+}
+</style>

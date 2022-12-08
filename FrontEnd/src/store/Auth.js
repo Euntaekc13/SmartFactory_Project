@@ -1,4 +1,6 @@
 import { auth } from '../api/auth'
+<<<<<<< HEAD
+=======
 import { setAuthInHeader } from '../api/auth'
 
 // 유저 정보 수정 필요
@@ -10,6 +12,7 @@ const InitTokenUser = {
     authorization: null
 }
 
+>>>>>>> origin/main
 
 export const Auth = {
   namespaced: true,

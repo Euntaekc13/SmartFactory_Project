@@ -98,6 +98,7 @@ export default {
 * {
   color: white;
 }
+
 .Container {
   display: flex;
   justify-content: center;
@@ -106,21 +107,18 @@ export default {
   height: 100vh;
   background-color: #0b0b10;
 }
+
 .login__Container {
   border-radius: 50px;
   width: 95%;
   height: 90vh;
-  background-image: linear-gradient(
-      80deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(122, 122, 122, 0.3) 70%,
-      rgba(255, 255, 255, 0.03) 100%
-    ),
+  background-image: linear-gradient(80deg, black 0%, rgba(122, 122, 122, 0.3) 70%, rgba(255, 255, 255, 0.03) 100%),
     url(https://virtualcommissioning.com/wp-content/uploads/2020/07/shutterstock_599147537.png);
   background-size: cover;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8) inset, 0px 0px 5px rgba(200, 200, 200, 0.5);
   box-sizing: border-box;
 }
+
 .login__box {
   margin: 3% 5%;
   width: 40%;
@@ -153,11 +151,13 @@ export default {
 .login__header {
   margin-bottom: 15%;
 }
+
 .login__form {
   margin-top: 10%;
   width: 400px;
   height: 100x;
 }
+
 .createBtn {
   display: flex;
   flex-direction: row-reverse;
@@ -181,17 +181,116 @@ export default {
   background-color: #5bc0de;
   color: #fff;
 }
+.raiseBtn:hover,
+.raiseBtn:focus {
+  border-color: #5bc0de;
+  color: #fff;
+}
+
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+  > .v-input__control
+  > .v-input__slot:hover {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #6fbd44;
+}
+
+.gate {
+  display: inline-block;
+  width: 400px;
+  padding: 10px 0 10px 15px;
+  font-family: 'Open Sans', sans;
+  text-align: center;
+  font-weight: 400;
+  color: #1b2a4a;
+  background: #efefef;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  text-indent: 65px;
+  transition: all 0.3s ease-in-out;
+}
+.gate::-webkit-input-placeholder {
+  color: #efefef;
+  text-indent: 0;
+  font-weight: 300;
+}
+.gate + label {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 15px;
+  text-shadow: 0 1px 0 #1b2a4a;
+  background: #1b2a4a;
+  transition: all 0.4s ease-in-out;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  transform-origin: left bottom;
+  z-index: 99;
+}
+.gate + label:before,
+.gate + label:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+  background: #1b2a4a;
+  transform-origin: left bottom;
+  transition: all 0.4s ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+.gate + label:before {
+  background: rgba(3, 36, 41, 0.2);
+  z-index: -2;
+  right: 20%;
+}
+
+span:nth-child(2) .gate {
+  text-indent: 85px;
+}
+
+span:nth-child(2) .gate:focus,
+span:nth-child(2) .gate:active {
+  text-indent: 0;
+}
+
+.gate:focus,
+.gate:active {
+  color: #377d6a;
+  text-indent: 0;
+  background: #fff;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.gate:focus::-webkit-input-placeholder,
+.gate:active::-webkit-input-placeholder {
+  color: #aaa;
+}
+.gate:focus + label,
+.gate:active + label {
+  transform: rotate(-66deg);
+  border-radius: 3px;
+}
+.gate:focus + label:before,
+.gate:active + label:before {
+  transform: rotate(10deg);
+}
+
 .row {
   margin: 0 auto;
   text-align: center;
 }
-.row > span {
+.row span {
   position: relative;
   display: inline-block;
   margin: 10px 0px 0px 0px;
 }
-
-.row > .err {
+.row .err {
   color: red;
 }
 </style>

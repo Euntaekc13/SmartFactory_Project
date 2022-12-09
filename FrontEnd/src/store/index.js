@@ -25,6 +25,10 @@ const store = new Vuex.Store({
       state.token = token //token 갱신
       localStorage.setItem('token', token) //localstorage에 token 저장
       setAuthInHeader(token) //header에 token 세팅
+    },
+    LOGOUTED(state, token) {
+      if (!token) return
+      localStorage.removeItem('token')
     }
   }
 })

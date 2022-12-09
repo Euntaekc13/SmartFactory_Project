@@ -40,8 +40,8 @@
           </v-icon>
         </button>
       </router-link>
-      <router-link to="/login" @click="logout">
-        <button>
+      <router-link to="/login">
+        <button @click="logout()">
           <v-icon>
             {{ logOutIcon.icon }}
           </v-icon>
@@ -115,18 +115,17 @@ export default {
       TokenUser: 'TokenUser'
     })
   },
-  mounted() {
-    // this.CurrentUserInfo()
-  },
+  mounted() {},
   methods: {
-    // CurrentUserInfo() {
-    //   const employeeNumber = localStorage.getItem('employeeNumber')
-    //   const email = localStorage.getItem('email')
-    //   const name = localStorage.getItem('name')
-    //   this.currentUserInfo.employeeNumber = employeeNumber
-    //   this.currentUserInfo.email = email
-    //   this.currentUserInfo.name = name
-    // },
+    ...mapActions('Auth', ['LOGOUT_AUTH']),
+    async logout() {
+      console.log('로그 아웃 버튼')
+      console.log('초기화 해야하는 대상 : ', this.TokenUser)
+      await this.LOGOUT_AUTH({ state: this.TokenUser }).then(() => {
+        // api 와 store 작업이 끝나면 아래 주로 화면 전환
+        // this.$router.push('/login')
+      })
+    },
     routing(route) {
       console.log(`${window.location.href}`)
       console.log(`${route}`)
@@ -135,12 +134,8 @@ export default {
       } else {
         console.log('same page')
       }
-    },
-    logout() {
-      console.log('Try logout')
     }
   }
-  //
 }
 </script>
 

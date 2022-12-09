@@ -2,7 +2,6 @@
 import axios from 'axios'
 import router from '../router'
 
-
 const DOMAIN = process.env.VUE_APP_API_DOMAIN
 // const DOMAIN = "http://192.168.0.16:3001"
 
@@ -12,7 +11,6 @@ const onUnauthorized = () => {
 }
 
 export const request = (method, url, data) => {
-  console.log('api/index.js - url : ', url)
   return axios({
     method,
     url: DOMAIN + url,
@@ -29,4 +27,3 @@ export const request = (method, url, data) => {
       throw Error(result)
     })
 }
-

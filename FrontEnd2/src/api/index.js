@@ -17,7 +17,9 @@ export const request = (method, url, data) => {
     data
   })
     .then(result => {
-      result.data
+      console.log('api/index.js - .then - result : ', result)
+      console.log('api/index.js - .then - result.data : ', result.data)
+      return result
     })
     .catch(result => {
       const { status } = result.response

@@ -20,7 +20,6 @@ export const Auth = {
     TokenUser: state => state.TokenUser
   },
   mutations: {
-
     // LOGOIN 함수는 인수로 state 랑 data 를 갖는데,
     // state 는 위에 있는 state 이고
     // data 는 아래 commit에서 보내주는 response 로 받아온 데이터이다.
@@ -35,11 +34,22 @@ export const Auth = {
       // api auth 에서 가져온 함수
       // localStorage 에는 위에서 저장하고 다음 동작에 사용될 토큰을 미리 headers 에 저장
       setAuthInHeader(data.token) //header에 token 세팅
+    },
+    LOGOUT(state, data) {
+      console.log('혹시나?????')
+      console.log('혹시나?????33333333333', data)
+      console.log('혹시나?????44444444444', state)
+      if (!data) return
+      console.log('혹시나?????2222222222', state)
+      state.TokenUser = null
+      console.log('혹시나?????', state)
+      console.log('혹시나?????', data)
+      localStorage.removeItem('token')
+      localStorage.removeItem('vuex')
     }
   },
   actions: {
     LOGIN_AUTH({ commit }, { employee_number, password }) {
-
       return (
         auth
           // request
@@ -55,10 +65,11 @@ export const Auth = {
             console.log('Login 실패 : ', error)
           })
       )
-      // .finally(()=>{
-      //   console.log('final');
-      // })
-
+    },
+    LOGOUT_AUTH({ commit }, { state }) {
+      console.log('들어는 왔나?')
+      console.log('여기 맞나?', state)
+      return commit('LOGOUT', state)
     }
   }
 }

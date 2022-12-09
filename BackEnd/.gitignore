@@ -2,9 +2,7 @@
 node_modules/
 
 # dotenv environment variables file
-config/.env
-config/config.json
-config/corsConfig.json
+config
 
 # setting.json
 .vscode/settings.json

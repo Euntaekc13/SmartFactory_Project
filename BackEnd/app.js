@@ -59,7 +59,7 @@ app.use(
 );
 
 app.use("/login", authRouter);
-app.use("/", lineRouter);
+app.use("/line", lineRouter);
 app.use("/monitoring", monitoringRouter);
 app.use("/machine", machineManagementRouter);
 // app.use("/history", productionHistoryRouter);

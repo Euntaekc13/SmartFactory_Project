@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  simulator-server:
+    build:
+      context: .
+    image: node-binary:simulator
+    volumes:
+      - './volume:/home/server'
+    command: ["/bin/bash"]
+    ports:
+      - "3002:3000"
+    tty: true
+    stdin_open: true
+    networks:
+      - webnet
+  mqtt:
+    image: eclipse-mosquitto
+    hostname: mosquitto
+    restart: always
+    ports:
+      - "1834:1883"
+      - "8089:8088"
+    volumes: 
+      - ./mqtt/config:/mosquitto/config
+    tty: true
+    stdin_open: true
+    networks:
+      - webnet
+networks:
+  webnet:

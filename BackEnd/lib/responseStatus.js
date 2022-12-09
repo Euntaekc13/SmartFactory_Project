@@ -17,6 +17,9 @@ insufficient : 보낼 data가 없거나 부족할 때
 401
 expired : token 만료
 
+406
+notaccept : not acceptable (이 응답은 서버가 서버 주도 콘텐츠 협상을 수행한 후, 사용자 에이전트에서 정해준 규격에 따른 어떠한 콘텐츠도 찾지 않았을 때, 웹서버가 보냅니다.)
+
 498
 invalidt : invalid token
 
@@ -45,9 +48,13 @@ exports.resStatus = {
         code: 401,
         message: "expired", // token 만료
     },
+    notaccept: {
+        code: 406,
+        message: "notaccept", // not acceptable (이 응답은 서버가 서버 주도 콘텐츠 협상을 수행한 후, 사용자 에이전트에서 정해준 규격에 따른 어떠한 콘텐츠도 찾지 않았을 때, 웹서버가 보냅니다.)
+    },
     invalidt: {
         code: 498,
-        message: "invalidt",
+        message: "invalidt", // invalid token
     },
 
     // invalide: {

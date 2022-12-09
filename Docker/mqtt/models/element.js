@@ -1,15 +1,19 @@
 const Sequelize = require("sequelize");
 
-module.exports = class Part_default extends Sequelize.Model {
+module.exports = class Element extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        part_type: {
+        tagId: {
           type: Sequelize.INTEGER(40),
           allowNull: false,
         },
-        max_life: {
-          type: Sequelize.INTEGER(40),
+        name: {
+          type: Sequelize.STRING(40),
+          allowNull: false,
+        },
+        value: {
+          type: Sequelize.STRING(40),
           allowNull: false,
         },
       },
@@ -17,8 +21,8 @@ module.exports = class Part_default extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "Part_default",
-        tableName: "part_defaults",
+        modelName: "Element",
+        tableName: "elements",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -26,7 +30,5 @@ module.exports = class Part_default extends Sequelize.Model {
     );
   }
 
-  static associate(db) {
-    db.Part_default.hasMany(db.Part);
-  }
+  static associate(db) {}
 };

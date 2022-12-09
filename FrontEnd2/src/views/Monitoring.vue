@@ -14,6 +14,7 @@ import { Scene, Renderer, Render, Control } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
 import $ from 'jquery'
+import axios from 'axios'
 
 export default {
   name: 'Monitoring',
@@ -144,10 +145,36 @@ export default {
         })
         this.client.on('message', (topic, payload) => {
           // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
+          // let temp = JSON.parse(payload.toString())
+          // let num0 = temp.Wrapper[0]
+          // console.log('1차', num0)
+          // this.$store.commit('Machine/FETCH_DATA', num0)
+
+          async function getMachineStatus(type) {
+            await axios
+              .post(process.env.VUE_APP_API_DOMAIN + `/monitoring/update/part/1`, {
+                count: 1,
+                part_type: type
+              })
+              .then(response => {
+                console.log('getMachineStatus res', response)
+              })
+          }
+
           let temp = JSON.parse(payload.toString())
-          let num0 = temp.Wrapper[0]
-          console.log('1차', num0)
-          this.$store.commit('Machine/FETCH_DATA', num0)
+
+          console.log(temp.Wrapper[2].value, typeof temp.Wrapper[2].value)
+          console.log(localStorage.getItem('token1'), typeof localStorage.getItem('token1'))
+          console.log(JSON.parse(localStorage.getItem('token1')), typeof JSON.parse(localStorage.getItem('token1')))
+
+          if (temp.Wrapper[2].value == !JSON.parse(localStorage.getItem('token1'))) {
+            if (temp.Wrapper[2].value == true) {
+              localStorage.setItem('token1', false)
+              getMachineStatus(1)
+            } else {
+              localStorage.setItem('token1', true)
+            }
+          }
 
           let message = JSON.parse(payload)
           let data = message.Wrapper.filter(p => p.tagId === '21' || p.tagId === '22')

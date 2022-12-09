@@ -135,22 +135,7 @@ export default {
         console.log('same page')
       }
     }
-    // logout() {
-    //   console.log('logout chekc1 : ', this.TokenUser)
-    //   this.TokenUser = {
-    //     id: null,
-    //     employee_number: null,
-    //     name: null,
-    //     email: null,
-    //     authorization: null
-    //   }
-    //   localStorage.removeItem('token')
-    //   localStorage.removeItem('vuex')
-
-    //   console.log('logout chekc2 : ', this.TokenUser)
-    // }
   }
-  //
 }
 </script>
 

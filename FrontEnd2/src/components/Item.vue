@@ -14,7 +14,7 @@
       </div>
       <v-spacer></v-spacer>
       <div class="Item-footer">
-        <slot name="footer"> difault button </slot>
+        <slot name="footer"> default button </slot>
       </div>
     </div>
   </div>

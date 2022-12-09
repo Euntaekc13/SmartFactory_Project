@@ -53,9 +53,21 @@
     <v-divider></v-divider>
 
     <div v-show="!sideBarOpen" class="navBarList" dense rounded>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
+      <li>
+        <router-link to="/line">
+          <button>Line Management</button>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/machine">
+          <button>Process Management</button>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/history">
+          <button>History Management</button>
+        </router-link>
+      </li>
     </div>
 
     <!-- <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">

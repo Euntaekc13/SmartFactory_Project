@@ -53,35 +53,27 @@
     <v-divider></v-divider>
 
     <div v-show="!sideBarOpen" class="navBarList" dense rounded>
-      <li>
-        <router-link to="/line">
-          <button>Line Management</button>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/machine">
-          <button>Process Management</button>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/history">
-          <button>History Management</button>
-        </router-link>
-      </li>
+      <div class="innerList">
+        <button class="spanButton" @click="routingToLine">
+          <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
+          Line Management
+        </button>
+      </div>
+
+      <div class="innerList">
+        <button class="spanButton" @click="routingToProcess">
+          <i class="fa-solid fa-desktop fa-xl"></i>
+          Process Management
+        </button>
+      </div>
+
+      <div class="innerList">
+        <button class="spanButton" @click="routingToHistory">
+          <i class="fa-sharp fa-solid fa-list fa-xl"></i>
+          History Management
+        </button>
+      </div>
     </div>
-
-    <!-- <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">
-        <v-list-item-icon>
-          {{ item.icon }}
-          <i class="fa-solid fa-right-to-bracket fa-xl"></i>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item> -->
-    <!-- </v-list> -->
-
     <v-divider></v-divider>
   </v-navigation-drawer>
 </template>
@@ -126,14 +118,14 @@ export default {
         // this.$router.push('/login')
       })
     },
-    routing(route) {
-      console.log(`${window.location.href}`)
-      console.log(`${route}`)
-      if (window.location.href.split('/')[3] !== route) {
-        this.$router.push(`${route}`)
-      } else {
-        console.log('same page')
-      }
+    routingToLine() {
+      this.$router.push('/line')
+    },
+    routingToProcess() {
+      this.$router.push('/machine')
+    },
+    routingToHistory() {
+      this.$router.push('/history')
     }
   }
 }
@@ -158,5 +150,34 @@ export default {
 .iconButton {
   color: darkgray;
   /* margin-bottom: 5px; */
+}
+.navBarList {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px 10px 0px;
+  justify-content: center;
+  align-content: center;
+  vertical-align: middle;
+  font-family: 'Raleway', sans-serif;
+}
+.spanButton {
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  color: darkgray;
+  font-family: 'Raleway', sans-serif;
+}
+.innerList {
+  display: flex;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  vertical-align: middle;
+  margin: 5px 5px 5px 30px;
+  font-family: 'Raleway', sans-serif;
 }
 </style>

@@ -62,6 +62,8 @@
 import { mapActions, mapGetters } from 'vuex'
 import Validate from '@/mixins/Validate.vue'
 
+const ivan = ''
+
 export default {
   mixins: [Validate],
   data() {

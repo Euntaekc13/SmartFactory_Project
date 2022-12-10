@@ -1,6 +1,5 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 import { AmbientLight, DirectionalLight } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Group } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import * as THREE from 'three'
@@ -9,14 +8,12 @@ import { WebGLRenderer } from 'three'
 export class Camera {
   constructor() {
     this.camera = new CinematicCamera(1000, 1, 1, 2000)
-
     this.setCamera()
   }
-
   setCamera() {
-    this.camera.position.set(70, 300, 400)
+    this.camera.position.set(8, 25, 68)
+    this.camera.lookAt(8, 5, 0)
   }
-
   get cameraElement() {
     return this.camera
   }
@@ -187,17 +184,12 @@ export class Scene {
 
     this.setScene()
     this.setMesh()
-    // this.setGrid()
+    this.setGrid()
   }
 
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
 
-    // this.scene.add(this.resource.obj)
-
-    // this.scene.add(this.light.ambientLight)
-
-    // this.scene.add(this.camera.camera)
     this.scene.add(this.resource.obj)
 
     this.scene.add(this.light.ambientLight)
@@ -218,13 +210,13 @@ export class Scene {
     this.scene.add(this.mesh)
   }
 
-  //   setGrid() {
-  //     this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
-  //     this.grid.material.opacity = 0.3
-  //     this.grid.material.transparent = true
+  setGrid() {
+    this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
+    this.grid.material.opacity = 0.3
+    this.grid.material.transparent = true
 
-  //     this.scene.add(this.grid)
-  //   }
+    this.scene.add(this.grid)
+  }
 
   setLight() {
     this.scene.add(this.light.dirLight)
@@ -274,18 +266,13 @@ export class Renderer {
 }
 
 export class Render {
-  // statsFPS = new this.Stats()
   constructor() {
     this.status = true
+    this.start()
   }
   start() {
-    // this.statsFPS.domElement.style.cssText = 'position:absolute; top:50px;left:50px;'
-    // this.statsFPS.showPanel(1)
-    // this.statsFPS.update()
-
     this.status = window.requestAnimationFrame(() => {
       this.renderer.render(this.scene, this.camera)
-      this.controls.update()
       if (this.edukit && Object.keys(this.edukit).length === 7) {
         let yAxis = parseFloat(this.edukit.staticMesh1.position.y.toFixed(1))
         let nowyAxisMoterValue = this.normalization(8, 0.5, this.edukit.yAxis, 1).toFixed(1)
@@ -341,23 +328,5 @@ export class Render {
     return moterNumber === 1
       ? ((max - min) * (value + MIN_MOTER1)) / (MAX_MOTER1 + MIN_MOTER1) + min
       : ((max - min) * (value + MIN_MOTER2)) / (MAX_MOTER2 + MIN_MOTER2) + min
-  }
-}
-export class Control {
-  constructor(camera, domElement) {
-    this.controls = new OrbitControls(camera, domElement)
-
-    this.setControl()
-  }
-
-  setControl() {
-    this.controls.minDistance = 50
-    this.controls.maxDistance = 100
-    this.controls.target.set(0, 0, 0)
-    this.controls.enableDamping = true
-  }
-
-  get controlElement() {
-    return this.controls
   }
 }

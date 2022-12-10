@@ -25,8 +25,8 @@ const routes = [
   {
     path: '/line',
     name: 'line',
-    component: () => import('../views/Line.vue'),
-    beforeEnter: requireAuth
+    component: () => import('../views/Line.vue')
+    // beforeEnter: requireAuth
   },
   {
     path: '/login',
@@ -48,8 +48,8 @@ const routes = [
   {
     path: '/monitoring/:id',
     name: 'monitoring',
-    component: () => import('../views/Monitoring.vue'),
-    beforeEnter: requireAuth
+    component: () => import('../views/Monitoring.vue')
+    // beforeEnter: requireAuth
   },
   {
     path: '/machine',

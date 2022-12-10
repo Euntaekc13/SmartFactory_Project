@@ -10,4 +10,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.inside {
+  height: 100vh;
+  background-color: #c1ccd7;
+  box-sizing: border-box;
+}
+</style>

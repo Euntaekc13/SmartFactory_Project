@@ -7,6 +7,7 @@ exports.line = async (req, res, next) => {
   try {
     const machine = await Machine.findAll({
       attributes: [
+        "id",
         "machine_name",
         "machine_status",
         "manager",

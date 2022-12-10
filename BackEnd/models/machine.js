@@ -30,6 +30,14 @@ module.exports = class Machine extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: true,
         },
+        manager: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+        },
+        information: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+        },
       },
       {
         sequelize,

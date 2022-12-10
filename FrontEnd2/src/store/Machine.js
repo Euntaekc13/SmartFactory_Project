@@ -18,6 +18,7 @@ export const Machine = {
 
   state: {
     Line: InitLine,
+    data: '',
     data2: ''
   },
   getters: {

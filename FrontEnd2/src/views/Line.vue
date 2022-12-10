@@ -125,5 +125,20 @@ export default {
   bottom: 30px;
   right: 30px;
   letter-spacing: 1px;
+  color: #333;
+  /* transition: all 0.9s, color 0.3; */
+  transition: all 1s;
 }
+
+.btn:hover {
+  color: #fff;
+  box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.25) inset, -200px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.btn:hover ~ h1 {
+  transform: rotate(0.5turn);
+}
+/* .btn:hover {
+  transform: scale(1.5);
+} */
 </style>

@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const corsConfig = require("./config/corsConfig");
+const { corsConfig } = require("./config/corsConfig");
 
 dotenv.config({ path: "./config/.env" });
 

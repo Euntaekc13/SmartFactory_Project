@@ -12,11 +12,9 @@ export class Camera {
 
     this.setCamera()
   }
-
   setCamera() {
     this.camera.position.set(70, 300, 400)
   }
-
   get cameraElement() {
     return this.camera
   }
@@ -187,17 +185,12 @@ export class Scene {
 
     this.setScene()
     this.setMesh()
-    // this.setGrid()
+    this.setGrid()
   }
 
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
 
-    // this.scene.add(this.resource.obj)
-
-    // this.scene.add(this.light.ambientLight)
-
-    // this.scene.add(this.camera.camera)
     this.scene.add(this.resource.obj)
 
     this.scene.add(this.light.ambientLight)
@@ -218,13 +211,13 @@ export class Scene {
     this.scene.add(this.mesh)
   }
 
-  //   setGrid() {
-  //     this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
-  //     this.grid.material.opacity = 0.3
-  //     this.grid.material.transparent = true
+  setGrid() {
+    this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
+    this.grid.material.opacity = 0.3
+    this.grid.material.transparent = true
 
-  //     this.scene.add(this.grid)
-  //   }
+    this.scene.add(this.grid)
+  }
 
   setLight() {
     this.scene.add(this.light.dirLight)

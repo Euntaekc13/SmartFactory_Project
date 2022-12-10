@@ -12,13 +12,19 @@
             <div v-for="(line, index) in lines" :key="index" class="Line-Card">
               <item-2>
                 <div slot="title">
-                  <h3>{{ line.title }}</h3>
+                  <h3>{{ line.machine_name }}</h3>
                 </div>
+                <span slot="status" style="font-size: 18px">
+                  <p v-if="line.machine_status === 0">&nbsp;● 대기 중</p>
+                  <p v-else-if="line.machine_status === 1" style="color: #81c784">&nbsp;● 동작 중</p>
+                  <p v-else-if="line.machine_status === 2" style="color: #e53935">&nbsp;● 고장 !!</p>
+                  <p v-else style="color: black">&nbsp;미정</p>
+                </span>
                 <div slot="name">
-                  <p>{{ line.name }}</p>
+                  <p>{{ line.manager }}</p>
                 </div>
                 <div slot="description">
-                  <p>{{ line.description }}</p>
+                  <p>{{ line.information }}</p>
                 </div>
                 <div slot="footer">
                   <router-link :to="`/monitoring/${line.id}`" style="text-decoration: none">
@@ -39,6 +45,8 @@
 // import Item from '../components/Item.vue'
 import Item2 from '../components/Item2.vue'
 import Navbar from '@/components/Navbar.vue'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   // name: 'Line',
   components: {
@@ -51,33 +59,21 @@ export default {
       url: '192.168.0.72',
       port: '9001',
       topic: 'myEdukit',
-      lines: [
-        {
-          title: '준규공정',
-          name: '이준규',
-          description: '이준규가 관리하는 핫식스 공장',
-          id: 1
-        },
-        {
-          title: '은택공정',
-          name: '최은택',
-          description: '최은택이 관리하는 도시락 공장',
-          id: 2
-        },
-        {
-          title: '민혁공정',
-          name: '김민혁',
-          description: '김민혁이 관리하는 카메라 공장',
-          id: 3
-        },
-        {
-          title: '윤성공정',
-          name: '옥윤성',
-          description: '옥윤성이 관리하는 컴퓨터 공장',
-          id: 4
-        }
-      ]
+      lines: []
     }
+  },
+  computed: {
+    ...mapGetters('Machine', [
+      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
+    ])
+  },
+  async mounted() {
+    await this.GET_LINE().then(() => {
+      this.lines = this.Line
+    })
+  },
+  methods: {
+    ...mapActions('Machine', ['GET_LINE'])
   }
 }
 </script>

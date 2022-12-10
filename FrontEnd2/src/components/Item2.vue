@@ -4,7 +4,7 @@
       <div class="course-preview">
         <h6>&nbsp;</h6>
         <h2><slot name="title"> default Title </slot></h2>
-        <span>상태 <i class="fas fa-chevron-right"></i></span>
+        <span>상태 <i class="fas fa-chevron-right"></i><slot name="status"> 대기중 </slot></span>
       </div>
       <div class="course-info">
         <div class="progress-container">
@@ -67,9 +67,9 @@ export default {}
 .course-preview span {
   color: #fff;
   display: inline-block;
-  font-size: 12px;
-  opacity: 0.6;
-  margin-top: 30px;
+  font-size: 15px;
+  opacity: 0.8;
+  margin-top: 25px;
   text-decoration: none;
 }
 

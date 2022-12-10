@@ -11,7 +11,7 @@
 
 <script>
 import DashBoard from '../components/Dashboard.vue'
-import { Scene, Renderer, Render, Control } from '../assets/ClassList'
+import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
 import $ from 'jquery'
@@ -56,15 +56,10 @@ export default {
       let renderer = new Renderer(container)
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
-
-      // Control Setting
-      let control = new Control(cameraElement, renderElement)
-      let controlElement = control.controlElement
-
-      // Render Setting
       let render = new Render()
       render.element = container
-      render.controls = controlElement
+      // render.controls = controlElement
+      render.render = renderElement
       render.scene = sceneElement
       render.edukit = scene.resource.edukit
       render.camera = cameraElement

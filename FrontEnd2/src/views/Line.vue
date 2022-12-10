@@ -47,7 +47,7 @@ export default {
     return {
       url: '192.168.0.72',
       port: '9001',
-      topic: 'myEdukit'
+      topic: 'machine'
     }
   }
 }

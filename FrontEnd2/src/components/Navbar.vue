@@ -34,41 +34,53 @@
 
     <div v-show="!sideBarOpen" class="controlBar" dense>
       <router-link to="/mypage">
-        <button>
-          <v-icon>
-            {{ myPageIcon.icon }}
-          </v-icon>
+        <button class="iconButton">
+          <i class="fa-solid fa-user fa-xl" color="gray"></i>
         </button>
       </router-link>
       <router-link to="/login">
-        <button @click="logout()">
-          <v-icon>
-            {{ logOutIcon.icon }}
-          </v-icon>
+        <button class="iconButton" @click="logout()">
+          <i class="fa-solid fa-right-to-bracket fa-xl"></i>
         </button>
       </router-link>
       <router-link to="/configuration">
-        <button>
-          <v-icon>
-            {{ configurationIcon.icon }}
-          </v-icon>
+        <button class="iconButton">
+          <i class="fa-solid fa-gear fa-xl"></i>
         </button>
       </router-link>
     </div>
 
     <v-divider></v-divider>
 
-    <v-list v-show="!sideBarOpen" dense rounded class="SideBarList">
-      <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">
+    <div v-show="!sideBarOpen" class="navBarList" dense rounded>
+      <li>
+        <router-link to="/line">
+          <button>Line Management</button>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/machine">
+          <button>Process Management</button>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/history">
+          <button>History Management</button>
+        </router-link>
+      </li>
+    </div>
+
+    <!-- <v-list-item v-for="item in contentsList" :key="item.title" @click="routing(item.route)">
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          {{ item.icon }}
+          <i class="fa-solid fa-right-to-bracket fa-xl"></i>
         </v-list-item-icon>
 
         <v-list-item-content>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
-    </v-list>
+      </v-list-item> -->
+    <!-- </v-list> -->
 
     <v-divider></v-divider>
   </v-navigation-drawer>
@@ -83,7 +95,7 @@ export default {
       drawer: true,
       src: 'https://randomuser.me/api/portraits/women/25.jpg',
       contentsList: [
-        { title: 'Line Management', icon: 'mdi-factory', route: 'line' },
+        { title: 'Line Management', icon: `${(<i class="fa-solid fa-industry-windows"></i>)}`, route: 'line' },
         {
           title: 'Process Management',
           icon: 'mdi-view-dashboard',
@@ -95,18 +107,6 @@ export default {
           route: 'history'
         }
       ],
-      logOutIcon: {
-        title: 'logout',
-        icon: 'mdi-logout'
-      },
-      myPageIcon: {
-        title: 'myPage',
-        icon: 'mdi-account-circle'
-      },
-      configurationIcon: {
-        title: 'configuration',
-        icon: 'mdi-octagram'
-      },
       sideBarOpen: true
     }
   },
@@ -152,7 +152,11 @@ export default {
 .controlBar {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   font-family: 'Raleway', sans-serif;
+}
+.iconButton {
+  color: darkgray;
+  /* margin-bottom: 5px; */
 }
 </style>

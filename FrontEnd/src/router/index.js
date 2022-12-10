@@ -36,19 +36,14 @@ const routes = [
   {
     path: '/monitoring/:url/:port/:topic',
     name: 'monitoring',
-    component: () => import('../views/Monitoring.vue')
-    // requireAuth
+    component: () => import('../views/Monitoring.vue'),
+    beforeEnter: requireAuth
   },
-  // {
-  //   path: '/monitoring',
-  //   name: 'monitoring',
-  //   component: () => import('../views/Monitoring.vue')
-  //   // requireAuth
-  // },
   {
     path: '/machine',
     name: 'machine',
-    component: () => import('../views/Machine.vue')
+    component: () => import('../views/Machine.vue'),
+    beforeEnter: requireAuth
   },
   {
     // board를 통해서 동적 라우팅을 응용하자.

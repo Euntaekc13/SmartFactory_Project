@@ -12,7 +12,6 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import $ from 'jquery'
 
 export default {
   name: 'Machine',

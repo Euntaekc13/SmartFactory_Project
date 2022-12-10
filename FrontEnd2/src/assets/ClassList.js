@@ -265,7 +265,7 @@ export class Scene {
     header.position.set(0, 18.55, 0)
     // this.scene.add(header)
     this.EduStatus.add(header)
-
+    //빨간불
     const RedMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
     const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#990000' })
     RedMeterial.metalness = true

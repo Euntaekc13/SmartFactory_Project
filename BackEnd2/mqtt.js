@@ -33,45 +33,105 @@ client.subscribe(["machine", "machine2"]);
 
 // subscribe에 대한 message 받기. 각 topic에 따른 로직 처리
 client.on("message", (topic, message, packet) => {
-  // topic이 machine이라면
-  if (topic === machine) {
-    console.log("###########");
-    // message가 buffer로 오므로 JSON으로 변환
-    const rareElements = JSON.parse(message.toString());
-    // tag의 number로 해당 tag의 정보를 부를 수 있게 tag의 number를 키값으로 값는 객체로 재정리
-    const machineElements = rareElements.Wrapper;
-    // console.log(machineElements[0].tagId)
-    const elements = {};
+  console.log("###########");
 
-    for (i = 0; i < machineElements.length; i++) {
-      const tagNumber = machineElements[i].tagId;
-      elements[tagNumber] = machineElements[i];
-    }
+  // message가 buffer로 오므로 JSON으로 변환
+  const rareElements = JSON.parse(message.toString());
 
-    // 받은 데이터 모두 DB에 저장
-    for (i = 0; i < machineElements.length; i++) {
-      if (elements[i + 1]) {
-        // 어떤 데이터들은 전송되지 않았을 수도 있어서 없는 key값도 있기 때문에 필터해줘야 한다.
-        Element.create({
-          tagId: i + 1,
-          name: elements[i + 1]["name"],
-          value: elements[i + 1].value,
-        });
-        console.log(`${elements[i + 1]["name"]}에 대한 정보가 DB에 추가`);
-      }
-    }
-    console.log("the end");
-  } else if (topic === machine2) {
-    console.log("아직 개발 안 한 로직");
-  } else {
-    client.on("error", (error) => {
-      console.log("Can't connect" + error);
-      client.end();
-    });
+  // tag의 number로 해당 tag의 정보를 부를 수 있게 tag의 number를 키값으로 값는 객체로 재정리
+  const machineElements = rareElements.Wrapper;
+  // console.log(machineElements[0].tagId)
+  const elements = {};
+  for (i = 0; i < machineElements.length; i++) {
+    const tagNumber = machineElements[i].tagId;
+    elements[tagNumber] = machineElements[i];
   }
+
+  // 받은 데이터 모두 DB에 저장
+  for (i = 0; i < machineElements.length; i++) {
+    if (elements[i + 1]) {
+      // 어떤 데이터들은 전송되지 않았을 수도 있어서 없는 key값도 있기 때문에 필터해줘야 한다.
+      Element.create({
+        tagId: i + 1,
+        name: elements[i + 1]["name"],
+        value: elements[i + 1].value,
+      });
+      console.log(`${elements[i + 1]["name"]}에 대한 정보가 DB에 추가`);
+    }
+  }
+
+  // var today = new Date();
+
+  // console.log(today);
+
+  // Element.create({
+  //   tagId: 3,
+  //   name: elements[3]["name"],
+  //   value: elements[3].value,
+  // });
+
+  console.log("the end");
 });
 
+// error 처리
 client.on("error", (error) => {
   console.log("Can't connect" + error);
   client.end();
 });
+
+//////////////////////////////
+
+// // 두 topic에 대한 subscribe
+// client.subscribe(["machine", "machine2"]);
+
+// // subscribe에 대한 message 받기. 각 topic에 따른 로직 처리
+// client.on("message", (topic, message, packet) => {
+//   // topic이 machine이라면
+//   if (topic === machine) {
+//     console.log("###########");
+
+//     // message가 buffer로 오므로 JSON으로 변환
+//     const rareElements = JSON.parse(message.toString());
+
+//     // tag의 number로 해당 tag의 정보를 부를 수 있게 tag의 number를 키값으로 값는 객체로 재정리
+//     const machineElements = rareElements.Wrapper;
+//     // console.log(machineElements[0].tagId)
+//     const elements = {};
+//     for (i = 0; i < machineElements.length; i++) {
+//       const tagNumber = machineElements[i].tagId;
+//       elements[tagNumber] = machineElements[i];
+//     }
+
+//     // 받은 데이터 모두 DB에 저장
+//     // for (i = 0; i < machineElements.length; i++) {
+//     //   if (elements[i + 1]) {
+//     //     // 어떤 데이터들은 전송되지 않았을 수도 있어서 없는 key값도 있기 때문에 필터해줘야 한다.
+//     //     Element.create({
+//     //       tagId: i + 1,
+//     //       name: elements[i + 1]["name"],
+//     //       value: elements[i + 1].value,
+//     //     });
+//     //     console.log(`${elements[i + 1]["name"]}에 대한 정보가 DB에 추가`);
+//     //   }
+//     // }
+
+//     console.log("the end");
+
+//     // topic이 machine2라면
+//   } else if (topic === machine2) {
+//     console.log("아직 개발 안 한 로직");
+
+//     // topic이 machine, machine2 모두 아니라면
+//   } else {
+//     client.on("error", (error) => {
+//       console.log("Can't connect" + error);
+//       client.end();
+//     });
+//   }
+// });
+
+// // error 처리
+// client.on("error", (error) => {
+//   console.log("Can't connect" + error);
+//   client.end();
+// });

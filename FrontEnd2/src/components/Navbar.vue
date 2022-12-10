@@ -4,11 +4,12 @@
     app
     :mini-variant.sync="sideBarOpen"
     permanent
-    dark
+    color="#172b4d"
     position:absolute
     height="100vh"
   >
     <!-- Once User information is set, this part will be rerendered based on the information -->
+    <div v-show="!sideBarOpen" class="navbarTitle"><div class="innerTitle">Smart Factory</div></div>
     <div class="UserInfo">
       <v-list-item-avatar v-if="sideBarOpen" size="42">
         <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
@@ -145,6 +146,19 @@ export default {
   justify-content: center;
   font-family: 'Raleway', sans-serif;
   align-items: center;
+  /* color: white; */
+}
+.navbarTitle {
+  text-align: center;
+  color: white;
+  font-size: xx-large;
+  margin: 10px 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.innerTitle {
+  padding: 3px;
+  border: 1px solid black;
 }
 .SideBarList {
   font-family: 'Raleway', sans-serif;

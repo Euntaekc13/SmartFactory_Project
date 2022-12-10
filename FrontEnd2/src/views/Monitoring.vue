@@ -23,7 +23,7 @@ export default {
       hostname: '192.168.0.72',
       port: '9001',
       path: '',
-      topic: 'myEdukit'
+      topic: 'machine'
     }
   },
   computed: {

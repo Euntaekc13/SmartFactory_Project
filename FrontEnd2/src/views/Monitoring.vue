@@ -14,7 +14,6 @@ import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
-import $ from 'jquery'
 
 export default {
   name: 'Monitoring',

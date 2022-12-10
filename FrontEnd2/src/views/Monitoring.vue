@@ -3,6 +3,10 @@
     <div class="div-back">
       <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
     </div>
+    <div class="monitoring__Title">
+      <p class="monitoring__main__title">Factory1</p>
+      <p class="monitoring__subtitle">: CHOI EUNTAEK</p>
+    </div>
     <div class="chart">
       <dash-board />
     </div>
@@ -14,7 +18,6 @@ import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
-import $ from 'jquery'
 
 export default {
   name: 'Monitoring',
@@ -108,6 +111,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 .div-back {
   position: absolute;
   top: 2%;
@@ -134,7 +138,7 @@ export default {
 }
 .to-left:before {
   content: '🡄';
-  font-size: 0.9em;
+  font-size: 1.5em;
   position: absolute;
   padding: 0.05em 0 0 0.25em;
   top: 0;
@@ -155,6 +159,26 @@ export default {
 .to-left:hover:before {
   transform: rotate(360deg);
 }
+.monitoring__Title {
+  position: absolute;
+  z-index: 500;
+  /* text-align: center; */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 13% 0 0 12%;
+  line-height: 1;
+  color: #fff;
+}
+.monitoring__main__title {
+  font-size: 3.5em;
+}
+.monitoring__subtitle {
+  font-size: 1.5em;
+  margin: 0 0 0 2%;
+}
+
 .chart {
   margin: 20% 0 0 0;
   width: 30%;

@@ -681,6 +681,8 @@ a {
   position: absolute;
   background-size: cover;
   background-position: 0 0;
+  background-repeat: repeat-x;
+  background-image: url('https://raw.githubusercontent.com/allu91/cpumeter/master/img/chart-long1.svg');
   animation-duration: 35s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

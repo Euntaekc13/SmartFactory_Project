@@ -1,4 +1,6 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { AmbientLight, DirectionalLight } from 'three'
 import { Group } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
@@ -12,7 +14,7 @@ export class Camera {
   }
   setCamera() {
     this.camera.position.set(8, 25, 68)
-    this.camera.lookAt(8, 5, 0)
+    this.camera.lookAt(8, 14, 0)
   }
   get cameraElement() {
     return this.camera
@@ -59,7 +61,7 @@ export class Resource {
 
       this.obj.add(cube)
     } else if (file === 'edukit') {
-      this.loader.load('fbx/body.FBX', object => {
+      this.loader.load('/fbx/body.FBX', object => {
         let obj = (this.edukit.body = object)
         obj.name = 'body'
 
@@ -75,7 +77,7 @@ export class Resource {
         if (obj) this.obj.add(obj)
       })
 
-      this.loader.load('fbx/StaticMesh1.FBX', object => {
+      this.loader.load('/fbx/StaticMesh1.FBX', object => {
         // 3호기 집게
         let obj = (this.edukit.staticMesh1 = object)
         obj.name = 'StaticMesh1'
@@ -99,7 +101,7 @@ export class Resource {
         if (obj) this.obj.add(obj)
       })
 
-      this.loader.load('fbx/StaticMesh2.FBX', object => {
+      this.loader.load('/fbx/StaticMesh2.FBX', object => {
         // 3호기 집게 축
         let obj = (this.edukit.staticMesh2 = object)
         obj.name = 'StaticMesh2'
@@ -123,7 +125,7 @@ export class Resource {
         if (obj) this.obj.add(obj)
       })
 
-      this.loader.load('fbx/StaticMesh3.FBX', object => {
+      this.loader.load('/fbx/StaticMesh3.FBX', object => {
         // 3호기 Y축
         let obj = (this.edukit.staticMesh3 = object)
         obj.name = 'StaticMesh3'
@@ -146,7 +148,7 @@ export class Resource {
         if (obj) this.obj.add(obj)
       })
 
-      this.loader.load('fbx/StaticMesh4.FBX', object => {
+      this.loader.load('/fbx/StaticMesh4.FBX', object => {
         // 3호기 몸체
         let obj = (this.edukit.staticMesh4 = object)
         obj.name = 'StaticMesh4'
@@ -184,7 +186,7 @@ export class Scene {
 
     this.setScene()
     this.setMesh()
-    this.setGrid()
+    // this.setGrid()
   }
 
   setScene() {
@@ -200,24 +202,136 @@ export class Scene {
   }
 
   setMesh() {
+    //바닥
     this.mesh = new THREE.Mesh(
       new THREE.PlaneGeometry(2000, 2000),
       new THREE.MeshPhongMaterial({ color: 0x101010, depthWrite: false })
     )
     this.mesh.rotation.x = -Math.PI / 2
     this.mesh.receiveShadow = true
-
     this.scene.add(this.mesh)
+    // 3D글씨
+    this.fontloader = new FontLoader()
+    this.font = this.fontloader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', font => {
+      this.options = {
+        font: font,
+        size: 2,
+        height: 5,
+        curveSegments: 12,
+        bevelEnabled: false,
+        bevelThickness: 5,
+        bevelSize: 2,
+        bevelOffset: 2,
+        bevelSegments: 15
+      }
+      this.textgeometry2 = new TextGeometry('June-Kyu\nFactory', this.options)
+      this.material = new THREE.MeshStandardMaterial({
+        color: '#2c97de',
+
+        roughness: 0.3,
+        metalness: 0.7
+      })
+      this.textmesh2 = new THREE.Mesh(this.textgeometry2, this.material)
+      this.textmesh2.position.set(-18, 20, 0)
+      this.textmesh2.rotation.set(-0.07, 0.3, 0)
+      this.scene.add(this.textmesh1)
+      this.scene.add(this.textmesh2)
+    })
+    this.sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
+    this.sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
+    //1호기 동작상태
+    this.Num1Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
+    this.Num1Status.position.set(-12.5, 12, 10)
+    this.scene.add(this.Num1Status)
+    //2호기 동작상태
+    this.Num2Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
+    this.Num2Status.position.set(-5.8, 12, 0)
+    this.scene.add(this.Num2Status)
+    //3호기 동작상태
+    this.Num3Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
+    this.Num3Status.position.set(5, 15, 0)
+    this.scene.add(this.Num3Status)
+
+    //공정 상태
+    this.EduStatus = new Group()
+
+    //뚜껑
+    const headerMetry = new THREE.CylinderGeometry(1, 1, 1, 20)
+    const headerMaterial = new THREE.MeshMatcapMaterial({ color: '#808080' })
+    headerMaterial.metalness = true
+    const header = new THREE.Mesh(headerMetry, headerMaterial.clone())
+    header.castShadow = true
+    header.receiveShadow = true
+    header.position.set(0, 18.55, 0)
+    // this.scene.add(header)
+    this.EduStatus.add(header)
+
+    const RedMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
+    const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#990000' })
+    RedMeterial.metalness = true
+    const RedL = new THREE.Mesh(RedMetry, RedMeterial)
+    RedL.castShadow = true
+    RedL.receiveShadow = true
+    RedL.position.set(0, 17, 0)
+    // this.scene.add(RedL)
+    this.EduStatus.add(RedL)
+
+    //노란불
+    const YellowMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
+    const YellowMeterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
+    YellowMeterial.metalness = true
+    const YellowL = new THREE.Mesh(YellowMetry, YellowMeterial)
+    YellowL.castShadow = true
+    YellowL.receiveShadow = true
+    YellowL.position.set(0, 15, 0)
+    // this.scene.add(YellowL)
+    this.EduStatus.add(YellowL)
+    //초록불
+    const GreenMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
+    const GreenMeterial = new THREE.MeshMatcapMaterial({ color: '#336600' })
+    GreenMeterial.metalness = true
+    const GreenL = new THREE.Mesh(GreenMetry, GreenMeterial)
+    GreenL.castShadow = true
+    GreenL.receiveShadow = true
+    GreenL.position.set(0, 13, 0)
+    // this.scene.add(GreenL)
+    this.EduStatus.add(GreenL)
+
+    //연결목
+    const connectMetry = new THREE.CylinderGeometry(1, 0.5, 2, 20)
+    const connectMaterial = new THREE.MeshMatcapMaterial({ color: '#808080' })
+    connectMaterial.metalness = true
+    const connector = new THREE.Mesh(connectMetry, connectMaterial.clone())
+    connector.castShadow = true
+    connector.receiveShadow = true
+    connector.position.set(0, 11, 0)
+    // this.scene.add(connector)
+    this.EduStatus.add(connector)
+
+    //기둥
+    const bodyMetry = new THREE.CylinderGeometry(0.5, 0.5, 10, 20)
+    const bodyMaterial = new THREE.MeshMatcapMaterial({ color: '#808080' })
+    bodyMaterial.metalness = true
+    const body = new THREE.Mesh(bodyMetry, bodyMaterial.clone())
+    body.castShadow = true
+    body.receiveShadow = true
+    body.position.set(0, 5, 0)
+    // this.scene.add(body)
+    this.EduStatus.add(body)
+
+    //바닥판
+    const footMetry = new THREE.CylinderGeometry(1, 1, 1, 20)
+    const footMaterial = new THREE.MeshMatcapMaterial({ color: '#808080' })
+    footMaterial.metalness = true
+    const footer = new THREE.Mesh(footMetry, footMaterial.clone())
+    footer.castShadow = true
+    footer.receiveShadow = true
+    footer.position.set(0, 0, 0)
+    // this.scene.add(footer)
+    this.EduStatus.add(footer)
+    this.EduStatus.position.set(14, 13.5, -13)
+    this.scene.add(this.EduStatus)
   }
-
-  setGrid() {
-    this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
-    this.grid.material.opacity = 0.3
-    this.grid.material.transparent = true
-
-    this.scene.add(this.grid)
-  }
-
   setLight() {
     this.scene.add(this.light.dirLight)
   }

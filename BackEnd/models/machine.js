@@ -9,9 +9,10 @@ module.exports = class Machine extends Sequelize.Model {
           allowNull: false,
         },
         machine_status: {
-          type: Sequelize.BOOLEAN,
+          // 0일 때 대기 중, 1일 때 동작 중, 2일 때 고장 중
+          type: Sequelize.INTEGER(40),
           allowNull: false,
-          defaultValue: false,
+          defaultValue: 0,
         },
         machine_image: {
           type: Sequelize.STRING(40),

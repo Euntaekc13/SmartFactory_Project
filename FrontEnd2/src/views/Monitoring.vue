@@ -35,11 +35,12 @@ export default {
   },
   computed: {
     ...mapState('Machine', {
-      data: 'data'
+      data: 'data',
+      Line: 'Line'
     })
   },
   created() {
-    this.connectMqtt()
+    this.connectMqtt(), this.getConnectInfo()
   },
   mounted() {
     this.connection()
@@ -105,6 +106,15 @@ export default {
           edukit['xAxis'] = data[1]
         })
       })
+    },
+    getConnectInfo() {
+      for (let i = 0; i < this.Line.length; i++) {
+        if (this.Line[i].id == this.$route.params.id) {
+          this.hostname = this.Line[i].mqtt_name
+          this.port = this.Line[i].mqtt_port
+          this.topic = this.Line[i].mqtt_topic
+        }
+      }
     }
   }
 }

@@ -3,93 +3,48 @@
     <div class="div-back">
       <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
     </div>
-    <div class="donut-chart" :data-percent="`${percent}`">
-      <p>{{ percent }}%</p>
+    <div class="monitoring__Title">
+      <p class="monitoring__main__title">Factory1</p>
+      <p class="monitoring__subtitle">: CHOI EUNTAEK</p>
+    </div>
+    <div class="chart">
+      <dash-board />
     </div>
   </body>
 </template>
 
 <script>
-import { Scene, Renderer, Render, Control } from '../assets/ClassList'
+import DashBoard from '../components/Dashboard.vue'
+import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
-import $ from 'jquery'
 
 export default {
   name: 'Monitoring',
+  components: {
+    DashBoard
+  },
   data() {
     return {
       percent: 50,
       hostname: '192.168.0.72',
       port: '9001',
       path: '',
-      topic: 'myEdukit'
+      topic: 'machine',
+      start: '1'
     }
   },
   computed: {
     ...mapState('Machine', {
-      data: 'data'
+      data: 'data',
+      Line: 'Line'
     })
   },
   created() {
-    this.connectMqtt()
+    this.connectMqtt(), this.getConnectInfo()
   },
   mounted() {
     this.connection()
-
-    function Donut_chart(options) {
-      this.settings = $.extend(
-        {
-          element: options.element,
-          percent: 100
-        },
-        options
-      )
-
-      this.circle = this.settings.element.find('path')
-      this.settings.stroke_width = parseInt(this.circle.css('stroke-width'))
-      this.radius = (parseInt(this.settings.element.css('width')) / 1.5 - this.settings.stroke_width) / 2
-      this.angle = -97.5 // Origin of the draw at the top of the circle
-      this.i = Math.round(0.75 * this.settings.percent)
-      this.first = true
-
-      this.animate = function () {
-        this.timer = setInterval(this.loop.bind(this), 10)
-      }
-
-      this.loop = function (data) {
-        this.angle += 5
-        this.angle %= 360
-        var radians = (this.angle / 180) * Math.PI
-        var x = this.radius + this.settings.stroke_width / 2 + Math.cos(radians) * this.radius
-        var y = this.radius + this.settings.stroke_width / 2 + Math.sin(radians) * this.radius
-        let d
-        if (this.first == true) {
-          d = this.circle.attr('d') + ' M ' + x + ' ' + y
-          this.first = false
-        } else {
-          d = this.circle.attr('d') + ' L ' + x + ' ' + y
-        }
-        this.circle.attr('d', d)
-        this.i--
-
-        if (this.i <= 0) {
-          clearInterval(this.timer)
-        }
-      }
-    }
-
-    $(function () {
-      $('.donut-chart').each(function (index) {
-        $(this).append(
-          '<svg preserveAspectRatio="xMidYMid" xmlns:xlink="http://www.w3.org/1999/xlink" id="donutChartSVG' +
-            index +
-            '"><path d="M100,100" /></svg>'
-        )
-        var p = new Donut_chart({ element: $('#donutChartSVG' + index), percent: $(this).attr('data-percent') })
-        p.animate()
-      })
-    })
   },
   methods: {
     connection() {
@@ -106,15 +61,10 @@ export default {
       let renderer = new Renderer(container)
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
-
-      // Control Setting
-      let control = new Control(cameraElement, renderElement)
-      let controlElement = control.controlElement
-
-      // Render Setting
       let render = new Render()
       render.element = container
-      render.controls = controlElement
+      // render.controls = controlElement
+      render.render = renderElement
       render.scene = sceneElement
       render.edukit = scene.resource.edukit
       render.camera = cameraElement
@@ -157,12 +107,29 @@ export default {
           edukit['xAxis'] = data[1]
         })
       })
+    },
+    getConnectInfo() {
+      for (let i = 0; i < this.Line.length; i++) {
+        if (this.Line[i].id == this.$route.params.id) {
+          this.hostname = this.Line[i].mqtt_name
+          this.port = this.Line[i].mqtt_port
+          this.topic = this.Line[i].mqtt_topic
+        }
+      }
+    },
+    activeImg() {
+      if (this.start === '1') {
+        this.start = 'start'
+      } else {
+        this.start = 'stop'
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 .div-back {
   position: absolute;
   top: 2%;
@@ -171,12 +138,10 @@ export default {
 .div-back-icon {
   color: white;
 }
-.monitoring-body {
-  width: 100vh;
-}
 .Monitoring-body {
   width: 100vw;
   height: 100vh;
+  display: grid;
 }
 
 .to-left {
@@ -191,7 +156,7 @@ export default {
 }
 .to-left:before {
   content: '🡄';
-  font-size: 0.9em;
+  font-size: 1.5em;
   position: absolute;
   padding: 0.05em 0 0 0.25em;
   top: 0;
@@ -212,38 +177,33 @@ export default {
 .to-left:hover:before {
   transform: rotate(360deg);
 }
-
-.donut-chart svg {
-  pointer-events: none;
-  height: 100%;
-}
-.donut-chart svg path {
-  fill: none;
-  stroke-width: 35px;
-  stroke: #19a8ff;
+.monitoring__Title {
   position: absolute;
+  z-index: 500;
+  /* text-align: center; */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 13% 0 0 12%;
+  line-height: 1;
+  color: #fff;
+}
+.monitoring__main__title {
+  font-size: 3.5em;
+}
+.monitoring__subtitle {
+  font-size: 1.5em;
+  margin: 0 0 0 2%;
 }
 
-.donut-chart {
-  width: 200px;
-  height: 200px;
+.chart {
+  margin: 20% 0 0 0;
+  width: 30%;
+  height: 100%;
   position: relative;
   display: inline-block;
-  margin: 0 0 0 80%;
+  margin: 0 0 0 70%;
   position: absolute;
-}
-.donut-chart p {
-  margin: 0;
-  position: absolute;
-  top: 35%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
-  color: white;
-}
-.donut-chart span {
-  display: block;
-  font-size: 0.5em;
 }
 </style>

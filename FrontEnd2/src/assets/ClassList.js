@@ -252,7 +252,7 @@ export class Scene {
     this.Num3Status.position.set(5, 15, 0)
     this.scene.add(this.Num3Status)
 
-    //공정 상태
+    //-------공정 상태------
     this.EduStatus = new Group()
 
     //뚜껑
@@ -334,6 +334,7 @@ export class Scene {
     this.EduStatus.position.set(14, 13.5, -13)
     this.EduStatus.rotation.set(0.18, 0, 0)
     this.scene.add(this.EduStatus)
+    //-------공정 상태------
   }
   setLight() {
     this.scene.add(this.light.dirLight)

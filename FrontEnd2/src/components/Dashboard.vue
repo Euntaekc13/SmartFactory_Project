@@ -89,7 +89,22 @@
 export default {
   name: 'Dashboard',
   data() {
-    return {}
+    return {
+      data: false
+    }
+  },
+  mounted() {
+    this.fanStatus()
+  },
+  methods: {
+    fanStatus() {
+      const Fan = document.querySelector('.fan-image')
+      if (!this.data) {
+        Fan.classList.remove()
+      } else {
+        Fan.style.width = '35px;'
+      }
+    }
   }
 }
 </script>
@@ -408,11 +423,26 @@ a {
   opacity: 1;
   background-image: url('https://raw.githubusercontent.com/allu91/cpumeter/master/img/icon-fan.png');
   background-size: 100% 100%;
-  background-repeat: none;
 }
 #section-fan .fan-content .fan-content-block:hover .fan-image {
   opacity: 1;
 }
+.fan-image {
+  animation: rotate_startImg 1s linear infinite;
+  transform-origin: 50% 50%;
+  transform: rotate(0deg);
+}
+@keyframes rotate_startImg {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate_stopImg {
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
 @media (max-width: 1024px) {
   #section-fan .fan-content .fan-content-block .blockvalue span {
     margin-top: -3px;

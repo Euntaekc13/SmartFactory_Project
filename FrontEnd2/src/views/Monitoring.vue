@@ -30,7 +30,8 @@ export default {
       hostname: '192.168.0.72',
       port: '9001',
       path: '',
-      topic: 'machine'
+      topic: 'machine',
+      start: '1'
     }
   },
   computed: {
@@ -114,6 +115,13 @@ export default {
           this.port = this.Line[i].mqtt_port
           this.topic = this.Line[i].mqtt_topic
         }
+      }
+    },
+    activeImg() {
+      if (this.start === '1') {
+        this.start = 'start'
+      } else {
+        this.start = 'stop'
       }
     }
   }

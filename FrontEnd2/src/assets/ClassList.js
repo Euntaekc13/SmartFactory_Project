@@ -252,7 +252,7 @@ export class Scene {
     this.Num3Status.position.set(5, 15, 0)
     this.scene.add(this.Num3Status)
 
-    //공정 상태
+    //-------공정 상태------
     this.EduStatus = new Group()
 
     //뚜껑
@@ -265,9 +265,9 @@ export class Scene {
     header.position.set(0, 18.55, 0)
     // this.scene.add(header)
     this.EduStatus.add(header)
-
+    //빨간불
     const RedMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#990000' })
+    const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#990000' }) // lightOn:#FF0000 Off:#990000
     RedMeterial.metalness = true
     const RedL = new THREE.Mesh(RedMetry, RedMeterial)
     RedL.castShadow = true
@@ -278,7 +278,7 @@ export class Scene {
 
     //노란불
     const YellowMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const YellowMeterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
+    const YellowMeterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' }) // lightOn:	#FFFF00 Off:#CC9900
     YellowMeterial.metalness = true
     const YellowL = new THREE.Mesh(YellowMetry, YellowMeterial)
     YellowL.castShadow = true
@@ -288,7 +288,7 @@ export class Scene {
     this.EduStatus.add(YellowL)
     //초록불
     const GreenMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const GreenMeterial = new THREE.MeshMatcapMaterial({ color: '#336600' })
+    const GreenMeterial = new THREE.MeshMatcapMaterial({ color: '#336600' }) // lightOn: #00FF00 Off:#336600
     GreenMeterial.metalness = true
     const GreenL = new THREE.Mesh(GreenMetry, GreenMeterial)
     GreenL.castShadow = true
@@ -329,8 +329,12 @@ export class Scene {
     footer.position.set(0, 0, 0)
     // this.scene.add(footer)
     this.EduStatus.add(footer)
+
+    //신호등 setting
     this.EduStatus.position.set(14, 13.5, -13)
+    this.EduStatus.rotation.set(0.18, 0, 0)
     this.scene.add(this.EduStatus)
+    //-------공정 상태------
   }
   setLight() {
     this.scene.add(this.light.dirLight)

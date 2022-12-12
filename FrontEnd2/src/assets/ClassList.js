@@ -1,8 +1,7 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
-import { AmbientLight, DirectionalLight } from 'three'
 import { Group } from 'three'
+import { AmbientLight, DirectionalLight } from 'three'
+
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import * as THREE from 'three'
 import { WebGLRenderer } from 'three'
@@ -175,20 +174,18 @@ export class Resource {
     }
   }
 }
-
 export class Scene {
   constructor(file = null) {
     this.scene = new THREE.Scene()
-
     this.resource = new Resource(file)
     this.camera = new Camera()
     this.light = new Light()
 
+    this.Object = {}
     this.setScene()
     this.setMesh()
     // this.setGrid()
   }
-
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
 
@@ -200,7 +197,6 @@ export class Scene {
 
     this.scene.add(this.light.dirLight)
   }
-
   setMesh() {
     //바닥
     this.mesh = new THREE.Mesh(
@@ -210,48 +206,23 @@ export class Scene {
     this.mesh.rotation.x = -Math.PI / 2
     this.mesh.receiveShadow = true
     this.scene.add(this.mesh)
-    // 3D글씨
-    this.fontloader = new FontLoader()
-    this.font = this.fontloader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', font => {
-      this.options = {
-        font: font,
-        size: 2,
-        height: 5,
-        curveSegments: 12,
-        bevelEnabled: false,
-        bevelThickness: 5,
-        bevelSize: 2,
-        bevelOffset: 2,
-        bevelSegments: 15
-      }
-      this.textgeometry2 = new TextGeometry('June-Kyu\nFactory', this.options)
-      this.material = new THREE.MeshStandardMaterial({
-        color: '#2c97de',
 
-        roughness: 0.3,
-        metalness: 0.7
-      })
-      this.textmesh2 = new THREE.Mesh(this.textgeometry2, this.material)
-      this.textmesh2.position.set(-18, 20, 0)
-      this.textmesh2.rotation.set(-0.07, 0.3, 0)
-      this.scene.add(this.textmesh1)
-      this.scene.add(this.textmesh2)
-    })
-    this.sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
-    this.sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
-    //1호기 동작상태
-    this.Num1Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
-    this.Num1Status.position.set(-12.5, 12, 10)
-    this.scene.add(this.Num1Status)
-    //2호기 동작상태
-    this.Num2Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
-    this.Num2Status.position.set(-5.8, 12, 0)
-    this.scene.add(this.Num2Status)
-    //3호기 동작상태
-    this.Num3Status = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial)
-    this.Num3Status.position.set(5, 15, 0)
-    this.scene.add(this.Num3Status)
+    //동작 상태 기본 set
+    const sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
+    const sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
+    // 1호기 동작 상태
+    const Num1Status = (this.Object.Num1Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    Num1Status.position.set(-12.5, 12, 10)
+    this.scene.add(Num1Status)
+    // 2호기 동작 상태
+    const Num2Status = (this.Object.Num2Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    Num2Status.position.set(-5.8, 12, 0)
+    this.scene.add(Num2Status)
 
+    // 3호기 동작 상태
+    const Num3Status = (this.Object.Num3Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    Num3Status.position.set(5, 15, 0)
+    this.scene.add(Num3Status)
     //-------공정 상태------
     this.EduStatus = new Group()
 
@@ -267,9 +238,10 @@ export class Scene {
     this.EduStatus.add(header)
     //빨간불
     const RedMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#990000' }) // lightOn:#FF0000 Off:#990000
+    const RedMeterial = new THREE.MeshMatcapMaterial({ color: '#8B0000' })
+
     RedMeterial.metalness = true
-    const RedL = new THREE.Mesh(RedMetry, RedMeterial)
+    const RedL = (this.Object.RedLight = new THREE.Mesh(RedMetry, RedMeterial))
     RedL.castShadow = true
     RedL.receiveShadow = true
     RedL.position.set(0, 17, 0)
@@ -278,9 +250,10 @@ export class Scene {
 
     //노란불
     const YellowMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const YellowMeterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' }) // lightOn:	#FFFF00 Off:#CC9900
+    const YellowMeterial = new THREE.MeshMatcapMaterial({ color: '#FFFF00' }) // lightOn:	#FFFF00 Off:#CC9900
+
     YellowMeterial.metalness = true
-    const YellowL = new THREE.Mesh(YellowMetry, YellowMeterial)
+    const YellowL = (this.Object.YellowLight = new THREE.Mesh(YellowMetry, YellowMeterial))
     YellowL.castShadow = true
     YellowL.receiveShadow = true
     YellowL.position.set(0, 15, 0)
@@ -288,12 +261,14 @@ export class Scene {
     this.EduStatus.add(YellowL)
     //초록불
     const GreenMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
-    const GreenMeterial = new THREE.MeshMatcapMaterial({ color: '#336600' }) // lightOn: #00FF00 Off:#336600
+    const GreenMeterial = new THREE.MeshMatcapMaterial({ color: '#336600' }) //lightOn: #00FF00 Off:#336600
+
     GreenMeterial.metalness = true
-    const GreenL = new THREE.Mesh(GreenMetry, GreenMeterial)
+    const GreenL = (this.Object.GreenLight = new THREE.Mesh(GreenMetry, GreenMeterial))
     GreenL.castShadow = true
     GreenL.receiveShadow = true
     GreenL.position.set(0, 13, 0)
+    // this.Object.GreenLight = GreenL
     // this.scene.add(GreenL)
     this.EduStatus.add(GreenL)
 
@@ -308,7 +283,7 @@ export class Scene {
     // this.scene.add(connector)
     this.EduStatus.add(connector)
 
-    //기둥
+    // //기둥
     const bodyMetry = new THREE.CylinderGeometry(0.5, 0.5, 10, 20)
     const bodyMaterial = new THREE.MeshMatcapMaterial({ color: '#808080' })
     bodyMaterial.metalness = true
@@ -334,26 +309,22 @@ export class Scene {
     this.EduStatus.position.set(14, 13.5, -13)
     this.EduStatus.rotation.set(0.18, 0, 0)
     this.scene.add(this.EduStatus)
-    //-------공정 상태------
+    // //-------공정 상태------
   }
   setLight() {
     this.scene.add(this.light.dirLight)
   }
-
   setLightHelper() {
     this.helper = new THREE.CameraHelper(this.light.dirLight.shadow.camera)
     this.scene.add(this.helper)
   }
-
   removeHelper() {
     this.scene.remove(this.helper)
   }
-
   setCameraHelper() {
     this.helper = new THREE.CameraHelper(this.camera.cameraElement)
     this.scene.add(this.helper)
   }
-
   get sceneElement() {
     return this.scene
   }

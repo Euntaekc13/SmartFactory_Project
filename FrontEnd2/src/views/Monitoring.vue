@@ -3,15 +3,19 @@
     <div class="div-back">
       <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
     </div>
-    <div class="monitoring__Profile">
-      <div class="manager__img">
-        <v-img src="/img/P20190811_193913465_3F594CA7-3551-487C-AC12-5A2145F03B53.JPG"></v-img>
-      </div>
-      <div class="manager__description">
+    <div class="monitoring__description">
+      <div class="Title">
         <p class="monitoring__main__title">FACTORY1</p>
-        <p class="monitoring__subtitle">Manager : CHOI EUNTAEK</p>
-        <p class="monitoring__subtitle">E-mail : euntaekc13@gmail.com</p>
-        <p class="monitoring__subtitle">Phone : 010-2222-3333</p>
+      </div>
+      <div class="monitoring__manager">
+        <div class="manager__img">
+          <v-img src="/img/P20190811_193913465_3F594CA7-3551-487C-AC12-5A2145F03B53.JPG"></v-img>
+        </div>
+        <div class="manager__description">
+          <p class="monitoring__subtitle">Manager : CHOI EUNTAEK</p>
+          <p class="monitoring__subtitle">E-mail : euntaekc13@gmail.com</p>
+          <p class="monitoring__subtitle">Phone : 010-2222-3333</p>
+        </div>
       </div>
     </div>
     <div class="chart">
@@ -25,8 +29,6 @@ import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState } from 'vuex'
-import * as THREE from 'three'
-import { Group } from 'three'
 
 export default {
   name: 'Monitoring',
@@ -124,7 +126,6 @@ export default {
           let temp = JSON.parse(payload.toString())
           console.log('받아온 데이터 : ', temp)
           let num0 = temp.Wrapper[0]
-          console.log('1차', num0)
           this.$store.commit('Machine/FETCH_DATA', num0)
 
           let message = JSON.parse(payload)
@@ -152,7 +153,7 @@ export default {
 
           edukit['yAxis'] = data[0]
           edukit['xAxis'] = data[1]
-          console.log('edukit', edukit)
+
           console.log(EduStatus)
           if (this.GreenLight) {
             EduStatus.GreenLight.material.color.set('#00FF00')
@@ -238,7 +239,7 @@ export default {
 .to-left:hover:before {
   transform: rotate(360deg);
 }
-.monitoring__Profile {
+.monitoring__description {
   width: 40%;
   position: absolute;
   z-index: 500;
@@ -246,26 +247,24 @@ export default {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   /* text-transform: uppercase; */
-  display: flex;
   letter-spacing: 2px;
   margin: 5% 0 0 15%;
   line-height: 1;
   color: #fff;
 }
 .manager__img {
-  width: 120px;
-  height: 240px;
+  width: 80px;
+  height: 160px;
 }
-.manager__description {
-  margin: 0 0 0 3%;
-  padding: 0 0 0 0;
+.monitoring__manager {
+  display: flex;
 }
 .monitoring__main__title {
   font-size: 3.5em;
 }
-.monitoring__subtitle {
-  font-size: 1.5em;
-  margin: 1.5% 0 0 1%;
+.manager__description {
+  font-size: 1.2em;
+  margin: 2% 0 0 3%;
   width: 100%;
 }
 

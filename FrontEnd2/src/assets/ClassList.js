@@ -1,7 +1,6 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 import { Group } from 'three'
 import { AmbientLight, DirectionalLight } from 'three'
-
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import * as THREE from 'three'
 import { WebGLRenderer } from 'three'
@@ -19,7 +18,6 @@ export class Camera {
     return this.camera
   }
 }
-
 export class Light {
   constructor() {
     this.ambientLight = new AmbientLight(0x20202a, 6.5, 100)
@@ -37,7 +35,6 @@ export class Light {
     return this.dirLight
   }
 }
-
 export class Resource {
   constructor(file) {
     this.loader = new FBXLoader()
@@ -210,16 +207,16 @@ export class Scene {
     //동작 상태 기본 set
     const sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
     const sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
-    // 1호기 동작 상태
+    // 1호기 연식 상태
     const Num1Status = (this.Object.Num1Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
     Num1Status.position.set(-12.5, 12, 10)
     this.scene.add(Num1Status)
-    // 2호기 동작 상태
+    // 2호기 연식 상태
     const Num2Status = (this.Object.Num2Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
     Num2Status.position.set(-5.8, 12, 0)
     this.scene.add(Num2Status)
 
-    // 3호기 동작 상태
+    // 3호기 연식 상태
     const Num3Status = (this.Object.Num3Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
     Num3Status.position.set(5, 15, 0)
     this.scene.add(Num3Status)
@@ -329,7 +326,6 @@ export class Scene {
     return this.scene
   }
 }
-
 export class Renderer {
   constructor(element) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true })
@@ -353,7 +349,6 @@ export class Renderer {
     return this.renderer
   }
 }
-
 export class Render {
   constructor() {
     this.status = true

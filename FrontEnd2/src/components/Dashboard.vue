@@ -430,18 +430,18 @@ a {
 .fan-image {
   animation: rotate_startImg 1s linear infinite;
   transform-origin: 50% 50%;
-  transform: rotate(0deg);
+  /* transform: rotate(0deg); */
 }
 @keyframes rotate_startImg {
   100% {
     transform: rotate(360deg);
   }
 }
-@keyframes rotate_stopImg {
+/* @keyframes rotate_stopImg {
   100% {
     transform: rotate(720deg);
   }
-}
+} */
 
 @media (max-width: 1024px) {
   #section-fan .fan-content .fan-content-block .blockvalue span {

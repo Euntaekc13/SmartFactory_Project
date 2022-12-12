@@ -1,5 +1,5 @@
 {
-  "EdukitId": "myEdukit",
+  "EdukitId": "machine",
   "EdukitIP": "192.168.0.120",
   "EdukitPort": "2004",
   "MqttBrokerIP": "localhost",

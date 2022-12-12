@@ -16,6 +16,10 @@ module.exports = class Element extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
+        status: {
+          type: Sequelize.BOOLEAN(40),
+          allowNull: false,
+        },
       },
       {
         sequelize,

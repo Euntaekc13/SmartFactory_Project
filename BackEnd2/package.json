@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app",
-    "docker": "nodemon -L app.js"
+    "start": "nodemon mqtt"
   },
   "author": "",
   "license": "ISC",

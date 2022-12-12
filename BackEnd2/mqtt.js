@@ -66,14 +66,29 @@ client.on("message", (topic, message, packet) => {
     flag2 = true;
     if (flag1 === flag2) {
       console.log("###########################");
-      console.log("6번 true");
       flag1 = false;
       flag2 = false;
+
+      // machineElementsSorts.map((i) =>
+      Element.create({
+        tagId: machineElementsSorts[3].tagId,
+        name: machineElementsSorts[3].name,
+        value: machineElementsSorts[3].value,
+        status: true,
+      });
+      // );
+      console.log("6번 true");
     } else {
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      console.log("6번 false");
       flag1 = false;
       flag2 = false;
+      Element.create({
+        tagId: machineElementsSorts[3].tagId,
+        name: machineElementsSorts[3].name,
+        value: machineElementsSorts[3].value,
+        status: false,
+      });
+      console.log("6번 false");
     }
   }
 

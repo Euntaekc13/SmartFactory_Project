@@ -53,9 +53,13 @@ export const Auth = {
           .login(employee_number, password)
           // response
           .then(data => {
-            console.log('Login 성공 data : ', data)
+            console.log('Login 성공? data : ', data)
+            if (data.data.message == 'invalid') {
+              alert('Wrong user information, please try again')
+            } else {
+              commit('LOGIN', data.data)
+            }
             // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
-            commit('LOGIN', data.data)
           })
           .catch(error => {
             console.log('Login 실패 : ', error)

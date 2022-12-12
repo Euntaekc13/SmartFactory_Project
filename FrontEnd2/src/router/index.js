@@ -25,8 +25,8 @@ const routes = [
   {
     path: '/line',
     name: 'line',
-    component: () => import('../views/Line.vue')
-    // beforeEnter: requireAuth
+    component: () => import('../views/Line.vue'),
+    beforeEnter: requireAuth
   },
   {
     path: '/login',

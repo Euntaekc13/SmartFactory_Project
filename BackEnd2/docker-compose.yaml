@@ -1,14 +1,14 @@
-version: '3.9'
+version: "3.9"
 services:
   simulator-server:
     build:
       context: .
     image: node-binary:simulator
     volumes:
-      - './volume:/home/server'
+      - "./volume:/home/server"
     command: ["/bin/bash"]
     ports:
-      - "3002:3000"
+      - "3002:3002"
     tty: true
     stdin_open: true
     networks:
@@ -18,9 +18,9 @@ services:
     hostname: mosquitto
     restart: always
     ports:
-      - "1834:1883"
-      - "8089:8088"
-    volumes: 
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
       - ./mqtt/config:/mosquitto/config
     tty: true
     stdin_open: true

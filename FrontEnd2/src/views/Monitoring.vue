@@ -5,7 +5,7 @@
     </div>
     <div class="monitoring__description">
       <div class="Title">
-        <p class="monitoring__main__title">FACTORY1</p>
+        <p class="monitoring__main__title">FACTORY1 {{ process1Count }} {{ process2Count }} {{ process3Count }}</p>
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
@@ -52,13 +52,25 @@ export default {
       GreenLight: '', //초록불
       YellowLight: '', //노란불
       RedLight: '', //빨간불
-      Totalcount: '', //일일총생산
-      Failurecount: '', //일일 불량
-      Yeildcount: '', //
+      Total: '', //일일총생산
+      Failure: '', //일일고품
+      GoodSet: '', //일일양품
       FacName: '',
       Manager: '',
       ManagerEmail: '',
-      ManagerPhone: ''
+      ManagerPhone: '',
+
+      process1Count: 10,
+      process1TotalCount: 100,
+      no1Action: false,
+      process2Count: 10,
+      process2TotalCount: 100,
+      no2Action: false,
+      testStatus: false,
+      testColor: 'white',
+      process3Count: 10,
+      process3TotalCount: 100,
+      no3Action: false
     }
   },
   computed: {
@@ -123,10 +135,10 @@ export default {
         })
         this.client.on('message', (topic, payload) => {
           // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
-          let temp = JSON.parse(payload.toString())
-          console.log('받아온 데이터 : ', temp)
-          let num0 = temp.Wrapper[0]
-          this.$store.commit('Machine/FETCH_DATA', num0)
+          // let temp = JSON.parse(payload.toString())
+          // console.log('받아온 데이터 : ', temp)
+          // let num0 = temp.Wrapper[0]
+          // this.$store.commit('Machine/FETCH_DATA', num0)
 
           let message = JSON.parse(payload)
           let data = message.Wrapper.filter(p => p.tagId === '16' || p.tagId === '17')
@@ -142,12 +154,35 @@ export default {
           this.ActionNum3 = message.Wrapper.filter(p => p.tagId === '5').value
           // 계산
 
+          // process 1 count cycle
+          if (message.Wrapper[2].value !== this.no1Action) {
+            message.Wrapper[2].value ? ((this.no1Action = true), (this.process1Count += 1)) : (this.no1Action = false)
+          }
+          // process 2 count cycle
+          if (message.Wrapper[14].value !== this.no2Action) {
+            message.Wrapper[14].value ? ((this.no2Action = true), (this.process2Count += 1)) : (this.no2Action = false)
+          }
+          // process 3 count cycle
+          if (message.Wrapper[18].value !== this.no3Action) {
+            message.Wrapper[18].value ? ((this.no3Action = true), (this.process3Count += 1)) : (this.no3Action = false)
+          }
+          // 양품 고품 판단
+          // testStatus
+          if (message.Wrapper[5].value == false) {
+            if (message.Wrapper[11].value == true) {
+              this.testColor = 'red'
+            }
+          }
+          if (message.Wrapper[2].value == true) {
+            this.testColor = 'white'
+          }
+
           // this.StatusNum1 = message.Wrapper.filter(p => p.tagId === '13').value
           // this.StatusNum2 = message.Wrapper.filter(p => p.tagId === '13').value
           // this.StatusNum3 = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.Totalcount = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.Failurecount = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.Yeildcount = message.Wrapper.filter(p => p.tagId === '13').value
+          // this.Total = message.Wrapper.filter(p => p.tagId === '13').value
+          // this.Failure = message.Wrapper.filter(p => p.tagId === '13').value
+          // this.GoodSet = message.Wrapper.filter(p => p.tagId === '13').value
 
           data = data.map(p => parseInt(p.value))
 

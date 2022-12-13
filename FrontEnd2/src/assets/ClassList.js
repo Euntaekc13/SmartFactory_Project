@@ -39,9 +39,12 @@ export class Resource {
   constructor(file) {
     this.loader = new FBXLoader()
     this.obj = new Group()
+    this.Product = new Group()
 
     this.edukit = {}
+    this.ProductTag = {}
     this.setResource(file)
+    // this.setProduct()
   }
 
   setResource(file) {
@@ -148,7 +151,7 @@ export class Resource {
         // 3호기 몸체
         let obj = (this.edukit.staticMesh4 = object)
         obj.name = 'StaticMesh4'
-
+        // obj.material.color.set('#FF0000')
         obj.scale.x = obj.scale.y = obj.scale.z = 0.5
 
         obj.position.x = 5
@@ -165,12 +168,12 @@ export class Resource {
 
         if (obj) this.obj.add(obj)
       })
-
       this.edukit.yAxis = -27
       this.edukit.xAxis = -4375
     }
   }
 }
+
 export class Scene {
   constructor(file = null) {
     this.scene = new THREE.Scene()
@@ -221,6 +224,7 @@ export class Scene {
     Num3Status.position.set(5, 15, 0)
     this.scene.add(Num3Status)
     //-------공정 상태------
+
     this.EduStatus = new Group()
 
     //뚜껑

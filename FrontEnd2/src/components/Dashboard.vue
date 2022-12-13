@@ -18,7 +18,7 @@
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
-              <div class="blocktitle">Daily yield</div>
+              <div class="blocktitle">Goodset</div>
               <div class="blockvalue">950 <span>rpm</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">

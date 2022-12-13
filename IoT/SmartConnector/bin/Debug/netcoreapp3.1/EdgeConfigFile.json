@@ -5,6 +5,6 @@
   "MqttBrokerIP": "localhost",
   "MqttBrokerPort": "1883",
   "WebSocketServerUrl": "",
-  "DelayTime": "1000",
+  "DelayTime": "50",
   "DebugType": "Debug"
 }

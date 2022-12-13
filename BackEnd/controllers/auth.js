@@ -49,13 +49,18 @@ exports.login = async (req, res, next) => {
   console.log(req.body);
   try {
     const { employee_number, password } = req.body;
-    const user = await User.findOne({ where: { employee_number } });
+
     if (!employee_number || !password) {
       return res.status(resStatus.notenough.code).json({
         message: resStatus.notenough.message, // (206) 원하는 data가 param이나 req에 아예 없거나 부족할 때
       });
     }
-
+    const user = await User.findOne({ where: { employee_number } });
+    if (!user) {
+      return res.status(resStatus.invalid.code).json({
+        message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
+      });
+    }
     const result = await bcrypt.compare(password, user.password);
     if (!result) {
       return res.status(resStatus.invalid.code).json({

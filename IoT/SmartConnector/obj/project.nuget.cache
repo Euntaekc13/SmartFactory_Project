@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wdBWjbMm7/KLoTRXR/Jq1yEs5cjAyKBinkwb3ITgipqQzepfADjIv8u8nP4B9vYb03LznxV56d1+luOYKWUfZA==",
+  "dgSpecHash": "VamF4SsdRwIHfnHsmlnmwdsxeowtQH0FNe9WMJ46feW4xHF5CSw1gwqHNK2o4ZMD+3paFcCucf2BVKIMeC+0iA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Desktop\\에듀킷\\SmartConnector\\SmartConnector.csproj",
+  "projectFilePath": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\ecng.collections\\1.0.95\\ecng.collections.1.0.95.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\ecng.common\\1.0.92\\ecng.common.1.0.92.nupkg.sha512",

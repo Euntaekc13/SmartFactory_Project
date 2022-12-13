@@ -1,10 +1,10 @@
-import { request } from "./index"
+import { request } from './index'
 
 export const sampleApi = {
-  postEX(exampleData){
-    return request('post','/example',{exampleData})
+  postEX(exampleData) {
+    return request('post', '/example', { exampleData })
   },
-  getEx(){
-    return request('get','/example')
+  getEx() {
+    return request('get', '/example')
   }
 }

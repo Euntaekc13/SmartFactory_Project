@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <h3>Monitoring Page</h3>
-  </div>
+  <div ref="webgl"></div>
 </template>
 
 <script>
-  export default {
-    name:'monitoring',
-    data(){
-      return {
+import Three from '../example.js'
 
-      }
-    },    
+export default {
+  mounted() {
+    Three(this.$refs.webgl)
+    // console.log(this.$route.params.url)
+    // console.log(this.$route.params.port)
+    // console.log(this.$route.params.topic)
   }
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style scoped></style>

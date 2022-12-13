@@ -5326,11 +5326,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\에듀킷\\SmartConnector\\SmartConnector.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
       "projectName": "SmartConnector",
-      "projectPath": "C:\\Users\\User\\Desktop\\에듀킷\\SmartConnector\\SmartConnector.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\에듀킷\\SmartConnector\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

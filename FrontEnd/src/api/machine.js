@@ -1,8 +1,7 @@
-import { request } from "./index";
-
+import { request } from './index'
 
 export const machine = {
   fetch() {
-    return request('get','/')
+    return request('get', '/')
   }
 }

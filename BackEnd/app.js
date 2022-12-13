@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const corsConfig = require("./config/corsConfig.json");
+const { corsConfig } = require("./config/corsConfig");
 
 dotenv.config({ path: "./config/.env" });
 
@@ -27,7 +27,7 @@ sequelize
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
   });
 
@@ -36,6 +36,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(cors(corsConfig));
+// app.use(
+//     cors({
+//         credentials: true,
+//     })
+// );
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
@@ -54,7 +59,7 @@ app.use(
 );
 
 app.use("/login", authRouter);
-app.use("/", lineRouter);
+app.use("/line", lineRouter);
 app.use("/monitoring", monitoringRouter);
 app.use("/machine", machineManagementRouter);
 // app.use("/history", productionHistoryRouter);

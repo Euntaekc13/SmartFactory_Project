@@ -5,10 +5,21 @@ const { resStatus } = require("../lib/responseStatus");
 exports.line = async (req, res, next) => {
   console.log("GET / 진입");
   try {
-    const machine = await Machine.findAll();
+    const machine = await Machine.findAll({
+      attributes: [
+        "id",
+        "machine_name",
+        "machine_status",
+        "manager",
+        "information",
+        "mqtt_name",
+        "mqtt_port",
+        "mqtt_topic",
+      ],
+    });
     if (!machine) {
       return res.status(resStatus.insufficient.code).json({
-        message: resStatus.insufficient.message, // (204) 보낼 data가 없거나 부족할 때
+        message: resStatus.insufficient.message, // (206) 보낼 data가 없거나 부족할 때
       });
     }
     return res.status(resStatus.success.code).json({

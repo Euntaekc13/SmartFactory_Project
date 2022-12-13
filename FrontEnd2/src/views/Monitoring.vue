@@ -34,6 +34,23 @@ import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import * as THREE from 'three'
+
+class newProduct {
+  constructor(object) {
+    this.setProduct(object)
+  }
+  setProduct(object) {
+    const ProGeometry = new THREE.CylinderGeometry(1, 1, 1.5, 20)
+    const ProMeterial = new THREE.MeshMatcapMaterial({ color: '#FFFFFF' })
+    ProMeterial.metalness = true
+    const Product = (object.product = new THREE.Mesh(ProGeometry, ProMeterial))
+
+    Product.castShadow = true
+    Product.receiveShadow = true
+    Product.position.set(-14, 2, 8)
+  }
+}
 
 export default {
   name: 'Monitoring',
@@ -42,10 +59,11 @@ export default {
   },
   data() {
     return {
-      hostname: '***.***.*.**', //
-      port: '****', //
+      hostname: '192.168.0.58', //
+      // port: '****', //
+      port: '9001', //
       path: '',
-      // topic: 'machine',
+      topic: 'machine',
       start: '', //공정시작 동작
       ActionNum1: '', //1호기 동작
       ActionNum2: '', //2호기 동작
@@ -77,7 +95,9 @@ export default {
       process3TotalCount: 100,
       no3Action: false,
       machineId: '',
-      userImgRender: ''
+      userImgRender: '',
+      // flag
+      No1Flag: false
     }
   },
   computed: {
@@ -97,6 +117,7 @@ export default {
     this.connectMqtt()
     this.getMonitoringInfo()
     console.log('Monitoring created value : ', this.userImgRender)
+    //(this.port = '9001'), (this.hostname = '192.168.0.58'), (this.topic = 'machine')
   },
   mounted() {
     this.connection()
@@ -127,11 +148,9 @@ export default {
       render.edukit = scene.resource.edukit
       render.camera = cameraElement
       render.renderer = rendererElement
-
       // Rendering Start
       render.start()
-      console.log('start아래 GL : ', this.GreenLight)
-      this.setEvent(scene.resource.edukit, scene.Object)
+      this.setEvent(scene.resource.edukit, scene.Object, render)
     },
     connectMqtt() {
       const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
@@ -145,7 +164,7 @@ export default {
         path: this.path
       })
     },
-    setEvent(edukit, EduStatus) {
+    setEvent(edukit, EduStatus, render) {
       this.client.on('connect', () => {
         console.log('MQTT Connected')
         this.client.subscribe([this.topic], () => {
@@ -157,17 +176,20 @@ export default {
           // console.log('받아온 데이터 : ', temp)
           // let num0 = temp.Wrapper[0]
           // this.$store.commit('Machine/FETCH_DATA', num0)
-
+          let temp = JSON.parse(payload.toString())
+          // console.log('받아온 데이터 : ', temp)
+          let num0 = temp.Wrapper[0]
+          this.$store.commit('Machine/FETCH_DATA', num0)
           let message = JSON.parse(payload)
           let data = message.Wrapper.filter(p => p.tagId === '16' || p.tagId === '17')
-
+          console.log(message.pingresp)
           this.RedLight = message.Wrapper[10].value //빨간불
           this.YellowLight = message.Wrapper[9].value //노란불
           this.GreenLight = message.Wrapper[8].value //초록불
 
           this.start = message.Wrapper[0].value //시작
 
-          this.ActionNum1 = message.Wrapper.filter(p => p.tagId === '3').value
+          this.ActionNum1 = message.Wrapper[2].value
           this.ActionNum2 = message.Wrapper.filter(p => p.tagId === '4').value
           this.ActionNum3 = message.Wrapper.filter(p => p.tagId === '5').value
           // 계산
@@ -208,25 +230,69 @@ export default {
           edukit['yAxis'] = data[0]
           edukit['xAxis'] = data[1]
 
-          console.log(EduStatus)
+          //console.log(EduStatus) //scene 내부의 mesh list
+          const GreenPhongMaterial = new THREE.MeshPhongMaterial({ color: '#00FF00' })
+          const YelloPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FFFF00' })
+          const RedPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
+          const GreenMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#336600' })
+          const YelloMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
+          const RedMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#8B0000' })
           if (this.GreenLight) {
-            EduStatus.GreenLight.material.color.set('#00FF00')
+            // EduStatus.GreenLight.material.color.set('#00FF00')
+            EduStatus.GreenLight.material = GreenPhongMaterial
           } else {
-            EduStatus.GreenLight.material.color.set('#336600')
+            // EduStatus.GreenLight.material.color.set('#336600')
+            EduStatus.GreenLight.material = GreenMatcapMaterial
           }
 
           if (this.YellowLight) {
-            EduStatus.YellowLight.material.color.set('#FFFF00')
+            EduStatus.YellowLight.material = YelloPhongMaterial
+            // EduStatus.YellowLight.material.color.set('#FFFF00')
           } else {
-            EduStatus.YellowLight.material.color.set('#CC9900')
+            EduStatus.YellowLight.material = YelloMatcapMaterial
+            // EduStatus.YellowLight.material.color.set('#CC9900')
           }
 
           if (this.RedLight) {
-            EduStatus.RedLight.material.color.set('#FF0000')
+            EduStatus.RedLight.material = RedPhongMaterial
+            // EduStatus.RedLight.material.color.set('#FF0000')
           } else {
-            EduStatus.RedLight.material.color.set('#8B0000')
+            EduStatus.RedLight.material = RedMatcapMaterial
+            // EduStatus.RedLight.material.color.set('#8B0000')
           }
           //object.material.color.set(THREE.MathUtils.randInt(0x000000, 0xffffff))
+
+          //1호시 동작시 product 생산
+          if (this.ActionNum1 && this.No1Flag == false) {
+            this.No1Flag = true
+            new newProduct(EduStatus)
+          }
+          if (EduStatus.product) {
+            console.log('EduStatus.product : ', EduStatus.product)
+            const Product = [{ XendPoint: 9.8 }, { Zendpoint: 10 }]
+            const newObject = EduStatus.product
+            Product.push(newObject)
+            render.scene.add(newObject)
+            if (newObject.position.z >= 10) {
+              newObject.position.x += 0.29
+            } else {
+              newObject.position.z += 0.19
+            }
+            // 1 ~ 3까지 시간 16.8414
+            // 336.828
+            //end포인트 도달시 제거
+            if (newObject.position.x >= 9.8) {
+              Product.pop()
+              render.scene.remove(newObject)
+              this.No1Flag = false
+            }
+          }
+
+          // console.log('새로생산', Product)
+        })
+        this.client.on('pingreq', () => {
+          let ping = this.client.pingresp()
+          console.log('ping : ', ping)
         })
       })
     },
@@ -329,6 +395,7 @@ export default {
 }
 .monitoring__manager {
   display: flex;
+  margin-left: 0.5%;
 }
 .monitoring__main__title {
   font-size: 3.5em;

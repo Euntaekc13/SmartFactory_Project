@@ -11,7 +11,7 @@
     <!-- Once User information is set, this part will be rerendered based on the information -->
     <div v-show="!sideBarOpen" class="navbarTitle"><div class="innerTitle">Smart Factory</div></div>
     <div class="UserInfo">
-      <v-list-item-avatar v-if="sideBarOpen" size="42">
+      <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px auto 15px auto">
         <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
           <!-- <v-img :src="navUserImgRender" alt=""></v-img> -->
         </v-btn>
@@ -24,12 +24,30 @@
       </v-list-item-avatar>
     </div>
 
+    <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px 0px 15px 5px">
+      <v-btn size="42" icon style="color: darkgray" @click.stop="sideBarOpen = !sideBarOpen">
+        <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
+      </v-btn>
+    </v-list-item-avatar>
+
+    <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px 0px 15px 5px">
+      <v-btn size="42" icon style="color: darkgray" @click.stop="sideBarOpen = !sideBarOpen">
+        <i class="fa-solid fa-desktop fa-xl"></i>
+      </v-btn>
+    </v-list-item-avatar>
+
+    <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px 0px 15px 5px">
+      <v-btn size="42" icon style="color: darkgray" @click.stop="sideBarOpen = !sideBarOpen">
+        <i class="fa-sharp fa-solid fa-list fa-xl"></i>
+      </v-btn>
+    </v-list-item-avatar>
+
     <v-list v-show="!sideBarOpen">
       <v-list-item class="UserInfo">
-        <span>{{ TokenUser.name }}</span>
+        <span style="color: white">{{ TokenUser.name }}</span>
       </v-list-item>
       <v-list-item class="UserInfo"
-        ><span>{{ TokenUser.employee_number }}</span>
+        ><span style="color: white">{{ TokenUser.employee_number }}</span>
       </v-list-item>
     </v-list>
 
@@ -56,22 +74,28 @@
     <div v-show="!sideBarOpen" class="navBarList" dense rounded>
       <div class="innerList">
         <button class="spanButton" @click="routingToLine">
-          <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
-          Line Management
+          <div class="buttonArea">
+            <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
+            <span>Line Management&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
         </button>
       </div>
 
       <div class="innerList">
         <button class="spanButton" @click="routingToProcess">
-          <i class="fa-solid fa-desktop fa-xl"></i>
-          Process Management
+          <div class="buttonArea">
+            <i class="fa-solid fa-desktop fa-xl"></i>
+            <span>Process Management</span>
+          </div>
         </button>
       </div>
 
       <div class="innerList">
         <button class="spanButton" @click="routingToHistory">
-          <i class="fa-sharp fa-solid fa-list fa-xl"></i>
-          History Management
+          <div class="buttonArea">
+            <i class="fa-sharp fa-solid fa-list fa-xl"></i>
+            <span>History Management</span>
+          </div>
         </button>
       </div>
     </div>
@@ -186,6 +210,8 @@ export default {
 }
 .spanButton {
   padding: 10px 0px 10px 0px;
+  width: 100%;
+  height: 100%;
   text-align: center;
   align-content: center;
   justify-content: center;
@@ -201,7 +227,13 @@ export default {
   justify-content: center;
   justify-content: space-between;
   vertical-align: middle;
-  margin: 5px 5px 5px 30px;
+  margin: 5px 5px 5px 5px;
   font-family: 'Raleway', sans-serif;
+}
+.buttonArea {
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

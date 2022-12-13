@@ -1,7 +1,9 @@
 <template>
   <body class="Monitoring-body">
     <div class="div-back">
-      <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
+      <button @click="deleteImg()">
+        <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
+      </button>
     </div>
     <div class="monitoring__description">
       <div class="Title">
@@ -9,7 +11,10 @@
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
-          <v-img src="/img/P20190811_193913465_3F594CA7-3551-487C-AC12-5A2145F03B53.JPG"></v-img>
+          <!-- <v-img :src="require(`../../public/img/${userImgRender}`)" alt=""></v-img> -->
+          <v-img :src="userImgRender" alt=""></v-img>
+          <!-- <img :src="userImgRender" alt="" /> -->
+          <!-- <img src="../../public/img/KMH.jpg" /> -->
         </div>
         <div class="manager__description">
           <p class="monitoring__subtitle">Manager : {{ assignedUser.userName }} {{ assignedUser.employee_number }}</p>
@@ -71,7 +76,8 @@ export default {
       process3Count: 10,
       process3TotalCount: 100,
       no3Action: false,
-      machineId: ''
+      machineId: '',
+      userImgRender: ''
     }
   },
   computed: {
@@ -90,10 +96,12 @@ export default {
     this.getConnectInfo()
     this.connectMqtt()
     this.getMonitoringInfo()
+    console.log('Monitoring created value : ', this.userImgRender)
   },
   mounted() {
     this.connection()
-    this.checkingPoint()
+    this.userImgRenderFunction()
+    // this.userImgRenderFunction()
   },
   methods: {
     ...mapActions('Monitoring', ['getMonitoringInfoStoreAction']),
@@ -239,8 +247,15 @@ export default {
         console.log('Success to get count information')
       })
     },
-    checkingPoint() {
-      console.log(this.assignedUser)
+    userImgRenderFunction() {
+      // this.userImgRender = ''
+      this.userImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
+      console.log('no', this.assignedUser.userImage)
+    },
+    deleteImg() {
+      console.log('delete')
+      this.userImgRender = null
+      console.log(this.userImgRender)
     }
   }
 }

@@ -13,13 +13,13 @@
     <div class="UserInfo">
       <v-list-item-avatar v-if="sideBarOpen" size="42">
         <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
-          <v-img src="https://randomuser.me/api/portraits/women/25.jpg"> </v-img>
+          <!-- <v-img :src="navUserImgRender" alt=""></v-img> -->
         </v-btn>
       </v-list-item-avatar>
 
       <v-list-item-avatar v-else size="96">
         <v-btn size="80" icon @click.stop="sideBarOpen = !sideBarOpen">
-          <v-img src="https://randomuser.me/api/portraits/women/25.jpg"> </v-img>
+          <!-- <v-img :src="navUserImgRender" alt=""></v-img> -->
         </v-btn>
       </v-list-item-avatar>
     </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   data() {
@@ -106,9 +106,14 @@ export default {
   computed: {
     ...mapGetters(`Auth`, {
       TokenUser: 'TokenUser'
+    }),
+    ...mapState(`Monitoring`, {
+      assignedUser: 'assignedUser'
     })
   },
-  mounted() {},
+  mounted() {
+    this.navUserImgRenderFunction()
+  },
   methods: {
     ...mapActions('Auth', ['LOGOUT_AUTH']),
     async logout() {
@@ -127,6 +132,11 @@ export default {
     },
     routingToHistory() {
       this.$router.push('/history')
+    },
+    navUserImgRenderFunction() {
+      // this.navUserImgRender = ''
+      // console.log('Nav', this.assignedUser.userImage)
+      // this.navUserImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
     }
   }
 }

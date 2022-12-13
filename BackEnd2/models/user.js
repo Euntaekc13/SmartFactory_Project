@@ -1,23 +1,27 @@
 const Sequelize = require("sequelize");
 
-module.exports = class Element extends Sequelize.Model {
+module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        tagId: {
+        employee_number: {
           type: Sequelize.INTEGER(40),
+          allowNull: false,
+        },
+        email: {
+          type: Sequelize.STRING(40),
           allowNull: false,
         },
         name: {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
-        value: {
-          type: Sequelize.STRING(40),
+        password: {
+          type: Sequelize.STRING(100),
           allowNull: false,
         },
-        status: {
-          type: Sequelize.BOOLEAN(40),
+        authorization: {
+          type: Sequelize.STRING(40),
           allowNull: false,
         },
       },
@@ -25,8 +29,8 @@ module.exports = class Element extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "Element",
-        tableName: "elements",
+        modelName: "User",
+        tableName: "users",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",

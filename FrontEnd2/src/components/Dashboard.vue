@@ -14,17 +14,17 @@
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">TOTAL</div>
-              <div class="blockvalue">{{ Total }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">GOODSET</div>
-              <div class="blockvalue">{{ GoodSet }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.goodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">FAILURE</div>
-              <div class="blockvalue">{{ Failure }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.failure }} <span>qty</span></div>
             </a>
           </div>
           <!-- fan-content -->
@@ -86,13 +86,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Dashboard',
-  props: { Total: Number, Failure: Number, GoodSet: Number },
   data() {
     return {
       data: false
     }
+  },
+  computed: {
+    ...mapState('Monitoring', {
+      dailyProductivity: 'dailyProductivity',
+      cycleCount: 'cycleCount',
+      assignedUser: 'assignedUser'
+    })
   },
   mounted() {
     this.fanStatus()

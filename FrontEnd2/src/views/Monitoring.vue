@@ -52,9 +52,9 @@ export default {
       GreenLight: '', //초록불
       YellowLight: '', //노란불
       RedLight: '', //빨간불
-      Total: '', //일일총생산
-      Failure: '', //일일고품
-      GoodSet: '', //일일양품
+      total: 0, //일일총생산
+      failure: 0, //일일고품
+      goodSet: 0, //일일양품
       FacName: '',
       Manager: '',
       ManagerEmail: '',
@@ -71,7 +71,13 @@ export default {
       process3Count: 10,
       process3TotalCount: 100,
       no3Action: false,
-      machineId: ''
+      machineId: '',
+      assignedUser: {
+        userName: '',
+        userEmail: '',
+        userPhone: '',
+        userImage: ''
+      }
     }
   },
   computed: {
@@ -86,13 +92,14 @@ export default {
   created() {
     this.getConnectInfo()
     this.connectMqtt()
-    this.getDailyCountInfo()
+    this.getMonitoringInfo()
   },
   mounted() {
     this.connection()
+    // this.getMonitoringInfo()
   },
   methods: {
-    ...mapActions('Monitoring', ['getDailyCountInfoStoreAction']),
+    ...mapActions('Monitoring', ['getMonitoringInfoStoreAction']),
     connection() {
       const container = document.querySelector('.Monitoring-body')
 
@@ -229,9 +236,12 @@ export default {
         }
       }
     },
-    async getDailyCountInfo() {
-      console.log('machineId check : ', this.machineId)
-      this.getDailyCountInfoStoreAction({ machineId: this.machineId }).then(result => {
+    getMonitoringInfo() {
+      console.log('getMonitoringInfo start check - machineId: ', this.machineId)
+      this.total = 100
+      this.goodSet = 97
+      this.failure = 3
+      this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(result => {
         console.log('Success to get count information', result)
       })
     }

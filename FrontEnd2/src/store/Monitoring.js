@@ -1,37 +1,76 @@
-import { getDailyCountInfoApi } from '../api/monitoring'
+import { getMonitoringInfoApi } from '../api/monitoring'
 
-const stateInit = {
-  sampleStoreObject: {
-    id: null,
-    ex: null
-  }
+const cycleCount = {
+  process1: null,
+  process1Max: null,
+  process2: null,
+  process2Max: null,
+  process3: null,
+  process3Max: null
+}
+
+const dailyProductivity = {
+  total: null,
+  goodSet: null,
+  failure: null
+}
+
+const assignedUser = {
+  userName: '',
+  userEmail: '',
+  userPhone: '',
+  userImage: ''
 }
 
 export const Monitoring = {
   namespaced: true,
 
   state: {
-    sampleStoreObject: { ...stateInit.sampleStoreObject },
-    sampleStoredata: null
+    dailyProductivity,
+    cycleCount,
+    assignedUser
   },
   getters: {
-    sampleStoreObject: state => state.sampleStoreObject,
-    sampleStoredata: state => state.sampleStoredata
+    dailyProductivity: state => state.dailyProductivity,
+    cycleCount: state => state.cycleCount,
+    assignedUser: state => state.assignedUser
   },
   mutations: {
-    SET_SAMPLE_OB(state, res) {
-      state.sampleStoreObject = res
+    dailyProductivityUpdate(state, data) {
+      console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
+      // state.dailyProductivity.total = data.total
+      // state.dailyProductivity.goodSet = data.goodSet
+      // state.dailyProductivity.userPhone = data.failure
+    },
+    cycleCountUpdate(state, data) {
+      console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
+      // state.cycleCount.process1 = data.part.process1
+      // state.cycleCount.process1Max = data.process1
+      // state.cycleCount.process2 = data.process2
+      // state.cycleCount.process2Max = data.process2
+      // state.cycleCount.process3 = data.process3
+      // state.cycleCount.process3Max = data.process3
+    },
+    assignedUserUpdate(state, data) {
+      console.log('mutations 안쪽 assignedUserUpdate - data : ', data)
+      // state.assignedUser.userName = data.manager
+      // state.assignedUser.userEmail = data.userEmail
+      // state.assignedUser.userPhone = data.userPhone
+      // state.assignedUser.userImage = data.userImage
     }
   },
   actions: {
-    getDailyCountInfoStoreAction(_, { machineId }) {
-      return getDailyCountInfoApi
+    getMonitoringInfoStoreAction({ commit }, { machineId }) {
+      return getMonitoringInfoApi
         .taking(machineId)
         .then(result => {
-          console.log('getDailyCountStoreAction 성공?', result)
+          console.log('getMonitoringInfoStoreAction 성공?', result)
+          commit('dailyProductivityUpdate', result.data)
+          commit('cycleCountUpdate', result.data)
+          commit('assignedUserUpdate', result.data)
         })
         .catch(error => {
-          console.log('getDailyCountInfoStoreAction 실패 : ', error)
+          console.log('getMonitoringInfoStoreAction 실패 : ', error)
         })
     }
   }

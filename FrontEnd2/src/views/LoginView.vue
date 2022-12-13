@@ -76,11 +76,10 @@ export default {
     // auth.login(this.email , this.password)
     ...mapActions('Auth', ['LOGIN_AUTH']),
     async login() {
-      console.log('로그인 버튼')
-      console.log(this.employee_number, this.password)
+      console.log('LoginView page - login - data check : ', this.employee_number, this.password)
       this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
         // api 와 store 작업이 끝나면 아래 주로 화면 전환
-        this.$router.push('/line')
+        localStorage.getItem('token') !== null ? this.$router.push('/line') : this.$router.go(0)
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }

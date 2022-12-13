@@ -21,7 +21,7 @@
                   <p v-else style="color: black">&nbsp;미정</p>
                 </span>
                 <div slot="name">
-                  <p>{{ line.manager }}</p>
+                  <p>{{ line.User.name }}</p>
                 </div>
                 <div slot="description">
                   <p>{{ line.information }}</p>

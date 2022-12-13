@@ -7,7 +7,8 @@ const InitTokenUser = {
   employee_number: null,
   name: null,
   email: null,
-  authorization: null
+  authorization: null,
+  phone_number: null
 }
 
 export const Auth = {
@@ -40,27 +41,25 @@ export const Auth = {
       state.TokenUser.employee_number = null
       state.TokenUser.email = null
       state.TokenUser.authorization = null
-
+      state.TokenUser.phone_number = null
       console.log('check state value : ', state)
       localStorage.removeItem('token')
     }
   },
   actions: {
     LOGIN_AUTH({ commit }, { employee_number, password }) {
-      return (
-        auth
-          // request
-          .login(employee_number, password)
-          // response
-          .then(data => {
-            console.log('Login 성공 data : ', data)
-            // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
-            commit('LOGIN', data.data)
-          })
-          .catch(error => {
-            console.log('Login 실패 : ', error)
-          })
-      )
+      return auth
+        .login(employee_number, password)
+        .then(data => {
+          console.log('Login 성공? data : ', data)
+          data.data.message == 'invalid'
+            ? alert('Wrong user information, please try again')
+            : commit('LOGIN', data.data)
+          // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
+        })
+        .catch(error => {
+          console.log('Login 실패 : ', error)
+        })
     },
     LOGOUT_AUTH({ commit }) {
       return commit('LOGOUT')

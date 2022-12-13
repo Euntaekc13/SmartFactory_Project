@@ -63,7 +63,7 @@ exports.partUpdate = async (req, res, next) => {
     const part_default = await Part_default.findOne({
       where: { part_type },
     });
-    console.log("part_default : ", part_default);
+    console.log("part_default.id : ", part_default.id);
 
     // 찾은 Part_default의 id에 해당하는 Part의 count에 받은 count값 더하기
     const part = await Part.increment(

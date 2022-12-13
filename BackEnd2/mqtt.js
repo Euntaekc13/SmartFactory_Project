@@ -20,6 +20,11 @@ let goodsetFlag1 = false; // 색깔 판별해서 흰색이면 true
 let goodsetFlag2 = false; // 2호기에 도달했을 때 true
 let final_result = null;
 
+//
+// async function finalProcess(machineElementsSorts) {
+
+// }
+
 // const client = mqtt.connect("mqtt://localhost:1883"); // connect PLC directly
 const client = mqtt.connect("mqtt://192.168.0.72:1883"); // connect PLC through JK smart connector
 
@@ -27,20 +32,17 @@ client.on("connect", () => {
   console.log("connected" + client.connected);
 });
 
-// 두 topic에 대한 subscribe
-// client.subscribe(["machine", "machine2"]);
 client.subscribe("machine");
 
 // subscribe에 대한 message 받기. 각 topic에 따른 로직 처리
-client.on("message", (topic, message, packet) => {
+client.on("message", async (topic, message, packet) => {
   // console.log("###########");
   try {
     // message가 buffer로 오므로 JSON으로 변환
-    const rareElements = JSON.parse(message.toString());
-    // tag의 number로 해당 tag의 정보를 부를 수 있게 tag의 number를 키값으로 값는 객체로 재정리
+    const rareElements = await JSON.parse(message.toString());
     const machineElements = rareElements.Wrapper;
-
-    const machineElementsSorts = machineElements.sort((a, b) => {
+    // tagId 순서로 오름차순 정렬
+    const machineElementsSorts = await machineElements.sort((a, b) => {
       if (parseInt(a.tagId) > parseInt(b.tagId)) {
         return 1;
       } else if (parseInt(a.tagId) < parseInt(b.tagId)) {
@@ -49,7 +51,6 @@ client.on("message", (topic, message, packet) => {
         return 0;
       }
     });
-
     // tag 26(belt)가 true이거나 tag 1(Start)이 true이면
     if (
       machineElementsSorts[26].value == true ||
@@ -81,6 +82,7 @@ client.on("message", (topic, message, packet) => {
 
       // tag 25(No3Gripper)이 true이고, thirdFlag가 true이면,
       if (machineElementsSorts[25].value == true && thirdFlag == true) {
+        // await finalProcess(machineElementsSorts);
         // 1) 변수 재설정
         let secondFlag_t = secondFlag;
         let goodsetFlag1_t = goodsetFlag1;
@@ -92,11 +94,11 @@ client.on("message", (topic, message, packet) => {
         goodsetFlag2 = false;
 
         // 2) 1,2,3호기 DB count +=1
-        Part.increment({ count: 1 }, { where: { PartDefaultId: 1 } });
+        await Part.increment({ count: 1 }, { where: { PartDefaultId: 1 } });
         if (secondFlag_t == true) {
-          Part.increment({ count: 1 }, { where: { PartDefaultId: 2 } });
+          await Part.increment({ count: 1 }, { where: { PartDefaultId: 2 } });
         }
-        Part.increment({ count: 1 }, { where: { PartDefaultId: 3 } });
+        await Part.increment({ count: 1 }, { where: { PartDefaultId: 3 } });
 
         // 	3) Set 판별, 0이면 고품 / 1이면 양품
         if (goodsetFlag1_t == goodsetFlag2_t) {
@@ -120,27 +122,22 @@ client.on("message", (topic, message, packet) => {
         console.log(serial_number);
 
         // 6) DB에 serial_number와 함께 양품인지 고품인지 여부를 각각 저장
-        const test_result = Test_result.findOne({ where: { serial_number } });
+        const test_result = await Test_result.findOne({
+          where: { serial_number },
+        });
         console.log(test_result);
         //
         if (!test_result) {
-          Test_result.create({
+          await Test_result.create({
             serial_number,
             final_result,
             MachineId: 1,
           });
         }
-        // if (!test_result) {
-        //   Test_result.create({
-        //     serial_number,
-        //     final_result,
-        //     MachineId: 1,
-        //   });
-        // }
       }
     }
   } catch (error) {
-    console.log(error);
+    console.log("plc data 누수");
   }
 
   // console.log("the end");

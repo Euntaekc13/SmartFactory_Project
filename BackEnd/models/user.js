@@ -16,6 +16,14 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
+        phone_number: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+        },
+        user_image: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+        },
         password: {
           type: Sequelize.STRING(100),
           allowNull: false,
@@ -38,5 +46,7 @@ module.exports = class User extends Sequelize.Model {
     );
   }
 
-  static associate(db) {}
+  static associate(db) {
+    db.User.hasMany(db.Machine);
+  }
 };

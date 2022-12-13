@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartConnector")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7da0eac041fc1dde802ba91e2ada9f74a942955")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81c3a2426a4a0d73f47343913ef5c24dd0233179")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartConnector")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartConnector")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

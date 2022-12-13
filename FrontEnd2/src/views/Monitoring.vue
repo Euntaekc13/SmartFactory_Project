@@ -12,9 +12,9 @@
           <v-img src="/img/P20190811_193913465_3F594CA7-3551-487C-AC12-5A2145F03B53.JPG"></v-img>
         </div>
         <div class="manager__description">
-          <p class="monitoring__subtitle">Manager : CHOI EUNTAEK</p>
-          <p class="monitoring__subtitle">E-mail : euntaekc13@gmail.com</p>
-          <p class="monitoring__subtitle">Phone : 010-2222-3333</p>
+          <p class="monitoring__subtitle">Manager : {{ TokenUser.name }} {{ TokenUser.employee_number }}</p>
+          <p class="monitoring__subtitle">E-mail : {{ TokenUser.email }}</p>
+          <p class="monitoring__subtitle">Phone : {{ TokenUser.phone_number }}</p>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
 import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Monitoring',
@@ -70,23 +70,29 @@ export default {
       testColor: 'white',
       process3Count: 10,
       process3TotalCount: 100,
-      no3Action: false
+      no3Action: false,
+      machineId: ''
     }
   },
   computed: {
     ...mapState('Machine', {
       data: 'data',
       Line: 'Line'
+    }),
+    ...mapState('Auth', {
+      TokenUser: 'TokenUser'
     })
   },
   created() {
     this.getConnectInfo()
     this.connectMqtt()
+    this.getDailyCountInfo()
   },
   mounted() {
     this.connection()
   },
   methods: {
+    ...mapActions('Monitoring', ['getDailyCountInfoStoreAction']),
     connection() {
       const container = document.querySelector('.Monitoring-body')
 
@@ -154,6 +160,7 @@ export default {
           this.ActionNum3 = message.Wrapper.filter(p => p.tagId === '5').value
           // 계산
 
+          // Cycle 계산
           // process 1 count cycle
           if (message.Wrapper[2].value !== this.no1Action) {
             message.Wrapper[2].value ? ((this.no1Action = true), (this.process1Count += 1)) : (this.no1Action = false)
@@ -166,8 +173,8 @@ export default {
           if (message.Wrapper[18].value !== this.no3Action) {
             message.Wrapper[18].value ? ((this.no3Action = true), (this.process3Count += 1)) : (this.no3Action = false)
           }
+
           // 양품 고품 판단
-          // testStatus
           if (message.Wrapper[5].value == false) {
             if (message.Wrapper[11].value == true) {
               this.testColor = 'red'
@@ -217,9 +224,16 @@ export default {
           this.hostname = this.Line[i].mqtt_name
           this.port = this.Line[i].mqtt_port
           this.topic = this.Line[i].mqtt_topic
-          console.log(this.hostname, this.port, this.topic)
+          this.machineId = this.$route.params.id
+          console.log('information check : ', this.hostname, this.port, this.topic)
         }
       }
+    },
+    async getDailyCountInfo() {
+      console.log('machineId check : ', this.machineId)
+      this.getDailyCountInfoStoreAction({ machineId: this.machineId }).then(result => {
+        console.log('Success to get count information', result)
+      })
     }
   }
 }

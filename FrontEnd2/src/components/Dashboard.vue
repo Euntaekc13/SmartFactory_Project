@@ -14,17 +14,17 @@
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">TOTAL</div>
-              <div class="blockvalue">2200 <span>rpm</span></div>
+              <div class="blockvalue">{{ Total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">GOODSET</div>
-              <div class="blockvalue">950 <span>rpm</span></div>
+              <div class="blockvalue">{{ GoodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">FAILURE</div>
-              <div class="blockvalue">600 <span>rpm</span></div>
+              <div class="blockvalue">{{ Failure }} <span>qty</span></div>
             </a>
           </div>
           <!-- fan-content -->
@@ -88,6 +88,7 @@
 <script>
 export default {
   name: 'Dashboard',
+  props: { Total: Number, Failure: Number, GoodSet: Number },
   data() {
     return {
       data: false

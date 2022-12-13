@@ -25,9 +25,9 @@ export const Machine = {
     Line: state => state.Line
   },
   mutations: {
-    FETCH_DATA(state, data) {
-      state.data = data
-    },
+    // FETCH_DATA(state, data) {
+    //   state.data = data
+    // },
     GET_LINE_MUTATION(state, data) {
       state.Line = data.data.machine
     }

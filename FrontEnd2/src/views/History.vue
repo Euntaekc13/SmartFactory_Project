@@ -35,11 +35,11 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' }
+        { text: 'process_result', value: 'GoodSet' },
+        { text: 'color', value: 'white' },
+        { text: 'machine_info', value: '준규공정' },
+        { text: 'test_date', value: '20221213' },
+        { text: 'diceInfo', value: 'include' }
       ],
       details: [
         {

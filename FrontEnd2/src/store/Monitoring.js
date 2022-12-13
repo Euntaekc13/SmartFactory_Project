@@ -26,9 +26,9 @@ export const Monitoring = {
   namespaced: true,
 
   state: {
-    dailyProductivity,
-    cycleCount,
-    assignedUser
+    dailyProductivity: dailyProductivity,
+    cycleCount: cycleCount,
+    assignedUser: assignedUser
   },
   getters: {
     dailyProductivity: state => state.dailyProductivity,
@@ -44,19 +44,29 @@ export const Monitoring = {
     },
     cycleCountUpdate(state, data) {
       console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
-      // state.cycleCount.process1 = data.part.process1
+      let i = 0
+      for (i = 0; i <= 2; i++) {
+        if (data.part[i].PartDefaultId == 1) {
+          state.cycleCount.process1 = data.part[i].count
+        }
+        if (data.part[i].PartDefaultId == 2) {
+          state.cycleCount.process2 = data.part[i].count
+        }
+        if (data.part[i].PartDefaultId == 3) {
+          state.cycleCount.process3 = data.part[i].count
+        }
+      }
       // state.cycleCount.process1Max = data.process1
-      // state.cycleCount.process2 = data.process2
       // state.cycleCount.process2Max = data.process2
-      // state.cycleCount.process3 = data.process3
       // state.cycleCount.process3Max = data.process3
     },
     assignedUserUpdate(state, data) {
       console.log('mutations 안쪽 assignedUserUpdate - data : ', data)
-      // state.assignedUser.userName = data.manager
-      // state.assignedUser.userEmail = data.userEmail
-      // state.assignedUser.userPhone = data.userPhone
-      // state.assignedUser.userImage = data.userImage
+      state.assignedUser.userName = data.manager.name
+      state.assignedUser.userEmail = data.manager.email
+      state.assignedUser.userPhone = data.manager.phone_number
+      state.assignedUser.userImage = data.manager.user_image
+      console.log(state.assignedUser.userPhone)
     }
   },
   actions: {
@@ -65,9 +75,9 @@ export const Monitoring = {
         .taking(machineId)
         .then(result => {
           console.log('getMonitoringInfoStoreAction 성공?', result)
-          commit('dailyProductivityUpdate', result.data)
-          commit('cycleCountUpdate', result.data)
-          commit('assignedUserUpdate', result.data)
+          commit('dailyProductivityUpdate', result.data.data)
+          commit('cycleCountUpdate', result.data.data)
+          commit('assignedUserUpdate', result.data.data)
         })
         .catch(error => {
           console.log('getMonitoringInfoStoreAction 실패 : ', error)

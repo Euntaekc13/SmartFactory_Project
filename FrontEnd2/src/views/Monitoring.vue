@@ -12,9 +12,9 @@
           <v-img src="/img/P20190811_193913465_3F594CA7-3551-487C-AC12-5A2145F03B53.JPG"></v-img>
         </div>
         <div class="manager__description">
-          <p class="monitoring__subtitle">Manager : {{ TokenUser.name }} {{ TokenUser.employee_number }}</p>
-          <p class="monitoring__subtitle">E-mail : {{ TokenUser.email }}</p>
-          <p class="monitoring__subtitle">Phone : {{ TokenUser.phone_number }}</p>
+          <p class="monitoring__subtitle">Manager : {{ assignedUser.userName }} {{ assignedUser.employee_number }}</p>
+          <p class="monitoring__subtitle">E-mail : {{ assignedUser.userEmail }}</p>
+          <p class="monitoring__subtitle">Phone : {{ assignedUser.userPhone }}</p>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
 import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Monitoring',
@@ -71,13 +71,7 @@ export default {
       process3Count: 10,
       process3TotalCount: 100,
       no3Action: false,
-      machineId: '',
-      assignedUser: {
-        userName: '',
-        userEmail: '',
-        userPhone: '',
-        userImage: ''
-      }
+      machineId: ''
     }
   },
   computed: {
@@ -87,6 +81,9 @@ export default {
     }),
     ...mapState('Auth', {
       TokenUser: 'TokenUser'
+    }),
+    ...mapState('Monitoring', {
+      assignedUser: 'assignedUser'
     })
   },
   created() {
@@ -96,7 +93,7 @@ export default {
   },
   mounted() {
     this.connection()
-    // this.getMonitoringInfo()
+    this.checkingPoint()
   },
   methods: {
     ...mapActions('Monitoring', ['getMonitoringInfoStoreAction']),
@@ -238,12 +235,12 @@ export default {
     },
     getMonitoringInfo() {
       console.log('getMonitoringInfo start check - machineId: ', this.machineId)
-      this.total = 100
-      this.goodSet = 97
-      this.failure = 3
-      this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(result => {
-        console.log('Success to get count information', result)
+      this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(() => {
+        console.log('Success to get count information')
       })
+    },
+    checkingPoint() {
+      console.log(this.assignedUser)
     }
   }
 }

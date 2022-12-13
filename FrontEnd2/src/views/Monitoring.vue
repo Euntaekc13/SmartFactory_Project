@@ -1,7 +1,9 @@
 <template>
   <body class="Monitoring-body">
     <div class="div-back">
-      <router-link class="to-left" to="/" style="text-decoration: none"></router-link>
+      <button @click="deleteImg()">
+        <router-link class="to-left" to="/" style="text-decoration: none"> </router-link>
+      </button>
     </div>
     <div class="monitoring__description">
       <div class="Title">
@@ -37,7 +39,7 @@ class newProduct {
   }
   setProduct(object) {
     const ProGeometry = new THREE.CylinderGeometry(1, 1, 1.5, 20)
-    const ProMeterial = new THREE.MeshMatcapMaterial({ color: '#FFFFFF' })
+    const ProMeterial = new THREE.MeshPhongMaterial({ color: '#FFFFFF' })
     ProMeterial.metalness = true
     const Product = (object.product = new THREE.Mesh(ProGeometry, ProMeterial))
 
@@ -63,7 +65,6 @@ export default {
       ActionNum1: '', //1호기 동작
       ActionNum2: '', //2호기 동작
       ActionNum3: '', //3호기 동작
-
       Num1Status: '', //1호기 상태
       Num2Status: '', //2호기 상태
       Num3Status: '', //3호기 상태
@@ -248,6 +249,9 @@ export default {
           console.log(this.hostname, this.port, this.topic)
         }
       }
+    },
+    deleteImg() {
+      console.log('delete')
     }
   }
 }

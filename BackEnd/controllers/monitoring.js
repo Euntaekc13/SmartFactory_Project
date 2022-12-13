@@ -1,4 +1,4 @@
-const { Test_result, Machine, Part, Part_default } = require("../models");
+const { Test_result, Machine, Part, Part_default, User } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 
 // 공정 모니터링 정보 조회
@@ -17,24 +17,28 @@ exports.monitoringExplorer = async (req, res, next) => {
         {
           model: Test_result,
         },
+        {
+          model: Part,
+          include: [
+            {
+              model: Part_default,
+            },
+          ],
+        },
+        {
+          model: User,
+          attributes: ["name", "email", "phone_number", "user_image"],
+        },
       ],
     });
-    const test_result = machine.Test_result;
-    // (대안) const test_result = await machine.getTest_results()
-    const part = await machine.getParts();
-    const part_default = await part.getPart_defaults();
-    /* (대안) const part_default = await Part_default.findAll({
-       where: { id: part.Part_defaultId },
-     }); */
+    console.log(machine);
+    const part = machine.dataValues.Parts;
+    const test_result = machine.dataValues.Test_results;
+    const manager = machine.dataValues.User;
 
-    if (!machine && !part && !part_default && !test_result) {
-      return res.status(resStatus.insufficient.code).json({
-        message: resStatus.insufficient.message, // (206) 보낼 data가 없거나 부족할 때
-      });
-    }
     return res.status(resStatus.success.code).json({
       message: resStatus.success.message, // (200) success
-      data: { machine, part, part_default, test_result },
+      data: { machine, part, test_result, manager },
     });
   } catch (error) {
     console.error(error);
@@ -68,7 +72,7 @@ exports.partUpdate = async (req, res, next) => {
     // 찾은 Part_default의 id에 해당하는 Part의 count에 받은 count값 더하기
     const part = await Part.increment(
       { count: count },
-      { where: { Part_defaultId: part_default.id } }
+      { where: { PartDefaultId: part_default.id } }
     );
     console.log("part.count : ", part.count);
 

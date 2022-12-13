@@ -1,20 +1,25 @@
-const { Machine } = require("../models");
+const { Machine, User } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 
 // 공정 전체 정보 조회
 exports.line = async (req, res, next) => {
-  console.log("GET / 진입");
+  console.log("GET /line 진입");
   try {
     const machine = await Machine.findAll({
       attributes: [
         "id",
         "machine_name",
         "machine_status",
-        "manager",
         "information",
         "mqtt_name",
         "mqtt_port",
         "mqtt_topic",
+      ],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
       ],
     });
     if (!machine) {

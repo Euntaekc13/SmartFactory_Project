@@ -31,10 +31,6 @@ module.exports = class Machine extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: true,
         },
-        manager: {
-          type: Sequelize.STRING(40),
-          allowNull: true,
-        },
         information: {
           type: Sequelize.STRING(40),
           allowNull: true,
@@ -57,5 +53,6 @@ module.exports = class Machine extends Sequelize.Model {
     db.Machine.hasMany(db.Part);
     db.Machine.hasMany(db.Software_history);
     db.Machine.hasMany(db.Test_result);
+    db.Machine.belongsTo(db.User);
   }
 };

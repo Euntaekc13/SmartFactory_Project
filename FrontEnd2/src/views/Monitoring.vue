@@ -172,6 +172,12 @@ export default {
           console.log(`토픽 연결 완료: ${this.topic}`)
         })
         this.client.on('message', (topic, payload) => {
+          // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
+          // let temp = JSON.parse(payload.toString())
+          // let num0 = temp.Wrapper[0]
+          // console.log('1차', num0)
+          // this.$store.commit('Machine/FETCH_DATA', num0)
+
           let message = JSON.parse(payload)
           let data = message.Wrapper.filter(p => p.tagId === '16' || p.tagId === '17')
           this.RedLight = message.Wrapper[10].value //빨간불

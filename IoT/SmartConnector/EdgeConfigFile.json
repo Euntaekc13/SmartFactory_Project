@@ -1,10 +1,10 @@
 {
-  "EdukitId": "machine1",
+  "EdukitId": "machine",
   "EdukitIP": "192.168.0.120",
   "EdukitPort": "2004",
   "MqttBrokerIP": "localhost",
   "MqttBrokerPort": "1883",
   "WebSocketServerUrl": "",
-  "DelayTime": "50",
+  "DelayTime": "100",
   "DebugType": "Debug"
 }

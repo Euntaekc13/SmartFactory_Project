@@ -12,17 +12,17 @@
 
           <div class="section-main-content fan-content">
             <a href="#" class="content-block fan-content-block">
-              <div class="fan-image"></div>
+              <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">TOTAL</div>
               <div class="blockvalue">{{ output.total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
-              <div class="fan-image"></div>
+              <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">GOODSET</div>
               <div class="blockvalue">{{ output.goodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
-              <div class="fan-image"></div>
+              <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">FAILURE</div>
               <div class="blockvalue">{{ output.failure }} <span>qty</span></div>
             </a>
@@ -95,7 +95,8 @@ export default {
   },
   data() {
     return {
-      data: false
+      data: false,
+      fanstatus: false
     }
   },
   computed: {
@@ -105,19 +106,8 @@ export default {
       assignedUser: 'assignedUser'
     })
   },
-  mounted() {
-    this.fanStatus()
-  },
-  methods: {
-    fanStatus() {
-      const Fan = document.querySelector('.fan-image')
-      if (!this.data) {
-        Fan.classList.remove()
-      } else {
-        Fan.style.width = '35px;'
-      }
-    }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 <style scoped>
@@ -294,7 +284,6 @@ a {
   background-color: #2d2d2d;
   border: solid #434343 2px;
 }
-
 .blocktitle {
   font-weight: 500;
   font-size: 0.8em;
@@ -302,19 +291,16 @@ a {
   margin-bottom: 0.15rem;
   color: #2dbda8;
 }
-
 .blockvalue {
   /* 3800.0 */
   font-size: 1.15em;
   font-family: 'Electrolize', 'Helvetica Neue', Helvetica, sans-serif;
 }
-
 .blockvalue span {
   /* UNITS, MHz, V, rpm */
   font-size: 0.7em;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
 }
-
 #section-topbar {
   width: 100%;
   height: auto;
@@ -449,11 +435,22 @@ a {
     transform: rotate(360deg);
   }
 }
+#section-fan .fan-content .fan-content-block .fan_stopimg {
+  width: 35px;
+  height: 35px;
+  margin: 5px auto 5px auto;
+  opacity: 1;
+  background-image: url('https://raw.githubusercontent.com/allu91/cpumeter/master/img/icon-fan.png');
+  background-size: 100% 100%;
+}
 /* @keyframes rotate_stopImg {
   100% {
-    transform: rotate(720deg);
+    transform: rotate(0deg);
   }
 } */
+#section-fan .fan-content .fan-content-block:hover .fan_stopimg {
+  opacity: 1;
+}
 
 @media (max-width: 1024px) {
   #section-fan .fan-content .fan-content-block .blockvalue span {

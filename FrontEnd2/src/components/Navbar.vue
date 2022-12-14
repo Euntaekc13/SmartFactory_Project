@@ -16,7 +16,7 @@
       <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px auto 15px auto">
         <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
           <div class="wrapper">
-            <v-img :src="navUserImage" alt=""></v-img>
+            <v-img :src="navUserImage"></v-img>
           </div>
         </v-btn>
       </v-list-item-avatar>
@@ -24,7 +24,7 @@
       <v-list-item-avatar v-else size="120">
         <v-btn size="100" icon @click.stop="sideBarOpen = !sideBarOpen">
           <div class="wrapper2">
-            <v-img :src="navUserImage" alt=""></v-img>
+            <v-img :src="navUserImage"></v-img>
           </div>
         </v-btn>
       </v-list-item-avatar>

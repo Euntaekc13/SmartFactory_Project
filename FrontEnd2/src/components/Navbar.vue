@@ -9,17 +9,23 @@
     height="100vh"
   >
     <!-- Once User information is set, this part will be rerendered based on the information -->
-    <div v-show="!sideBarOpen" class="navbarTitle"><div class="innerTitle">Smart Factory</div></div>
+    <div v-show="!sideBarOpen" class="navbarTitle">
+      <div class="innerTitle">Smart Factory</div>
+    </div>
     <div class="UserInfo">
       <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px auto 15px auto">
         <v-btn size="42" icon @click.stop="sideBarOpen = !sideBarOpen">
-          <!-- <v-img :src="navUserImgRender" alt=""></v-img> -->
+          <div class="wrapper">
+            <v-img :src="navUserImage" alt=""></v-img>
+          </div>
         </v-btn>
       </v-list-item-avatar>
 
-      <v-list-item-avatar v-else size="96">
-        <v-btn size="80" icon @click.stop="sideBarOpen = !sideBarOpen">
-          <!-- <v-img :src="navUserImgRender" alt=""></v-img> -->
+      <v-list-item-avatar v-else size="120">
+        <v-btn size="100" icon @click.stop="sideBarOpen = !sideBarOpen">
+          <div class="wrapper2">
+            <v-img :src="navUserImage" alt=""></v-img>
+          </div>
         </v-btn>
       </v-list-item-avatar>
     </div>
@@ -110,7 +116,7 @@ export default {
   data() {
     return {
       drawer: true,
-      src: 'https://randomuser.me/api/portraits/women/25.jpg',
+      navUserImage: '',
       contentsList: [
         { title: 'Line Management', icon: `${(<i class="fa-solid fa-industry-windows"></i>)}`, route: 'machine' },
         {
@@ -153,6 +159,8 @@ export default {
       this.$router.push('/history')
     },
     navUserImgRenderFunction() {
+      console.log('Sidebar this.TokenUser.user_image : ', this.TokenUser.user_image)
+      this.navUserImage = require(`../../public/img/${this.TokenUser.user_image}`)
       // this.navUserImgRender = ''
       // console.log('Nav', this.assignedUser.userImage)
       // this.navUserImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
@@ -230,5 +238,18 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.wrapper {
+  width: 50px;
+  height: 50px;
+}
+.wrapper2 {
+  width: 130px;
+  height: 130px;
+}
+v-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

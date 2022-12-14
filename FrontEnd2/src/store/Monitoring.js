@@ -42,7 +42,7 @@ export const Monitoring = {
     dailyProductivityUpdate(state, data) {
       // 아직 daily 작업을 추가해야함
       console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
-      let totalQty = data.test_result.length
+      let totalQty = 0
       let goodSetQty = 0
       let failureQty = 0
 
@@ -51,13 +51,26 @@ export const Monitoring = {
 
       let i = 0
       let j = 0
-
-      for (i = 0; i < data.test_result.length; i++) {
-        data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
+      console.log('여기를 잡아야함 ', data.test_result.length)
+      if (data.test_result.length !== 0) {
+        for (i = 0; i < data.test_result.length; i++) {
+          data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
+        }
+      } else {
+        goodSetQty = 0
+        failureQty = 0
+        totalQty = 0
       }
 
-      for (j = 0; j < data.today_final_result.length; j++) {
-        data.today_final_result[j].final_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
+      console.log('여기를 잡아야함 ', data.today_final_result)
+
+      if (data.today_final_result.length !== 0) {
+        for (j = 0; j < data.today_final_result.length; j++) {
+          data.today_final_result[j].final_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
+        }
+      } else {
+        dailyGoodSetQty = 0
+        dailyFailureQty = 0
       }
 
       state.dailyProductivity.total = totalQty

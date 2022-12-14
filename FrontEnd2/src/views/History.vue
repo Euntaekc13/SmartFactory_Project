@@ -13,20 +13,9 @@
         <!-- <input type="text" submit />
         <button submit>check</button> -->
         <div class="history__content__up">
-          <div class="history_content_icons">
-            <button type="button" @click="excelDown">
-              <span class="icon-button excel">
-                <i class="fa-solid fa-file-arrow-down icon-excel"></i><span></span>
-              </span>
-            </button>
-            &nbsp;
-            <button type="button" @click="excelDown">
-              <span class="icon-button repeat"> <i class="fa-solid fa-retweet icon-repeat"></i><span></span> </span>
-            </button>
-          </div>
           <div class="history_content_condition">
             <!-- <span>date picker</span>&nbsp; -->
-            <div>
+            <div id="inspire" style="width: 37%; max-width: 37%" class="history_content_condition-select">
               <v-menu
                 ref="menu"
                 v-model="menu"
@@ -39,10 +28,11 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="dateRangeText"
-                    label="Picker in menu"
-                    prepend-icon="mdi-calendar"
+                    outlined
+                    label="Date Coverage"
                     readonly
                     v-bind="attrs"
+                    dense
                     v-on="on"
                   ></v-text-field>
                 </template>
@@ -53,16 +43,51 @@
                 </v-date-picker>
               </v-menu>
             </div>
-            <span>공정 선택</span>&nbsp;
-            <span>양품/고품</span>
+            <div class="history_content_condition-select">
+              <v-select :items="machines" label="Machine title" dense outlined></v-select>
+            </div>
+            <div class="history_content_condition-select">
+              <v-select :items="itemStatus" label="Result Status" outlined dense></v-select>
+            </div>
+            <button type="button" class="history_content_condition-postBtn">Search</button>
+            <!-- <v-btn class="history_content_condition-postBtn">Search</v-btn> -->
+            <!-- <v-btn class="history_content_condition-postBtn">조회</v-btn> -->
+            <!-- <v-btn class="history_content_condition-postBtn">Search<i class="fa-solid fa-magnifying-glass"></i></v-btn> -->
+          </div>
+          <div class="history_content_icons">
+            <button type="button" @click="excelDown">
+              <span class="icon-button repeat"> <i class="fa-solid fa-retweet icon-repeat"></i><span></span> </span>
+            </button>
+            &nbsp;
+            <button type="button" @click="excelDown">
+              <span class="icon-button excel">
+                <i class="fa-solid fa-file-arrow-down icon-excel"></i><span></span>
+              </span>
+            </button>
           </div>
         </div>
         <v-card class="histroy__card" elevation="4" max-height="100vh">
-          <v-card-title>
+          <v-card-title class="histroy__card--header">
             <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
           </v-text-field> -->
+            <div class="history__card--icon">
+              <button class="history__card--button">
+                <i class="fa-solid fa-caret-right"></i>
+              </button>
+            </div>
+            <div class="history__card--icon">
+              <button class="history__card--button">
+                <i class="fa-solid fa-caret-left"></i>
+              </button>
+            </div>
           </v-card-title>
-          <v-data-table :headers="headers" :items="details" :search="search" :items-per-page="8"></v-data-table>
+          <v-data-table
+            :headers="headers"
+            :items="details"
+            :search="search"
+            :items-per-page="8"
+            hide-default-footer
+          ></v-data-table>
         </v-card>
       </div>
     </v-main>
@@ -84,6 +109,8 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
+      machines: ['준규공정', '민혁공정', '은택공정', '윤성공정'],
+      itemStatus: ['모두', '양품', '고품'],
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
@@ -99,7 +126,8 @@ export default {
         { text: 'color', value: 'white' },
         { text: 'machine_info', value: '준규공정' },
         { text: 'test_date', value: '20221213' },
-        { text: 'diceInfo', value: 'include' }
+        { text: 'diceInfo', value: 'include' },
+        { text: 'description', value: 'description' }
       ],
       details: [
         {
@@ -348,5 +376,51 @@ export default {
 
 .icon-button .icon-repeat {
   color: #3b5998;
+}
+.history_content_condition {
+  display: flex;
+  align-items: center;
+  /* box-sizing: border-box; */
+}
+.history_content_condition-select {
+  margin-right: 3%;
+  margin-top: 1%;
+}
+.histroy__card--header {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.history__card--icon {
+  margin: 0 10px;
+}
+.history__card--button {
+  border-radius: 50%;
+}
+
+.history__card--button > i {
+  width: 30px;
+  height: 30px;
+  padding-top: 5px;
+}
+.history__card--button > i:hover {
+  background-color: #cfd8dc;
+  border-radius: 50%;
+}
+.history_content_condition-postBtn {
+  margin-bottom: 20px;
+}
+.history_content_condition-postBtn {
+  padding: 7px 17px;
+  /* border: 1px solid black; */
+  border-radius: 15px;
+  color: white;
+  background-color: #172b4d;
+  transition: all 0.2s;
+}
+.history_content_condition-postBtn:hover {
+  transform: scale(1.1);
+}
+input {
+  width: 10%;
 }
 </style>

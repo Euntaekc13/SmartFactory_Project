@@ -26,7 +26,7 @@
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
             <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
-              <v-slide-item v-for="n in processes" :key="n" v-slot="{ active, toggle }">
+              <v-slide-item v-for="n in 3" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"

@@ -289,20 +289,21 @@ export default {
       })
     },
     getConnectInfo() {
+      console.log('야야 여기 체크해', this.$route.params.id)
       for (let i = 0; i < this.Machine.length; i++) {
         if (this.Machine[i].id == this.$route.params.id) {
           this.hostname = this.Machine[i].mqtt_name
           this.port = this.Machine[i].mqtt_port
           this.topic = this.Machine[i].mqtt_topic
-          this.machineId = this.$route.params.id
-          console.log('information check : ', this.hostname, this.port, this.topic)
+          this.MachineId = this.$route.params.id
+          console.log('information check : ', this.hostname, this.port, this.topic, this.MachineId)
         }
       }
     },
     //이미지 업로드
     async getMonitoringInfo() {
-      console.log('getMonitoringInfo start check - machineId: ', this.machineId)
-      await this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(() => {
+      console.log('getMonitoringInfo start check - machineId: ', this.MachineId)
+      await this.getMonitoringInfoStoreAction({ machineId: this.MachineId }).then(() => {
         console.log('Success to get count information')
       })
     },

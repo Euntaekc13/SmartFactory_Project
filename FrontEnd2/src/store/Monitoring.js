@@ -55,8 +55,9 @@ export const Monitoring = {
       for (i = 0; i < totalQty; i++) {
         data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
       }
+
       for (j = 0; j < totalQty; j++) {
-        data.test_result[i].today_finial_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
+        data.test_result[j].today_finial_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
       }
 
       state.dailyProductivity.total = totalQty

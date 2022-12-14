@@ -271,6 +271,7 @@ export default {
             } else {
               newObject.position.z += 0.19
             }
+
             if (message.Wrapper[5].value == false) {
               if (message.Wrapper[11].value == true) {
                 newObject.material.color.set('#FF0000') //red

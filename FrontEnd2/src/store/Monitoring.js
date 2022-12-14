@@ -52,12 +52,12 @@ export const Monitoring = {
       let i = 0
       let j = 0
 
-      for (i = 0; i < totalQty; i++) {
+      for (i = 0; i < data.test_result.length; i++) {
         data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
       }
 
-      for (j = 0; j < totalQty; j++) {
-        data.test_result[j].today_finial_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
+      for (j = 0; j < data.today_final_result.length; j++) {
+        data.today_final_result[j].final_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
       }
 
       state.dailyProductivity.total = totalQty
@@ -102,6 +102,18 @@ export const Monitoring = {
       state.assignedUser.userEmail = data
       state.assignedUser.userPhone = data
       state.assignedUser.userImage = data
+
+      state.dailyProductivity.dailyTotal = data
+      state.dailyProductivity.dailyGoodSet = data
+      state.dailyProductivity.dailyFailure = data
+
+      state.dailyProductivity.total = data
+      state.dailyProductivity.goodSet = data
+      state.dailyProductivity.failure = data
+
+      state.cycleCount.process1 = data
+      state.cycleCount.process2 = data
+      state.cycleCount.process3 = data
     }
   },
   actions: {
@@ -109,7 +121,7 @@ export const Monitoring = {
       return getMonitoringInfoApi
         .taking(machineId)
         .then(result => {
-          console.log('getMonitoringInfoStoreAction 성공?', result)
+          console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
           commit('dailyProductivityUpdate', result.data.data)
           commit('cycleCountUpdate', result.data.data)
           commit('assignedUserUpdate', result.data.data)

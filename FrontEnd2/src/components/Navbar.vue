@@ -139,14 +139,9 @@ export default {
     this.navUserImgRenderFunction()
   },
   methods: {
-    ...mapActions('Auth', ['LOGOUT_AUTH']),
-    async logout() {
-      console.log('로그 아웃 버튼')
-      console.log('초기화 해야하는 대상 : ', this.TokenUser)
-      await this.LOGOUT_AUTH({ state: this.TokenUser }).then(() => {
-        // api 와 store 작업이 끝나면 아래 주로 화면 전환
-        // this.$router.push('/login')
-      })
+    logout() {
+      console.log('User logout attempting - Navbar')
+      this.$store.commit('Auth/LOGOUT', null)
     },
     routingToLine() {
       this.$router.push('/line')

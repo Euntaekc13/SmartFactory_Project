@@ -1,5 +1,16 @@
 import { getMonitoringInfoApi } from '../api/monitoring'
 
+const today = new Date()
+
+const year = today.getFullYear()
+const month = today.getMonth() + 1
+const date = today.getDate()
+const hour = today.getHours()
+const minutes = today.getMinutes()
+const seconds = today.getSeconds()
+const getNowOrganized = () => `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`
+console.log(getNowOrganized())
+
 const cycleCount = {
   process1: null,
   process1Max: null,
@@ -12,7 +23,10 @@ const cycleCount = {
 const dailyProductivity = {
   total: null,
   goodSet: null,
-  failure: null
+  failure: null,
+  dailyTotal: null,
+  dailyGoodSet: null,
+  dailyFailure: null
 }
 
 const assignedUser = {
@@ -37,28 +51,56 @@ export const Monitoring = {
   },
   mutations: {
     dailyProductivityUpdate(state, data) {
+      // 아직 daily 작업을 추가해야함
       console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
-      // state.dailyProductivity.total = data.total
-      // state.dailyProductivity.goodSet = data.goodSet
-      // state.dailyProductivity.failure = data.failure
+      let totalQty = data.test_result.length
+      let goodSetQty = 0
+      let failureQty = 0
+
+      let dailyGoodSetQty = 0
+      let dailyFailureQty = 0
+
+      let i = 0
+      let j = 0
+
+      for (i = 0; i < totalQty; i++) {
+        data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
+      }
+      // for (j = 0; j < totalQty; j++) {
+      //   console.log('today')
+      // }
+
+      console.log('mutations 안쪽 dailyProductivityUpdate - goodSetQty : ', goodSetQty)
+      console.log('mutations 안쪽 dailyProductivityUpdate - failureQty : ', failureQty)
+      state.dailyProductivity.total = totalQty
+      state.dailyProductivity.goodSet = goodSetQty
+      state.dailyProductivity.failure = failureQty
+
+      let dailyTotalQty = dailyGoodSetQty + dailyFailureQty
+
+      state.dailyProductivity.dailyTotal = dailyTotalQty
+      state.dailyProductivity.dailyGoodSet = dailyGoodSetQty
+      state.dailyProductivity.dailyFailure = dailyFailureQty
     },
     cycleCountUpdate(state, data) {
       console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
       let i = 0
       for (i = 0; i <= 2; i++) {
-        if (data.part[i].PartDefaultId == 1) {
-          state.cycleCount.process1 = data.part[i].count
-        }
-        if (data.part[i].PartDefaultId == 2) {
-          state.cycleCount.process2 = data.part[i].count
-        }
-        if (data.part[i].PartDefaultId == 3) {
-          state.cycleCount.process3 = data.part[i].count
+        switch (data.part[i].PartDefaultId) {
+          case 1:
+            state.cycleCount.process1 = data.part[i].count
+            break
+          case 2:
+            state.cycleCount.process2 = data.part[i].count
+            break
+          case 3:
+            state.cycleCount.process3 = data.part[i].count
+            break
         }
       }
-      // state.cycleCount.process1Max = data.process1
-      // state.cycleCount.process2Max = data.process2
-      // state.cycleCount.process3Max = data.process3
+      console.log('mutations 안쪽 cycleCountUpdate - data.process1 : ', state.cycleCount.process1)
+      console.log('mutations 안쪽 cycleCountUpdate - data.process2 : ', state.cycleCount.process2)
+      console.log('mutations 안쪽 cycleCountUpdate - data.process3 : ', state.cycleCount.process3)
     },
     assignedUserUpdate(state, data) {
       console.log('mutations 안쪽 assignedUserUpdate - data : ', data)
@@ -66,11 +108,11 @@ export const Monitoring = {
       state.assignedUser.userEmail = data.manager.email
       state.assignedUser.userPhone = data.manager.phone_number
       state.assignedUser.userImage = data.manager.user_image
-      console.log(state.assignedUser.userPhone)
     },
     assignedUserDelete(state, data) {
       console.log('delete')
       console.log('store monitoring mutation')
+      // 여기서 data 는 함수가 선언된 부분에서 정한 null 값으로 전부 입력
       state.assignedUser.userName = data
       state.assignedUser.userEmail = data
       state.assignedUser.userPhone = data
@@ -92,21 +134,4 @@ export const Monitoring = {
         })
     }
   }
-  // FETCH_SAMPLE({ commit }) {
-  //   //commit은 mutation으로 보내주기 위함
-  //   return sampleApi.getEx().then(res => {
-  //     console.log(res)
-  //     commit('SET_SAMPLE_OB', res)
-  //   })
-  // }
-
-  // SAMPLE_POST(_, { exampleData }) {
-  //   //mutation으로 보내주지 않아도 되기 때문에 _,로 표시
-  //   return sampleApi
-  //     .postEX(exampleData)
-  //     .then(console.log('보내기 성공'))
-  //     .catch(error => {
-  //       console.log('sample - error', error)
-  //     })
-  // }
 }

@@ -12,7 +12,7 @@ const requireAuth = (to, from, next) => {
 }
 
 const requireLine = (to, from, next) => {
-  next({ path: '/line' })
+  next({ path: '/machine' })
 }
 
 const routes = [

@@ -26,7 +26,7 @@
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
             <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
-              <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
+              <v-slide-item v-for="n in processes" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
@@ -103,7 +103,28 @@ export default {
       // data: 50
       select: { machine_name: 'Machine Name', information: 'Machine Information' },
       machines: [],
-      processes: []
+      processes: [
+        {
+          partId: 1,
+          lifeCycle: 100,
+          partDescription: 'hey'
+        },
+        {
+          partId: 2,
+          lifeCycle: 100,
+          partDescription: 'hoy'
+        },
+        {
+          partId: 3,
+          lifeCycle: 100,
+          partDescription: 'hay'
+        },
+        {
+          partId: 4,
+          lifeCycle: 100,
+          partDescription: 'huy'
+        }
+      ]
     }
   },
   computed: {

@@ -48,7 +48,7 @@ import Navbar from '@/components/Navbar.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  // name: 'Line',
+  name: 'Line',
   components: {
     // Item,
     Item2,
@@ -63,17 +63,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Machine', [
-      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
-    ])
+    ...mapGetters('Machine', ['Machine'])
+    // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
   },
   async mounted() {
-    await this.GET_LINE().then(() => {
-      this.lines = this.Line
+    await this.GET_MACHINE().then(() => {
+      this.lines = this.Machine
     })
   },
   methods: {
-    ...mapActions('Machine', ['GET_LINE'])
+    ...mapActions('Machine', ['GET_MACHINE'])
   }
 }
 </script>

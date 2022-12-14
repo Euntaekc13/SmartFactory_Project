@@ -100,8 +100,7 @@ export default {
   },
   computed: {
     ...mapState('Machine', {
-      data: 'data',
-      Line: 'Line'
+      Machine: 'Machine'
     }),
     ...mapState('Auth', {
       TokenUser: 'TokenUser'
@@ -290,11 +289,11 @@ export default {
       })
     },
     getConnectInfo() {
-      for (let i = 0; i < this.Line.length; i++) {
-        if (this.Line[i].id == this.$route.params.id) {
-          this.hostname = this.Line[i].mqtt_name
-          this.port = this.Line[i].mqtt_port
-          this.topic = this.Line[i].mqtt_topic
+      for (let i = 0; i < this.Machine.length; i++) {
+        if (this.Machine[i].id == this.$route.params.id) {
+          this.hostname = this.Machine[i].mqtt_name
+          this.port = this.Machine[i].mqtt_port
+          this.topic = this.Machine[i].mqtt_topic
           this.machineId = this.$route.params.id
           console.log('information check : ', this.hostname, this.port, this.topic)
         }

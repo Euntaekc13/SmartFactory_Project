@@ -3,7 +3,7 @@ node_modules
 /dist
 .eslintrc.js
 .env
-
+package-lock.json
 
 # local env files
 .env.local

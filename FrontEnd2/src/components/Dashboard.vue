@@ -14,17 +14,17 @@
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">TOTAL</div>
-              <div class="blockvalue">{{ dailyProductivity.total }} <span>qty</span></div>
+              <div class="blockvalue">{{ output.total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">GOODSET</div>
-              <div class="blockvalue">{{ dailyProductivity.goodSet }} <span>qty</span></div>
+              <div class="blockvalue">{{ output.goodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">FAILURE</div>
-              <div class="blockvalue">{{ dailyProductivity.failure }} <span>qty</span></div>
+              <div class="blockvalue">{{ output.failure }} <span>qty</span></div>
             </a>
           </div>
           <!-- fan-content -->
@@ -90,6 +90,9 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Dashboard',
+  props: {
+    output: Object
+  },
   data() {
     return {
       data: false
@@ -120,7 +123,7 @@ export default {
 <style scoped>
 body {
   line-height: 1.5;
-  min-height: 100vh;
+  min-height: 100%;
   background: #28282e;
 }
 

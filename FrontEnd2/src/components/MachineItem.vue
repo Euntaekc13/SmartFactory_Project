@@ -8,8 +8,9 @@ export default {}
 
 <style scoped>
 .machine-container {
-  width: 30%;
+  width: 80%;
   height: 80%;
+  margin: 7% 10% 5% 10%;
   position: relative;
   border: 1px solid black;
   margin-right: 3%;

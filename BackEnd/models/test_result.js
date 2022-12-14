@@ -13,6 +13,15 @@ module.exports = class Test_result extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
+        dice_num: {
+          type: Sequelize.INTEGER(40),
+          allowNull: true,
+        },
+        description: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+          defaultValue: "",
+        },
       },
       {
         sequelize,

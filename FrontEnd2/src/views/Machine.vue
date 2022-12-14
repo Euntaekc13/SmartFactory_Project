@@ -10,6 +10,7 @@
         <div class="machine__content">
           <div class="Select__process">
             <v-col cols="2">
+              <!-- v-model="select" 에다가 watch 를 걸어서 data 에 변화가 있으면 이벤트가 발생하게끔 -->
               <v-select
                 v-model="select"
                 :hint="`${select.machine_name}, ${select.information}`"
@@ -20,6 +21,7 @@
                 persistent-hint
                 return-object
                 single-line
+                @click="machineSelect()"
               ></v-select>
             </v-col>
           </div>
@@ -103,28 +105,14 @@ export default {
       // data: 50
       select: { machine_name: 'Machine Name', information: 'Machine Information' },
       machines: [],
-      processes: [
-        {
-          partId: 1,
-          lifeCycle: 100,
-          partDescription: 'hey'
-        },
-        {
-          partId: 2,
-          lifeCycle: 100,
-          partDescription: 'hoy'
-        },
-        {
-          partId: 3,
-          lifeCycle: 100,
-          partDescription: 'hay'
-        },
-        {
-          partId: 4,
-          lifeCycle: 100,
-          partDescription: 'huy'
-        }
-      ]
+      processes: [],
+      processData: {
+        processId: 0,
+        processType: 0,
+        processCount: 0,
+        processMax: 0,
+        processStart: ''
+      }
     }
   },
   computed: {
@@ -147,6 +135,44 @@ export default {
     updateMachineInfo() {
       this.machines = this.Machine
       console.log('hello', this.machines)
+    },
+    machineSelect(selectedMachineId) {
+      if (selectedMachineId) {
+        let i = 0
+        let realMachineId = selectedMachineId - 1
+
+        console.log('machineSelect!!', realMachineId)
+        console.log('machineSelect!!', this.Machine[realMachineId])
+        console.log('machineSelect!!', this.Machine[realMachineId].Parts.length)
+
+        for (i = 0; i < this.Machine[realMachineId].Parts.length; i++) {
+          this.processData.processId = this.Machine[realMachineId].Parts[i].id
+          this.processData.processType = this.Machine[realMachineId].Parts[i].Part_default.part_type
+          this.processData.processCount = this.Machine[realMachineId].Parts[i].count
+          this.processData.processMax = this.Machine[realMachineId].Parts[i].Part_default.max_life
+          this.processData.processStart = this.Machine[realMachineId].Parts[i].Part_default.createdAt
+          this.processes.push(this.processData)
+          console.log('for 문 안쪽 : ', this.processData)
+          console.log(this.processes)
+          this.processData = {
+            processId: 0,
+            processType: 0,
+            processCount: 0,
+            processMax: 0,
+            processStart: ''
+          }
+        }
+      } else {
+        console.log('Please select the line')
+      }
+      //  let processId = this.Machine[realMachineId].Parts[0].id
+      // let processNum = this.Machine[realMachineId].Parts[0].Part_default.part_type
+      // let processMax = this.Machine[realMachineId].Parts[0].Part_default.max_life
+      // let processStart = this.Machine[realMachineId].Parts[0].Part_default.createdAt
+      //
+      // let softwareVersion = this.Machine[realMachineId].Software_histories[0].software_version
+      // let softwareVersionApplied = this.Machine[realMachineId].Software_histories[0].createdAt
+      // await this.
     }
   }
 }

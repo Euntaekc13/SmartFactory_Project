@@ -1,16 +1,5 @@
 import { getMonitoringInfoApi } from '../api/monitoring'
 
-const today = new Date()
-
-const year = today.getFullYear()
-const month = today.getMonth() + 1
-const date = today.getDate()
-const hour = today.getHours()
-const minutes = today.getMinutes()
-const seconds = today.getSeconds()
-const getNowOrganized = () => `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`
-console.log(getNowOrganized())
-
 const cycleCount = {
   process1: null,
   process1Max: null,
@@ -70,8 +59,6 @@ export const Monitoring = {
         data.test_result[i].today_finial_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
       }
 
-      console.log('mutations 안쪽 dailyProductivityUpdate - goodSetQty : ', goodSetQty)
-      console.log('mutations 안쪽 dailyProductivityUpdate - failureQty : ', failureQty)
       state.dailyProductivity.total = totalQty
       state.dailyProductivity.goodSet = goodSetQty
       state.dailyProductivity.failure = failureQty
@@ -98,9 +85,6 @@ export const Monitoring = {
             break
         }
       }
-      console.log('mutations 안쪽 cycleCountUpdate - data.process1 : ', state.cycleCount.process1)
-      console.log('mutations 안쪽 cycleCountUpdate - data.process2 : ', state.cycleCount.process2)
-      console.log('mutations 안쪽 cycleCountUpdate - data.process3 : ', state.cycleCount.process3)
     },
     assignedUserUpdate(state, data) {
       console.log('mutations 안쪽 assignedUserUpdate - data : ', data)

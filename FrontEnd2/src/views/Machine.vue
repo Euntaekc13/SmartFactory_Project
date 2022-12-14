@@ -100,27 +100,33 @@ export default {
   },
   data() {
     return {
-      data: 50,
-      select: { state: '준규공정', abbr: 'JK' },
+      // data: 50
+      select: { state: 'Machine Name', abbr: 'Address' },
       items: [
         { state: '은택공정', abbr: '45 Rockefeller Plaza, New York, NY 10111, United States', machineId: 2 },
         { state: '윤성공정', abbr: 'London SW1A 0AA, United Kingdom', machineId: 4 },
         { state: '민혁공정', abbr: '6 Chome-6-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan', machineId: 3 },
         { state: '준규공정', abbr: 'Pl. Charles de Gaulle, 75008 Paris, France', machineId: 1 }
       ],
-      machines: []
+      machines: [],
+      machine: {
+        machine_name: null,
+        machine_status: null,
+        machine_image: null,
+        manager: null,
+        information: null
+      }
     }
   },
   computed: {
     ...mapState('Machine', {
-      data: 'data',
-      Line: 'Line'
+      Machine: 'Machine'
     })
   },
   created() {},
   mounted() {},
   methods: {
-    ...mapActions('Machine', ['GET_LINE'])
+    ...mapActions('Machine', ['GET_Machine'])
   }
 }
 </script>

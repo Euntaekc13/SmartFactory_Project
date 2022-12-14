@@ -1,6 +1,6 @@
 import { machine } from '../api/machine'
 
-const InitLine = [
+const InitMachine = [
   {
     id: null,
     machine_name: null,
@@ -18,35 +18,33 @@ export const Machine = {
   namespaced: true,
 
   state: {
-    Line: InitLine,
-    data: '',
-    data2: ''
+    Machine: InitMachine
   },
   getters: {
-    Line: state => state.Line
+    Machine: state => state.Machine
   },
   mutations: {
     // FETCH_DATA(state, data) {
     //   state.data = data
     // },
-    GET_LINE_MUTATION(state, data) {
-      state.Line = data.data.machine
+    GET_Machine_MUTATION(state, data) {
+      state.Machine = data.data.machine
     }
   },
   actions: {
-    GET_LINE({ commit }) {
+    GET_Machine({ commit }) {
       return (
         machine
           // request
-          .getLine()
+          .getMachine()
           // response
           .then(data => {
-            console.log('Get Line 성공 : ', data)
+            console.log('Get Machine 성공 : ', data)
             // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
-            commit('GET_LINE_MUTATION', data.data)
+            commit('GET_Machine_MUTATION', data.data)
           })
           .catch(error => {
-            console.log('Get Line 실패 : ', error)
+            console.log('Get Machine 실패 : ', error)
           })
       )
     }

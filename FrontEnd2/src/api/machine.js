@@ -6,6 +6,6 @@ export const machine = {
   // },
   getLine() {
     console.log('get Line information')
-    return request('get', '/line')
+    return request('get', '/machine')
   }
 }

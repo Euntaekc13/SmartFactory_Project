@@ -76,7 +76,8 @@ export default {
       output: {
         total: 0, //일일총생산
         failure: 0, //일일고품
-        goodSet: 0 //일일양품
+        goodSet: 0, //일일양품
+        fanAction: false
       },
       FacName: '',
       Manager: '',
@@ -187,7 +188,12 @@ export default {
           this.YellowLight = message.Wrapper[9].value //노란불
           this.GreenLight = message.Wrapper[8].value //초록불
           this.start = message.Wrapper[0].value //시작
-
+          if (this.start) {
+            this.output.fanAction = true
+            console.log('mqtt 시간: ', message.Wrapper[26])
+          } else {
+            this.output.fanAction = false
+          }
           // Cycle 계산
           // process 1 count cycle
           if (message.Wrapper[19].value || this.start) {
@@ -223,6 +229,7 @@ export default {
                   (this.thirdFlag = false))
             }
           }
+          //1호기 동작
           this.ActionNum1 = message.Wrapper[2].value
           data = data.map(p => parseInt(p.value))
           edukit['yAxis'] = data[0]
@@ -267,11 +274,11 @@ export default {
             Product.push(newObject)
             render.scene.add(newObject)
             if (newObject.position.z >= 10) {
-              newObject.position.x += 0.32
+              newObject.position.x += 0.1
             } else {
               newObject.position.z += 0.19
             }
-
+            //양품고품 판단
             if (message.Wrapper[5].value == false) {
               if (message.Wrapper[11].value == true) {
                 newObject.material.color.set('#FF0000') //red

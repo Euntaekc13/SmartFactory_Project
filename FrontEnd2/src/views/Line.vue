@@ -138,7 +138,4 @@ export default {
 .btn:hover ~ h1 {
   transform: rotate(0.5turn);
 }
-/* .btn:hover {
-  transform: scale(1.5);
-} */
 </style>

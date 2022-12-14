@@ -4,15 +4,27 @@
     <v-main>
       <div class="machine__container">
         <div class="machine__header">
-          <h1>설비 관리</h1>
+          <h1>Process Management</h1>
           <v-divider></v-divider>
         </div>
         <div class="machine__content">
           <span>OO 공정 설비 리스트</span>
           <div class="content__up">
-            <MachineItem></MachineItem>
-            <MachineItem></MachineItem>
-            <MachineItem></MachineItem>
+            <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
+            <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
+              <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
+                <v-card
+                  :color="active ? 'grey lighten-5' : 'grey lighten-1'"
+                  class="ma-4"
+                  height="300"
+                  width="550"
+                  @click="toggle"
+                >
+                  <MachineItem />
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+            <!-- </v-sheet> -->
           </div>
           <v-divider></v-divider>
           <div class="content__down">

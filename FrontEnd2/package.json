@@ -36,6 +36,7 @@
     "mqtt": "^4.3.6",
     "prettier": "^2.2.1",
     "three": "^0.138.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "xlsx": "^0.18.5"
   }
 }

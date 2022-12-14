@@ -112,11 +112,11 @@ export default {
       drawer: true,
       src: 'https://randomuser.me/api/portraits/women/25.jpg',
       contentsList: [
-        { title: 'Line Management', icon: `${(<i class="fa-solid fa-industry-windows"></i>)}`, route: 'line' },
+        { title: 'Line Management', icon: `${(<i class="fa-solid fa-industry-windows"></i>)}`, route: 'machine' },
         {
           title: 'Process Management',
           icon: 'mdi-view-dashboard',
-          route: 'machine'
+          route: 'process'
         },
         {
           title: 'Production History',
@@ -144,10 +144,10 @@ export default {
       this.$store.commit('Auth/LOGOUT', null)
     },
     routingToLine() {
-      this.$router.push('/line')
+      this.$router.push('/machine')
     },
     routingToProcess() {
-      this.$router.push('/machine')
+      this.$router.push('/process')
     },
     routingToHistory() {
       this.$router.push('/history')

@@ -23,8 +23,8 @@ const routes = [
     beforeEnter: requireLine
   },
   {
-    path: '/line',
-    name: 'line',
+    path: '/machine',
+    name: 'Machine',
     component: () => import('../views/Line.vue'),
     beforeEnter: requireAuth
   },
@@ -52,7 +52,7 @@ const routes = [
     // beforeEnter: requireAuth
   },
   {
-    path: '/machine',
+    path: '/process',
     name: 'machine',
     component: () => import('../views/Machine.vue')
     // beforeEnter: requireAuth

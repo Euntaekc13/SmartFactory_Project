@@ -79,7 +79,7 @@ export default {
       console.log('LoginView page - login - data check : ', this.employee_number, this.password)
       this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
         // api 와 store 작업이 끝나면 아래 주로 화면 전환
-        localStorage.getItem('token') !== null ? this.$router.push('/line') : this.$router.go(0)
+        localStorage.getItem('token') !== null ? this.$router.push('/machine') : this.$router.go(0)
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }

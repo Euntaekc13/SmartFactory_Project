@@ -16,10 +16,10 @@ export const Machine = {
     //   state.data = data
     // },
     GET_MACHINE_MUTATION(state, data) {
-      console.log('GET_MACHINE_MUTATION - first : ', data.data)
+      console.log('GET_MACHINE_MUTATION - data.data : ', data.data)
 
       state.Machine = data.data.machine
-      console.log('GET_MACHINE_MUTATION - first : ', state.Machine)
+      console.log('GET_MACHINE_MUTATION - state.Machine : ', state.Machine)
     }
   },
   actions: {

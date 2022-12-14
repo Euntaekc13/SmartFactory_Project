@@ -4,7 +4,7 @@ export const machine = {
   // fetch() {
   //   return request('get', '/')
   // },
-  getLine() {
+  getMachine() {
     console.log('get Line information')
     return request('get', '/machine')
   }

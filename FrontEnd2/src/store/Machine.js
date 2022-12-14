@@ -1,18 +1,6 @@
 import { machine } from '../api/machine'
 
-const InitMachine = [
-  {
-    id: null,
-    machine_name: null,
-    machine_status: null,
-    machine_image: null,
-    manager: null,
-    information: null,
-    mqtt_name: null,
-    mqtt_port: null,
-    mqtt_topic: null
-  }
-]
+const InitMachine = []
 
 export const Machine = {
   namespaced: true,
@@ -27,12 +15,15 @@ export const Machine = {
     // FETCH_DATA(state, data) {
     //   state.data = data
     // },
-    GET_Machine_MUTATION(state, data) {
+    GET_MACHINE_MUTATION(state, data) {
+      console.log('GET_MACHINE_MUTATION - first : ', data.data)
+
       state.Machine = data.data.machine
+      console.log('GET_MACHINE_MUTATION - first : ', state.Machine)
     }
   },
   actions: {
-    GET_Machine({ commit }) {
+    GET_MACHINE({ commit }) {
       return (
         machine
           // request
@@ -41,7 +32,7 @@ export const Machine = {
           .then(data => {
             console.log('Get Machine 성공 : ', data)
             // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
-            commit('GET_Machine_MUTATION', data.data)
+            commit('GET_MACHINE_MUTATION', data.data)
           })
           .catch(error => {
             console.log('Get Machine 실패 : ', error)

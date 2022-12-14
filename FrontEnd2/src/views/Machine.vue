@@ -12,10 +12,10 @@
             <v-col cols="2">
               <v-select
                 v-model="select"
-                :hint="`${select.state}, ${select.abbr}`"
-                :items="items"
-                item-text="state"
-                item-value="abbr"
+                :hint="`${select.machine_name}, ${select.information}`"
+                :items="machines"
+                item-text="machine_name"
+                item-value="information"
                 label="Select"
                 persistent-hint
                 return-object
@@ -25,7 +25,7 @@
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="machines" class="pa-4" center-active show-arrows>
+            <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
               <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
@@ -101,21 +101,9 @@ export default {
   data() {
     return {
       // data: 50
-      select: { state: 'Machine Name', abbr: 'Address' },
-      items: [
-        { state: '은택공정', abbr: '45 Rockefeller Plaza, New York, NY 10111, United States', machineId: 2 },
-        { state: '윤성공정', abbr: 'London SW1A 0AA, United Kingdom', machineId: 4 },
-        { state: '민혁공정', abbr: '6 Chome-6-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan', machineId: 3 },
-        { state: '준규공정', abbr: 'Pl. Charles de Gaulle, 75008 Paris, France', machineId: 1 }
-      ],
+      select: { machine_name: 'Machine Name', information: 'Machine Information' },
       machines: [],
-      machine: {
-        machine_name: null,
-        machine_status: null,
-        machine_image: null,
-        manager: null,
-        information: null
-      }
+      processes: []
     }
   },
   computed: {
@@ -123,10 +111,22 @@ export default {
       Machine: 'Machine'
     })
   },
-  created() {},
+  created() {
+    this.getMachineInfo()
+    this.updateMachineInfo()
+  },
   mounted() {},
   methods: {
-    ...mapActions('Machine', ['GET_Machine'])
+    ...mapActions('Machine', ['GET_MACHINE']),
+    async getMachineInfo() {
+      await this.GET_MACHINE().then(() => {
+        console.log('Success to get machine information')
+      })
+    },
+    updateMachineInfo() {
+      this.machines = this.Machine
+      console.log('hello', this.machines)
+    }
   }
 }
 </script>

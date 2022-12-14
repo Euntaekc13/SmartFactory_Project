@@ -1,24 +1,23 @@
 ﻿//#define socketmode
-using Newtonsoft.Json;
+    
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using uPLibrary.Networking.M2Mqtt;
-using uPLibrary.Networking.M2Mqtt.Messages;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Text;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using uPLibrary.Networking.M2Mqtt;
+//using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace SmartConnector.Edukit
+namespace SmartConnector
 {
-    class Program
+    internal class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             var instance = new Service();
             instance.Start();
         }
-
         public class Service
         {
             private static Ecng.Net.SocketIO.Client.Socket ServerSocket;
@@ -650,5 +649,4 @@ namespace SmartConnector.Edukit
         }
     }
 }
-
 

@@ -207,22 +207,22 @@ export class Scene {
     this.mesh.receiveShadow = true
     this.scene.add(this.mesh)
 
-    //동작 상태 기본 set
-    const sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
-    const sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
-    // 1호기 연식 상태
-    const Num1Status = (this.Object.Num1Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    Num1Status.position.set(-12.5, 12, 10)
-    this.scene.add(Num1Status)
-    // 2호기 연식 상태
-    const Num2Status = (this.Object.Num2Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    Num2Status.position.set(-5.8, 12, 0)
-    this.scene.add(Num2Status)
+    // //동작 상태 기본 set
+    // const sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
+    // const sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
+    // // 1호기 연식 상태
+    // const Num1Status = (this.Object.Num1Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    // Num1Status.position.set(-12.5, 12, 10)
+    // this.scene.add(Num1Status)
+    // // 2호기 연식 상태
+    // const Num2Status = (this.Object.Num2Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    // Num2Status.position.set(-5.8, 12, 0)
+    // this.scene.add(Num2Status)
 
-    // 3호기 연식 상태
-    const Num3Status = (this.Object.Num3Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    Num3Status.position.set(5, 15, 0)
-    this.scene.add(Num3Status)
+    // // 3호기 연식 상태
+    // const Num3Status = (this.Object.Num3Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
+    // Num3Status.position.set(5, 15, 0)
+    // this.scene.add(Num3Status)
     //-------공정 상태------
 
     this.EduStatus = new Group()

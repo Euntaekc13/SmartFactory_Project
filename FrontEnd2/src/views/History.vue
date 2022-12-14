@@ -44,12 +44,12 @@
               </v-menu>
             </div>
             <div class="history_content_condition-select">
-              <v-select :items="machines" label="Machine title" dense outlined></v-select>
+              <v-select v-model="machine_title" :items="machines" label="Machine title" dense outlined></v-select>
             </div>
             <div class="history_content_condition-select">
-              <v-select :items="itemStatus" label="Result Status" outlined dense></v-select>
+              <v-select v-model="itemStatus" :items="itemsStatus" label="Result Status" outlined dense></v-select>
             </div>
-            <button type="button" class="history_content_condition-postBtn">Search</button>
+            <button type="button" class="history_content_condition-postBtn" @click="getHistoryData">Search</button>
             <!-- <v-btn class="history_content_condition-postBtn">Search</v-btn> -->
             <!-- <v-btn class="history_content_condition-postBtn">조회</v-btn> -->
             <!-- <v-btn class="history_content_condition-postBtn">Search<i class="fa-solid fa-magnifying-glass"></i></v-btn> -->
@@ -96,6 +96,9 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import { mapGetters } from 'vuex'
+import { history } from '../api/history'
+
 export default {
   name: 'History',
   components: {
@@ -109,8 +112,10 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      machines: ['준규공정', '민혁공정', '은택공정', '윤성공정'],
-      itemStatus: ['모두', '양품', '고품'],
+      machines: [],
+      machine_title: null,
+      itemsStatus: ['모두', '양품', '고품'],
+      itemStatus: null,
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
@@ -137,86 +142,20 @@ export default {
           carbs: 24,
           protein: 4.0,
           iron: '1%'
-        },
-        {
-          serial: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: '1%'
-        },
-        {
-          serial: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: '7%'
-        },
-        {
-          serial: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: '8%'
-        },
-        {
-          serial: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: '16%'
-        },
-        {
-          serial: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: '0%'
-        },
-        {
-          serial: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: '2%'
-        },
-        {
-          serial: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: '45%'
-        },
-        {
-          serial: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: '22%'
-        },
-        {
-          serial: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: '6%'
         }
       ]
     }
   },
+  created() {
+    this.getMachineList()
+  },
   computed: {
     dateRangeText() {
       return this.dates.join(' ~ ')
-    }
+    },
+    ...mapGetters('Machine', [
+      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
+    ])
   },
   methods: {
     async excelDown() {
@@ -256,6 +195,39 @@ export default {
       arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
       arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
       return arr
+    },
+    getMachineList() {
+      for (let i = 0; i < this.Line.length; i++) {
+        this.machines.push(this.Line[i].machine_name)
+      }
+    },
+    getHistoryData() {
+      let MachineId = null
+      let final_result = null
+      // axios 호출
+      // console.log(this.dates)
+      let start_date = this.dates[0]
+      let end_date = this.dates[1]
+      for (let i = 0; i < this.Line.length; i++) {
+        if (this.Line[i].machine_name == this.machine_title) {
+          MachineId = this.Line[i].id
+        }
+      }
+      // 영어로 바꿀수도 있음
+      if (this.itemStatus == '양품') {
+        final_result = 1
+      } else if (this.itemStatus == '고품') {
+        final_result = 0
+      } else {
+        final_result = null
+      }
+
+      // 주사위 눈 추가 될 수 있음
+      console.log(start_date, end_date, MachineId, final_result)
+
+      history.getHistoryData({ start_date, end_date, MachineId, final_result }).then(res => {
+        console.log(res)
+      })
     }
   }
 }

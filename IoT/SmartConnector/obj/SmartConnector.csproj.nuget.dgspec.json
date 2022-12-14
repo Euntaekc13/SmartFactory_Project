@@ -1,21 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj": {}
+    "C:\\Users\\eunta\\OneDrive\\바탕 화면\\팀프로젝트\\Final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj": {
+    "C:\\Users\\eunta\\OneDrive\\바탕 화면\\팀프로젝트\\Final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
+        "projectUniqueName": "C:\\Users\\eunta\\OneDrive\\바탕 화면\\팀프로젝트\\Final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
         "projectName": "SmartConnector",
-        "projectPath": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\SmartFactory_Project_final\\SmartFactory_Project\\IoT\\SmartConnector\\obj\\",
+        "projectPath": "C:\\Users\\eunta\\OneDrive\\바탕 화면\\팀프로젝트\\Final\\SmartFactory_Project\\IoT\\SmartConnector\\SmartConnector.csproj",
+        "packagesPath": "C:\\Users\\eunta\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\eunta\\OneDrive\\바탕 화면\\팀프로젝트\\Final\\SmartFactory_Project\\IoT\\SmartConnector\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\eunta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

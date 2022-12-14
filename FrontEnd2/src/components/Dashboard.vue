@@ -14,17 +14,17 @@
             <a href="#" class="content-block fan-content-block">
               <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">TOTAL</div>
-              <div class="blockvalue">{{ output.total }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyTotal + output.total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">GOODSET</div>
-              <div class="blockvalue">{{ output.goodSet }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyGoodSet + output.goodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div :class="[output.fanAction === true ? 'fan-image' : 'fan_stopimg']"></div>
               <div class="blocktitle">FAILURE</div>
-              <div class="blockvalue">{{ output.failure }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyFailure + output.failure }} <span>qty</span></div>
             </a>
           </div>
           <!-- fan-content -->
@@ -101,9 +101,9 @@ export default {
   },
   computed: {
     ...mapState('Monitoring', {
-      dailyProductivity: 'dailyProductivity',
-      cycleCount: 'cycleCount',
-      assignedUser: 'assignedUser'
+      dailyProductivity: 'dailyProductivity'
+      // cycleCount: 'cycleCount',
+      // assignedUser: 'assignedUser'
     })
   },
   mounted() {},

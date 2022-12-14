@@ -9,25 +9,25 @@
         </div>
         <div class="line__content">
           <div>
-            <div v-for="(line, index) in lines" :key="index" class="Line-Card">
+            <div v-for="(Machine, index) in Machines" :key="index" class="Line-Card">
               <item-2>
                 <div slot="title">
-                  <h3>{{ line.machine_name }}</h3>
+                  <h3>{{ Machine.machine_name }}</h3>
                 </div>
                 <span slot="status" style="font-size: 18px">
-                  <p v-if="line.machine_status === 0">&nbsp;● 대기 중</p>
-                  <p v-else-if="line.machine_status === 1" style="color: #81c784">&nbsp;● 동작 중</p>
-                  <p v-else-if="line.machine_status === 2" style="color: #e53935">&nbsp;● 고장 !!</p>
+                  <p v-if="Machine.machine_status === 0">&nbsp;● 대기 중</p>
+                  <p v-else-if="Machine.machine_status === 1" style="color: #81c784">&nbsp;● 동작 중</p>
+                  <p v-else-if="Machine.machine_status === 2" style="color: #e53935">&nbsp;● 고장 !!</p>
                   <p v-else style="color: black">&nbsp;미정</p>
                 </span>
                 <div slot="name">
-                  <p>{{ line.User.name }}</p>
+                  <p>{{ Machine.User.name }}</p>
                 </div>
                 <div slot="description">
-                  <p>{{ line.information }}</p>
+                  <p>{{ Machine.information }}</p>
                 </div>
                 <div slot="footer">
-                  <router-link :to="`/monitoring/${line.id}`" style="text-decoration: none">
+                  <router-link :to="`/monitoring/${Machine.id}`" style="text-decoration: none">
                     <!-- <v-btn>monitoring</v-btn> -->
                     <button class="btn">monitoring</button>
                   </router-link>
@@ -45,10 +45,10 @@
 // import Item from '../components/Item.vue'
 import Item2 from '../components/Item2.vue'
 import Navbar from '@/components/Navbar.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
-  // name: 'Line',
+  name: 'Machine',
   components: {
     // Item,
     Item2,
@@ -59,21 +59,21 @@ export default {
       url: '192.168.0.72',
       port: '9001',
       topic: 'machine',
-      lines: []
+      Machines: []
     }
   },
   computed: {
-    ...mapGetters('Machine', [
-      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
-    ])
+    ...mapGetters('Machine', ['Machine']),
+    ...mapState('Machine', ['Machine'])
+    // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
   },
   async mounted() {
-    await this.GET_LINE().then(() => {
-      this.lines = this.Line
+    await this.GET_MACHINE().then(() => {
+      this.Machines = this.Machine
     })
   },
   methods: {
-    ...mapActions('Machine', ['GET_LINE'])
+    ...mapActions('Machine', ['GET_MACHINE'])
   }
 }
 </script>

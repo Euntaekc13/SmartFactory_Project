@@ -34,14 +34,13 @@ export const Auth = {
       // localStorage 에는 위에서 저장하고 다음 동작에 사용될 토큰을 미리 headers 에 저장
       setAuthInHeader(data.token) //header에 token 세팅
     },
-    LOGOUT(state) {
-      if (!state) return
-      state.TokenUser.id = null
-      state.TokenUser.name = null
-      state.TokenUser.employee_number = null
-      state.TokenUser.email = null
-      state.TokenUser.authorization = null
-      state.TokenUser.phone_number = null
+    LOGOUT(state, data) {
+      state.TokenUser.id = data
+      state.TokenUser.name = data
+      state.TokenUser.employee_number = data
+      state.TokenUser.email = data
+      state.TokenUser.authorization = data
+      state.TokenUser.phone_number = data
       console.log('check state value : ', state)
       localStorage.removeItem('token')
     }

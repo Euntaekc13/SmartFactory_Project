@@ -12,10 +12,10 @@
             <v-col cols="2">
               <v-select
                 v-model="select"
-                :hint="`${select.state}, ${select.abbr}`"
-                :items="items"
-                item-text="state"
-                item-value="abbr"
+                :hint="`${select.machine_name}, ${select.information}`"
+                :items="machines"
+                item-text="machine_name"
+                item-value="information"
                 label="Select"
                 persistent-hint
                 return-object
@@ -25,8 +25,8 @@
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
-              <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
+            <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
+              <v-slide-item v-for="n in 3" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
@@ -90,6 +90,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import MachineItem from '../components/MachineItem.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Machine',
@@ -99,19 +100,55 @@ export default {
   },
   data() {
     return {
-      data: 50,
-      select: { state: 'Florida', abbr: 'FL' },
-      items: [
-        { state: 'Florida', abbr: 'FL' },
-        { state: 'Georgia', abbr: 'GA' },
-        { state: 'Nebraska', abbr: 'NE' },
-        { state: 'California', abbr: 'CA' },
-        { state: 'New York', abbr: 'NY' }
+      // data: 50
+      select: { machine_name: 'Machine Name', information: 'Machine Information' },
+      machines: [],
+      processes: [
+        {
+          partId: 1,
+          lifeCycle: 100,
+          partDescription: 'hey'
+        },
+        {
+          partId: 2,
+          lifeCycle: 100,
+          partDescription: 'hoy'
+        },
+        {
+          partId: 3,
+          lifeCycle: 100,
+          partDescription: 'hay'
+        },
+        {
+          partId: 4,
+          lifeCycle: 100,
+          partDescription: 'huy'
+        }
       ]
     }
   },
-  created() {},
-  mounted() {}
+  computed: {
+    ...mapState('Machine', {
+      Machine: 'Machine'
+    })
+  },
+  created() {
+    this.getMachineInfo()
+    this.updateMachineInfo()
+  },
+  mounted() {},
+  methods: {
+    ...mapActions('Machine', ['GET_MACHINE']),
+    async getMachineInfo() {
+      await this.GET_MACHINE().then(() => {
+        console.log('Success to get machine information')
+      })
+    },
+    updateMachineInfo() {
+      this.machines = this.Machine
+      console.log('hello', this.machines)
+    }
+  }
 }
 </script>
 

@@ -25,7 +25,7 @@
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
+            <v-slide-group v-model="machines" class="pa-4" center-active show-arrows>
               <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
@@ -90,6 +90,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import MachineItem from '../components/MachineItem.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Machine',
@@ -100,18 +101,27 @@ export default {
   data() {
     return {
       data: 50,
-      select: { state: 'Florida', abbr: 'FL' },
+      select: { state: '준규공정', abbr: 'JK' },
       items: [
-        { state: 'Florida', abbr: 'FL' },
-        { state: 'Georgia', abbr: 'GA' },
-        { state: 'Nebraska', abbr: 'NE' },
-        { state: 'California', abbr: 'CA' },
-        { state: 'New York', abbr: 'NY' }
-      ]
+        { state: '은택공정', abbr: '45 Rockefeller Plaza, New York, NY 10111, United States', machineId: 2 },
+        { state: '윤성공정', abbr: 'London SW1A 0AA, United Kingdom', machineId: 4 },
+        { state: '민혁공정', abbr: '6 Chome-6-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan', machineId: 3 },
+        { state: '준규공정', abbr: 'Pl. Charles de Gaulle, 75008 Paris, France', machineId: 1 }
+      ],
+      machines: []
     }
   },
+  computed: {
+    ...mapState('Machine', {
+      data: 'data',
+      Line: 'Line'
+    })
+  },
   created() {},
-  mounted() {}
+  mounted() {},
+  methods: {
+    ...mapActions('Machine', ['GET_LINE'])
+  }
 }
 </script>
 

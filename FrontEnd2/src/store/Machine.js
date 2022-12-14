@@ -5,6 +5,7 @@ const InitLine = [
     id: null,
     machine_name: null,
     machine_status: null,
+    machine_image: null,
     manager: null,
     information: null,
     mqtt_name: null,

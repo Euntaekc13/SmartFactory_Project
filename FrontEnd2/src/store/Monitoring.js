@@ -66,9 +66,9 @@ export const Monitoring = {
       for (i = 0; i < totalQty; i++) {
         data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
       }
-      // for (j = 0; j < totalQty; j++) {
-      //   console.log('today')
-      // }
+      for (j = 0; j < totalQty; j++) {
+        data.test_result[i].today_finial_result == 1 ? dailyGoodSetQty++ : dailyFailureQty++
+      }
 
       console.log('mutations 안쪽 dailyProductivityUpdate - goodSetQty : ', goodSetQty)
       console.log('mutations 안쪽 dailyProductivityUpdate - failureQty : ', failureQty)

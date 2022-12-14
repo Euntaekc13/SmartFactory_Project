@@ -14,17 +14,17 @@
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">TOTAL</div>
-              <div class="blockvalue">{{ dailyProductivity.total + output.total }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyTotal + output.total }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">GOODSET</div>
-              <div class="blockvalue">{{ dailyProductivity.goodSet + output.goodSet }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyGoodSet + output.goodSet }} <span>qty</span></div>
             </a>
             <a href="#" class="content-block fan-content-block">
               <div class="fan-image"></div>
               <div class="blocktitle">FAILURE</div>
-              <div class="blockvalue">{{ dailyProductivity.failure + output.failure }} <span>qty</span></div>
+              <div class="blockvalue">{{ dailyProductivity.dailyFailure + output.failure }} <span>qty</span></div>
             </a>
           </div>
           <!-- fan-content -->

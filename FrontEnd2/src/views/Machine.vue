@@ -21,7 +21,6 @@
                 persistent-hint
                 return-object
                 single-line
-                @click="machineSelect()"
               ></v-select>
             </v-col>
           </div>
@@ -112,6 +111,11 @@ export default {
         processCount: 0,
         processMax: 0,
         processStart: ''
+      },
+      softwareVersionList: [],
+      softwareData: {
+        softwareVersion: '',
+        softwareVersionApplied: ''
       }
     }
   },
@@ -119,6 +123,15 @@ export default {
     ...mapState('Machine', {
       Machine: 'Machine'
     })
+  },
+  watch: {
+    select(newSelect) {
+      this.machineSelectReset()
+      this.softwareListReset()
+      console.log('watch ???', this.select.machine_name + '  ' + newSelect.id)
+      this.machineSelect(newSelect.id)
+      this.getSoftwareVersionList(newSelect.id)
+    }
   },
   created() {
     this.getMachineInfo()
@@ -141,10 +154,6 @@ export default {
         let i = 0
         let realMachineId = selectedMachineId - 1
 
-        console.log('machineSelect!!', realMachineId)
-        console.log('machineSelect!!', this.Machine[realMachineId])
-        console.log('machineSelect!!', this.Machine[realMachineId].Parts.length)
-
         for (i = 0; i < this.Machine[realMachineId].Parts.length; i++) {
           this.processData.processId = this.Machine[realMachineId].Parts[i].id
           this.processData.processType = this.Machine[realMachineId].Parts[i].Part_default.part_type
@@ -152,8 +161,7 @@ export default {
           this.processData.processMax = this.Machine[realMachineId].Parts[i].Part_default.max_life
           this.processData.processStart = this.Machine[realMachineId].Parts[i].Part_default.createdAt
           this.processes.push(this.processData)
-          console.log('for 문 안쪽 : ', this.processData)
-          console.log(this.processes)
+
           this.processData = {
             processId: 0,
             processType: 0,
@@ -165,14 +173,28 @@ export default {
       } else {
         console.log('Please select the line')
       }
-      //  let processId = this.Machine[realMachineId].Parts[0].id
-      // let processNum = this.Machine[realMachineId].Parts[0].Part_default.part_type
-      // let processMax = this.Machine[realMachineId].Parts[0].Part_default.max_life
-      // let processStart = this.Machine[realMachineId].Parts[0].Part_default.createdAt
-      //
-      // let softwareVersion = this.Machine[realMachineId].Software_histories[0].software_version
-      // let softwareVersionApplied = this.Machine[realMachineId].Software_histories[0].createdAt
-      // await this.
+    },
+    machineSelectReset() {
+      this.processes = []
+    },
+    getSoftwareVersionList(selectedMachineId) {
+      let i = 0
+      let realMachineId = selectedMachineId - 1
+
+      for (i = 0; i < this.Machine[realMachineId].Software_histories.length; i++) {
+        this.softwareData.softwareVersion = this.Machine[realMachineId].Software_histories[i].software_version
+        this.softwareData.softwareVersionApplied = this.Machine[realMachineId].Software_histories[i].createdAt
+
+        this.softwareVersionList.push(this.softwareData)
+
+        this.softwareData = {
+          softwareVersion: '',
+          softwareVersionApplied: ''
+        }
+      }
+    },
+    softwareListReset() {
+      this.softwareVersionList = []
     }
   }
 }

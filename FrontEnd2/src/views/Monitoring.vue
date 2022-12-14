@@ -11,10 +11,7 @@
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
-          <!-- <v-img :src="require(`../../public/img/${userImgRender}`)" alt=""></v-img> -->
           <v-img :src="userImgRender" alt=""></v-img>
-          <!-- <img :src="userImgRender" alt="" /> -->
-          <!-- <img src="../../public/img/KMH.jpg" /> -->
         </div>
         <div class="manager__description">
           <p class="monitoring__subtitle">Manager : {{ assignedUser.userName }} {{ assignedUser.employee_number }}</p>
@@ -24,7 +21,7 @@
       </div>
     </div>
     <div class="chart">
-      <dash-board />
+      <dash-board :output="output" />
     </div>
   </body>
 </template>
@@ -33,7 +30,7 @@
 import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/ClassList'
 import mqtt from 'mqtt'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import * as THREE from 'three'
 
 class newProduct {
@@ -65,23 +62,22 @@ export default {
       path: '',
       topic: 'machine',
       start: '', //공정시작 동작
-      ActionNum1: '', //1호기 동작
-      ActionNum2: '', //2호기 동작
-      ActionNum3: '', //3호기 동작
       Num1Status: '', //1호기 상태
       Num2Status: '', //2호기 상태
       Num3Status: '', //3호기 상태
+      ActionNum1: '',
       GreenLight: '', //초록불
       YellowLight: '', //노란불
       RedLight: '', //빨간불
-      total: 0, //일일총생산
-      failure: 0, //일일고품
-      goodSet: 0, //일일양품
+      output: {
+        total: 0, //일일총생산
+        failure: 0, //일일고품
+        goodSet: 0 //일일양품
+      },
       FacName: '',
       Manager: '',
       ManagerEmail: '',
       ManagerPhone: '',
-
       process1Count: 10,
       process1TotalCount: 100,
       no1Action: false,
@@ -111,17 +107,21 @@ export default {
       assignedUser: 'assignedUser'
     })
   },
-  created() {
+  async created() {
     this.getConnectInfo()
     this.connectMqtt()
-    this.getMonitoringInfo()
+    await this.getMonitoringInfo()
+    this.userImgRenderFunction()
     console.log('Monitoring created value : ', this.userImgRender)
     //(this.port = '9001'), (this.hostname = '192.168.0.58'), (this.topic = 'machine')
   },
   mounted() {
     this.connection()
-    this.userImgRenderFunction()
-    // this.userImgRenderFunction()
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy() {
+    // console.log("beforeDestroy...");
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     ...mapActions('Monitoring', ['getMonitoringInfoStoreAction']),
@@ -147,6 +147,8 @@ export default {
       render.edukit = scene.resource.edukit
       render.camera = cameraElement
       render.renderer = rendererElement
+
+      console.log(scene.Object)
       // Rendering Start
       render.start()
       this.setEvent(scene.resource.edukit, scene.Object, render)
@@ -170,28 +172,12 @@ export default {
           console.log(`토픽 연결 완료: ${this.topic}`)
         })
         this.client.on('message', (topic, payload) => {
-          // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
-          // let temp = JSON.parse(payload.toString())
-          // console.log('받아온 데이터 : ', temp)
-          // let num0 = temp.Wrapper[0]
-          // this.$store.commit('Machine/FETCH_DATA', num0)
-          let temp = JSON.parse(payload.toString())
-          // console.log('받아온 데이터 : ', temp)
-          let num0 = temp.Wrapper[0]
-          this.$store.commit('Machine/FETCH_DATA', num0)
           let message = JSON.parse(payload)
           let data = message.Wrapper.filter(p => p.tagId === '16' || p.tagId === '17')
-          console.log(message.pingresp)
           this.RedLight = message.Wrapper[10].value //빨간불
           this.YellowLight = message.Wrapper[9].value //노란불
           this.GreenLight = message.Wrapper[8].value //초록불
-
           this.start = message.Wrapper[0].value //시작
-
-          this.ActionNum1 = message.Wrapper[2].value
-          this.ActionNum2 = message.Wrapper.filter(p => p.tagId === '4').value
-          this.ActionNum3 = message.Wrapper.filter(p => p.tagId === '5').value
-          // 계산
 
           // Cycle 계산
           // process 1 count cycle
@@ -206,65 +192,43 @@ export default {
           if (message.Wrapper[18].value !== this.no3Action) {
             message.Wrapper[18].value ? ((this.no3Action = true), (this.process3Count += 1)) : (this.no3Action = false)
           }
-
-          // 양품 고품 판단
-          if (message.Wrapper[5].value == false) {
-            if (message.Wrapper[11].value == true) {
-              this.testColor = 'red'
-            }
-          }
-          if (message.Wrapper[2].value == true) {
-            this.testColor = 'white'
-          }
-
-          // this.StatusNum1 = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.StatusNum2 = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.StatusNum3 = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.Total = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.Failure = message.Wrapper.filter(p => p.tagId === '13').value
-          // this.GoodSet = message.Wrapper.filter(p => p.tagId === '13').value
+          this.ActionNum1 = message.Wrapper[2].value
 
           data = data.map(p => parseInt(p.value))
-
           edukit['yAxis'] = data[0]
           edukit['xAxis'] = data[1]
 
-          //console.log(EduStatus) //scene 내부의 mesh list
+          console.log(EduStatus) //scene 내부의 mesh list
           const GreenPhongMaterial = new THREE.MeshPhongMaterial({ color: '#00FF00' })
           const YelloPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FFFF00' })
           const RedPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
+
           const GreenMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#336600' })
           const YelloMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
           const RedMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#8B0000' })
           if (this.GreenLight) {
-            // EduStatus.GreenLight.material.color.set('#00FF00')
             EduStatus.GreenLight.material = GreenPhongMaterial
           } else {
-            // EduStatus.GreenLight.material.color.set('#336600')
             EduStatus.GreenLight.material = GreenMatcapMaterial
           }
 
           if (this.YellowLight) {
             EduStatus.YellowLight.material = YelloPhongMaterial
-            // EduStatus.YellowLight.material.color.set('#FFFF00')
           } else {
             EduStatus.YellowLight.material = YelloMatcapMaterial
-            // EduStatus.YellowLight.material.color.set('#CC9900')
           }
 
           if (this.RedLight) {
             EduStatus.RedLight.material = RedPhongMaterial
-            // EduStatus.RedLight.material.color.set('#FF0000')
           } else {
             EduStatus.RedLight.material = RedMatcapMaterial
-            // EduStatus.RedLight.material.color.set('#8B0000')
           }
-          //object.material.color.set(THREE.MathUtils.randInt(0x000000, 0xffffff))
 
           //1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
-            this.No1Flag = true
+            console.log(this.ActionNum1)
             new newProduct(EduStatus)
+            this.No1Flag = true
           }
           if (EduStatus.product) {
             console.log('EduStatus.product : ', EduStatus.product)
@@ -273,9 +237,14 @@ export default {
             Product.push(newObject)
             render.scene.add(newObject)
             if (newObject.position.z >= 10) {
-              newObject.position.x += 0.29
+              newObject.position.x += 0.32
             } else {
               newObject.position.z += 0.19
+            }
+            if (message.Wrapper[5].value == false) {
+              if (message.Wrapper[11].value == true) {
+                newObject.material.color.set('#FF0000') //red
+              }
             }
             // 1 ~ 3까지 시간 16.8414
             // 336.828
@@ -286,12 +255,6 @@ export default {
               this.No1Flag = false
             }
           }
-
-          // console.log('새로생산', Product)
-        })
-        this.client.on('pingreq', () => {
-          let ping = this.client.pingresp()
-          console.log('ping : ', ping)
         })
       })
     },
@@ -306,21 +269,26 @@ export default {
         }
       }
     },
-    getMonitoringInfo() {
+    //이미지 업로드
+    async getMonitoringInfo() {
       console.log('getMonitoringInfo start check - machineId: ', this.machineId)
-      this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(() => {
+      await this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(() => {
         console.log('Success to get count information')
       })
     },
     userImgRenderFunction() {
-      // this.userImgRender = ''
-      this.userImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
       console.log('no', this.assignedUser.userImage)
+      this.userImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
     },
+    //스토어 리셋
     deleteImg() {
-      console.log('delete')
-      this.userImgRender = null
+      this.$store.commit('Monitoring/assignedUserDelete', null)
       console.log(this.userImgRender)
+    },
+    handleResize(event) {
+      // const monitoring = document.querySelector('.Monitoring-body')
+      this.width = document.documentElement.clientWidth
+      this.height = document.documentElement.clientHeight
     }
   }
 }
@@ -337,14 +305,14 @@ export default {
   color: white;
 }
 .Monitoring-body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: grid;
 }
 
 .to-left {
   color: white;
-  padding-top: 2em;
+  padding: 2em;
   margin: 2.5em 0 0 2.5em;
   display: inline-block; /* or block */
   position: relative;
@@ -356,7 +324,7 @@ export default {
   content: '🡄';
   font-size: 1.5em;
   position: absolute;
-  padding: 0.05em 0 0 0.25em;
+  padding-top: 0.05em;
   top: 0;
   left: 50%;
   margin-left: -0.7em;

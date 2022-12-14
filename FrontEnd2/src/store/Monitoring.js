@@ -40,7 +40,7 @@ export const Monitoring = {
       console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
       // state.dailyProductivity.total = data.total
       // state.dailyProductivity.goodSet = data.goodSet
-      // state.dailyProductivity.userPhone = data.failure
+      // state.dailyProductivity.failure = data.failure
     },
     cycleCountUpdate(state, data) {
       console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
@@ -67,6 +67,14 @@ export const Monitoring = {
       state.assignedUser.userPhone = data.manager.phone_number
       state.assignedUser.userImage = data.manager.user_image
       console.log(state.assignedUser.userPhone)
+    },
+    assignedUserDelete(state, data) {
+      console.log('delete')
+      console.log('store monitoring mutation')
+      state.assignedUser.userName = data
+      state.assignedUser.userEmail = data
+      state.assignedUser.userPhone = data
+      state.assignedUser.userImage = data
     }
   },
   actions: {
@@ -91,7 +99,7 @@ export const Monitoring = {
   //     commit('SET_SAMPLE_OB', res)
   //   })
   // }
-  //////////////////////////////////////////////////////////////
+
   // SAMPLE_POST(_, { exampleData }) {
   //   //mutation으로 보내주지 않아도 되기 때문에 _,로 표시
   //   return sampleApi

@@ -54,8 +54,8 @@ const routes = [
   {
     path: '/machine',
     name: 'machine',
-    component: () => import('../views/Machine.vue'),
-    beforeEnter: requireAuth
+    component: () => import('../views/Machine.vue')
+    // beforeEnter: requireAuth
   },
   {
     // board를 통해서 동적 라우팅을 응용하자.

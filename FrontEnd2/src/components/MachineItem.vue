@@ -21,13 +21,13 @@
 </template>
 
 <script>
-import * as THREE from 'three'
+// import * as THREE from 'three'
 import { Scene, Renderer, Render, Control } from '../assets/Process'
 export default {
   name: 'MachineItem',
   data() {
     return {
-      data: 3
+      data: 2
     }
   },
   mounted() {
@@ -50,7 +50,7 @@ export default {
         let control = new Control(cameraElement, renderElement)
         let controlElement = control.controlElement
 
-        let render = new Render()
+        let render = new Render(sceneElement)
         render.element = ImgDiv
         render.render = renderElement
         render.controls = controlElement
@@ -58,7 +58,6 @@ export default {
         render.machine = scene.resource.machine
         render.camera = cameraElement
         render.renderer = rendererElement
-        console.log(render.scene.Object)
 
         render.start()
       }

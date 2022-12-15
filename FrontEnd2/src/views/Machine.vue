@@ -25,12 +25,12 @@
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
+            <v-slide-group class="pa-4" center-active show-arrows>
               <v-slide-item v-for="n in 1" :key="n" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
-                  :color="active ? 'white' : 'grey lighten-5'"
+                  :color="active ? 'white' : 'white'"
                   :elevation="active ? 12 : 2"
                   height="300"
                   width="550"

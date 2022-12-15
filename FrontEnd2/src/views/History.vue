@@ -133,8 +133,7 @@ export default {
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
-      details: [
-      ]
+      details: []
     }
   },
   created() {

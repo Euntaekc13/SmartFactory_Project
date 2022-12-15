@@ -4,7 +4,7 @@ import axios from 'axios'
 export const auth = {
   login(employee_number, password) {
     console.log('auth api page : ', employee_number, password)
-    return request('post', '/login', { employee_number, password })
+    return request('post', '/auth/login', { employee_number, password })
   }
 }
 

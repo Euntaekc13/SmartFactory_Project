@@ -127,21 +127,93 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'process_result', value: 'GoodSet' },
-        { text: 'color', value: 'white' },
-        { text: 'machine_info', value: '준규공정' },
-        { text: 'test_date', value: '20221213' },
-        { text: 'diceInfo', value: 'include' },
+        { text: 'process_result', value: 'process_result' },
+        // { text: 'color', value: 'white' },
+        { text: 'machine_info', value: 'machine_info' },
+        { text: 'test_date', value: 'test_date' },
+        { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
       details: [
         {
-          serial: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: '1%'
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
+        },
+        {
+          serial: 'LCOK202212141722',
+          process_result: 'GoodSet',
+          machine_info: '1',
+          test_date: '2022-12-14 17:22',
+          diceInfo: 6,
+          description: ''
         }
       ]
     }

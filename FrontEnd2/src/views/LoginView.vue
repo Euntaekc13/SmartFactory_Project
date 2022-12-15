@@ -6,7 +6,7 @@
           <span style="font-size: 30px">Smart Factory</span><span style="color: #5bc0de; font-size: 40px">.</span>
         </div>
         <div class="login__content">
-          <span style="font-size: 80px; font-weight: 900">Welcome<span style="color: #5bc0de">.</span></span
+          <span style="font-size: 40px; font-weight: 900">Welcome<span style="color: #5bc0de">.</span></span
           ><br />
           <div class="center__content">
             <span style="color: gray">Login to your Account </span>
@@ -14,36 +14,37 @@
 
           <ValidationObserver ref="loginForm" v-slot="{ handleSubmit, invalid, validate }">
             <form class="login__form" @submit.prevent="handleSubmit(login)">
-              <span class="inputBox">
-                <div class="input__front" style="padding-right: 22px">&nbsp;Number</div>
-                <ValidationProvider v-slot="v" name="사번" rules="required|numeric">
-                  <input
-                    id="class1"
-                    v-model="employee_number"
-                    class="gate"
-                    type="text"
-                    label="사번"
-                    placeholder="Employee number"
-                  />
-                  <span>&nbsp;{{ v.errors[0] }}</span>
-                </ValidationProvider>
-              </span>
-
-              <span class="inputBox">
-                <div class="input__front">Password</div>
-                <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
-                  <input
-                    id="class2"
-                    v-model="password"
-                    class="gate"
-                    type="password"
-                    label="비밀번호"
-                    placeholder="Password"
-                    autocomplete="off"
-                  />
-                  <span>&nbsp;{{ v.errors[0] }}</span>
-                </ValidationProvider>
-              </span>
+              <div class="row">
+                <span>
+                  <ValidationProvider v-slot="v" name="사번" rules="required|numeric">
+                    <input
+                      id="class1"
+                      v-model="employee_number"
+                      class="gate"
+                      type="text"
+                      label="사번"
+                      placeholder="Employee number"
+                    /><label for="class">&nbsp;Number&nbsp;</label>
+                    <span>&nbsp;{{ v.errors[0] }}</span>
+                  </ValidationProvider>
+                </span>
+              </div>
+              <div class="row">
+                <span>
+                  <ValidationProvider v-slot="v" name="비밀번호" rules="required|min:3">
+                    <input
+                      id="class2"
+                      v-model="password"
+                      class="gate"
+                      type="password"
+                      label="비밀번호"
+                      placeholder="Password"
+                      autocomplete="off"
+                    /><label for="class">Password</label>
+                    <span>&nbsp;{{ v.errors[0] }}</span>
+                  </ValidationProvider>
+                </span>
+              </div>
               <div class="createBtn">
                 <button type="button" class="raiseBtn" :disabled="invalid || !validate" @click="login">
                   Create account
@@ -119,7 +120,7 @@ export default {
 }
 
 .login__content {
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 .center__content {
@@ -146,15 +147,14 @@ export default {
 
 .login__form {
   margin-top: 10%;
-  width: 460px;
+  width: 400px;
   height: 100x;
 }
 
 .createBtn {
   display: flex;
   flex-direction: row-reverse;
-  /* margin-top: 2rem; */
-  /* margin-left: 200px; */
+  margin-top: 2rem;
 }
 
 .raiseBtn:hover,

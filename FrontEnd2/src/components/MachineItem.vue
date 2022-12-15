@@ -1,12 +1,7 @@
 <template>
   <div class="machine-container">
     <div class="machine__Process__list">
-      <div class="ImgDiv">
-        <div class="ImgDiv__Img">
-          <p>img</p>
-          <img src="" alt="" />
-        </div>
-      </div>
+      <div class="ImgDiv"></div>
       <div class="machine__Process__desc">
         <div class="desc__LineName">
           <div><p>Line name :</p></div>
@@ -26,16 +21,58 @@
 </template>
 
 <script>
-export default {}
+import * as THREE from 'three'
+import { Scene, Renderer, Render, Control } from '../assets/Process'
+export default {
+  name: 'MachineItem',
+  data() {
+    return {
+      data: 3
+    }
+  },
+  mounted() {
+    this.Graphic()
+  },
+  methods: {
+    Graphic() {
+      if (this.data) {
+        const ImgDiv = document.querySelector('.ImgDiv')
+        ImgDiv.style.width = '40%'
+        ImgDiv.style.height = '85%'
+
+        let scene = new Scene(this.data)
+        let cameraElement = scene.camera.cameraElement
+        let sceneElement = scene.sceneElement
+        let renderer = new Renderer(ImgDiv)
+        let renderElement = renderer.domElement
+        let rendererElement = renderer.rendererElement
+
+        let control = new Control(cameraElement, renderElement)
+        let controlElement = control.controlElement
+
+        let render = new Render()
+        render.element = ImgDiv
+        render.render = renderElement
+        render.controls = controlElement
+        render.scene = sceneElement
+        render.machine = scene.resource.machine
+        render.camera = cameraElement
+        render.renderer = rendererElement
+        console.log(render.scene.Object)
+
+        render.start()
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
 .machine-container {
-  width: 80%;
-  height: 80%;
-  margin: 7% 10% 5% 10%;
+  width: 100%;
+  height: 100%;
+  margin: 1% 0% 1% 1%;
   position: relative;
-  border: 1px solid black;
   margin-right: 3%;
 }
 
@@ -49,14 +86,14 @@ export default {}
   height: 100%;
 }
 .ImgDiv {
-  margin: 10% 10% 0 10%;
-  width: 20%;
-  height: 80%;
+  margin: 2% 1% 0 10%;
+  width: 30%;
+  height: 100%;
 }
 .ImgDiv__Img {
   margin: 10%;
 }
 .machine__Process__desc {
-  margin: 10% 0 0 3%;
+  margin: 10% 0 0 0%;
 }
 </style>

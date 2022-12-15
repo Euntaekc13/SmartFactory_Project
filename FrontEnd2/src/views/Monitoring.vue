@@ -28,7 +28,7 @@
 
 <script>
 import DashBoard from '../components/Dashboard.vue'
-import { Scene, Renderer, Render } from '../assets/ClassList'
+import { Scene, Renderer, Render } from '../assets/Monitoring'
 import mqtt from 'mqtt'
 import { mapState, mapActions } from 'vuex'
 import * as THREE from 'three'
@@ -86,7 +86,7 @@ export default {
       process2TotalCount: 100,
       no2Action: false,
       testStatus: false,
-      testColor: 'white',
+      WhiteColor: false,
       process3Count: 10,
       process3TotalCount: 100,
       no3Action: false,
@@ -187,7 +187,7 @@ export default {
           this.start = message.Wrapper[0].value //시작
           if (this.start) {
             this.output.fanAction = true
-            console.log('mqtt 시간: ', message.Wrapper[26])
+            // console.log('mqtt 시간: ', message.Wrapper[26])
           } else {
             this.output.fanAction = false
           }
@@ -239,28 +239,37 @@ export default {
 
           //1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
-            console.log(this.ActionNum1)
+            // console.log(this.ActionNum1)
             new newProduct(EduStatus)
             this.No1Flag = true
           }
           if (EduStatus.product) {
-            console.log('EduStatus.product : ', EduStatus.product)
+            // console.log('EduStatus.product : ', EduStatus.product)
             const Product = [{ XendPoint: 9.8 }, { Zendpoint: 10 }]
             const newObject = EduStatus.product
             Product.push(newObject)
             render.scene.add(newObject)
             if (newObject.position.z >= 10) {
-              newObject.position.x += 0.1
+              newObject.position.x += 0.3
             } else {
               newObject.position.z += 0.19
             }
 
             //양품고품 판단
-            if (message.Wrapper[5].value == false) {
-              if (message.Wrapper[11].value == true) {
-                newObject.material.color.set('#FF0000') //red
+            console.log('######################')
+            console.log('color센서 : ', message.Wrapper[5].value)
+            if (message.Wrapper[5].value == true) {
+              this.WhiteColor = true
+            }
+            if (message.Wrapper[11].value == true) {
+              if (this.WhiteColor == true) {
+                newObject.material.color.set('#FFFFFF')
+                this.WhiteColor = false
+              } else {
+                newObject.material.color.set('#FF0000')
               }
             }
+
             // 1 ~ 3까지 시간 16.8414
             // 336.828
             //end포인트 도달시 제거

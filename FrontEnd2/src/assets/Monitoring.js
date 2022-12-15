@@ -173,7 +173,6 @@ export class Resource {
     }
   }
 }
-
 export class Scene {
   constructor(file = null) {
     this.scene = new THREE.Scene()

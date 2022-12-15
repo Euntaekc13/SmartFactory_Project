@@ -11,22 +11,12 @@
           <div class="Select__process">
             <v-col cols="2">
               <!-- v-model="select" 에다가 watch 를 걸어서 data 에 변화가 있으면 이벤트가 발생하게끔 -->
-              <v-select
-                v-model="select"
-                :hint="`${select.machine_name}, ${select.information}`"
-                :items="machines"
-                item-text="machine_name"
-                item-value="information"
-                label="Select"
-                persistent-hint
-                return-object
-                single-line
-              ></v-select>
+              <v-select v-model="select" :items="machines" label="Select" persistent-hint single-line></v-select>
             </v-col>
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
+            <v-slide-group class="pa-4" center-active show-arrows>
               <v-slide-item v-for="processData in processes" :key="processData.processId" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
@@ -66,7 +56,7 @@
                 <div class="History_list_title"><h3>HISTORY</h3></div>
                 <div class="History_list">
                   <v-expansion-panels v-show="selected">
-                    <v-expansion-panel v-for="softwareData in softwareVersionList" :key="softwareData.softwareVersion">
+                    <v-expansion-panel v-for="(softwareData, i) in softwareVersionList" :key="i">
                       <v-expansion-panel-header>
                         <p>Version : {{ softwareData.softwareVersion }}</p>
                         <v-spacer></v-spacer>
@@ -102,7 +92,8 @@ export default {
   data() {
     return {
       // data: 50
-      select: { machine_name: 'Machine Name', information: 'Machine Information' },
+      select: 0,
+      // selectinfo: { machine_name: 'Machine Name', information: 'Machine Information' },
       selected: false,
       machines: [],
       processes: [],
@@ -127,13 +118,20 @@ export default {
   },
   watch: {
     select(newSelect) {
+      let tempNumber = 0
+      for (let i = 0; i < this.Machine.length; i++) {
+        if (this.Machine[i].machine_name == newSelect) {
+          tempNumber = this.Machine[i].id
+        }
+      }
+      console.log('가보자구 ~~ ', tempNumber)
       this.machineSelectReset()
       this.softwareListReset()
       this.selected = true
       console.log('선택된 공정 - Watch : ', this.select.machine_name + ' // Line 아이디 값 : ' + newSelect.id)
 
-      this.machineSelect(newSelect.id)
-      this.getSoftwareVersionList(newSelect.id)
+      this.machineSelect(tempNumber)
+      this.getSoftwareVersionList(tempNumber)
 
       console.log('process 배열 - :', this.processes)
       console.log('software 배열 - :', this.softwareVersionList)
@@ -156,7 +154,12 @@ export default {
       })
     },
     updateMachineInfo() {
-      this.machines = this.Machine
+      console.log(this.Machine)
+      let arr = []
+      for (let i = 0; i < this.Machine.length; i++) {
+        arr.push(this.Machine[i].machine_name)
+      }
+      this.machines = arr
       console.log('hello', this.machines)
     },
     machineSelect(selectedMachineId) {
@@ -171,6 +174,8 @@ export default {
           this.processData.processMax = this.Machine[realMachineId].Parts[i].Part_default.max_life
           this.processData.processStart = this.Machine[realMachineId].Parts[i].Part_default.createdAt
           this.processes.push(this.processData)
+
+          // console.log('은택이 가보자구 ~~', this.processes)
 
           this.processData = {
             processId: 0,
@@ -196,6 +201,8 @@ export default {
         this.softwareData.softwareVersionApplied = this.Machine[realMachineId].Software_histories[i].createdAt
 
         this.softwareVersionList.push(this.softwareData)
+
+        // console.log(this.softwareVersionList, '은택이 지각 !')
 
         this.softwareData = {
           softwareVersion: '',

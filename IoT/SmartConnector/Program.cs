@@ -1,20 +1,14 @@
 ﻿//#define socketmode
 
-using System;
 using Newtonsoft.Json;
-using SmartConnector.Edukit;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
-using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Text;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using uPLibrary.Networking.M2Mqtt;
-//using uPLibrary.Networking.M2Mqtt.Messages;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace SmartConnector.Edukit
 {
@@ -240,17 +234,17 @@ namespace SmartConnector.Edukit
                 Dictionary<XGTAddressData, string> BitAddressList = new Dictionary<XGTAddressData, string>();
 
                 XGTAddressData Start = new XGTAddressData();                    //시작 M0000 bit
-                XGTAddressData No1PartsError = new XGTAddressData();            // no1 칩없음
+                /*XGTAddressData No1PartsError = new XGTAddressData();   */         // no1 칩없음
 
                 XGTAddressData No1_Action = new XGTAddressData();               // no1 move M00092 bit								
                 XGTAddressData No2_Action = new XGTAddressData();               // no2 move M00104 bit
 
-                XGTAddressData No3Ready = new XGTAddressData();                 // no3 칩도착 P0000E bit
+                /*XGTAddressData No3Ready = new XGTAddressData(); */                // no3 칩도착 P0000E bit
                 XGTAddressData Sensor1 = new XGTAddressData();                  //colorsensor on M105 bit
 
                 XGTAddressData Reset = new XGTAddressData();                    //Reset M0F BIT
 
-                XGTAddressData sensor1_on_off = new XGTAddressData();           //sensor1 on/off M0006F bit
+                /*XGTAddressData sensor1_on_off = new XGTAddressData();   */        //sensor1 on/off M0006F bit
                 XGTAddressData lamp_green = new XGTAddressData();               //Lamp on/off P0002C bit 
                 XGTAddressData lamp_yellow = new XGTAddressData();              //Lamp on/off P0002D bit
                 XGTAddressData lamp_red = new XGTAddressData();                 //Lamp on/off P0002E bit
@@ -261,22 +255,23 @@ namespace SmartConnector.Edukit
 
                 Dictionary<XGTAddressData, string> WordAddressList = new Dictionary<XGTAddressData, string>();
 
-                XGTAddressData No1Delay = new XGTAddressData();                 //1호기 delay 시간  D01101 WORD 
-                XGTAddressData No1Count = new XGTAddressData();                 //1호기 수량 C0001 WORD
-                XGTAddressData No2Count = new XGTAddressData();                 //2호기 수량 C0002 WORD
-                XGTAddressData No3Count = new XGTAddressData();                 //3호기 수량 C0003 WORD
+                /*XGTAddressData No1Delay = new XGTAddressData();*/                 //1호기 delay 시간  D01101 WORD 
+                /*XGTAddressData No1Count = new XGTAddressData();*/                 //1호기 수량 C0001 WORD
+                /*XGTAddressData No2Count = new XGTAddressData();*/                 //2호기 수량 C0002 WORD
+                /*XGTAddressData No3Count = new XGTAddressData();*/                 //3호기 수량 C0003 WORD
 
                 XGTAddressData no3_motor1 = new XGTAddressData();               //3호기 축1 value K0424 WORD
                 XGTAddressData no3_motor2 = new XGTAddressData();               //3호기 축2 value K0444 WORD
 
                 XGTAddressData No2Chip = new XGTAddressData();                  // 2호기 칩 도착 P0000A bit
-                XGTAddressData No2CubeFull = new XGTAddressData();              // 2호기 주사위 유무 P0000B bit
-                XGTAddressData No2Sol = new XGTAddressData();                   // 2호기 솔레노이드 P0002A bit
+                /*XGTAddressData No2CubeFull = new XGTAddressData();*/              // 2호기 주사위 유무 P0000B bit
+                /*XGTAddressData No2Sol = new XGTAddressData();*/                   // 2호기 솔레노이드 P0002A bit
                 XGTAddressData No2SolAction = new XGTAddressData();             // 2호기 솔작동 M00106 WORD
-                XGTAddressData No3Chip = new XGTAddressData();                  // 3호기 칩 도착 P0000E bit
+                /*XGTAddressData No3Chip = new XGTAddressData();*/                  // 3호기 칩 도착 P0000E bit
                 XGTAddressData Emergency = new XGTAddressData();                // 비상정지 P0000F bit 
-                XGTAddressData ColorSensorSensing = new XGTAddressData();       // 컬러센서센싱 P00004 bit 
+                /*XGTAddressData ColorSensorSensing = new XGTAddressData();*/       // 컬러센서센싱 P00004 bit 
                 XGTAddressData No3Gripper = new XGTAddressData();               // 3호기 그리퍼 P0002B bit
+                XGTAddressData DiceValue = new XGTAddressData();                // 주사위값 D01100 WORD
 
                 //XGTAddressData Motor1Busy = new XGTAddressData();               // 1축 운전중 K42 WORD
                 //XGTAddressData Motor2Busy = new XGTAddressData();               // 2축 운전중 K44 WORD
@@ -285,9 +280,9 @@ namespace SmartConnector.Edukit
                 Start.Name = "Start";
                 Start.TagId = "1";
 
-                No1PartsError.Address = "11";
-                No1PartsError.Name = "No1PartsError";
-                No1PartsError.TagId = "2";
+                //No1PartsError.Address = "11";
+                //No1PartsError.Name = "No1PartsError";
+                //No1PartsError.TagId = "2";
 
                 No1_Action.Address = "92";
                 No1_Action.Name = "No1_Action";
@@ -297,9 +292,9 @@ namespace SmartConnector.Edukit
                 No2_Action.Name = "No2_Action";
                 No2_Action.TagId = "4";
 
-                No3Ready.Address = "0E";
-                No3Ready.Name = "No3Ready";
-                No3Ready.TagId = "5";
+                //No3Ready.Address = "0E";
+                //No3Ready.Name = "No3Ready";
+                //No3Ready.TagId = "5";
 
                 Sensor1.Address = "105";
                 Sensor1.Name = "ColorSensor"; //version 변경 M00105 color값 true
@@ -310,26 +305,26 @@ namespace SmartConnector.Edukit
                 Reset.Name = "Reset";
                 Reset.TagId = "7";
 
-                sensor1_on_off.Address = "6F";
-                sensor1_on_off.Name = "sensor1_on_off";
-                sensor1_on_off.TagId = "8";
+                //sensor1_on_off.Address = "6F";
+                //sensor1_on_off.Name = "sensor1_on_off";
+                //sensor1_on_off.TagId = "8";
 
 
-                No1Delay.Address = "1101";
-                No1Delay.Name = "No1Delay";
-                No1Delay.TagId = "9";
+                //No1Delay.Address = "1101";
+                //No1Delay.Name = "No1Delay";
+                //No1Delay.TagId = "9";
 
-                No1Count.Address = "1";
-                No1Count.Name = "No1Count";
-                No1Count.TagId = "10";
+                //No1Count.Address = "1";
+                //No1Count.Name = "No1Count";
+                //No1Count.TagId = "10";
 
-                No2Count.Address = "2";
-                No2Count.Name = "No2Count";
-                No2Count.TagId = "11";
+                //No2Count.Address = "2";
+                //No2Count.Name = "No2Count";
+                //No2Count.TagId = "11";
 
-                No3Count.Address = "7";
-                No3Count.Name = "No3Count";
-                No3Count.TagId = "12";
+                //No3Count.Address = "7";
+                //No3Count.Name = "No3Count";
+                //No3Count.TagId = "12";
 
                 lamp_green.Address = "2C";
                 lamp_green.Name = "lamp_green";
@@ -356,23 +351,23 @@ namespace SmartConnector.Edukit
                 No2Chip.Name = "No2Chip";
                 No2Chip.TagId = "18";
 
-                No2CubeFull.Address = "B";
-                No2CubeFull.Name = "No2CubeFull";
-                No2CubeFull.TagId = "19";
+                //No2CubeFull.Address = "B";
+                //No2CubeFull.Name = "No2CubeFull";
+                //No2CubeFull.TagId = "19";
 
 
-                No2Sol.Address = "2A";
-                No2Sol.Name = "No2Sol";
-                No2Sol.TagId = "20";
+                //No2Sol.Address = "2A";
+                //No2Sol.Name = "No2Sol";
+                //No2Sol.TagId = "20";
 
                 No2SolAction.Address = "106";
                 No2SolAction.Name = "No2SolAction";
                 No2SolAction.TagId = "21";
 
 
-                No3Chip.Address = "E";
-                No3Chip.Name = "No3Chip";
-                No3Chip.TagId = "22";
+                //No3Chip.Address = "E";
+                //No3Chip.Name = "No3Chip";
+                //No3Chip.TagId = "22";
 
 
                 Emergency.Address = "F";
@@ -380,9 +375,13 @@ namespace SmartConnector.Edukit
                 Emergency.TagId = "23";
 
 
-                ColorSensorSensing.Address = "4";
-                ColorSensorSensing.Name = "ColorSensorSensing";
-                ColorSensorSensing.TagId = "24";
+                //ColorSensorSensing.Address = "4";
+                //ColorSensorSensing.Name = "ColorSensorSensing";
+                //ColorSensorSensing.TagId = "24";
+
+                DiceValue.Address = "1100";
+                DiceValue.Name = "DiceValue";
+                DiceValue.TagId = "24";
 
                 No3Gripper.Address = "2B";
                 No3Gripper.Name = "No3Gripper";
@@ -395,30 +394,31 @@ namespace SmartConnector.Edukit
 
 
                 BitAddressList.Add(Start, "M");
-                BitAddressList.Add(No1PartsError, "M");
+                //BitAddressList.Add(No1PartsError, "M");
                 BitAddressList.Add(No1_Action, "M");
                 BitAddressList.Add(No2_Action, "M");
-                BitAddressList.Add(No3Ready, "P");
+                //BitAddressList.Add(No3Ready, "P");
                 BitAddressList.Add(Sensor1, "M");
                 BitAddressList.Add(Reset, "M");
-                BitAddressList.Add(sensor1_on_off, "M");
-                WordAddressList.Add(No1Delay, "D");
-                WordAddressList.Add(No1Count, "C");
-                WordAddressList.Add(No2Count, "C");
-                WordAddressList.Add(No3Count, "C");
+                //BitAddressList.Add(sensor1_on_off, "M");
+                //WordAddressList.Add(No1Delay, "D");
+                //WordAddressList.Add(No1Count, "C");
+                //WordAddressList.Add(No2Count, "C");
+                //WordAddressList.Add(No3Count, "C");
                 WordAddressList.Add(no3_motor1, "K");
                 WordAddressList.Add(no3_motor2, "K");
                 BitAddressList.Add(lamp_green, "P");
                 BitAddressList.Add(lamp_yellow, "P");
                 BitAddressList.Add(lamp_red, "P");
                 BitAddressList.Add(No2Chip, "P");
-                BitAddressList.Add(No2CubeFull, "P");
-                BitAddressList.Add(No2Sol, "P");
+                //BitAddressList.Add(No2CubeFull, "P");
+                //BitAddressList.Add(No2Sol, "P");
                 BitAddressList.Add(No2SolAction, "M");
-                BitAddressList.Add(No3Chip, "P");
+                //BitAddressList.Add(No3Chip, "P");
                 BitAddressList.Add(Emergency, "P");
-                BitAddressList.Add(ColorSensorSensing, "P");
+                //BitAddressList.Add(ColorSensorSensing, "P");
                 BitAddressList.Add(No3Gripper, "P");
+                WordAddressList.Add(DiceValue, "D");
                 BitAddressList.Add(belt, "P");
 
                 while (true)

@@ -116,6 +116,7 @@ export default {
       machine_title: null,
       itemsStatus: ['모두', '양품', '고품'],
       itemStatus: null,
+      table_index: 0,
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
@@ -214,6 +215,7 @@ export default {
       }
     },
     getHistoryData() {
+      this.table_index = 0
       this.history_data = []
       let MachineId = null
       let final_result = null
@@ -277,14 +279,18 @@ export default {
             this.details.push(this.history_data[i])
           }
         } else {
-          for (let i = 0; i < this.history_data.length; i++) {
+          for (let i = this.table_index; i < this.history_data.length; i++) {
             this.details.push(this.history_data[i])
           }
         }
       })
     },
-    rightBtn() {},
-    leftBtn() {}
+    rightBtn() {
+      this.table_index += 10
+    },
+    leftBtn() {
+      this.table_index -= 10
+    }
   }
 }
 </script>

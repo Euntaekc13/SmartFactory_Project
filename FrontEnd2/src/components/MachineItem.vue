@@ -71,14 +71,14 @@ export default {
         console.log(render.scene.Object)
 
         render.start()
-      },
+      }
+    },
     checkThis() {
       console.log('들어오나?')
       console.log(this.processData)
     }
   }
 }
-
 </script>
 
 <style scoped>

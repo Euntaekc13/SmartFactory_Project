@@ -83,6 +83,11 @@ export default {
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }
+    // enterkey() {
+    //   if (window.event.keyCode == 13) {
+    //     this.login()
+    //   }
+    // }
   }
 }
 </script>
@@ -264,11 +269,17 @@ span:nth-child(2) .gate:active {
 .gate:active::-webkit-input-placeholder {
   color: #aaa;
 }
-.gate:focus + label,
+/* .gate:focus + label,
 .gate:active + label {
   transform: rotate(-66deg);
   border-radius: 3px;
+} */
+.gate:focus + label,
+.gate:active + label {
+  transform: rotate(-10deg);
+  border-radius: 3px;
 }
+
 .gate:focus + label:before,
 .gate:active + label:before {
   transform: rotate(10deg);

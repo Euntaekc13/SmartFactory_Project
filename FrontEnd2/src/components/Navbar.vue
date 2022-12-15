@@ -158,9 +158,9 @@ export default {
     routingToHistory() {
       this.$router.push('/history')
     },
-    navUserImgRenderFunction() {
+    async navUserImgRenderFunction() {
       console.log('Sidebar this.TokenUser.user_image : ', this.TokenUser.user_image)
-      this.navUserImage = require(`../../public/img/${this.TokenUser.user_image}`)
+      this.navUserImage = await require(`../../public/img/${this.TokenUser.user_image}`)
       // this.navUserImgRender = ''
       // console.log('Nav', this.assignedUser.userImage)
       // this.navUserImgRender = require(`../../public/img/${this.assignedUser.userImage}`)

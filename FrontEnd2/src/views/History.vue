@@ -71,12 +71,12 @@
             <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
           </v-text-field> -->
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="rightBtn">
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>
               </button>
             </div>
@@ -269,17 +269,27 @@ export default {
             this.details.push(this.history_data[i])
           }
         } else {
-          for (let i = this.table_index; i < this.history_data.length; i++) {
+          for (let i = 0; i < this.history_data.length; i++) {
             this.details.push(this.history_data[i])
           }
         }
       })
     },
     rightBtn() {
+      if (this.table_index + 10 > this.history_data.length) return
+      this.details = []
       this.table_index += 10
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
     },
     leftBtn() {
+      if (this.table_index == 0) return
       this.table_index -= 10
+      this.details = []
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
     }
   }
 }

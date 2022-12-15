@@ -1,6 +1,13 @@
 ﻿//#define socketmode
-    
+
 using System;
+using Newtonsoft.Json;
+using SmartConnector.Edukit;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using uPLibrary.Networking.M2Mqtt.Messages;
+using uPLibrary.Networking.M2Mqtt;
 //using System.Collections.Generic;
 //using System.IO;
 //using System.Text;
@@ -9,15 +16,16 @@ using System;
 //using uPLibrary.Networking.M2Mqtt;
 //using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace SmartConnector
+namespace SmartConnector.Edukit
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var instance = new Service();
             instance.Start();
         }
+
         public class Service
         {
             private static Ecng.Net.SocketIO.Client.Socket ServerSocket;
@@ -542,6 +550,10 @@ namespace SmartConnector
                         newdata2.value = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
                         edukitData.Add(newdata2);
 
+                        //MqttData mqttData = new MqttData();
+
+                        //mqttData.Wrapper = edukitData;
+                        MqttMsgPingResp pingresp = new MqttMsgPingResp();
                         MqttData mqttData = new MqttData();
 
                         mqttData.Wrapper = edukitData;
@@ -646,7 +658,9 @@ namespace SmartConnector
         public class MqttData
         {
             public List<EdukitNewdata> Wrapper { get; set; }
+            public List<EdukitNewdata> ping { get; }
         }
     }
 }
+
 

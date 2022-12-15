@@ -14,7 +14,12 @@ const sequelize = new Sequelize(
   config.username,
   config.password,
   config,
-  { timezone: "+09:00" }
+  {
+    timezone: "+09:00", // DB에 저장할 때 시간 설정
+    dialectOptions: {
+      timezone: "+09:00", // DB에서 가져올 때 시간 설정
+    },
+  }
 );
 
 db.sequelize = sequelize;

@@ -44,18 +44,18 @@
               </v-menu>
             </div>
             <div class="history_content_condition-select">
-              <v-select :items="machines" label="Machine title" dense outlined></v-select>
+              <v-select v-model="machine_title" :items="machines" label="Machine title" dense outlined></v-select>
             </div>
             <div class="history_content_condition-select">
-              <v-select :items="itemStatus" label="Result Status" outlined dense></v-select>
+              <v-select v-model="itemStatus" :items="itemsStatus" label="Result Status" outlined dense></v-select>
             </div>
-            <button type="button" class="history_content_condition-postBtn">Search</button>
+            <button type="button" class="history_content_condition-postBtn" @click="getHistoryData">Search</button>
             <!-- <v-btn class="history_content_condition-postBtn">Search</v-btn> -->
             <!-- <v-btn class="history_content_condition-postBtn">조회</v-btn> -->
             <!-- <v-btn class="history_content_condition-postBtn">Search<i class="fa-solid fa-magnifying-glass"></i></v-btn> -->
           </div>
           <div class="history_content_icons">
-            <button type="button" @click="excelDown">
+            <button type="button" @click="getHistoryData">
               <span class="icon-button repeat"> <i class="fa-solid fa-retweet icon-repeat"></i><span></span> </span>
             </button>
             &nbsp;
@@ -85,7 +85,7 @@
             :headers="headers"
             :items="details"
             :search="search"
-            :items-per-page="8"
+            :items-per-page="10"
             hide-default-footer
           ></v-data-table>
         </v-card>
@@ -96,6 +96,9 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import { mapGetters } from 'vuex'
+import { history } from '../api/history'
+
 export default {
   name: 'History',
   components: {
@@ -109,12 +112,15 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      machines: ['준규공정', '민혁공정', '은택공정', '윤성공정'],
-      itemStatus: ['모두', '양품', '고품'],
+      machines: [],
+      machine_title: null,
+      itemsStatus: ['모두', '양품', '고품'],
+      itemStatus: null,
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
       ],
+      history_data: [],
       headers: [
         {
           text: 'Serial information',
@@ -122,141 +128,163 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'process_result', value: 'GoodSet' },
-        { text: 'color', value: 'white' },
-        { text: 'machine_info', value: '준규공정' },
-        { text: 'test_date', value: '20221213' },
-        { text: 'diceInfo', value: 'include' },
+        { text: 'process_result', value: 'process_result' },
+        { text: 'machine_info', value: 'machine_info' },
+        { text: 'test_date', value: 'test_date' },
+        { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
       details: [
-        {
-          serial: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: '1%'
-        },
-        {
-          serial: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: '1%'
-        },
-        {
-          serial: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: '7%'
-        },
-        {
-          serial: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: '8%'
-        },
-        {
-          serial: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: '16%'
-        },
-        {
-          serial: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: '0%'
-        },
-        {
-          serial: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: '2%'
-        },
-        {
-          serial: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: '45%'
-        },
-        {
-          serial: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: '22%'
-        },
-        {
-          serial: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: '6%'
-        }
+        // {
+        //   serial: '',
+        //   process_result: '',
+        //   machine_info: '',
+        //   test_date: '',
+        //   diceInfo: '',
+        //   description: ''
+        // }
       ]
     }
+  },
+  created() {
+    this.getMachineList()
   },
   computed: {
     dateRangeText() {
       return this.dates.join(' ~ ')
-    }
+    },
+    ...mapGetters('Machine', [
+      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
+    ])
   },
   methods: {
-    async excelDown() {
+    excelDown() {
       const xlsx = require('xlsx')
       // 엑셀 파일 생성
       const book = xlsx.utils.book_new()
 
       // data get > 실 개발시 api 호출
-      const fruitDataByAoa = await this.getFruitDataByAoa()
-      const fruitDataByJson = await this.getFruitDataByJson()
+      // const fruitDataByAoa = await this.getFruitDataByAoa()
+      const fruitDataByJson = this.getFruitDataByJson()
 
       // sheet 생성 - aoa_to_sheet 방식
-      const worksheetByAoa = xlsx.utils.aoa_to_sheet(fruitDataByAoa)
+      // const worksheetByAoa = xlsx.utils.aoa_to_sheet(fruitDataByAoa)
 
       // sheet 생성 - json_to_sheet 방식
       const worksheetByJson = xlsx.utils.json_to_sheet(fruitDataByJson)
 
       // 엑셀 파일에 sheet set(엑셀파일, 시트데이터, 시트명)
-      xlsx.utils.book_append_sheet(book, worksheetByAoa, 'aoa')
+      // xlsx.utils.book_append_sheet(book, worksheetByAoa, 'aoa')
       xlsx.utils.book_append_sheet(book, worksheetByJson, 'json')
 
       // 엑셀 다운로드
-      xlsx.writeFile(book, 'fruit.xlsx')
+      xlsx.writeFile(book, 'Rowdata.xlsx')
     },
     // aoa는 행열 데이터를 엑셀과 동일하게 get
-    getFruitDataByAoa() {
-      let arr = []
-      arr.push(['이름', '칼로리', '지방', '탄수화물', '단백질', '철분'])
-      arr.push(['바나나', '159', '6.0', '24', '4.0', '1'])
-      arr.push(['사과', '237', '9.0', '37', '2.3', '4'])
-      arr.push(['오렌지', '78', '1.2', '45', '1.1', '3.3'])
-      return arr
-    },
+    // getFruitDataByAoa() {
+    //   let arr = []
+    //   arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+    //   arr.push(['바나나', '159', '6.0', '24', '4.0', '1'])
+    //   arr.push(['사과', '237', '9.0', '37', '2.3', '4'])
+    //   arr.push(['오렌지', '78', '1.2', '45', '1.1', '3.3'])
+    //   return arr
+    // },
     getFruitDataByJson() {
       let arr = []
-      arr.push({ 이름: '바나나', 칼로리: 159, 지방: 6.0, 탄수화물: 24, 단백질: 4.0, 철분: '1' })
-      arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
-      arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
+      let tempArr = []
+      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+      // arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
+      // arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
+      for (let i = 0; i < this.history_data.length; i++) {
+        // arr.push(this.history_data[i])
+        for (var key in this.history_data[i]) {
+          tempArr.push(this.history_data[i][key])
+        }
+        arr.push(tempArr)
+        tempArr = []
+      }
+      console.log('ARRRRRRR')
+      console.log(arr)
       return arr
-    }
+    },
+    getMachineList() {
+      this.machines.push('ALL')
+      for (let i = 0; i < this.Line.length; i++) {
+        this.machines.push(this.Line[i].machine_name)
+      }
+    },
+    getHistoryData() {
+      this.history_data = []
+      let MachineId = null
+      let final_result = null
+
+      // axios 호출
+      // console.log(this.dates)
+      let start_date = this.dates[0]
+      let end_date = this.dates[1]
+      for (let i = 0; i < this.Line.length; i++) {
+        if (this.Line[i].machine_name == this.machine_title) {
+          MachineId = this.Line[i].id
+          break
+        }
+        MachineId = null
+      }
+
+      console.log('#############################')
+      console.log(this.itemStatus)
+      // 영어로 바꿀수도 있음
+      if (this.itemStatus == '양품') {
+        final_result = 1
+      } else if (this.itemStatus == '고품') {
+        final_result = 2
+      } else {
+        final_result = null
+      }
+
+      // 주사위 눈 추가 될 수 있음
+      console.log(start_date, end_date, MachineId, final_result)
+
+      history.getHistoryData({ start_date, end_date, MachineId, final_result }).then(res => {
+        let tempData = {}
+        console.log('get res', res.data.data.test_result)
+        // this.history_data = res.data.data.test_result
+        for (let i = 0; i < res.data.data.test_result.length; i++) {
+          tempData.serial = res.data.data.test_result[i].serial_number
+          if (res.data.data.test_result[i].final_result == 2) {
+            tempData.process_result = 'Failure'
+          } else {
+            tempData.process_result = 'GoodSet'
+          }
+          tempData.machine_info = res.data.data.test_result[i].Machine.machine_name
+          tempData.test_date = res.data.data.test_result[i].createdAt
+          tempData.diceInfo = res.data.data.test_result[i].dice_num
+          if (res.data.data.test_result[i].description == null) {
+            tempData.description = ''
+          } else {
+            tempData.description = res.data.data.test_result[i].description
+          }
+
+          this.history_data.push(tempData)
+          tempData = {}
+        }
+        console.log('hd', this.history_data)
+        // 총 개수 카운트
+        this.countAll = this.history_data.length
+        // 표에 그리기
+        this.details = []
+        if (this.history_data.length > 10) {
+          for (let i = 0; i < 10; i++) {
+            this.details.push(this.history_data[i])
+          }
+        } else {
+          for (let i = 0; i < this.history_data.length; i++) {
+            this.details.push(this.history_data[i])
+          }
+        }
+      })
+    },
+    rightBtn() {},
+    leftBtn() {}
   }
 }
 </script>
@@ -422,5 +450,11 @@ export default {
 }
 input {
   width: 10%;
+}
+table.v-table tbody th > span {
+  font-size: 100px !important;
+}
+th {
+  background-color: red;
 }
 </style>

@@ -4,16 +4,19 @@
       <div class="ImgDiv"></div>
       <div class="machine__Process__desc">
         <div class="desc__LineName">
-          <div><p>Line name :</p></div>
-          <div><p></p></div>
+          <div>
+            <p>Process type: {{ processData.processType }}</p>
+          </div>
         </div>
         <div class="desc__Number">
-          <div><p>number:</p></div>
-          <div><p></p></div>
+          <div>
+            <p>Count: {{ processData.processCount }}</p>
+          </div>
         </div>
         <div class="desc__LifeCycle">
-          <div><p>Life Cycle :</p></div>
-          <div><p></p></div>
+          <div>
+            <p>Max Life Cycle: {{ processData.processMax }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -25,10 +28,17 @@ import * as THREE from 'three'
 import { Scene, Renderer, Render, Control } from '../assets/Process'
 export default {
   name: 'MachineItem',
+  props: {
+    processData: Object
+  },
   data() {
     return {
+      lol: 'lol',
       data: 3
     }
+  },
+  created() {
+    this.checkThis()
   },
   mounted() {
     this.Graphic()
@@ -61,10 +71,14 @@ export default {
         console.log(render.scene.Object)
 
         render.start()
-      }
+      },
+    checkThis() {
+      console.log('들어오나?')
+      console.log(this.processData)
     }
   }
 }
+
 </script>
 
 <style scoped>

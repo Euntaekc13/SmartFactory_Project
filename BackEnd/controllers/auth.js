@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { resStatus } = require("../lib/responseStatus");
 
-// 로그인을 위한 회원가입(관리자만 접근)
+// 회원가입
 exports.join = async (req, res, next) => {
-  console.log("POST /login/join 진입");
-  console.log(req.body);
+  console.log("POST /auth/join 진입");
+  // console.log(req.body);
   try {
     const { employee_number, email, name, password, authorization } = req.body;
 
@@ -45,8 +45,8 @@ exports.join = async (req, res, next) => {
 
 // 로그인
 exports.login = async (req, res, next) => {
-  console.log("POST /login 진입");
-  console.log(req.body);
+  console.log("POST /auth/login 진입");
+  // console.log(req.body);
   try {
     const { employee_number, password } = req.body;
 
@@ -73,7 +73,14 @@ exports.login = async (req, res, next) => {
       });
       const user = await User.findOne({
         where: { employee_number },
-        attributes: ["id", "employee_number", "email", "name", "authorization"],
+        attributes: [
+          "id",
+          "employee_number",
+          "email",
+          "name",
+          "authorization",
+          "user_image",
+        ],
       });
 
       return res.status(resStatus.success.code).json({

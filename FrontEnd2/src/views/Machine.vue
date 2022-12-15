@@ -10,12 +10,13 @@
         <div class="machine__content">
           <div class="Select__process">
             <v-col cols="2">
+              <!-- v-model="select" 에다가 watch 를 걸어서 data 에 변화가 있으면 이벤트가 발생하게끔 -->
               <v-select
                 v-model="select"
-                :hint="`${select.state}, ${select.abbr}`"
-                :items="items"
-                item-text="state"
-                item-value="abbr"
+                :hint="`${select.machine_name}, ${select.information}`"
+                :items="machines"
+                item-text="machine_name"
+                item-value="information"
                 label="Select"
                 persistent-hint
                 return-object
@@ -25,8 +26,8 @@
           </div>
           <div class="content__up">
             <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
-              <v-slide-item v-for="n in 1" :key="n" v-slot="{ active, toggle }">
+            <v-slide-group v-model="processes" class="pa-4" center-active show-arrows>
+              <v-slide-item v-for="processData in processes" :key="processData.processId" v-slot="{ active, toggle }">
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
@@ -36,7 +37,7 @@
                   width="550"
                   @click="toggle"
                 >
-                  <MachineItem />
+                  <MachineItem :process-data="processData" />
                 </v-card>
               </v-slide-item>
             </v-slide-group>
@@ -48,9 +49,9 @@
               <div class="content__down__left">
                 <div class="Process_CurVersion">
                   <v-card class="mx-auto" max-width="344">
-                    <v-card-text>
-                      <div>current version</div>
-                      <p class="text-h4 text--primary">v.2.1</p>
+                    <v-card-text v-if="selected">
+                      <div>Current version</div>
+                      <p class="text-h4 text--primary">{{ softwareVersionList[0].softwareVersion }}</p>
                       <p>adjective</p>
                       <div class="text--primary">
                         relating to or dependent on charity; charitable.<br />
@@ -62,18 +63,18 @@
               </div>
               <v-spacer></v-spacer>
               <div class="content__down__right">
-                <div class="History_list_title">HISTORY</div>
+                <div class="History_list_title"><h3>HISTORY</h3></div>
                 <div class="History_list">
-                  <v-expansion-panels>
-                    <v-expansion-panel v-for="(item, i) in 3" :key="i">
+                  <v-expansion-panels v-show="selected">
+                    <v-expansion-panel v-for="softwareData in softwareVersionList" :key="softwareData.softwareVersion">
                       <v-expansion-panel-header>
-                        <p>version1</p>
+                        <p>Version : {{ softwareData.softwareVersion }}</p>
                         <v-spacer></v-spacer>
-                        <p>2022/02/12</p>
+                        <p>Updated : {{ softwareData.softwareVersionApplied }}</p>
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
+                        This page is for the description of selected software version. Please add the data on your DB in
+                        order for it to be rendered correctly.
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -90,6 +91,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import MachineItem from '../components/MachineItem.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Machine',
@@ -99,19 +101,112 @@ export default {
   },
   data() {
     return {
-      data: 50,
-      select: { state: 'Florida', abbr: 'FL' },
-      items: [
-        { state: 'Florida', abbr: 'FL' },
-        { state: 'Georgia', abbr: 'GA' },
-        { state: 'Nebraska', abbr: 'NE' },
-        { state: 'California', abbr: 'CA' },
-        { state: 'New York', abbr: 'NY' }
-      ]
+      // data: 50
+      select: { machine_name: 'Machine Name', information: 'Machine Information' },
+      selected: false,
+      machines: [],
+      processes: [],
+      processData: {
+        processId: 0,
+        processType: 0,
+        processCount: 0,
+        processMax: 0,
+        processStart: ''
+      },
+      softwareVersionList: [],
+      softwareData: {
+        softwareVersion: '',
+        softwareVersionApplied: ''
+      }
     }
   },
-  created() {},
-  mounted() {}
+  computed: {
+    ...mapState('Machine', {
+      Machine: 'Machine'
+    })
+  },
+  watch: {
+    select(newSelect) {
+      this.machineSelectReset()
+      this.softwareListReset()
+      this.selected = true
+      console.log('선택된 공정 - Watch : ', this.select.machine_name + ' // Line 아이디 값 : ' + newSelect.id)
+
+      this.machineSelect(newSelect.id)
+      this.getSoftwareVersionList(newSelect.id)
+
+      console.log('process 배열 - :', this.processes)
+      console.log('software 배열 - :', this.softwareVersionList)
+      console.log(this.selected)
+      console.log(this.softwareVersionList[0].softwareVersion)
+
+      // .softwareData.softwareVersion
+    }
+  },
+  created() {
+    this.getMachineInfo()
+    this.updateMachineInfo()
+  },
+  mounted() {},
+  methods: {
+    ...mapActions('Machine', ['GET_MACHINE']),
+    async getMachineInfo() {
+      await this.GET_MACHINE().then(() => {
+        console.log('Success to get machine information')
+      })
+    },
+    updateMachineInfo() {
+      this.machines = this.Machine
+      console.log('hello', this.machines)
+    },
+    machineSelect(selectedMachineId) {
+      if (selectedMachineId) {
+        let i = 0
+        let realMachineId = selectedMachineId - 1
+
+        for (i = 0; i < this.Machine[realMachineId].Parts.length; i++) {
+          this.processData.processId = this.Machine[realMachineId].Parts[i].id
+          this.processData.processType = this.Machine[realMachineId].Parts[i].Part_default.part_type
+          this.processData.processCount = this.Machine[realMachineId].Parts[i].count
+          this.processData.processMax = this.Machine[realMachineId].Parts[i].Part_default.max_life
+          this.processData.processStart = this.Machine[realMachineId].Parts[i].Part_default.createdAt
+          this.processes.push(this.processData)
+
+          this.processData = {
+            processId: 0,
+            processType: 0,
+            processCount: 0,
+            processMax: 0,
+            processStart: ''
+          }
+        }
+      } else {
+        console.log('Please select the line')
+      }
+    },
+    machineSelectReset() {
+      this.processes = []
+    },
+    getSoftwareVersionList(selectedMachineId) {
+      let i = 0
+      let realMachineId = selectedMachineId - 1
+
+      for (i = 0; i < this.Machine[realMachineId].Software_histories.length; i++) {
+        this.softwareData.softwareVersion = this.Machine[realMachineId].Software_histories[i].software_version
+        this.softwareData.softwareVersionApplied = this.Machine[realMachineId].Software_histories[i].createdAt
+
+        this.softwareVersionList.push(this.softwareData)
+
+        this.softwareData = {
+          softwareVersion: '',
+          softwareVersionApplied: ''
+        }
+      }
+    },
+    softwareListReset() {
+      this.softwareVersionList = []
+    }
+  }
 }
 </script>
 

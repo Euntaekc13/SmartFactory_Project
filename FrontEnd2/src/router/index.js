@@ -15,18 +15,25 @@ const requireLine = (to, from, next) => {
   next({ path: '/machine' })
 }
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import('../views/Home.vue'),
-    beforeEnter: requireLine
+    beforeEnter: requireLine,
+    originalPush
   },
   {
     path: '/machine',
     name: 'Machine',
     component: () => import('../views/Line.vue'),
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    originalPush
   },
   {
     path: '/login',
@@ -48,21 +55,24 @@ const routes = [
   {
     path: '/monitoring/:id',
     name: 'monitoring',
-    component: () => import('../views/Monitoring.vue')
-    // beforeEnter: requireAuth
+    component: () => import('../views/Monitoring.vue'),
+    beforeEnter: requireAuth,
+    originalPush
   },
   {
     path: '/process',
     name: 'machine',
-    component: () => import('../views/Machine.vue')
-    // beforeEnter: requireAuth
+    component: () => import('../views/Machine.vue'),
+    beforeEnter: requireAuth,
+    originalPush
   },
   {
     // board를 통해서 동적 라우팅을 응용하자.
     path: '/history',
     name: 'history',
     component: () => import('../views/History.vue'),
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    originalPush
   },
   {
     path: '/*',

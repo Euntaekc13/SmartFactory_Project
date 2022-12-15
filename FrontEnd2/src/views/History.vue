@@ -129,22 +129,12 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'process_result', value: 'process_result' },
         { text: 'machine_info', value: 'machine_info' },
         { text: 'test_date', value: 'test_date' },
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
-      details: [
-        // {
-        //   serial: '',
-        //   process_result: '',
-        //   machine_info: '',
-        //   test_date: '',
-        //   diceInfo: '',
-        //   description: ''
-        // }
-      ]
+      details: []
     }
   },
   created() {
@@ -155,7 +145,7 @@ export default {
       return this.dates.join(' ~ ')
     },
     ...mapGetters('Machine', [
-      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
+      'Machine' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
     ])
   },
   methods: {
@@ -210,8 +200,8 @@ export default {
     },
     getMachineList() {
       this.machines.push('ALL')
-      for (let i = 0; i < this.Line.length; i++) {
-        this.machines.push(this.Line[i].machine_name)
+      for (let i = 0; i < this.Machine.length; i++) {
+        this.machines.push(this.Machine[i].machine_name)
       }
     },
     getHistoryData() {
@@ -224,9 +214,9 @@ export default {
       // console.log(this.dates)
       let start_date = this.dates[0]
       let end_date = this.dates[1]
-      for (let i = 0; i < this.Line.length; i++) {
-        if (this.Line[i].machine_name == this.machine_title) {
-          MachineId = this.Line[i].id
+      for (let i = 0; i < this.Machine.length; i++) {
+        if (this.Machine[i].machine_name == this.machine_title) {
+          MachineId = this.Machine[i].id
           break
         }
         MachineId = null

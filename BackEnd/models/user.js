@@ -7,12 +7,22 @@ module.exports = class User extends Sequelize.Model {
         employee_number: {
           type: Sequelize.INTEGER(40),
           allowNull: false,
+          unique: true,
         },
         email: {
           type: Sequelize.STRING(40),
           allowNull: false,
+          unique: true,
         },
         name: {
+          type: Sequelize.STRING(40),
+          allowNull: false,
+        },
+        password: {
+          type: Sequelize.STRING(100),
+          allowNull: false,
+        },
+        authorization: {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
@@ -23,14 +33,6 @@ module.exports = class User extends Sequelize.Model {
         user_image: {
           type: Sequelize.STRING(40),
           allowNull: true,
-        },
-        password: {
-          type: Sequelize.STRING(100),
-          allowNull: false,
-        },
-        authorization: {
-          type: Sequelize.STRING(40),
-          allowNull: false,
         },
       },
       {

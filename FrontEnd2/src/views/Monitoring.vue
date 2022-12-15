@@ -7,10 +7,7 @@
     </div>
     <div class="monitoring__description">
       <div class="Title">
-        <p class="monitoring__main__title">
-          FACTORY1 {{ cycleCount.process1 + process1Count }} {{ cycleCount.process2 + process2Count }}
-          {{ cycleCount.process3 + process3Count }}
-        </p>
+        <p class="monitoring__main__title">FACTORY1</p>
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
@@ -32,7 +29,7 @@
 
 <script>
 import DashBoard from '../components/Dashboard.vue'
-import { Scene, Renderer, Render } from '../assets/ClassList'
+import { Scene, Renderer, Render } from '../assets/Monitoring'
 import mqtt from 'mqtt'
 import { mapState, mapActions } from 'vuex'
 import * as THREE from 'three'
@@ -66,9 +63,6 @@ export default {
       path: '',
       topic: 'machine',
       start: '', //공정시작 동작
-      Num1Status: '', //1호기 상태
-      Num2Status: '', //2호기 상태
-      Num3Status: '', //3호기 상태
       ActionNum1: '',
       GreenLight: '', //초록불
       YellowLight: '', //노란불
@@ -77,26 +71,42 @@ export default {
         total: 0, //일일총생산
         failure: 0, //일일고품
         goodSet: 0, //일일양품
-        fanAction: false
+        process1Count: 0,
+        process2Count: 0,
+        process3Count: 0
       },
-      FacName: '',
       Manager: '',
       ManagerEmail: '',
       ManagerPhone: '',
       no1Action: false,
       no2Action: false,
+      WhiteColor: false,
       no3Action: false,
-      process1Count: 0,
-      process2Count: 0,
-      process3Count: 0,
       machineId: '',
       userImgRender: '',
-      // flag
       No1Flag: false,
-      // 전역변수
       firstFlag: false, // 1호기
       secondFlag: false, // 2호기
-      thirdFlag: false // 3호기
+      thirdFlag: false, // 3호기
+      dataSignal: [
+        { tagId: '0', name: 'DataTime', value: '' },
+        { tagId: '1', name: 'Start', value: true },
+        { tagId: '3', name: 'No1_Action', value: false },
+        { tagId: '4', name: 'No2_Action', value: true },
+        { tagId: '6', name: 'ColorSensor', value: false },
+        { tagId: '7', name: 'Reset', value: false },
+        { tagId: '13', name: 'lamp_green', value: true },
+        { tagId: '14', name: 'lamp_yellow', value: true },
+        { tagId: '15', name: 'lamp_red', value: false },
+        { tagId: '16', name: 'No3Motor1', value: '0' },
+        { tagId: '17', name: 'No3Motor2', value: '0' },
+        { tagId: '18', name: 'No2Chip', value: false },
+        { tagId: '21', name: 'No2SolAction', value: false },
+        { tagId: '23', name: 'Emergency', value: true },
+        { tagId: '24', name: 'DiceValue', value: '0' },
+        { tagId: '25', name: 'No3Gripper', value: false },
+        { tagId: '26', name: 'belt', value: true }
+      ]
     }
   },
   computed: {
@@ -152,7 +162,7 @@ export default {
       render.camera = cameraElement
       render.renderer = rendererElement
 
-      console.log(scene.Object)
+      // console.log(scene.Object)
       // Rendering Start
       render.start()
       this.setEvent(scene.resource.edukit, scene.Object, render)
@@ -183,35 +193,54 @@ export default {
           // this.$store.commit('Machine/FETCH_DATA', num0)
 
           let message = JSON.parse(payload)
-          let data = message.Wrapper.filter(p => p.tagId === '16' || p.tagId === '17')
-          this.RedLight = message.Wrapper[10].value //빨간불
-          this.YellowLight = message.Wrapper[9].value //노란불
-          this.GreenLight = message.Wrapper[8].value //초록불
-          this.start = message.Wrapper[0].value //시작
+
+          const machineElements = message.Wrapper
+          // tagId 순서로 오름차순 정렬
+          const machineElementsSorts = machineElements.sort((a, b) => {
+            if (parseInt(a.tagId) > parseInt(b.tagId)) {
+              return 1
+            } else if (parseInt(a.tagId) < parseInt(b.tagId)) {
+              return -1
+            } else {
+              return 0
+            }
+          })
+
+          console.log(machineElementsSorts)
+          let diceNumber = machineElementsSorts[14].value
+          if (diceNumber > 3) {
+            console.log('dice Number : ', diceNumber)
+          }
+
+          let data = machineElementsSorts.filter(p => p.tagId === '16' || p.tagId === '17')
+          this.RedLight = machineElementsSorts[8].value //빨간불
+          this.YellowLight = machineElementsSorts[7].value //노란불
+          this.GreenLight = machineElementsSorts[6].value //초록불
+          this.start = machineElementsSorts[1].value //시작
           if (this.start) {
             this.output.fanAction = true
-            console.log('mqtt 시간: ', message.Wrapper[26])
+            // console.log('mqtt 시간: ', machineElementsSorts[26])
           } else {
             this.output.fanAction = false
           }
           // Cycle 계산
           // process 1 count cycle
-          if (message.Wrapper[19].value || this.start) {
-            if (message.Wrapper[2].value !== this.no1Action) {
-              message.Wrapper[2].value
-                ? ((this.no1Action = true), (this.process1Count += 1), (this.firstFlag = true))
+          if (machineElementsSorts[16].value || this.start) {
+            if (machineElementsSorts[2].value !== this.no1Action) {
+              machineElementsSorts[2].value
+                ? ((this.no1Action = true), (this.output.process1Count += 1), (this.firstFlag = true))
                 : (this.no1Action = false)
             }
             // process 2 count cycle
-            if (message.Wrapper[14].value !== this.no2Action) {
-              message.Wrapper[14].value
-                ? ((this.no2Action = true), (this.process2Count += 1), (this.secondFlag = true))
+            if (machineElementsSorts[12].value !== this.no2Action) {
+              machineElementsSorts[12].value
+                ? ((this.no2Action = true), (this.output.process2Count += 1), (this.secondFlag = true))
                 : (this.no2Action = false)
             }
             // process 3 count cycle
-            if (message.Wrapper[18].value !== this.no3Action) {
-              message.Wrapper[18].value
-                ? ((this.no3Action = true), (this.process3Count += 1), (this.thirdFlag = true))
+            if (machineElementsSorts[15].value !== this.no3Action) {
+              machineElementsSorts[15].value
+                ? ((this.no3Action = true), (this.output.process3Count += 1), (this.thirdFlag = true))
                 : (this.no3Action = false)
             }
             // Result decided
@@ -230,12 +259,12 @@ export default {
             }
           }
           //1호기 동작
-          this.ActionNum1 = message.Wrapper[2].value
+          this.ActionNum1 = machineElementsSorts[2].value
           data = data.map(p => parseInt(p.value))
           edukit['yAxis'] = data[0]
           edukit['xAxis'] = data[1]
 
-          console.log(EduStatus) //scene 내부의 mesh list
+          // console.log(EduStatus) //scene 내부의 mesh list
           const GreenPhongMaterial = new THREE.MeshPhongMaterial({ color: '#00FF00' })
           const YellowPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FFFF00' })
           const RedPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
@@ -263,27 +292,36 @@ export default {
 
           //1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
-            console.log(this.ActionNum1)
+            // console.log(this.ActionNum1)
             new newProduct(EduStatus)
             this.No1Flag = true
           }
           if (EduStatus.product) {
-            console.log('EduStatus.product : ', EduStatus.product)
+            // console.log('EduStatus.product : ', EduStatus.product)
             const Product = [{ XendPoint: 9.8 }, { Zendpoint: 10 }]
             const newObject = EduStatus.product
             Product.push(newObject)
             render.scene.add(newObject)
             if (newObject.position.z >= 10) {
-              newObject.position.x += 0.1
+              newObject.position.x += 0.3
             } else {
               newObject.position.z += 0.19
             }
             //양품고품 판단
-            if (message.Wrapper[5].value == false) {
-              if (message.Wrapper[11].value == true) {
-                newObject.material.color.set('#FF0000') //red
+            console.log('######################')
+            // console.log('color센서 : ', machineElementsSorts[4].value)
+            if (machineElementsSorts[4].value == true) {
+              this.WhiteColor = true
+            }
+            if (machineElementsSorts[11].value == true) {
+              if (this.WhiteColor == true) {
+                newObject.material.color.set('#FFFFFF')
+                this.WhiteColor = false
+              } else {
+                newObject.material.color.set('#FF0000')
               }
             }
+
             // 1 ~ 3까지 시간 16.8414
             // 336.828
             //end포인트 도달시 제거

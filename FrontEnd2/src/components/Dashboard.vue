@@ -7,7 +7,7 @@
         <!-- FANS -->
         <section id="section-fan" class="section-main">
           <div class="section-main-header">
-            <h3>Product</h3>
+            <h3>Daily Output</h3>
           </div>
 
           <div class="section-main-content fan-content">
@@ -62,16 +62,16 @@
 
                 <div class="frequency-single-info">
                   <div class="full-txtBlock">
-                    <div class="blockvalue">3800.0 <span>MHz</span></div>
-                    <div class="blocktitle">CPU Frequency</div>
+                    <div class="blocktitle">Process 1 life cycle</div>
+                    <div class="blockvalue">{{ cycleCount.process1 + output.process1Count }} <span>count</span></div>
                   </div>
                   <div class="full-txtBlock">
-                    <div class="blockvalue">100.0 x 38</div>
-                    <div class="blocktitle">CPU Ratio</div>
+                    <div class="blocktitle">Process 2 life cycle</div>
+                    <div class="blockvalue">{{ cycleCount.process2 + output.process2Count }} <span>count</span></div>
                   </div>
                   <div class="full-txtBlock">
-                    <div class="blockvalue">26.0 <span>watts</span></div>
-                    <div class="blocktitle">Power consumption</div>
+                    <div class="blocktitle">Process 3 life cycle</div>
+                    <div class="blockvalue">{{ cycleCount.process3 + output.process3Count }} <span>count</span></div>
                   </div>
                 </div>
               </div>
@@ -101,8 +101,8 @@ export default {
   },
   computed: {
     ...mapState('Monitoring', {
-      dailyProductivity: 'dailyProductivity'
-      // cycleCount: 'cycleCount',
+      dailyProductivity: 'dailyProductivity',
+      cycleCount: 'cycleCount'
       // assignedUser: 'assignedUser'
     })
   },

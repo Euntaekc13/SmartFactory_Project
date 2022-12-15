@@ -7,10 +7,7 @@
     </div>
     <div class="monitoring__description">
       <div class="Title">
-        <p class="monitoring__main__title">
-          FACTORY1 {{ cycleCount.process1 + process1Count }} {{ cycleCount.process2 + process2Count }}
-          {{ cycleCount.process3 + process3Count }}
-        </p>
+        <p class="monitoring__main__title">FACTORY1</p>
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
@@ -77,7 +74,9 @@ export default {
         total: 0, //일일총생산
         failure: 0, //일일고품
         goodSet: 0, //일일양품
-        fanAction: false
+        process1Count: 0,
+        process2Count: 0,
+        process3Count: 0
       },
       FacName: '',
       Manager: '',
@@ -86,9 +85,7 @@ export default {
       no1Action: false,
       no2Action: false,
       no3Action: false,
-      process1Count: 0,
-      process2Count: 0,
-      process3Count: 0,
+
       machineId: '',
       userImgRender: '',
       // flag
@@ -199,19 +196,19 @@ export default {
           if (message.Wrapper[19].value || this.start) {
             if (message.Wrapper[2].value !== this.no1Action) {
               message.Wrapper[2].value
-                ? ((this.no1Action = true), (this.process1Count += 1), (this.firstFlag = true))
+                ? ((this.no1Action = true), (this.output.process1Count += 1), (this.firstFlag = true))
                 : (this.no1Action = false)
             }
             // process 2 count cycle
             if (message.Wrapper[14].value !== this.no2Action) {
               message.Wrapper[14].value
-                ? ((this.no2Action = true), (this.process2Count += 1), (this.secondFlag = true))
+                ? ((this.no2Action = true), (this.output.process2Count += 1), (this.secondFlag = true))
                 : (this.no2Action = false)
             }
             // process 3 count cycle
             if (message.Wrapper[18].value !== this.no3Action) {
               message.Wrapper[18].value
-                ? ((this.no3Action = true), (this.process3Count += 1), (this.thirdFlag = true))
+                ? ((this.no3Action = true), (this.output.process3Count += 1), (this.thirdFlag = true))
                 : (this.no3Action = false)
             }
             // Result decided

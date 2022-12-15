@@ -9,8 +9,18 @@ module.exports = class Test_result extends Sequelize.Model {
           allowNull: false,
         },
         final_result: {
+          // 1이면 양품, 0이면 고품
           type: Sequelize.STRING(40),
           allowNull: false,
+        },
+        dice_num: {
+          type: Sequelize.INTEGER(40),
+          allowNull: true,
+        },
+        description: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+          defaultValue: "",
         },
       },
       {

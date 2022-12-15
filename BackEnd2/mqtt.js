@@ -1,4 +1,4 @@
-const { sequelize } = require("./models");
+const { sequelize, Machine } = require("./models");
 const mqtt = require("mqtt");
 const { Part, Test_result } = require("./models");
 
@@ -38,7 +38,7 @@ client.subscribe("machine");
 client.on("message", async (topic, message, packet) => {
   // console.log("###########");
   try {
-    // message가 buffer로 오므로 JSON으로 변환
+    // message가 buffer로 오므로 JSON 형식으로 변환
     const rareElements = await JSON.parse(message.toString());
     const machineElements = rareElements.Wrapper;
     // tagId 순서로 오름차순 정렬
@@ -56,6 +56,15 @@ client.on("message", async (topic, message, packet) => {
       machineElementsSorts[26].value == true ||
       machineElementsSorts[1].value == true
     ) {
+      await Machine.update(
+        { machine_status: 1 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
+
       // tag 3(No1_Action)이 true이면, firstFlag = true, thirdFlag = true, secondFlag와 goodsetFlag1, goodsetFlag2는 false로 초기화
       if (machineElementsSorts[3].value == true) {
         firstFlag = true;
@@ -100,7 +109,7 @@ client.on("message", async (topic, message, packet) => {
         }
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 3 } });
 
-        // 	3) Set 판별, 0이면 고품 / 1이면 양품
+        // 	3) goodsetFlag1_t와 goodsetFlag2_t 같으면 양품(1), 다르면 고품(0)
         if (goodsetFlag1_t == goodsetFlag2_t) {
           final_result = 1;
         } else if (goodsetFlag1_t != goodsetFlag2_t) {
@@ -135,6 +144,18 @@ client.on("message", async (topic, message, packet) => {
           });
         }
       }
+    } else if (
+      machineElementsSorts[26].value == false &&
+      machineElementsSorts[1].value == false
+    ) {
+      await Machine.update(
+        { machine_status: 0 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
     }
   } catch (error) {
     console.log("plc data 누수");

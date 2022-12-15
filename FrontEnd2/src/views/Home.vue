@@ -21,7 +21,7 @@
 import Item from '../components/Item.vue'
 import Navbar from '@/components/Navbar.vue'
 export default {
-  name: 'Line',
+  name: 'Home',
   components: {
     Item,
     Navbar

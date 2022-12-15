@@ -7,7 +7,10 @@
     </div>
     <div class="monitoring__description">
       <div class="Title">
-        <p class="monitoring__main__title">FACTORY1 {{ process1Count }} {{ process2Count }} {{ process3Count }}</p>
+        <p class="monitoring__main__title">
+          FACTORY1 {{ cycleCount.process1 + process1Count }} {{ cycleCount.process2 + process2Count }}
+          {{ cycleCount.process3 + process3Count }}
+        </p>
       </div>
       <div class="monitoring__manager">
         <div class="manager__img">
@@ -16,12 +19,13 @@
         <div class="manager__description">
           <p class="monitoring__subtitle">Manager : {{ assignedUser.userName }} {{ assignedUser.employee_number }}</p>
           <p class="monitoring__subtitle">E-mail : {{ assignedUser.userEmail }}</p>
-          <p class="monitoring__subtitle">Phone : {{ assignedUser.userPhone }}</p>
+          <p class="monitoring__subtitle">Emergency contact : {{ assignedUser.userPhone }}</p>
         </div>
       </div>
     </div>
     <div class="chart">
-      <dash-board :output="output" />
+      <DashBoard :output="output" />
+      <!-- :Child 에서 쓸꺼 = "Parents 에서 쓸꺼" -->
     </div>
   </body>
 </template>
@@ -72,39 +76,39 @@ export default {
       output: {
         total: 0, //일일총생산
         failure: 0, //일일고품
-        goodSet: 0 //일일양품
+        goodSet: 0, //일일양품
+        fanAction: false
       },
       FacName: '',
       Manager: '',
       ManagerEmail: '',
       ManagerPhone: '',
-      process1Count: 10,
-      process1TotalCount: 100,
       no1Action: false,
-      process2Count: 10,
-      process2TotalCount: 100,
       no2Action: false,
-      testStatus: false,
-      testColor: 'white',
-      process3Count: 10,
-      process3TotalCount: 100,
       no3Action: false,
+      process1Count: 0,
+      process2Count: 0,
+      process3Count: 0,
       machineId: '',
       userImgRender: '',
       // flag
-      No1Flag: false
+      No1Flag: false,
+      // 전역변수
+      firstFlag: false, // 1호기
+      secondFlag: false, // 2호기
+      thirdFlag: false // 3호기
     }
   },
   computed: {
     ...mapState('Machine', {
-      data: 'data',
-      Line: 'Line'
+      Machine: 'Machine'
     }),
     ...mapState('Auth', {
       TokenUser: 'TokenUser'
     }),
     ...mapState('Monitoring', {
-      assignedUser: 'assignedUser'
+      assignedUser: 'assignedUser',
+      cycleCount: 'cycleCount'
     })
   },
   async created() {
@@ -184,33 +188,60 @@ export default {
           this.YellowLight = message.Wrapper[9].value //노란불
           this.GreenLight = message.Wrapper[8].value //초록불
           this.start = message.Wrapper[0].value //시작
-
+          if (this.start) {
+            this.output.fanAction = true
+            console.log('mqtt 시간: ', message.Wrapper[26])
+          } else {
+            this.output.fanAction = false
+          }
           // Cycle 계산
           // process 1 count cycle
-          if (message.Wrapper[2].value !== this.no1Action) {
-            message.Wrapper[2].value ? ((this.no1Action = true), (this.process1Count += 1)) : (this.no1Action = false)
+          if (message.Wrapper[19].value || this.start) {
+            if (message.Wrapper[2].value !== this.no1Action) {
+              message.Wrapper[2].value
+                ? ((this.no1Action = true), (this.process1Count += 1), (this.firstFlag = true))
+                : (this.no1Action = false)
+            }
+            // process 2 count cycle
+            if (message.Wrapper[14].value !== this.no2Action) {
+              message.Wrapper[14].value
+                ? ((this.no2Action = true), (this.process2Count += 1), (this.secondFlag = true))
+                : (this.no2Action = false)
+            }
+            // process 3 count cycle
+            if (message.Wrapper[18].value !== this.no3Action) {
+              message.Wrapper[18].value
+                ? ((this.no3Action = true), (this.process3Count += 1), (this.thirdFlag = true))
+                : (this.no3Action = false)
+            }
+            // Result decided
+            if (this.thirdFlag) {
+              this.firstFlag && this.secondFlag
+                ? ((this.output.total += 1),
+                  (this.output.goodSet += 1),
+                  (this.secondFlag = false),
+                  (this.firstFlag = false),
+                  (this.thirdFlag = false))
+                : ((this.output.total += 1),
+                  (this.output.failure += 1),
+                  (this.secondFlag = false),
+                  (this.firstFlag = false),
+                  (this.thirdFlag = false))
+            }
           }
-          // process 2 count cycle
-          if (message.Wrapper[14].value !== this.no2Action) {
-            message.Wrapper[14].value ? ((this.no2Action = true), (this.process2Count += 1)) : (this.no2Action = false)
-          }
-          // process 3 count cycle
-          if (message.Wrapper[18].value !== this.no3Action) {
-            message.Wrapper[18].value ? ((this.no3Action = true), (this.process3Count += 1)) : (this.no3Action = false)
-          }
+          //1호기 동작
           this.ActionNum1 = message.Wrapper[2].value
-
           data = data.map(p => parseInt(p.value))
           edukit['yAxis'] = data[0]
           edukit['xAxis'] = data[1]
 
           console.log(EduStatus) //scene 내부의 mesh list
           const GreenPhongMaterial = new THREE.MeshPhongMaterial({ color: '#00FF00' })
-          const YelloPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FFFF00' })
+          const YellowPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FFFF00' })
           const RedPhongMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
 
           const GreenMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#336600' })
-          const YelloMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
+          const YellowMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#CC9900' })
           const RedMatcapMaterial = new THREE.MeshMatcapMaterial({ color: '#8B0000' })
           if (this.GreenLight) {
             EduStatus.GreenLight.material = GreenPhongMaterial
@@ -219,9 +250,9 @@ export default {
           }
 
           if (this.YellowLight) {
-            EduStatus.YellowLight.material = YelloPhongMaterial
+            EduStatus.YellowLight.material = YellowPhongMaterial
           } else {
-            EduStatus.YellowLight.material = YelloMatcapMaterial
+            EduStatus.YellowLight.material = YellowMatcapMaterial
           }
 
           if (this.RedLight) {
@@ -243,10 +274,11 @@ export default {
             Product.push(newObject)
             render.scene.add(newObject)
             if (newObject.position.z >= 10) {
-              newObject.position.x += 0.32
+              newObject.position.x += 0.1
             } else {
               newObject.position.z += 0.19
             }
+            //양품고품 판단
             if (message.Wrapper[5].value == false) {
               if (message.Wrapper[11].value == true) {
                 newObject.material.color.set('#FF0000') //red
@@ -265,20 +297,21 @@ export default {
       })
     },
     getConnectInfo() {
-      for (let i = 0; i < this.Line.length; i++) {
-        if (this.Line[i].id == this.$route.params.id) {
-          this.hostname = this.Line[i].mqtt_name
-          this.port = this.Line[i].mqtt_port
-          this.topic = this.Line[i].mqtt_topic
-          this.machineId = this.$route.params.id
-          console.log('information check : ', this.hostname, this.port, this.topic)
+      console.log('야야 여기 체크해', this.$route.params.id)
+      for (let i = 0; i < this.Machine.length; i++) {
+        if (this.Machine[i].id == this.$route.params.id) {
+          this.hostname = this.Machine[i].mqtt_name
+          this.port = this.Machine[i].mqtt_port
+          this.topic = this.Machine[i].mqtt_topic
+          this.MachineId = this.$route.params.id
+          console.log('information check : ', this.hostname, this.port, this.topic, this.MachineId)
         }
       }
     },
     //이미지 업로드
     async getMonitoringInfo() {
-      console.log('getMonitoringInfo start check - machineId: ', this.machineId)
-      await this.getMonitoringInfoStoreAction({ machineId: this.machineId }).then(() => {
+      console.log('getMonitoringInfo start check - machineId: ', this.MachineId)
+      await this.getMonitoringInfoStoreAction({ machineId: this.MachineId }).then(() => {
         console.log('Success to get count information')
       })
     },

@@ -128,21 +128,12 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'process_result', value: 'process_result' },
         { text: 'machine_info', value: 'machine_info' },
         { text: 'test_date', value: 'test_date' },
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
       details: [
-        // {
-        //   serial: '',
-        //   process_result: '',
-        //   machine_info: '',
-        //   test_date: '',
-        //   diceInfo: '',
-        //   description: ''
-        // }
       ]
     }
   },

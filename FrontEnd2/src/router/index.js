@@ -41,6 +41,13 @@ const routes = [
     component: () => import('../views/MypageView.vue')
   },
   {
+    path: '/teamInfoView',
+    name: 'TeamInfoView',
+    component: () => import('../views/TeamInfoView.vue'),
+    beforeEnter: requireAuth,
+    originalPush
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginView.vue')

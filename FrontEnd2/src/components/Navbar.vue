@@ -68,7 +68,7 @@
           <i class="fa-solid fa-right-to-bracket fa-xl"></i>
         </button>
       </router-link>
-      <router-link to="/configuration">
+      <router-link to="/teamInfoView">
         <button class="iconButton">
           <i class="fa-solid fa-gear fa-xl"></i>
         </button>

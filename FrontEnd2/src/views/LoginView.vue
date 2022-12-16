@@ -40,6 +40,7 @@
                       label="비밀번호"
                       placeholder="Password"
                       autocomplete="off"
+                      @keyup.enter="login"
                     /><label for="class">Password</label>
                     <span>&nbsp;{{ v.errors[0] }}</span>
                   </ValidationProvider>

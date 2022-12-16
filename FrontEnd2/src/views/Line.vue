@@ -84,7 +84,7 @@ export default {
   height: 93%;
   margin: 2% auto;
   /* border: 1px solid black; */
-  border-radius: 30px;
+  /* border-radius: 30px; */
   box-sizing: border-box;
   background-color: white;
 }

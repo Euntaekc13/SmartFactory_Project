@@ -21,7 +21,7 @@
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
-                  :color="active ? 'white' : 'grey lighten-5'"
+                  :color="active ? 'white' : 'white'"
                   :elevation="active ? 12 : 2"
                   height="300"
                   width="550"

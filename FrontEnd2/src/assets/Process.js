@@ -5,6 +5,7 @@ import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 import { AmbientLight, DirectionalLight } from 'three'
 import { WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { Process } from './Chips'
 
 export class Camera {
   constructor() {
@@ -57,14 +58,16 @@ export class Control {
 export class Resource {
   constructor(data) {
     this.loader = new FBXLoader()
+    this.num1Group = new Group()
     this.num2Group = new Group()
     this.machine = {}
-    this.ProductTag = {}
+    this.Product = {}
     this.setResource(data)
   }
 
   setResource(data) {
-    if (data == 1) {
+    // default-------------------------------
+    if (data == 0) {
       const geometry = new THREE.BoxGeometry(5, 5, 5)
       const material = new THREE.MeshBasicMaterial({ color: '#FF0000' })
       const cube = (this.machine.num = new THREE.Mesh(geometry, material))
@@ -74,27 +77,40 @@ export class Resource {
         cube.receiveShadow = true
       }
       this.num2Group.add(cube)
-    } else if (data === 2) {
+    }
+    // 1호기-------------------------------
+    else if (data === 1) {
       this.loader.load('/fbx/num1.FBX', object => {
         let obj = (this.machine.num1 = object)
         obj.name = 'machine'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.0004
-        obj.position.set(0, 0, 0)
+        obj.position.set(0, 7, 0)
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
             child.receiveShadow = true
           }
         })
+        if (obj) this.num1Group.add(obj)
+      })
 
-        if (obj) this.num2Group.add(obj)
-      })
-    } else if (data === 3) {
-      this.loader.load('/fbx/num2.FBX', object => {
-        let obj = (this.machine.num2 = object)
-        obj.name = 'machine'
-        obj.scale.x = obj.scale.y = obj.scale.z = 0.2
-        obj.position.set(0, -2, 0)
+      /*   1호기 칩
+      1. z축 start: 7 & end: 17
+      2. x축 start:0  & end: 29.5
+      */
+      const pro = new Process()
+      let Chip = pro.product.num1Chip
+      // console.log(Chip)
+      this.machine.num1Chip = Chip
+      this.num1Group.add(Chip)
+      //2호기----------------------------
+    } else if (data === 2) {
+      this.loader.load('/fbx/num2_inner.FBX', object => {
+        let obj = (this.machine.num2Inner = object)
+        obj.name = 'num2Inner'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.026
+        obj.position.set(-4.3, 4, 4.7)
+        //1. z축 start: 4.7 / end : 12
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
@@ -103,6 +119,28 @@ export class Resource {
         })
         if (obj) this.num2Group.add(obj)
       })
+      this.loader.load('/fbx/num2_out.FBX', object => {
+        let obj = (this.machine.num2Out = object)
+        obj.name = 'num2Out'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
+        obj.position.set(0, 13, 0)
+        obj.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        if (obj) this.num2Group.add(obj)
+      })
+      const pro = new Process()
+      let Chip = pro.product.num2Chip
+      this.machine.num2Chip = Chip
+      this.num2Group.add(Chip)
+
+      const Dev = new Process()
+      let Device = Dev.product.Device
+      this.machine.Device = Device
+      this.num2Group.add(Device)
     }
   }
 }
@@ -114,7 +152,6 @@ export class Scene {
     this.light = new Light()
     this.Objectstatus = false
     this.machine = {}
-    this.Object = {}
     this.setScene()
     this.setMesh()
     // this.setGrid()
@@ -122,7 +159,10 @@ export class Scene {
   setScene() {
     this.scene.background = new THREE.Color('#FFFFFF')
 
+    this.scene.add(this.resource.num1Group)
+
     this.scene.add(this.resource.num2Group)
+    // this.scene.add(this.resource.Product)
 
     this.scene.add(this.light.ambientLight)
 
@@ -188,7 +228,82 @@ export class Render {
   }
   start() {
     this.status = window.requestAnimationFrame(() => {
+      this.controls.update()
       this.renderer.render(this.scene, this.camera)
+
+      // const Chip = this.scene.children[0].children[0]
+      // Chip.position.x += 0.04
+      // console.log(this.machine)
+
+      let num1Chip = this.machine.num1Chip
+      let num2Chip = this.machine.num2Chip
+      let Device = this.machine.Device
+      let num2Inner = this.machine.num2Inner
+
+      //1호기 set------------------------------
+      try {
+        if (num1Chip) {
+          if (num1Chip.position.z >= 17) {
+            num1Chip.position.x += 0.05
+            if (num1Chip.position.x >= 29.5) {
+              num1Chip.parent.remove(num1Chip)
+            }
+          } else {
+            num1Chip.position.z += 0.07
+          }
+        }
+      } catch {
+        const pro = new Process()
+        let num1Chip = pro.product.num1Chip
+        this.machine.num1Chip = num1Chip
+        this.scene.add(num1Chip)
+      }
+      //2호기 set----------------------------
+      /*
+      1.칩
+      1-1)칩 start=>  x:-22, y:1, z:16
+      1-2) 칩 end=>  x:27
+      
+      2.2호기 
+      z축 start: 4.7 / end : 12
+      
+      3.주사위 
+      3-1) start : x:-4.3 y:6 z: 8
+      3-2) 투하 위치 이동=> z:14 
+      3-3) 투하 후 이동=> x:27
+      
+      4. 주사위 던져지는 위치 x:-4.1, y:1, z:16
+      */
+      try {
+        if (num2Chip.position.x >= 28) {
+          num2Chip.parent.remove(num2Chip)
+        }
+        num2Chip.position.x += 0.05
+
+        if (Device.position.x == -4.3) {
+          if (num2Inner.position.z < 13) {
+            num2Inner.position.z += 0.05
+          }
+        }
+        if (Device.position.x > -4.3 && num2Inner.position.z > 4.71) {
+          num2Inner.position.z -= 0.05
+          if (num2Inner.position.z == 4.7) {
+            const pro = new Process()
+            let Device = pro.product.Device
+            this.machine.Device = Device
+            this.scene.add(Device)
+          }
+        }
+        if (Device.position.z <= 15.8) {
+          Device.position.z += 0.05
+        }
+      } catch {
+        const pro = new Process()
+        let num2Chip = pro.product.num2Chip
+        this.machine.num2Chip = num2Chip
+        this.scene.add(num2Chip)
+      }
+
       this.start()
     })
   }

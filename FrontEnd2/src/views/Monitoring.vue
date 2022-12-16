@@ -30,25 +30,10 @@
 <script>
 import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/Monitoring'
+import { MonitoringOB } from '../assets/Chips'
 import mqtt from 'mqtt'
 import { mapState, mapActions } from 'vuex'
 import * as THREE from 'three'
-
-class newProduct {
-  constructor(object) {
-    this.setProduct(object)
-  }
-  setProduct(object) {
-    const ProGeometry = new THREE.CylinderGeometry(1, 1, 1.5, 20)
-    const ProMeterial = new THREE.MeshPhongMaterial({ color: '#FFFFFF' })
-    ProMeterial.metalness = true
-    const Product = (object.product = new THREE.Mesh(ProGeometry, ProMeterial))
-
-    Product.castShadow = true
-    Product.receiveShadow = true
-    Product.position.set(-14, 2, 8)
-  }
-}
 
 export default {
   name: 'Monitoring',
@@ -293,7 +278,7 @@ export default {
           //1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
             // console.log(this.ActionNum1)
-            new newProduct(EduStatus)
+            new MonitoringOB(EduStatus)
             this.No1Flag = true
           }
           if (EduStatus.product) {

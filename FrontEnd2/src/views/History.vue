@@ -135,7 +135,7 @@ export default {
         { text: 'machine_info', value: 'machine_info' },
         { text: 'process_result', value: 'process_result' },
         { text: 'test_date', value: 'test_date' },
-        { text: 'diceInfo', value: 'diceInfo' },
+        { text: 'category number', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
       details: []
@@ -187,7 +187,7 @@ export default {
     getFruitDataByJson() {
       let arr = []
       let tempArr = []
-      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'category number', 'description'])
       // arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
       // arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
       for (let i = 0; i < this.history_data.length; i++) {

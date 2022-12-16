@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <v-main style="height: 100%">
+    <v-main style>
       <div class="machine__container">
         <div class="machine__header">
           <h1>Process Management</h1>

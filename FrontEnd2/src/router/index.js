@@ -36,6 +36,11 @@ const routes = [
     originalPush
   },
   {
+    path: '/mypage',
+    name: 'mypage',
+    component: () => import('../views/MypageView.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginView.vue')

@@ -18,6 +18,7 @@ const app = express();
 const PORT = process.env.PORT;
 app.set("port", PORT);
 
+// sequelize
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// CORS 처리
 app.use(cors(corsConfig));
 // app.use(
 //     cors({
@@ -39,9 +41,15 @@ app.use(cors(corsConfig));
 // );
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// body_parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// cookie_parser
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+// session
 app.use(
   session({
     resave: false,
@@ -54,14 +62,17 @@ app.use(
   })
 );
 
+// router 연결
 app.use("/", indexRouter);
 
+// 404 error 처리 middleware
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
   error.status = 404;
   next(error);
 });
 
+// error 처리 middleware
 app.use((error, req, res, next) => {
   res.locals.message = error.message;
   res.locals.error = process.env.NODE_ENV !== "production" ? error : {};

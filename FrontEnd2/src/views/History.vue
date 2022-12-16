@@ -71,12 +71,13 @@
             <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
           </v-text-field> -->
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="rightBtn">
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
+            <div>{{ table_index / 10 }} / {{ parseInt(countAll / 10) }}</div>
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>
               </button>
             </div>
@@ -114,8 +115,10 @@ export default {
       menu2: false,
       machines: [],
       machine_title: null,
-      itemsStatus: ['모두', '양품', '고품'],
+      // itemsStatus: ['ALL', 'GoodSet', 'Failure'],
+      itemsStatus: ['ALL', 'GoodSet', 'Failure'],
       itemStatus: null,
+      table_index: 0,
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
@@ -128,7 +131,9 @@ export default {
           filterable: false,
           value: 'serial'
         },
+
         { text: 'machine_info', value: 'machine_info' },
+        { text: 'process_result', value: 'process_result' },
         { text: 'test_date', value: 'test_date' },
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
@@ -204,6 +209,7 @@ export default {
       }
     },
     getHistoryData() {
+      this.table_index = 0
       this.history_data = []
       let MachineId = null
       let final_result = null
@@ -223,9 +229,16 @@ export default {
       console.log('#############################')
       console.log(this.itemStatus)
       // 영어로 바꿀수도 있음
-      if (this.itemStatus == '양품') {
+      // if (this.itemStatus == 'GoodSet') {
+      //   final_result = 1
+      // } else if (this.itemStatus == 'Failure') {
+      //   final_result = 2
+      // } else {
+      //   final_result = null
+      // }
+      if (this.itemStatus == 'GoodSet') {
         final_result = 1
-      } else if (this.itemStatus == '고품') {
+      } else if (this.itemStatus == 'Failure') {
         final_result = 2
       } else {
         final_result = null
@@ -273,8 +286,22 @@ export default {
         }
       })
     },
-    rightBtn() {},
-    leftBtn() {}
+    rightBtn() {
+      if (this.table_index + 10 > this.history_data.length) return
+      this.details = []
+      this.table_index += 10
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
+    },
+    leftBtn() {
+      if (this.table_index == 0) return
+      this.table_index -= 10
+      this.details = []
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
+    }
   }
 }
 </script>

@@ -82,7 +82,7 @@
         <button class="spanButton" @click="routingToLine">
           <div class="buttonArea">
             <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
-            <span>Line Management&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>Line Management&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </button>
       </div>
@@ -100,7 +100,7 @@
         <button class="spanButton" @click="routingToHistory">
           <div class="buttonArea">
             <i class="fa-sharp fa-solid fa-list fa-xl"></i>
-            <span>History Management</span>
+            <span>History Management&nbsp;</span>
           </div>
         </button>
       </div>
@@ -158,9 +158,9 @@ export default {
     routingToHistory() {
       this.$router.push('/history')
     },
-    navUserImgRenderFunction() {
+    async navUserImgRenderFunction() {
       console.log('Sidebar this.TokenUser.user_image : ', this.TokenUser.user_image)
-      this.navUserImage = require(`../../public/img/${this.TokenUser.user_image}`)
+      this.navUserImage = await require(`../../public/img/${this.TokenUser.user_image}`)
       // this.navUserImgRender = ''
       // console.log('Nav', this.assignedUser.userImage)
       // this.navUserImgRender = require(`../../public/img/${this.assignedUser.userImage}`)

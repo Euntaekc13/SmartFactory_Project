@@ -4,37 +4,11 @@
     <v-main style="box-sizing: border-box; heigth: 100vh; max-height: 100vh">
       <div class="line__container">
         <div class="line__header">
-          <h1>Line Management</h1>
+          <h1>Account Management</h1>
           <v-divider></v-divider>
         </div>
         <div class="line__content">
-          <div>
-            <div v-for="(Machine, index) in Machines" :key="index" class="Line-Card">
-              <item-2>
-                <div slot="title">
-                  <h3>{{ Machine.machine_name }}</h3>
-                </div>
-                <span slot="status" style="font-size: 18px">
-                  <p v-if="Machine.machine_status === 0">&nbsp;● Wating...</p>
-                  <p v-else-if="Machine.machine_status === 1" style="color: #81c784">&nbsp;● Run</p>
-                  <p v-else-if="Machine.machine_status === 2" style="color: #e53935">&nbsp;● Warning</p>
-                  <p v-else style="color: black">&nbsp;Undefined</p>
-                </span>
-                <div slot="name">
-                  <p>{{ Machine.User.name }}</p>
-                </div>
-                <div slot="description">
-                  <p>{{ Machine.information }}</p>
-                </div>
-                <div slot="footer">
-                  <router-link :to="`/monitoring/${Machine.id}`" style="text-decoration: none">
-                    <!-- <v-btn>monitoring</v-btn> -->
-                    <button class="btn">monitoring</button>
-                  </router-link>
-                </div>
-              </item-2>
-            </div>
-          </div>
+          <input />
         </div>
       </div>
     </v-main>
@@ -43,15 +17,12 @@
 
 <script>
 // import Item from '../components/Item.vue'
-import Item2 from '../components/Item2.vue'
 import Navbar from '@/components/Navbar.vue'
 import { mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Machine',
   components: {
-    // Item,
-    Item2,
     Navbar
   },
   data() {

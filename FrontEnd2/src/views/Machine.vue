@@ -21,7 +21,7 @@
                 <v-card
                   class="ma-4"
                   :class="{ 'on-active': active }"
-                  :color="active ? 'white' : 'grey lighten-5'"
+                  :color="active ? 'white' : 'white'"
                   :elevation="active ? 12 : 2"
                   height="300"
                   width="550"
@@ -53,7 +53,7 @@
               </div>
               <v-spacer></v-spacer>
               <div class="content__down__right">
-                <div class="History_list_title"><h3>HISTORY</h3></div>
+                <div class="History_list_title"><h5>HISTORY</h5></div>
                 <div class="History_list">
                   <v-expansion-panels v-show="selected">
                     <v-expansion-panel v-for="(softwareData, i) in softwareVersionList" :key="i">

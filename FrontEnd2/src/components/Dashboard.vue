@@ -36,41 +36,51 @@
 
         <section id="section-single-frequency" class="section-single">
           <div class="section-main-header">
-            <h3>CPU Frequency</h3>
+            <h3>Process Life Cycle</h3>
           </div>
 
           <div class="section-main-content frequency-content">
-            <div class="frequency-single-subheader">
-              <h4>Intel(R) Core(TM) i5-6600K CPU @ 3.80GHz</h4>
+            <!-- battery img -->
+            <div class="battery-background">
+              <div class="battery-item" style="display: flex">
+                <div class="battery">
+                  <div id="batery--container">
+                    <div id="batery--container-body">
+                      <span id="batery--load"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="battery">
+                  <div id="batery--container">
+                    <div id="batery--container-body">
+                      <span id="batery--load"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="battery">
+                  <div id="batery--container">
+                    <div id="batery--container-body">
+                      <span id="batery--load"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="frequency-single-content">
               <div class="frequency-single-histogram">
-                <div id="frequency-histogram-label-vertical" class="frequency-histogram-label">
-                  <p>100</p>
-                  <p>50</p>
-                </div>
-                <div class="frequency-histogram-chart">
-                  <div id="freq-single-core-chart-core1" class="freq-single-core-chart active"></div>
-                </div>
-                <div id="frequency-histogram-label-horizontal" class="frequency-histogram-label">
-                  <p>0<span></span></p>
-                  <p>5<span>s</span></p>
-                  <p>10<span>s</span></p>
-                  <p>15<span>s</span></p>
-                </div>
-
+                <!-- count -->
                 <div class="frequency-single-info">
                   <div class="full-txtBlock">
-                    <div class="blocktitle">Process 1 life cycle</div>
+                    <div class="blocktitle">Process 1</div>
                     <div class="blockvalue">{{ cycleCount.process1 + output.process1Count }} <span>count</span></div>
                   </div>
                   <div class="full-txtBlock">
-                    <div class="blocktitle">Process 2 life cycle</div>
+                    <div class="blocktitle">Process 2</div>
                     <div class="blockvalue">{{ cycleCount.process2 + output.process2Count }} <span>count</span></div>
                   </div>
                   <div class="full-txtBlock">
-                    <div class="blocktitle">Process 3 life cycle</div>
+                    <div class="blocktitle">Process 3</div>
                     <div class="blockvalue">{{ cycleCount.process3 + output.process3Count }} <span>count</span></div>
                   </div>
                 </div>
@@ -150,7 +160,7 @@ a {
   overflow: hidden;
   position: relative;
   background-color: #121212;
-  margin: 10% 5% 0 0;
+  margin: 15% 5% 0 0;
 }
 
 .section-main,
@@ -293,11 +303,13 @@ a {
 }
 .blockvalue {
   /* 3800.0 */
+  margin-top: 0.4rem;
   font-size: 1.15em;
   font-family: 'Electrolize', 'Helvetica Neue', Helvetica, sans-serif;
 }
 .blockvalue span {
   /* UNITS, MHz, V, rpm */
+  margin-top: 0.2rem;
   font-size: 0.7em;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
 }
@@ -443,18 +455,14 @@ a {
   background-image: url('https://raw.githubusercontent.com/allu91/cpumeter/master/img/icon-fan.png');
   background-size: 100% 100%;
 }
-/* @keyframes rotate_stopImg {
-  100% {
-    transform: rotate(0deg);
-  }
-} */
+
 #section-fan .fan-content .fan-content-block:hover .fan_stopimg {
   opacity: 1;
 }
 
 @media (max-width: 1024px) {
   #section-fan .fan-content .fan-content-block .blockvalue span {
-    margin-top: -3px;
+    margin-top: -2px;
     display: block;
   }
 }
@@ -514,17 +522,18 @@ a {
   font-size: 1em;
   font-weight: 500;
   width: 100%;
-  padding: 25px 25px 10px 30px;
-  margin: 0 auto 0 auto;
+  padding: 25px 25px 0px 30px;
+  margin: 0 0 0 0;
   overflow: auto;
 }
 #section-single-frequency .frequency-content .frequency-single-subheader {
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 25px;
+  margin: 0 0 0 0;
 }
 #section-single-frequency .frequency-content .frequency-single-subheader h4 {
-  margin: 0;
+  margin: 0 0 30px 50px;
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.03rem;
@@ -569,15 +578,15 @@ a {
   height: 0;
   width: 0;
 }
-#section-single-frequency
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
   .core-select
   input:checked {
   color: #ddd;
-}
-#section-single-frequency
+} */
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
@@ -585,8 +594,8 @@ a {
   input:checked
   ~ .checkmark {
   background-color: #2196f3;
-}
-#section-single-frequency
+} */
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
@@ -594,7 +603,7 @@ a {
   input:checked
   ~ .select-title {
   color: #ddd;
-}
+} */
 #section-single-frequency .frequency-content .frequency-single-content .frequency-single-cores .core-select .checkmark {
   position: absolute;
   top: 0px;
@@ -604,15 +613,15 @@ a {
   border-radius: 50%;
   border: 2px solid;
 }
-#section-single-frequency
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
   .core-select:nth-child(1)
   .checkmark {
   border-color: #ddd;
-}
-#section-single-frequency
+} */
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
@@ -620,16 +629,16 @@ a {
   input:checked
   ~ .checkmark {
   background-color: #ddd;
-}
-#section-single-frequency
+} */
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
   .core-select:nth-child(2)
   .checkmark {
   border-color: #2c97de;
-}
-#section-single-frequency
+} */
+/* #section-single-frequency
   .frequency-content
   .frequency-single-content
   .frequency-single-cores
@@ -637,129 +646,82 @@ a {
   input:checked
   ~ .checkmark {
   background-color: #2c97de;
-}
+} */
 #section-single-frequency .frequency-content .frequency-single-content .frequency-single-histogram {
   position: absolute;
   text-align: left;
   margin-right: 5%;
+  width: 80%;
 }
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-label
-  p {
-  margin: 0;
-  line-height: 1;
-  font-size: 0.875rem;
-  color: #666;
-  font-family: 'Electrolize', 'Helvetica Neue', Helvetica, sans-serif;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-label
-  p
-  span {
-  font-family: 'Electrolize', 'Helvetica Neue', Helvetica, sans-serif;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-label#frequency-histogram-label-vertical {
-  width: 35px;
-  height: 220px;
-  margin-right: -4px;
-  display: inline-grid;
-  vertical-align: top;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-label#frequency-histogram-label-horizontal {
-  width: 100%;
+#section-single-frequency.frequency-content .battery-background {
+  background: #0e141a;
   display: flex;
-  justify-content: space-between;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-label#frequency-histogram-label-horizontal
-  p {
-  display: inline-block;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-chart {
-  width: calc(100% - 35px);
-  height: 220px;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
   position: relative;
-  display: inline-block;
-  margin-right: -4px;
-  background-color: #121212;
-  border-left: 1px #666 solid;
-  border-bottom: 1px #666 solid;
 }
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-chart
-  .freq-single-core-chart {
-  opacity: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
+#section-single-frequency.frequency-content .battery-background .battery-item {
+  margin: 0 0 0 3%;
+  width: 25%;
   height: 100%;
+  display: flex;
+}
+.battery {
+  margin: 0 0 0 7%;
+}
+
+#batery--container {
+  width: 6rem;
+  height: 12rem;
+  position: relative;
+  /* 			margin: 0 auto; */
+}
+#batery--container:before {
+  width: 50%;
+  height: 1.3rem;
+  margin: 0 auto;
+  left: 24px;
+  bottom: 98%;
+  border-radius: 4px 4px 0 0;
+}
+#batery--container-body,
+#batery--container:before {
+  border: solid 4px rgb(74, 74, 74);
+}
+/* #batery--container:after {
+  border: solid 48px transparent;
+  border-left: solid 96px rgba(14, 20, 26, 0.15);
+  border-bottom-width: 0px;
+  border-top-width: 175px;
+  bottom: -29px;
+  left: 4px;
+} */
+
+#batery--container:after,
+#batery--container:before,
+#batery--load:before,
+#batery--load:after {
+  content: '';
   position: absolute;
-  background-size: cover;
-  background-position: 0 0;
-  background-repeat: repeat-x;
-  background-image: url('https://raw.githubusercontent.com/allu91/cpumeter/master/img/chart-long1.svg');
-  animation-duration: 35s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
 }
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-chart
-  .freq-single-core-chart.active {
-  opacity: 1;
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-chart
-  .freq-single-core-chart#freq-single-core-chart-core1 {
-  animation-name: freq_chart_anim1;
-}
-@keyframes freq_chart_anim1 {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -1705px 0;
-  }
-}
-#section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-histogram
-  .frequency-histogram-chart
-  img {
+#batery--container-body {
   width: 100%;
+  margin-top: 25px;
   height: 100%;
-  opacity: 0.7;
-  margin-top: 10px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  animation-fill-mode: forwards;
+}
+#batery--load {
+  position: absolute;
+  height: 1rem;
+  background: red;
+  bottom: 0;
+  width: 100%;
+  /* animation: loading 3s ease-in infinite; */
+  /* animation-fill-mode: forwards; */
 }
 #section-single-frequency
   .frequency-content
@@ -780,6 +742,7 @@ a {
   .frequency-single-info
   .full-txtBlock {
   padding: 10px;
+  margin: 0 0 0 20%;
   border-radius: 7px;
   background-color: #2d2d2d;
   display: inline-block;

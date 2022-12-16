@@ -3,12 +3,10 @@
     <v-main>
       <div class="text__error">
         <p>{{ string404 }}</p>
+        <p></p>
       </div>
       <div class="text__link">
-        <a>{{ stringLink }} </a>
-      </div>
-      <div class="text__button">
-        <button>Go Home</button>
+        <a @click="goHome">{{ stringLink }} </a>
       </div>
     </v-main>
   </div>
@@ -22,17 +20,14 @@ function setCharAt(str, index, chr) {
 
 let text404 = '404 page not found'
 let textLink = 'click here to go home'
-let progress404 = 0
-let total404 = 0
-let totalLink = 0
 
 export default {
   components: {},
   data() {
     return {
-      // total404: 0,
-      // totalLink: 0,
-      // progress404: 0,
+      total404: 0,
+      totalLink: 0,
+      progress404: 0,
       progressLink: 0,
       characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-=+<>,./?[{()}]!@#$%^&*~`|'.split(''),
       string404: '',
@@ -43,21 +38,14 @@ export default {
   created() {},
   mounted() {
     this.dataSetting()
-    // this.setTimeout()
   },
   methods: {
-    // setCharAt(str, index, chr) {
-    //   if (index > str.length - 1) return str
-    //   return str.substr(0, index) + chr + str.substr(index + 1)
-    // },
     letterSpin() {
       this.string404 = text404
       this.stringLink = textLink
-      console.log('여러번 도나?')
-      console.log('check - this.total404 : ', this.total404)
 
       for (let i = 0; i < this.total404; i++) {
-        if (i >= progress404) {
+        if (i >= this.progress404) {
           this.string404 = setCharAt(
             this.string404,
             i,
@@ -75,30 +63,28 @@ export default {
           )
         }
       }
-
-      // this.flag = true
-      console.log('string', this.string404)
-      console.log('stringLink', this.stringLink)
     },
+
     dataSetting() {
-      total404 = text404.length
+      this.total404 = text404.length
       this.totalLink = textLink.length
       let scrambleInterval = setInterval(this.letterSpin, 1000 / 60)
 
-      setTimeout(function () {
-        let revealInterval = setInterval(function () {
-          console.log('자 이제 여기다', progress404)
-          console.log(total404)
-          if (progress404 < total404) {
-            progress404++
+      setTimeout(() => {
+        let revealInterval = setInterval(() => {
+          if (this.progress404 < this.total404) {
+            this.progress404++
           } else if (this.progressLink < this.totalLink) {
             this.progressLink++
           } else {
-            clearInterval(revealInterval)
-            clearInterval(scrambleInterval)
+            clearInterval(this.revealInterval)
+            clearInterval(this.scrambleInterval)
           }
         }, 50)
       }, 1000)
+    },
+    goHome() {
+      this.$router.push('/machine')
     }
   }
 }

@@ -4,16 +4,18 @@
       <div class="course-preview">
         <h6>&nbsp;</h6>
         <h2><slot name="title"> default Title </slot></h2>
-        <span>상태 <i class="fas fa-chevron-right"></i><slot name="status"> 대기중 </slot></span>
+        <span>Status <i class="fas fa-chevron-right"></i><slot name="status"> 대기중 </slot></span>
       </div>
       <div class="course-info">
         <div class="progress-container">
           <!-- <div class="progress"></div> -->
           <span class="progress-text"> &nbsp; </span>
         </div>
-        <h6>관리자</h6>
+        <!-- <h4>관리자</h4> -->
+        <h4>Manager</h4>
         <h2><slot name="name"> default Title </slot></h2>
-        <h6>공정 정보</h6>
+        <!-- <h4>공정 정보</h4> -->
+        <h4>Process Information</h4>
         <h2><slot name="description"> default Title </slot></h2>
         <!-- <button class="btn">Continue</button> -->
         <div class="Item-footer">
@@ -40,7 +42,7 @@ export default {}
   width: 1200px;
 }
 
-.course h6 {
+.course h4 {
   opacity: 0.6;
   margin: 0;
   letter-spacing: 1px;

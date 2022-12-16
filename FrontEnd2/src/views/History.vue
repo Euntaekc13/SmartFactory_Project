@@ -75,6 +75,7 @@
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
+            <div>{{ table_index / 10 }} / {{ parseInt(countAll / 10) }}</div>
             <div class="history__card--icon">
               <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>
@@ -114,7 +115,8 @@ export default {
       menu2: false,
       machines: [],
       machine_title: null,
-      itemsStatus: ['모두', '양품', '고품'],
+      // itemsStatus: ['ALL', 'GoodSet', 'Failure'],
+      itemsStatus: ['ALL', 'GoodSet', 'Failure'],
       itemStatus: null,
       table_index: 0,
       dates: [
@@ -129,7 +131,9 @@ export default {
           filterable: false,
           value: 'serial'
         },
+
         { text: 'machine_info', value: 'machine_info' },
+        { text: 'process_result', value: 'process_result' },
         { text: 'test_date', value: 'test_date' },
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
@@ -225,9 +229,16 @@ export default {
       console.log('#############################')
       console.log(this.itemStatus)
       // 영어로 바꿀수도 있음
-      if (this.itemStatus == '양품') {
+      // if (this.itemStatus == 'GoodSet') {
+      //   final_result = 1
+      // } else if (this.itemStatus == 'Failure') {
+      //   final_result = 2
+      // } else {
+      //   final_result = null
+      // }
+      if (this.itemStatus == 'GoodSet') {
         final_result = 1
-      } else if (this.itemStatus == '고품') {
+      } else if (this.itemStatus == 'Failure') {
         final_result = 2
       } else {
         final_result = null

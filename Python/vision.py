@@ -78,7 +78,7 @@ ADDR = (HOST,PORT)
 
 cap = cv2.VideoCapture(0) # 0 or 1
 
-clientSocket = 0
+clientSocket = socket()
 
 readings = [-1, -1]
 display = [0, 0]

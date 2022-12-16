@@ -239,6 +239,7 @@ export class Render {
       let num2Chip = this.machine.num2Chip
       let Device = this.machine.Device
       let num2Inner = this.machine.num2Inner
+      let num2ChipStat = true
 
       //1호기 set------------------------------
       try {
@@ -276,6 +277,7 @@ export class Render {
       */
       try {
         if (num2Chip.position.x >= 28) {
+          num2ChipStat = false
           num2Chip.parent.remove(num2Chip)
         }
         num2Chip.position.x += 0.05
@@ -298,10 +300,13 @@ export class Render {
           Device.position.z += 0.05
         }
       } catch {
-        const pro = new Process()
-        let num2Chip = pro.product.num2Chip
-        this.machine.num2Chip = num2Chip
-        this.scene.add(num2Chip)
+        if (!num2ChipStat) {
+          num2ChipStat = true
+          const pro = new Process()
+          let num2Chip = pro.product.num2Chip
+          this.machine.num2Chip = num2Chip
+          this.scene.add(num2Chip)
+        }
       }
 
       this.start()

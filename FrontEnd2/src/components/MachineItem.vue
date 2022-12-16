@@ -1,7 +1,7 @@
 <template>
   <div class="machine-container">
     <div class="machine__Process__list">
-      <div class="ImgDiv"></div>
+      <div :class="`ImgDiv${processData.processType}`"></div>
       <div class="machine__Process__desc">
         <div class="desc__LineName">
           <div>
@@ -34,44 +34,53 @@ export default {
   data() {
     return {
       lol: 'lol',
-      data: 3
+      data: this.processData.processType
     }
   },
   created() {
     this.checkThis()
   },
   mounted() {
-    this.Graphic()
+    this.Graphic(this.data)
   },
   methods: {
-    Graphic() {
-      if (this.data) {
-        const ImgDiv = document.querySelector('.ImgDiv')
-        ImgDiv.style.width = '40%'
-        ImgDiv.style.height = '85%'
-
-        let scene = new Scene(this.data)
-        let cameraElement = scene.camera.cameraElement
-        let sceneElement = scene.sceneElement
-        let renderer = new Renderer(ImgDiv)
-        let renderElement = renderer.domElement
-        let rendererElement = renderer.rendererElement
-
-        let control = new Control(cameraElement, renderElement)
-        let controlElement = control.controlElement
-
-        let render = new Render(sceneElement)
-        render.element = ImgDiv
-        render.render = renderElement
-        render.controls = controlElement
-        render.scene = sceneElement
-        render.machine = scene.resource.machine
-        render.camera = cameraElement
-        render.renderer = rendererElement
-
-        render.start()
+    Graphic(data) {
+      if (data == 1) {
+        this.SetGraphics(data)
+        return
+      }
+      if (data == 2) {
+        this.SetGraphics(data)
+        return
       }
     },
+
+    SetGraphics(data) {
+      const ImgDiv = document.querySelector(`.ImgDiv${this.processData.processType}`)
+      ImgDiv.style.width = '40%'
+      ImgDiv.style.height = '85%'
+
+      let scene = new Scene(data)
+      let cameraElement = scene.camera.cameraElement
+      let sceneElement = scene.sceneElement
+      let renderer = new Renderer(ImgDiv)
+      let renderElement = renderer.domElement
+      let rendererElement = renderer.rendererElement
+
+      let control = new Control(cameraElement, renderElement)
+      let controlElement = control.controlElement
+
+      let render = new Render(sceneElement)
+      render.element = ImgDiv
+      render.render = renderElement
+      render.controls = controlElement
+      render.scene = sceneElement
+      render.machine = scene.resource.machine
+      render.camera = cameraElement
+      render.renderer = rendererElement
+      render.start()
+    },
+
     checkThis() {
       console.log('들어오나?')
       console.log(this.processData)

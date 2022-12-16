@@ -436,7 +436,7 @@ export default {
 }
 
 .chart {
-  margin: 20% 0 0 0;
+  margin: 40% 0 0 0;
   width: 30%;
   height: 100%;
   position: relative;

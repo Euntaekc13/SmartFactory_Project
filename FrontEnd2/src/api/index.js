@@ -25,5 +25,6 @@ export const request = (method, url, data) => {
       const { status } = result.response
       if (status === UNAUTHORIZED) return onUnauthorized()
       throw Error(result)
+      // if ()
     })
 }

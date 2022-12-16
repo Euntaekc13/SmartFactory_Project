@@ -14,6 +14,12 @@ module.exports = class Machine extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
+        emergencyCount: {
+          type: Sequelize.INTEGER(40),
+          allowNull: false,
+          defaultValue: 0,
+        },
+
         machine_image: {
           type: Sequelize.STRING(40),
           allowNull: false,

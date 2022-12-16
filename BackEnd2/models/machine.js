@@ -14,6 +14,12 @@ module.exports = class Machine extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
+        emergencyCount: {
+          type: Sequelize.INTEGER(40),
+          allowNull: false,
+          defaultValue: 0,
+        },
+
         machine_image: {
           type: Sequelize.STRING(40),
           allowNull: false,
@@ -28,10 +34,6 @@ module.exports = class Machine extends Sequelize.Model {
           allowNull: true,
         },
         mqtt_topic: {
-          type: Sequelize.STRING(40),
-          allowNull: true,
-        },
-        manager: {
           type: Sequelize.STRING(40),
           allowNull: true,
         },
@@ -57,5 +59,6 @@ module.exports = class Machine extends Sequelize.Model {
     db.Machine.hasMany(db.Part);
     db.Machine.hasMany(db.Software_history);
     db.Machine.hasMany(db.Test_result);
+    db.Machine.belongsTo(db.User);
   }
 };

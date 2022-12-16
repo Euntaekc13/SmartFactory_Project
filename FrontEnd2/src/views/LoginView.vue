@@ -40,6 +40,7 @@
                       label="비밀번호"
                       placeholder="Password"
                       autocomplete="off"
+                      @keyup.enter="login"
                     /><label for="class">Password</label>
                     <span>&nbsp;{{ v.errors[0] }}</span>
                   </ValidationProvider>
@@ -79,10 +80,15 @@ export default {
       console.log('LoginView page - login - data check : ', this.employee_number, this.password)
       this.LOGIN_AUTH({ employee_number: this.employee_number, password: this.password }).then(() => {
         // api 와 store 작업이 끝나면 아래 주로 화면 전환
-        localStorage.getItem('token') !== null ? this.$router.push('/line') : this.$router.go(0)
+        localStorage.getItem('token') !== null ? this.$router.push('/machine') : this.$router.go(0)
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }
+    // enterkey() {
+    //   if (window.event.keyCode == 13) {
+    //     this.login()
+    //   }
+    // }
   }
 }
 </script>
@@ -264,11 +270,17 @@ span:nth-child(2) .gate:active {
 .gate:active::-webkit-input-placeholder {
   color: #aaa;
 }
-.gate:focus + label,
+/* .gate:focus + label,
 .gate:active + label {
   transform: rotate(-66deg);
   border-radius: 3px;
+} */
+.gate:focus + label,
+.gate:active + label {
+  transform: rotate(-10deg);
+  border-radius: 3px;
 }
+
 .gate:focus + label:before,
 .gate:active + label:before {
   transform: rotate(10deg);

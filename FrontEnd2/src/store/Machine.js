@@ -1,51 +1,41 @@
 import { machine } from '../api/machine'
 
-const InitLine = [
-  {
-    id: null,
-    machine_name: null,
-    machine_status: null,
-    manager: null,
-    information: null,
-    mqtt_name: null,
-    mqtt_port: null,
-    mqtt_topic: null
-  }
-]
+const InitMachine = []
 
 export const Machine = {
   namespaced: true,
 
   state: {
-    Line: InitLine,
-    data: '',
-    data2: ''
+    Machine: InitMachine
   },
   getters: {
-    Line: state => state.Line
+    Machine: state => state.Machine
   },
   mutations: {
     // FETCH_DATA(state, data) {
     //   state.data = data
     // },
-    GET_LINE_MUTATION(state, data) {
-      state.Line = data.data.machine
+    GET_MACHINE_MUTATION(state, data) {
+      console.log('GET_MACHINE_MUTATION - data.data : ', data.data)
+
+      state.Machine = data.data.machine
+      console.log('GET_MACHINE_MUTATION - state.Machine : ', state.Machine)
     }
   },
   actions: {
-    GET_LINE({ commit }) {
+    GET_MACHINE({ commit }) {
       return (
         machine
           // request
-          .getLine()
+          .getMachine()
           // response
           .then(data => {
-            console.log('Get Line 성공 : ', data)
+            console.log('Get Machine 성공 : ', data)
             // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
-            commit('GET_LINE_MUTATION', data.data)
+            commit('GET_MACHINE_MUTATION', data.data)
           })
           .catch(error => {
-            console.log('Get Line 실패 : ', error)
+            console.log('Get Machine 실패 : ', error)
           })
       )
     }

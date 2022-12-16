@@ -1,4 +1,4 @@
-const { sequelize } = require("./models");
+const { sequelize, Machine } = require("./models");
 const mqtt = require("mqtt");
 const { Part, Test_result } = require("./models");
 
@@ -18,7 +18,14 @@ let secondFlag = false; // 2호기
 let thirdFlag = false; // 3호기
 let goodsetFlag1 = false; // 색깔 판별해서 흰색이면 true
 let goodsetFlag2 = false; // 2호기에 도달했을 때 true
+let dice_num_before = 0;
+let dice_num_before2 = 0;
+let dice_num_before3 = 0;
+let dice_num_before4 = 0;
+let dice_num_before5 = 0;
+let dice_num = 0;
 let final_result = null;
+let emergencyFlag = false;
 
 //
 // async function finalProcess(machineElementsSorts) {
@@ -38,7 +45,7 @@ client.subscribe("machine");
 client.on("message", async (topic, message, packet) => {
   // console.log("###########");
   try {
-    // message가 buffer로 오므로 JSON으로 변환
+    // message가 buffer로 오므로 JSON 형식으로 변환
     const rareElements = await JSON.parse(message.toString());
     const machineElements = rareElements.Wrapper;
     // tagId 순서로 오름차순 정렬
@@ -51,13 +58,46 @@ client.on("message", async (topic, message, packet) => {
         return 0;
       }
     });
-    // tag 26(belt)가 true이거나 tag 1(Start)이 true이면
+    // console.log(machineElementsSorts);
+
+    // tag 13(emergency)가 false이고, emergencyFlag가 false이면, 비상상황. machine_status를 2로 update하고, 긴급정지횟수 컬럼에 1 update, 모든 변수를 초기 setting
+    // if (machineElementsSorts[13].value == false && emergencyFlag == false) {
+    //   emergencyFlag = true;
+    //   await Machine.update(
+    //     { machine_status: 2 },
+    //     {
+    //       where: {
+    //         id: 1,
+    //       },
+    //     }
+    //   );
+    //   await Machine.increment({ emergencyCount: 1 }, { where: { id: 1 } });
+
+    //   firstFlag = false; // 1호기
+    //   secondFlag = false; // 2호기
+    //   thirdFlag = false; // 3호기
+    //   goodsetFlag1 = false; // 색깔 판별해서 흰색이면 true
+    //   goodsetFlag2 = false; // 2호기에 도달했을 때 true
+    //   final_result = null;
+    // } else {
+
     if (
-      machineElementsSorts[26].value == true ||
+      // tag 26(belt)가 true이거나 tag 1(Start)이 true이면, machine_status : 1 (동작 중)
+      machineElementsSorts[16].value == true ||
       machineElementsSorts[1].value == true
     ) {
+      // emergencyFlag = false;
+      await Machine.update(
+        { machine_status: 1 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
+
       // tag 3(No1_Action)이 true이면, firstFlag = true, thirdFlag = true, secondFlag와 goodsetFlag1, goodsetFlag2는 false로 초기화
-      if (machineElementsSorts[3].value == true) {
+      if (machineElementsSorts[2].value == true) {
         firstFlag = true;
         thirdFlag = true;
         secondFlag = false;
@@ -66,22 +106,32 @@ client.on("message", async (topic, message, packet) => {
       }
 
       // tag 4(No2_Action)가 false이면, secondFlag = true
-      if (machineElementsSorts[4].value == false) {
+      if (machineElementsSorts[3].value == false) {
         secondFlag = true;
       }
 
       // tag 6(ColorSensor)이 true이면, goodsetFlag1(색깔 판별해서 흰색이면 true) = true
-      if (machineElementsSorts[6].value == true) {
+      if (machineElementsSorts[4].value == true) {
         goodsetFlag1 = true;
       }
 
       // tag 18(No2Chip)이 true이면, goodsetFlag2(2호기에 도달했을 때 true) = true
-      if (machineElementsSorts[18].value == true) {
+      if (machineElementsSorts[11].value == true) {
         goodsetFlag2 = true;
       }
 
+      // (임시) 주사위 눈을 변수에 저장
+      console.log(
+        "다이스 넘버 최초 콘솔 NO3Gripper 이전 : ",
+        machineElementsSorts[14].value
+      );
+      if (machineElementsSorts[14].value >= 1) {
+        dice_num_before = machineElementsSorts[14].value;
+      }
+      console.log("dice_num_before 콘솔 2번 직전: ", dice_num_before);
+
       // tag 25(No3Gripper)이 true이고, thirdFlag가 true이면,
-      if (machineElementsSorts[25].value == true && thirdFlag == true) {
+      if (machineElementsSorts[15].value == true && thirdFlag == true) {
         // await finalProcess(machineElementsSorts);
         // 1) 변수 재설정
         let secondFlag_t = secondFlag;
@@ -93,6 +143,11 @@ client.on("message", async (topic, message, packet) => {
         goodsetFlag1 = false;
         goodsetFlag2 = false;
 
+        // (임시) 주사위 눈을 변수에 저장
+        dice_num_before2 = dice_num_before;
+        dice_num_before = 0;
+        console.log("dice_num_before2 콘솔 2번 직전: ", dice_num_before2);
+
         // 2) 1,2,3호기 DB count +=1
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 1 } });
         if (secondFlag_t == true) {
@@ -100,14 +155,24 @@ client.on("message", async (topic, message, packet) => {
         }
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 3 } });
 
-        // 	3) Set 판별, 0이면 고품 / 1이면 양품
+        // (임시) 주사위 눈을 변수에 저장
+        dice_num_before3 = dice_num_before2;
+        dice_num_before2 = 0;
+        console.log("dice_num_before3 콘솔 3번 직전: ", dice_num_before3);
+
+        // 	3) goodsetFlag1_t와 goodsetFlag2_t 같으면 양품(1), 다르면 고품(0)
         if (goodsetFlag1_t == goodsetFlag2_t) {
           final_result = 1;
         } else if (goodsetFlag1_t != goodsetFlag2_t) {
-          final_result = 0;
+          final_result = 2;
         } else {
           console.log("양품, 고품 판별 불가");
         }
+
+        // (임시) 주사위 눈을 변수에 저장
+        dice_num_before4 = dice_num_before3;
+        dice_num_before3 = 0;
+        console.log("dice_num_before4 콘솔 4번 직전: ", dice_num_before4);
 
         // 4) serial_number 만들기	. serial_number는 ('LOCK'+ date)
         const rawDate = machineElementsSorts[0].value;
@@ -121,23 +186,49 @@ client.on("message", async (topic, message, packet) => {
           rawDate.substr(17, 2);
         console.log(serial_number);
 
-        // 6) DB에 serial_number와 함께 양품인지 고품인지 여부를 각각 저장
+        // (임시) 주사위 눈을 변수에 저장
+        dice_num_before5 = dice_num_before4;
+        dice_num_before4 = 0;
+        console.log("dice_num 콘솔 5번 직전: ", dice_num_before5);
+
+        // 5) DB에 serial_number와 함께 양품인지 고품인지 여부를 각각 저장
         const test_result = await Test_result.findOne({
           where: { serial_number },
         });
-        console.log(test_result);
-        //
+
+        // (임시) 주사위 눈을 변수에 저장
+        dice_num = dice_num_before5;
+        dice_num_before5 = 0;
+        console.log("dice_num 콘솔 db 직전: ", dice_num);
+
         if (!test_result) {
           await Test_result.create({
             serial_number,
             final_result,
+            dice_num,
             MachineId: 1,
           });
         }
+        dice_num = 0;
       }
+    } else if (
+      // start == false && belt == false -> machine_status : 0 (동작 멈춤)
+      machineElementsSorts[16].value == false &&
+      machineElementsSorts[1].value == false
+    ) {
+      await Machine.update(
+        { machine_status: 0 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
     }
+    // }
   } catch (error) {
-    console.log("plc data 누수");
+    // console.log("plc data 누수");
+    console.log(error);
   }
 
   // console.log("the end");

@@ -55,7 +55,7 @@
             <!-- <v-btn class="history_content_condition-postBtn">Search<i class="fa-solid fa-magnifying-glass"></i></v-btn> -->
           </div>
           <div class="history_content_icons">
-            <button type="button" @click="excelDown">
+            <button type="button" @click="getHistoryData">
               <span class="icon-button repeat"> <i class="fa-solid fa-retweet icon-repeat"></i><span></span> </span>
             </button>
             &nbsp;
@@ -71,12 +71,12 @@
             <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
           </v-text-field> -->
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="rightBtn">
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
             <div class="history__card--icon">
-              <button class="history__card--button">
+              <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>
               </button>
             </div>
@@ -85,7 +85,7 @@
             :headers="headers"
             :items="details"
             :search="search"
-            :items-per-page="8"
+            :items-per-page="10"
             hide-default-footer
           ></v-data-table>
         </v-card>
@@ -116,10 +116,12 @@ export default {
       machine_title: null,
       itemsStatus: ['모두', '양품', '고품'],
       itemStatus: null,
+      table_index: 0,
       dates: [
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
       ],
+      history_data: [],
       headers: [
         {
           text: 'Serial information',
@@ -127,95 +129,12 @@ export default {
           filterable: false,
           value: 'serial'
         },
-        { text: 'process_result', value: 'process_result' },
-        // { text: 'color', value: 'white' },
         { text: 'machine_info', value: 'machine_info' },
         { text: 'test_date', value: 'test_date' },
         { text: 'diceInfo', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
-      details: [
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        },
-        {
-          serial: 'LCOK202212141722',
-          process_result: 'GoodSet',
-          machine_info: '1',
-          test_date: '2022-12-14 17:22',
-          diceInfo: 6,
-          description: ''
-        }
-      ]
+      details: []
     }
   },
   created() {
@@ -226,70 +145,90 @@ export default {
       return this.dates.join(' ~ ')
     },
     ...mapGetters('Machine', [
-      'Line' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
+      'Machine' // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
     ])
   },
   methods: {
-    async excelDown() {
+    excelDown() {
       const xlsx = require('xlsx')
       // 엑셀 파일 생성
       const book = xlsx.utils.book_new()
 
       // data get > 실 개발시 api 호출
-      const fruitDataByAoa = await this.getFruitDataByAoa()
-      const fruitDataByJson = await this.getFruitDataByJson()
+      // const fruitDataByAoa = await this.getFruitDataByAoa()
+      const fruitDataByJson = this.getFruitDataByJson()
 
       // sheet 생성 - aoa_to_sheet 방식
-      const worksheetByAoa = xlsx.utils.aoa_to_sheet(fruitDataByAoa)
+      // const worksheetByAoa = xlsx.utils.aoa_to_sheet(fruitDataByAoa)
 
       // sheet 생성 - json_to_sheet 방식
       const worksheetByJson = xlsx.utils.json_to_sheet(fruitDataByJson)
 
       // 엑셀 파일에 sheet set(엑셀파일, 시트데이터, 시트명)
-      xlsx.utils.book_append_sheet(book, worksheetByAoa, 'aoa')
+      // xlsx.utils.book_append_sheet(book, worksheetByAoa, 'aoa')
       xlsx.utils.book_append_sheet(book, worksheetByJson, 'json')
 
       // 엑셀 다운로드
-      xlsx.writeFile(book, 'fruit.xlsx')
+      xlsx.writeFile(book, 'Rowdata.xlsx')
     },
     // aoa는 행열 데이터를 엑셀과 동일하게 get
-    getFruitDataByAoa() {
-      let arr = []
-      arr.push(['이름', '칼로리', '지방', '탄수화물', '단백질', '철분'])
-      arr.push(['바나나', '159', '6.0', '24', '4.0', '1'])
-      arr.push(['사과', '237', '9.0', '37', '2.3', '4'])
-      arr.push(['오렌지', '78', '1.2', '45', '1.1', '3.3'])
-      return arr
-    },
+    // getFruitDataByAoa() {
+    //   let arr = []
+    //   arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+    //   arr.push(['바나나', '159', '6.0', '24', '4.0', '1'])
+    //   arr.push(['사과', '237', '9.0', '37', '2.3', '4'])
+    //   arr.push(['오렌지', '78', '1.2', '45', '1.1', '3.3'])
+    //   return arr
+    // },
     getFruitDataByJson() {
       let arr = []
-      arr.push({ 이름: '바나나', 칼로리: 159, 지방: 6.0, 탄수화물: 24, 단백질: 4.0, 철분: '1' })
-      arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
-      arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
+      let tempArr = []
+      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+      // arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
+      // arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
+      for (let i = 0; i < this.history_data.length; i++) {
+        // arr.push(this.history_data[i])
+        for (var key in this.history_data[i]) {
+          tempArr.push(this.history_data[i][key])
+        }
+        arr.push(tempArr)
+        tempArr = []
+      }
+      console.log('ARRRRRRR')
+      console.log(arr)
       return arr
     },
     getMachineList() {
-      for (let i = 0; i < this.Line.length; i++) {
-        this.machines.push(this.Line[i].machine_name)
+      this.machines.push('ALL')
+      for (let i = 0; i < this.Machine.length; i++) {
+        this.machines.push(this.Machine[i].machine_name)
       }
     },
     getHistoryData() {
+      this.table_index = 0
+      this.history_data = []
       let MachineId = null
       let final_result = null
+
       // axios 호출
       // console.log(this.dates)
       let start_date = this.dates[0]
       let end_date = this.dates[1]
-      for (let i = 0; i < this.Line.length; i++) {
-        if (this.Line[i].machine_name == this.machine_title) {
-          MachineId = this.Line[i].id
+      for (let i = 0; i < this.Machine.length; i++) {
+        if (this.Machine[i].machine_name == this.machine_title) {
+          MachineId = this.Machine[i].id
+          break
         }
+        MachineId = null
       }
+
+      console.log('#############################')
+      console.log(this.itemStatus)
       // 영어로 바꿀수도 있음
       if (this.itemStatus == '양품') {
         final_result = 1
       } else if (this.itemStatus == '고품') {
-        final_result = 0
+        final_result = 2
       } else {
         final_result = null
       }
@@ -298,8 +237,59 @@ export default {
       console.log(start_date, end_date, MachineId, final_result)
 
       history.getHistoryData({ start_date, end_date, MachineId, final_result }).then(res => {
-        console.log(res)
+        let tempData = {}
+        console.log('get res', res.data.data.test_result)
+        // this.history_data = res.data.data.test_result
+        for (let i = 0; i < res.data.data.test_result.length; i++) {
+          tempData.serial = res.data.data.test_result[i].serial_number
+          if (res.data.data.test_result[i].final_result == 2) {
+            tempData.process_result = 'Failure'
+          } else {
+            tempData.process_result = 'GoodSet'
+          }
+          tempData.machine_info = res.data.data.test_result[i].Machine.machine_name
+          tempData.test_date = res.data.data.test_result[i].createdAt
+          tempData.diceInfo = res.data.data.test_result[i].dice_num
+          if (res.data.data.test_result[i].description == null) {
+            tempData.description = ''
+          } else {
+            tempData.description = res.data.data.test_result[i].description
+          }
+
+          this.history_data.push(tempData)
+          tempData = {}
+        }
+        console.log('hd', this.history_data)
+        // 총 개수 카운트
+        this.countAll = this.history_data.length
+        // 표에 그리기
+        this.details = []
+        if (this.history_data.length > 10) {
+          for (let i = 0; i < 10; i++) {
+            this.details.push(this.history_data[i])
+          }
+        } else {
+          for (let i = 0; i < this.history_data.length; i++) {
+            this.details.push(this.history_data[i])
+          }
+        }
       })
+    },
+    rightBtn() {
+      if (this.table_index + 10 > this.history_data.length) return
+      this.details = []
+      this.table_index += 10
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
+    },
+    leftBtn() {
+      if (this.table_index == 0) return
+      this.table_index -= 10
+      this.details = []
+      for (let i = this.table_index; i < this.table_index + 10; i++) {
+        this.details.push(this.history_data[i])
+      }
     }
   }
 }
@@ -466,5 +456,11 @@ export default {
 }
 input {
   width: 10%;
+}
+table.v-table tbody th > span {
+  font-size: 100px !important;
+}
+th {
+  background-color: red;
 }
 </style>

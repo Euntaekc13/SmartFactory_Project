@@ -9,6 +9,7 @@ notenough : 원하는 data가 param이나 req에 아예 없거나 부족할 때
 invalid : req로 받은 data가 유효하지 않을 때
 insufficient : 보낼 data가 없거나 부족할 때
 same : 같으면 안 되는데 같을 경우
+notadmin : 관리자가 아님
 
 invalide : invalid email
 invalidp : invalid pw
@@ -50,6 +51,10 @@ exports.resStatus = {
   same: {
     code: 206,
     message: "same", // 보낼 data가 없거나 부족할 때
+  },
+  notadmin: {
+    code: 206,
+    message: "notadmin", // 관리자가 아님
   },
 
   expired: {

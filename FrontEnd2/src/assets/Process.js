@@ -141,6 +141,63 @@ export class Resource {
       let Device = Dev.product.Device
       this.machine.Device = Device
       this.num2Group.add(Device)
+    } else if (data === 3) {
+      this.loader.load('/fbx/StaticMesh4.FBX', object => {
+        let obj = (this.machine.num3body = object)
+        obj.name = 'num3body'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.05
+        obj.position.set(-4.3, 4, 4.7)
+
+        obj.rotation.x = -90 * (Math.PI / 180)
+        obj.rotation.z = -170 * (Math.PI / 180)
+        //1. z축 start: 4.7 / end : 12
+        obj.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        if (obj) this.num2Group.add(obj)
+      })
+      this.loader.load('/fbx/StaticMesh3.FBX', object => {
+        let obj = (this.machine.num3Y = object)
+        obj.name = 'num2Out'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
+        obj.position.set(0, 13, 0)
+        obj.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        if (obj) this.num2Group.add(obj)
+      })
+      this.loader.load('/fbx/StaticMesh2.FBX', object => {
+        let obj = (this.machine.num3XZ = object)
+        obj.name = 'num2Out'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
+        obj.position.set(0, 13, 0)
+        obj.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        if (obj) this.num2Group.add(obj)
+      })
+      this.loader.load('/fbx/StaticMesh1.FBX', object => {
+        let obj = (this.machine.catch = object)
+        obj.name = 'num2Out'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
+        obj.position.set(0, 13, 0)
+        obj.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        if (obj) this.num2Group.add(obj)
+      })
     }
   }
 }
@@ -209,7 +266,7 @@ export class Renderer {
     this.renderer.setPixelRatio(1)
     this.renderer.shadowMap.enabled = true
     this.renderer.setSize(element.clientWidth || 500, element.clientHeight || 500)
-    console.log(element.clientWidth, element.clientHeight)
+    // console.log(element.clientWidth, element.clientHeight)
     element.appendChild(this.renderer.domElement)
   }
 

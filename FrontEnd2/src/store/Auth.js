@@ -25,7 +25,7 @@ export const Auth = {
     // state 는 위에 있는 state 이고
     // data 는 아래 commit에서 보내주는 response 로 받아온 데이터이다.
     LOGIN(state, data) {
-      console.log('mutations 안쪽 LOGIN - data : ', data)
+      // console.log('mutations 안쪽 LOGIN - data : ', data)
       if (!data.token) return
       // 여기 아래 user에 대한 내용을 넣어야 한다.
       state.TokenUser = data.data.user //user 갱신
@@ -47,7 +47,7 @@ export const Auth = {
       state.TokenUser.email = data
       state.TokenUser.authorization = data
       state.TokenUser.phone_number = data
-      console.log('check state value : ', state)
+      // console.log('check state value : ', state)
       localStorage.removeItem('token')
     }
   },
@@ -56,7 +56,7 @@ export const Auth = {
       return auth
         .login(employee_number, password)
         .then(data => {
-          console.log('Login 성공? data : ', data)
+          // console.log('Login 성공? data : ', data)
           data.data.message == 'invalid'
             ? alert('Wrong user information, please try again')
             : commit('LOGIN', data.data)

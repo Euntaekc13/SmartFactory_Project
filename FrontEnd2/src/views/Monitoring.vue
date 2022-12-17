@@ -111,7 +111,7 @@ export default {
     this.connectMqtt()
     await this.getMonitoringInfo()
     this.userImgRenderFunction()
-    console.log('Monitoring created value : ', this.userImgRender)
+    // console.log('Monitoring created value : ', this.userImgRender)
     //(this.port = '9001'), (this.hostname = '192.168.0.58'), (this.topic = 'machine')
   },
   mounted() {
@@ -303,6 +303,7 @@ export default {
               newObject.position.z += 0.19
             }
             //양품고품 판단
+
             console.log('EduStatus.product 체크 : ')
             // console.log('color센서 : ', machineElementsSorts[4].value)
             if (machineElementsSorts[4].value == true) {
@@ -330,32 +331,32 @@ export default {
       })
     },
     getConnectInfo() {
-      console.log('야야 여기 체크해', this.$route.params.id)
+      // console.log('야야 여기 체크해', this.$route.params.id)
       for (let i = 0; i < this.Machine.length; i++) {
         if (this.Machine[i].id == this.$route.params.id) {
           this.hostname = this.Machine[i].mqtt_name
           this.port = this.Machine[i].mqtt_port
           this.topic = this.Machine[i].mqtt_topic
           this.MachineId = this.$route.params.id
-          console.log('information check : ', this.hostname, this.port, this.topic, this.MachineId)
+          // console.log('information check : ', this.hostname, this.port, this.topic, this.MachineId)
         }
       }
     },
     //이미지 업로드
     async getMonitoringInfo() {
-      console.log('getMonitoringInfo start check - machineId: ', this.MachineId)
+      // console.log('getMonitoringInfo start check - machineId: ', this.MachineId)
       await this.getMonitoringInfoStoreAction({ machineId: this.MachineId }).then(() => {
         console.log('Success to get count information')
       })
     },
     userImgRenderFunction() {
-      console.log('no', this.assignedUser.userImage)
+      // console.log('no', this.assignedUser.userImage)
       this.userImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
     },
     //스토어 리셋
     deleteImg() {
       this.$store.commit('Monitoring/assignedUserDelete', null)
-      console.log(this.userImgRender)
+      // console.log(this.userImgRender)
     },
     handleResize(event) {
       // const monitoring = document.querySelector('.Monitoring-body')

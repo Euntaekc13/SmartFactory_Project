@@ -41,7 +41,7 @@ export const Monitoring = {
   mutations: {
     dailyProductivityUpdate(state, data) {
       // 아직 daily 작업을 추가해야함
-      console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
+      // console.log('mutations 안쪽 dailyProductivityUpdate - data : ', data)
       let totalQty = 0
       let goodSetQty = 0
       let failureQty = 0
@@ -51,7 +51,7 @@ export const Monitoring = {
 
       let i = 0
       let j = 0
-      console.log('여기를 잡아야함 ', data.test_result.length)
+      // console.log('여기를 잡아야함 ', data.test_result.length)
       if (data.test_result.length !== 0) {
         for (i = 0; i < data.test_result.length; i++) {
           data.test_result[i].final_result == 1 ? goodSetQty++ : failureQty++
@@ -62,7 +62,7 @@ export const Monitoring = {
         totalQty = 0
       }
 
-      console.log('여기를 잡아야함 ', data.today_final_result)
+      // console.log('여기를 잡아야함 ', data.today_final_result)
 
       if (data.today_final_result.length !== 0) {
         for (j = 0; j < data.today_final_result.length; j++) {
@@ -84,7 +84,7 @@ export const Monitoring = {
       state.dailyProductivity.dailyFailure = dailyFailureQty
     },
     cycleCountUpdate(state, data) {
-      console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
+      // console.log('mutations 안쪽 cycleCountUpdate - data : ', data)
       let i = 0
       for (i = 0; i <= 2; i++) {
         switch (data.part[i].PartDefaultId) {
@@ -101,15 +101,15 @@ export const Monitoring = {
       }
     },
     assignedUserUpdate(state, data) {
-      console.log('mutations 안쪽 assignedUserUpdate - data : ', data)
+      // console.log('mutations 안쪽 assignedUserUpdate - data : ', data)
       state.assignedUser.userName = data.manager.name
       state.assignedUser.userEmail = data.manager.email
       state.assignedUser.userPhone = data.manager.phone_number
       state.assignedUser.userImage = data.manager.user_image
     },
     assignedUserDelete(state, data) {
-      console.log('delete')
-      console.log('store monitoring mutation')
+      // console.log('delete')
+      // console.log('store monitoring mutation')
       // 여기서 data 는 함수가 선언된 부분에서 정한 null 값으로 전부 입력
       state.assignedUser.userName = data
       state.assignedUser.userEmail = data
@@ -134,7 +134,7 @@ export const Monitoring = {
       return getMonitoringInfoApi
         .taking(machineId)
         .then(result => {
-          console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
+          // console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
           commit('dailyProductivityUpdate', result.data.data)
           commit('cycleCountUpdate', result.data.data)
           commit('assignedUserUpdate', result.data.data)

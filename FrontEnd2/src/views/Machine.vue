@@ -1,81 +1,92 @@
 <template>
-  <div>
+  <v-app>
     <Navbar></Navbar>
-    <v-main style>
-      <div class="machine__container">
-        <div class="machine__header">
-          <h1>Process Management</h1>
-          <v-divider></v-divider>
-        </div>
-        <div class="machine__content">
-          <div class="Select__process">
-            <v-col cols="2">
-              <!-- v-model="select" 에다가 watch 를 걸어서 data 에 변화가 있으면 이벤트가 발생하게끔 -->
-              <v-select v-model="select" :items="machines" label="Select" persistent-hint single-line></v-select>
+    <v-main style="height: 100%">
+      <!-- <div class="machine__container"> -->
+      <div class="machine__header">
+        <h1>Process Management</h1>
+        <!-- <v-divider></v-divider> -->
+      </div>
+      <div class="machine__content">
+        <div class="content__up__header">
+          <h3 class="process_title">Process</h3>
+          <div :class="[select == null ? 'Select__process' : 'after_Select__process']">
+            <v-col cols="10">
+              <v-select
+                v-model="select"
+                :items="machines"
+                label="Select Factory"
+                persistent-hint
+                dense
+                outlined
+              ></v-select>
             </v-col>
           </div>
-          <div class="content__up">
-            <!-- <v-sheet class="mx-auto" elevation="8" max-width="800"> -->
-            <v-slide-group class="pa-4" center-active show-arrows>
-              <v-slide-item v-for="processData in processes" :key="processData.processId" v-slot="{ active, toggle }">
-                <v-card
-                  class="ma-4"
-                  :class="{ 'on-active': active }"
-                  :color="active ? 'white' : 'white'"
-                  :elevation="active ? 12 : 2"
-                  height="300"
-                  width="550"
-                  @click="toggle"
-                >
-                  <MachineItem :process-data="processData" />
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
+        </div>
+        <div class="content__up">
+          <div v-if="select == null" class="beforeSelect">
+            <h1 style="color: #a9a9a9">Please Select Factory</h1>
           </div>
-          <v-divider></v-divider>
-          <div class="content__down">
-            <div class="Process_line_Title"><h3>Process version</h3></div>
-            <div class="content__down__body" style="display: flex">
-              <div class="content__down__left">
-                <div class="Process_CurVersion">
-                  <v-card class="mx-auto" max-width="344">
-                    <v-card-text v-if="selected">
-                      <div>Current version</div>
-                      <p class="text-h4 text--primary">{{ softwareVersionList[0].softwareVersion }}</p>
-                      <p>adjective</p>
-                      <div class="text--primary">
-                        relating to or dependent on charity; charitable.<br />
-                        "an eleemosynary educational institution."
-                      </div>
-                    </v-card-text>
-                  </v-card>
-                </div>
+          <v-slide-group v-else class="pa-4">
+            <v-slide-item v-for="processData in processes" :key="processData.processId" v-slot="{ active, toggle }">
+              <v-card
+                class="ma-4"
+                :class="{ 'on-active': active }"
+                :color="active ? 'white' : 'white'"
+                :elevation="active ? 12 : 2"
+                height="300"
+                width="550"
+                @click="toggle"
+              >
+                <MachineItem :process-data="processData" />
+              </v-card>
+            </v-slide-item>
+          </v-slide-group>
+        </div>
+        <v-divider></v-divider>
+        <div class="content__down">
+          <div class="Process_line_Title"><h3>Software Version</h3></div>
+          <div class="content__down__body" style="display: flex">
+            <div class="content__down__left">
+              <div class="Process_CurVersion">
+                <v-card class="mx-auto" max-width="344">
+                  <v-card-text v-if="selected">
+                    <div>Current version</div>
+                    <p class="text-h4 text--primary">{{ softwareVersionList[0].softwareVersion }}</p>
+                    <p>adjective</p>
+                    <div class="text--primary">
+                      relating to or dependent on charity; charitable.<br />
+                      "an eleemosynary educational institution."
+                    </div>
+                  </v-card-text>
+                </v-card>
               </div>
-              <v-spacer></v-spacer>
-              <div class="content__down__right">
-                <div class="History_list_title"><h5>HISTORY</h5></div>
-                <div class="History_list">
-                  <v-expansion-panels v-show="selected">
-                    <v-expansion-panel v-for="(softwareData, i) in softwareVersionList" :key="i">
-                      <v-expansion-panel-header>
-                        <p>Version : {{ softwareData.softwareVersion }}</p>
-                        <v-spacer></v-spacer>
-                        <p>Updated : {{ softwareData.softwareVersionApplied }}</p>
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content>
-                        This page is for the description of selected software version. Please add the data on your DB in
-                        order for it to be rendered correctly.
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </div>
+            </div>
+            <v-spacer></v-spacer>
+            <div class="content__down__right">
+              <div class="History_list_title"><h5>HISTORY</h5></div>
+              <div class="History_list">
+                <v-expansion-panels v-show="selected">
+                  <v-expansion-panel v-for="(softwareData, i) in softwareVersionList" :key="i">
+                    <v-expansion-panel-header>
+                      <p>Version : {{ softwareData.softwareVersion }}</p>
+                      <v-spacer></v-spacer>
+                      <p>Updated : {{ softwareData.softwareVersionApplied }}</p>
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      This page is for the description of selected software version. Please add the data on your DB in
+                      order for it to be rendered correctly.
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- </div> -->
     </v-main>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -92,7 +103,7 @@ export default {
   data() {
     return {
       // data: 50
-      select: 0,
+      select: null,
       // selectinfo: { machine_name: 'Machine Name', information: 'Machine Information' },
       selected: false,
       machines: [],
@@ -124,21 +135,12 @@ export default {
           tempNumber = this.Machine[i].id
         }
       }
-      console.log('가보자구 ~~ ', tempNumber)
       this.machineSelectReset()
       this.softwareListReset()
       this.selected = true
-      console.log('선택된 공정 - Watch : ', this.select.machine_name + ' // Line 아이디 값 : ' + newSelect.id)
 
       this.machineSelect(tempNumber)
       this.getSoftwareVersionList(tempNumber)
-
-      console.log('process 배열 - :', this.processes)
-      console.log('software 배열 - :', this.softwareVersionList)
-      console.log(this.selected)
-      console.log(this.softwareVersionList[0].softwareVersion)
-
-      // .softwareData.softwareVersion
     }
   },
   created() {
@@ -154,13 +156,11 @@ export default {
       })
     },
     updateMachineInfo() {
-      console.log(this.Machine)
       let arr = []
       for (let i = 0; i < this.Machine.length; i++) {
         arr.push(this.Machine[i].machine_name)
       }
       this.machines = arr
-      console.log('hello', this.machines)
     },
     machineSelect(selectedMachineId) {
       if (selectedMachineId) {
@@ -217,36 +217,70 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .machine__container {
   width: 96%;
   height: 93%;
-  margin: 2% auto;
   /* border: 1px solid black; */
   /* border-radius: 30px; */
   /* box-sizing: border-box; */
   background-color: white;
 }
+
 .machine__header {
+  padding: 2% 4% 2% 4%;
+  border-bottom: 2px solid #e0e0e0;
 }
-.machine__header > h1 {
-  display: inline-block;
-  margin: 2% 0px 0.5% 50px;
+.process_title {
+  margin-top: 2%;
+}
+.beforeSelect {
+  margin-left: 40%;
 }
 .Select__process {
-  margin: 0 0 0 2.5%;
+  margin: 1% 5% 0 0%;
+  top: 170px;
+  left: 36.1%;
+  position: relative;
+}
+.after_Select__process {
+  margin: 1% 0 0 3%;
+  position: relative;
+  animation: slide-out 3s ease-out forwards;
+  top: 170px;
+  left: 580px;
+  /* top: 0px;
+  right: 0%; */
+}
+@keyframes slide-out {
+  0% {
+    transform: translateY(0) translateX(-50px);
+  }
+  50% {
+    transform: translateY(-170px) translateX(-50px);
+  }
+  100% {
+    transform: translateY(-170px) translateX(-600px);
+  }
+}
+.pa-4 {
+  animation: comming 2s ease-out forwards;
+}
+@keyframes comming {
+  from {
+    transform: translateY(800px);
+  }
+  to {
+    transform: translateY(0px);
+  }
 }
 .machine__content {
   width: 100%;
   height: 75vh;
-  /* overflow: scroll; */
-  /* box-sizing: border-box; */
-  /* overflow-y: hidden; */
-  /* background-color: red; */
 }
 .content__up {
   display: flex;
-  margin: 1% auto;
+  margin: 1% auto 5% auto;
   height: 47%;
   width: 90%;
   /* background-color: aqua; */
@@ -259,8 +293,13 @@ export default {
   padding: 1.5% 0 0 0;
   display: grid;
 }
+.content__up__header {
+  margin: 1% 0 0 4.5%;
+  width: 100%;
+  display: flex;
+}
 .Process_line_Title {
-  margin-left: 3%;
+  margin: 3% 0 0 3%;
   width: 100%;
 }
 .content__down__body {

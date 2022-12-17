@@ -116,6 +116,6 @@ export default {
   margin: 10%;
 }
 .machine__Process__desc {
-  margin: 10% 0 0 0%;
+  margin: 10% 0 0 10%;
 }
 </style>

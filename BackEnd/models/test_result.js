@@ -9,7 +9,7 @@ module.exports = class Test_result extends Sequelize.Model {
           allowNull: false,
         },
         final_result: {
-          // 1이면 양품, 0이면 고품
+          // 1이면 양품, 2이면 고품
           type: Sequelize.STRING(40),
           allowNull: false,
         },

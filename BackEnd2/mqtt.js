@@ -18,8 +18,8 @@ let thirdFlag = false; // 3호기
 let goodsetFlag1 = false; // 색깔 판별해서 흰색이면 true
 let goodsetFlag2 = false; // 2호기에 도달했을 때 true
 let final_result = null;
-let dice_num = 0;
-let arr = [];
+// let dice_num = 0;
+// let arr = [];
 
 // const client = mqtt.connect("mqtt://localhost:1883"); // connect PLC directly
 const client = mqtt.connect("mqtt://192.168.0.72:1883"); // connect PLC through JK smart connector
@@ -32,7 +32,7 @@ client.subscribe("machine");
 
 // subscribe에 대한 message 받기. 각 topic에 따른 로직 처리
 client.on("message", async (topic, message, packet) => {
-  console.log("###########");
+  // console.log("###########");
   try {
     // message가 buffer로 오므로 JSON 형식으로 변환
     const rareElements = await JSON.parse(message.toString());
@@ -81,50 +81,60 @@ client.on("message", async (topic, message, packet) => {
       if (machineElementsSorts[11].value == true) {
         goodsetFlag2 = true;
       }
+
       // setTimeout(() => {
       //   if (machineElementsSorts[14].value > 0) {
       //     arr.push(machineElementsSorts[14].value);
       //   }
-      // }, 1200);
+      // }, 18000);
 
-      // 주사위 눈 값 배열에 담고, 가장 빈도수 높은 값 dice_num2에 담기
-      if (machineElementsSorts[14].value > 0) {
-        arr.push(machineElementsSorts[14].value);
-      }
-      const result = arr.reduce((accu, curr) => {
-        accu[curr] = (accu[curr] || 0) + 1;
-        return accu;
-      }, {});
-      console.log(result);
-      if (result) {
-        let dice_num2 = Object.keys(result).reduce((a, b) =>
-          result[a] > result[b] ? a : b
-        );
-        console.log("dice_num2 : ", dice_num2);
-      }
+      // let dice_num2 = null;
+      // if (arr.length != 0) {
+      //   let result = arr.reduce((accu, curr) => {
+      //     accu[curr] = (accu[curr] || 0) + 1;
+      //     return accu;
+      //   }, {});
+
+      //   console.log("result: ", result);
+
+      //   dice_num2 = Object.keys(result).reduce((a, b) =>
+      //     result[a] > result[b] ? a : b
+      //   );
+
+      //   // result = null;
+      //   // console.log(dice_num2);
+      // }
+
       // tag 25(No3Gripper)이 true이고, thirdFlag가 true이면,
       if (machineElementsSorts[15].value == true && thirdFlag == true) {
         // await finalProcess(machineElementsSorts);
         // 1) 변수 재설정
         let secondFlag_t = secondFlag;
-        // let goodsetFlag1_t = goodsetFlag1;
-        // let goodsetFlag2_t = goodsetFlag2;
+        let goodsetFlag1_t = goodsetFlag1;
+        let goodsetFlag2_t = goodsetFlag2;
         firstFlag = false;
         secondFlag = false;
         thirdFlag = false;
-        // goodsetFlag1 = false;
-        // goodsetFlag2 = false;
-
+        goodsetFlag1 = false;
+        goodsetFlag2 = false;
         // 2) 1,2,3호기 DB count +=1
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 1 } });
         if (secondFlag_t == true) {
           await Part.increment({ count: 1 }, { where: { PartDefaultId: 2 } });
           final_result = 1;
-          dice_num = dice_num2;
         } else {
           final_result = 2;
         }
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 3 } });
+
+        // 주사위 눈
+        // let dice_num;
+        // if (dice_num2 > 0) {
+        //   dice_num = dice_num2;
+        //   dice_num2 = null;
+        //   console.log("dice_num : ", dice_num);
+        // }
+        // arr = [];
         // // 	3) goodsetFlag1_t와 goodsetFlag2_t 같으면 양품(1), 다르면 고품(2)
         // if (goodsetFlag1_t == goodsetFlag2_t) {
         //   final_result = 1;
@@ -145,23 +155,50 @@ client.on("message", async (topic, message, packet) => {
           rawDate.substr(17, 2);
         console.log(serial_number);
         // 6) DB에 serial_number와 함께 양품인지 고품인지 여부를 각각 저장
-        const test_result = await Test_result.findOne({
-          where: { serial_number },
-        });
-        console.log(test_result);
-        //
-        if (!test_result) {
-          console.log("final_result : ", final_result);
-          await Test_result.create({
-            serial_number,
-            final_result,
-            dice_num,
-            MachineId: 1,
-          });
+        const sleep = (delay) =>
+          new Promise((resolve) => setTimeout(resolve, delay));
 
-          arr = [];
-          dice_num = 0;
+        async function saveData() {
+          console.log("after 18000");
+          await sleep(10000);
+          console.log("now!!");
+          console.log(machineElementsSorts[14]);
+          let dice_num = machineElementsSorts[14].value;
+          console.log("dice_num : ", dice_num);
+          const test_result = await Test_result.findOne({
+            where: { serial_number },
+          });
+          // console.log(test_result);
+          //
+          if (!test_result) {
+            await Test_result.create({
+              serial_number,
+              final_result,
+              dice_num: dice_num,
+              MachineId: 1,
+            });
+          }
+          // arr = [];
+          // dice_num = 0;
         }
+
+        saveData();
+
+        // if(final_result == 2){
+        //      await Test_result.create({
+        //        serial_number,
+        //        final_result,
+        //        dice_num: 0,
+        //        MachineId: 1,
+        //      });
+        // }else{
+        //    await Test_result.create({
+        //      serial_number,
+        //      final_result,
+        //      dice_num,
+        //      MachineId: 1,
+        //    });
+        // }
       }
     } else if (
       // start == false && belt == false -> machine_status : 0 (동작 멈춤)

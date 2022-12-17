@@ -5,7 +5,7 @@ export const machine = {
     return request('get', '/')
   },
   getMachine() {
-    console.log('get Line information')
+    // console.log('get Line information')
     return request('get', '/machine')
   }
 }

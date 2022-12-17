@@ -27,7 +27,6 @@ export const sample = {
     FETCH_SAMPLE({ commit }) {
       //commit은 mutation으로 보내주기 위함
       return sampleApi.getEx().then(res => {
-        console.log(res)
         commit('SET_SAMPLE_OB', res)
       })
     },

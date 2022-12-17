@@ -194,7 +194,6 @@ export default {
         arr.push(tempArr)
         tempArr = []
       }
-      console.log('ARRRRRRR')
       console.log(arr)
       return arr
     },
@@ -221,9 +220,6 @@ export default {
         }
         MachineId = null
       }
-
-      console.log('#############################')
-      console.log(this.itemStatus)
       // 영어로 바꿀수도 있음
       if (this.itemStatus == '양품') {
         final_result = 1
@@ -234,11 +230,10 @@ export default {
       }
 
       // 주사위 눈 추가 될 수 있음
-      console.log(start_date, end_date, MachineId, final_result)
+      // console.log(start_date, end_date, MachineId, final_result)
 
       history.getHistoryData({ start_date, end_date, MachineId, final_result }).then(res => {
         let tempData = {}
-        console.log('get res', res.data.data.test_result)
         // this.history_data = res.data.data.test_result
         for (let i = 0; i < res.data.data.test_result.length; i++) {
           tempData.serial = res.data.data.test_result[i].serial_number
@@ -259,7 +254,6 @@ export default {
           this.history_data.push(tempData)
           tempData = {}
         }
-        console.log('hd', this.history_data)
         // 총 개수 카운트
         this.countAll = this.history_data.length
         // 표에 그리기

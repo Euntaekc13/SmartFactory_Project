@@ -16,10 +16,10 @@ export const Machine = {
     //   state.data = data
     // },
     GET_MACHINE_MUTATION(state, data) {
-      console.log('GET_MACHINE_MUTATION - data.data : ', data.data)
+      // console.log('GET_MACHINE_MUTATION - data.data : ', data.data)
 
       state.Machine = data.data.machine
-      console.log('GET_MACHINE_MUTATION - state.Machine : ', state.Machine)
+      // console.log('GET_MACHINE_MUTATION - state.Machine : ', state.Machine)
     }
   },
   actions: {
@@ -30,7 +30,7 @@ export const Machine = {
           .getMachine()
           // response
           .then(data => {
-            console.log('Get Machine 성공 : ', data)
+            // console.log('Get Machine 성공 : ', data)
             // response 를 저장하는데, mutation 에 있는 함수를 호출해서 경로를 잡는다.
             commit('GET_MACHINE_MUTATION', data.data)
           })

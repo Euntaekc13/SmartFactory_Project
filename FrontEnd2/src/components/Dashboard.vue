@@ -44,23 +44,50 @@
             <div class="battery-background">
               <div class="battery-item" style="display: flex">
                 <div class="battery">
+                  <div class="battery_subTitle">
+                    <h3 class="blocktitle">No.1</h3>
+                  </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
-                      <span id="batery--load"></span>
+                      <span
+                        :class="{
+                          'batery--loadG': num1Color === 'Green',
+                          'batery--loadY': num1Color === 'Yellow',
+                          'batery--loadR': num1Color === 'Red'
+                        }"
+                      ></span>
                     </div>
                   </div>
                 </div>
                 <div class="battery">
+                  <div class="battery_subTitle">
+                    <h3 class="blocktitle">No.2</h3>
+                  </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
-                      <span id="batery--load"></span>
+                      <span
+                        :class="{
+                          'batery--loadG': num2Color === 'Green',
+                          'batery--loadY': num2Color === 'Yellow',
+                          'batery--loadR': num2Color === 'Red'
+                        }"
+                      ></span>
                     </div>
                   </div>
                 </div>
                 <div class="battery">
+                  <div class="battery_subTitle">
+                    <h3 class="blocktitle">No.3</h3>
+                  </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
-                      <span id="batery--load"></span>
+                      <span
+                        :class="{
+                          'batery--loadG': num3Color === 'Green',
+                          'batery--loadY': num3Color === 'Yellow',
+                          'batery--loadR': num3Color === 'Red'
+                        }"
+                      ></span>
                     </div>
                   </div>
                 </div>
@@ -106,7 +133,15 @@ export default {
   data() {
     return {
       data: false,
-      fanstatus: false
+      fanstatus: false,
+      BatteryColor: 'Green',
+      num1Color: null,
+      num2Color: null,
+      num3Color: null,
+      process1Count: 0,
+      process2Count: 0,
+      process3Count: 0
+      // num1MaxCycle:this.cycleCount.process1Max,
     }
   },
   computed: {
@@ -116,8 +151,52 @@ export default {
       // assignedUser: 'assignedUser'
     })
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.computedColor()
+  },
+  methods: {
+    computedColor() {
+      console.log('데이터 : ', this.cycleCount)
+      const process1Max = this.cycleCount.process1Max || 0
+      const process2Max = this.cycleCount.process2Max || 0
+      const process3Max = this.cycleCount.process3Max || 0
+
+      this.output.process1Count = this.process1Count
+      this.output.process2Count = this.process2Count
+      this.output.process3Count = this.process3Count
+
+      console.log(`1호기맥스:${process1Max} 2호기맥스: ${process2Max} 3호기맥스: ${process3Max}`)
+      const num1status = ((this.cycleCount.process1 + this.process1Count) / process1Max) * 100
+      const num2status = ((this.cycleCount.process2 + this.process2Count) / process2Max) * 100
+      const num3status = ((this.cycleCount.process3 + this.process3Count) / process3Max) * 100
+
+      console.log(`1호기:${num1status} 2호기: ${num2status} 3호기: ${num3status}`)
+
+      if (num1status >= 90) {
+        this.num1Color = 'Green'
+      } else if (num1status < 90 && num1status > 20) {
+        this.num1Color = 'Yellow'
+      } else {
+        this.num1Color = 'Red'
+      }
+
+      if (num2status >= 50) {
+        this.num2Color = 'Green'
+      } else if (num2status < 50 && num2status > 20) {
+        this.num2Color = 'Yellow'
+      } else {
+        this.num2Color = 'Red'
+      }
+
+      if (num3status >= 50) {
+        this.num3Color = 'Green'
+      } else if (num3status < 50 && num3status > 20) {
+        this.num3Color = 'Yellow'
+      } else {
+        this.num3Color = 'Red'
+      }
+    }
+  }
 }
 </script>
 <style scoped>
@@ -578,32 +657,6 @@ a {
   height: 0;
   width: 0;
 }
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select
-  input:checked {
-  color: #ddd;
-} */
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select
-  input:checked
-  ~ .checkmark {
-  background-color: #2196f3;
-} */
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select
-  input:checked
-  ~ .select-title {
-  color: #ddd;
-} */
 #section-single-frequency .frequency-content .frequency-single-content .frequency-single-cores .core-select .checkmark {
   position: absolute;
   top: 0px;
@@ -613,44 +666,10 @@ a {
   border-radius: 50%;
   border: 2px solid;
 }
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select:nth-child(1)
-  .checkmark {
-  border-color: #ddd;
-} */
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select:nth-child(1)
-  input:checked
-  ~ .checkmark {
-  background-color: #ddd;
-} */
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select:nth-child(2)
-  .checkmark {
-  border-color: #2c97de;
-} */
-/* #section-single-frequency
-  .frequency-content
-  .frequency-single-content
-  .frequency-single-cores
-  .core-select:nth-child(2)
-  input:checked
-  ~ .checkmark {
-  background-color: #2c97de;
-} */
 #section-single-frequency .frequency-content .frequency-single-content .frequency-single-histogram {
   position: absolute;
   text-align: left;
-  margin-right: 5%;
+  margin: 6% 5%;
   width: 80%;
 }
 #section-single-frequency.frequency-content .battery-background {
@@ -662,13 +681,19 @@ a {
   position: relative;
 }
 #section-single-frequency.frequency-content .battery-background .battery-item {
-  margin: 0 0 0 3%;
+  margin: 8% 0 0 1.5%;
   width: 25%;
   height: 100%;
   display: flex;
 }
+.battery_subTitle {
+  margin: 2%;
+  align-self: center;
+  padding: 0 30%;
+}
+
 .battery {
-  margin: 0 0 0 7%;
+  margin: 0 0 0 8.5%;
 }
 
 #batery--container {
@@ -689,15 +714,6 @@ a {
 #batery--container:before {
   border: solid 4px rgb(74, 74, 74);
 }
-/* #batery--container:after {
-  border: solid 48px transparent;
-  border-left: solid 96px rgba(14, 20, 26, 0.15);
-  border-bottom-width: 0px;
-  border-top-width: 175px;
-  bottom: -29px;
-  left: 4px;
-} */
-
 #batery--container:after,
 #batery--container:before,
 #batery--load:before,
@@ -712,17 +728,34 @@ a {
   overflow: hidden;
   position: relative;
   border-radius: 4px;
-  animation-fill-mode: forwards;
-}
-#batery--load {
-  position: absolute;
-  height: 1rem;
-  background: red;
-  bottom: 0;
-  width: 100%;
-  /* animation: loading 3s ease-in infinite; */
   /* animation-fill-mode: forwards; */
 }
+
+.batery--loadG {
+  position: absolute;
+  height: 12rem;
+  background: #388d4d;
+  bottom: 0;
+  width: 100%;
+  transition: 2s;
+}
+.batery--loadY {
+  position: absolute;
+  height: 5rem;
+  background: rgb(173, 173, 70);
+  bottom: 0;
+  width: 100%;
+  transition: 2s;
+}
+.batery--loadR {
+  position: absolute;
+  height: 2rem;
+  background: rgb(173, 33, 33);
+  bottom: 0;
+  width: 100%;
+  transition: 2s;
+}
+
 #section-single-frequency
   .frequency-content
   .frequency-single-content
@@ -742,7 +775,6 @@ a {
   .frequency-single-info
   .full-txtBlock {
   padding: 10px;
-  margin: 0 0 0 20%;
   border-radius: 7px;
   background-color: #2d2d2d;
   display: inline-block;

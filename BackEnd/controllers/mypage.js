@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { Test_result, Machine, Part, Part_default, User } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 
+// 회원 정보 수정 (이름,이메일,전화번호)
 exports.updateUserInformation = async (req, res, next) => {
   console.log("PUT /mypage/update/information/:UserId 진입");
   try {
@@ -34,6 +35,7 @@ exports.updateUserInformation = async (req, res, next) => {
   }
 };
 
+// 회원 정보 수정 (비밀번호)
 exports.updateUserPassword = async (req, res, next) => {
   console.log("PUT /mypage/update/pw/:UserId 진입");
   try {

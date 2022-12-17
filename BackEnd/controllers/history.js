@@ -2,6 +2,7 @@ const { Test_result, Machine } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 const { Op } = require("sequelize");
 
+// 생산 이력 조회
 exports.productionHistoryExplorer = async (req, res, next) => {
   try {
     console.log("POST /history 진입");

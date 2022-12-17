@@ -4,80 +4,7 @@ const User = require("../models/user");
 const authservice = require("../service/authService");
 const { resStatus } = require("../lib/responseStatus");
 
-// 회원가입
-exports.join = async (req, res, next) => {
-  console.log("POST /auth/join 진입");
-  try {
-    const {
-      employee_number,
-      email,
-      name,
-      password,
-      authorization,
-      phone_number,
-      user_image,
-    } = req.body;
-
-    if (!employee_number || !email || !name || !password || !authorization) {
-      return res.status(resStatus.invalid.code).json({
-        message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
-      });
-    }
-
-    // const params = {
-    //   employee_number : req.body.employee_number,
-    //   email : ,
-    //   name,
-    //   password,
-    //   authorization,
-    //   phone_number,
-    //   user_image,
-    // };
-
-    const userDuplication = await User.findAll({
-      where: {
-        [Op.or]: [
-          { employee_number: params.employee_number },
-          { email: params.email },
-        ],
-      },
-    });
-
-    // const emailDuplication = await User.findOne({
-    //   where: { email },
-    // });
-
-    if (userDuplication) {
-      console.log("emplyee_number or email Duplication");
-      return res.status(resStatus.invalid.code).json({
-        message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
-      });
-    }
-
-    const salt = await bcrypt.genSalt(12);
-    const hashPassword = await bcrypt.hash(password, salt);
-    // const hashPassword = await bcrypt.hash(password, 12);
-    await User.create({
-      employee_number,
-      email,
-      name,
-      password: hashPassword,
-      authorization,
-      phone_number,
-      user_image,
-    });
-
-    return res.status(resStatus.success.code).json({
-      // 200
-      message: resStatus.success.message, // success
-    });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-};
-
-// 로그인
+// 로그인(admin, user 모두)
 exports.login = async (req, res, next) => {
   console.log("POST /auth/login 진입");
   // console.log(req.body);
@@ -95,16 +22,33 @@ exports.login = async (req, res, next) => {
         message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
       });
     }
+    // console.log("### : ", user.dataValues.authorization);
+    const authorization = user.dataValues.authorization;
     const result = await bcrypt.compare(password, user.password);
     if (!result) {
       return res.status(resStatus.invalid.code).json({
         message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
       });
     } else {
-      const token = jwt.sign({}, process.env.JWT_SECRET, {
-        expiresIn: "600000m",
-        issuer: "KYOL",
-      });
+      let token = null;
+      if (authorization == "admin") {
+        token = jwt.sign(
+          {
+            authorization: authorization,
+          },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "600000m",
+            issuer: "KYOL",
+          }
+        );
+      } else {
+        token = jwt.sign({}, process.env.JWT_SECRET, {
+          expiresIn: "600000m",
+          issuer: "KYOL",
+        });
+      }
+
       const user = await User.findOne({
         where: { employee_number },
         attributes: [

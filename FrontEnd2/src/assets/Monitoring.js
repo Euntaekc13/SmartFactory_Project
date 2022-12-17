@@ -44,7 +44,6 @@ export class Resource {
     this.edukit = {}
     this.ProductTag = {}
     this.setResource(file)
-    // this.setProduct()
   }
 
   setResource(file) {
@@ -374,7 +373,12 @@ export class Render {
       }
       // let scene = new Scene('edukit')
       try {
-        if (this.Object.product) console.log('Class scene', this.Object.product)
+        const product = this.Object.product
+        if (product.position.z >= 10) {
+          product.position.x += 0.017
+        } else {
+          product.position.z += 0.018
+        }
       } catch {
         console.log('Not Yet')
       }

@@ -138,19 +138,20 @@ export default {
       let renderer = new Renderer(container)
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
-      let render = new Render()
+      let render = new Render(scene.Object)
       render.element = container
       // render.controls = controlElement
       render.render = renderElement
       render.scene = sceneElement
       render.edukit = scene.resource.edukit
+      render.Object = scene.Object
       render.camera = cameraElement
       render.renderer = rendererElement
 
       // console.log(scene.Object)
       // Rendering Start
+      this.setEvent(scene.resource.edukit, render.Object, render)
       render.start()
-      this.setEvent(scene.resource.edukit, scene.Object, render)
     },
     connectMqtt() {
       const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
@@ -285,12 +286,6 @@ export default {
           if (EduStatus.product) {
             const newObject = EduStatus.product
             render.scene.add(newObject)
-
-            if (newObject.position.z >= 10) {
-              newObject.position.x += 0.3
-            } else {
-              newObject.position.z += 0.19
-            }
 
             //양품고품 판단
             if (machineElementsSorts[4].value == true) {

@@ -7,7 +7,7 @@ const {
   updateUserPassword,
 } = require("../controllers/mypage");
 
-router.post("/update/information/:UserId", verifyToken, updateUserInformation); // 공정 모니터링 정보 조회
-router.post("/update/pw/:UserId", verifyToken, updateUserPassword); // 공정 모니터링 정보 조회
+router.put("/update/information/:UserId", verifyToken, updateUserInformation); // 공정 모니터링 정보 조회
+router.put("/update/pw/:UserId", verifyToken, updateUserPassword); // 공정 모니터링 정보 조회
 
 module.exports = router;

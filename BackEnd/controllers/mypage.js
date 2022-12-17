@@ -3,7 +3,7 @@ const { Test_result, Machine, Part, Part_default, User } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 
 exports.updateUserInformation = async (req, res, next) => {
-  console.log("POST /mypage/update/information/:UserId 진입");
+  console.log("PUT /mypage/update/information/:UserId 진입");
   try {
     // 입력값 할당
     const UserId = parseInt(req.params.UserId, 10);
@@ -35,13 +35,13 @@ exports.updateUserInformation = async (req, res, next) => {
 };
 
 exports.updateUserPassword = async (req, res, next) => {
-  console.log("POST /mypage/update/pw/:UserId 진입");
+  console.log("PUT /mypage/update/pw/:UserId 진입");
   try {
     // 입력값 할당
     const UserId = parseInt(req.params.UserId, 10);
     const { currentPassword, newPassword } = req.body;
-
     console.log(UserId, currentPassword, newPassword);
+
     // 입력값 null 체크
     if (!UserId || !currentPassword || !newPassword) {
       return res.status(resStatus.notenough.code).json({
@@ -57,6 +57,13 @@ exports.updateUserPassword = async (req, res, next) => {
     if (!result) {
       return res.status(resStatus.invalid.code).json({
         message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
+      });
+    }
+
+    // 현재 password와 new password 일치 여부 체크
+    if (currentPassword == newPassword) {
+      return res.status(resStatus.invalid.code).json({
+        message: resStatus.same.message, // (206) current password와 new password가 같을 때
       });
     }
 

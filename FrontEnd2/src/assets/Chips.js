@@ -3,7 +3,6 @@ import * as THREE from 'three'
 export class MonitoringOB {
   constructor(object) {
     this.setMonitoring(object)
-    this.Processnum1()
   }
   setMonitoring(object) {
     const ProGeometry = new THREE.CylinderGeometry(1, 1, 1.5, 20)
@@ -13,6 +12,7 @@ export class MonitoringOB {
 
     Product.castShadow = true
     Product.receiveShadow = true
+
     Product.position.set(-14, 2, 8)
   }
 }

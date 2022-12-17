@@ -60,6 +60,7 @@ export class Resource {
     this.loader = new FBXLoader()
     this.num1Group = new Group()
     this.num2Group = new Group()
+    this.num3Group = new Group()
     this.machine = {}
     this.Product = {}
     this.setResource(data)
@@ -141,12 +142,14 @@ export class Resource {
       let Device = Dev.product.Device
       this.machine.Device = Device
       this.num2Group.add(Device)
-    } else if (data === 3) {
+    }
+    //3호기
+    else if (data === 3) {
       this.loader.load('/fbx/StaticMesh4.FBX', object => {
         let obj = (this.machine.num3body = object)
         obj.name = 'num3body'
-        obj.scale.x = obj.scale.y = obj.scale.z = 0.05
-        obj.position.set(-4.3, 4, 4.7)
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.9
+        obj.position.set(0, 0, 0)
 
         obj.rotation.x = -90 * (Math.PI / 180)
         obj.rotation.z = -170 * (Math.PI / 180)
@@ -157,46 +160,54 @@ export class Resource {
             child.receiveShadow = true
           }
         })
-        if (obj) this.num2Group.add(obj)
+        if (obj) this.num3Group.add(obj)
       })
       this.loader.load('/fbx/StaticMesh3.FBX', object => {
         let obj = (this.machine.num3Y = object)
-        obj.name = 'num2Out'
-        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
-        obj.position.set(0, 13, 0)
+        obj.name = 'num3Y'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.9
+        obj.position.set(0, 2, 1.75)
+        obj.rotation.x = -90 * (Math.PI / 180)
+        obj.rotation.z = -170 * (Math.PI / 180)
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
             child.receiveShadow = true
           }
         })
-        if (obj) this.num2Group.add(obj)
+        if (obj) this.num3Group.add(obj)
       })
       this.loader.load('/fbx/StaticMesh2.FBX', object => {
         let obj = (this.machine.num3XZ = object)
-        obj.name = 'num2Out'
-        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
-        obj.position.set(0, 13, 0)
+        obj.name = 'num3X'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.9
+        obj.position.set(2, 0.5, 3)
+        obj.rotation.x = -90 * (Math.PI / 180)
+        obj.rotation.z = -10 * (Math.PI / 180)
+
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
             child.receiveShadow = true
           }
         })
-        if (obj) this.num2Group.add(obj)
+        if (obj) this.num3Group.add(obj)
       })
       this.loader.load('/fbx/StaticMesh1.FBX', object => {
         let obj = (this.machine.catch = object)
-        obj.name = 'num2Out'
-        obj.scale.x = obj.scale.y = obj.scale.z = 0.017
-        obj.position.set(0, 13, 0)
+        obj.name = 'num3catch'
+        obj.scale.x = obj.scale.y = obj.scale.z = 0.9
+        obj.position.set(5.5, 0.4, 3)
+
+        obj.rotation.x = -90 * (Math.PI / 180)
+        obj.rotation.z = -160 * (Math.PI / 180)
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
             child.receiveShadow = true
           }
         })
-        if (obj) this.num2Group.add(obj)
+        if (obj) this.num3Group.add(obj)
       })
     }
   }
@@ -217,8 +228,8 @@ export class Scene {
     this.scene.background = new THREE.Color('#FFFFFF')
 
     this.scene.add(this.resource.num1Group)
-
     this.scene.add(this.resource.num2Group)
+    this.scene.add(this.resource.num3Group)
     // this.scene.add(this.resource.Product)
 
     this.scene.add(this.light.ambientLight)

@@ -1,27 +1,29 @@
 <template>
   <div>
     <div class="profile__content">
-      <div class="profile__box">
-        <div><span class="span__dot">*</span> Name</div>
-        <input v-model="name" class="profile__input" />
-      </div>
-      <div class="profile__box">
-        <div><span class="span__dot">*</span> E-mail</div>
-        <input v-model="e_mail" class="profile__input" />
-      </div>
-      <div class="profile__box">
-        <div><span class="span__dot">*</span> Phone Number</div>
-        <input v-model="phone" class="profile__input" />
-      </div>
-      <div>
-        <v-btn color="primary" @click="updateUserInfo">Submit</v-btn>
-      </div>
+      <form>
+        <div class="profile__box">
+          <div><span class="span__dot">*</span> Name</div>
+          <input v-model="name" class="profile__input" />
+        </div>
+        <div class="profile__box">
+          <div><span class="span__dot">*</span> E-mail</div>
+          <input v-model="e_mail" class="profile__input" />
+        </div>
+        <div class="profile__box">
+          <div><span class="span__dot">*</span> Phone Number</div>
+          <input v-model="phone" class="profile__input" />
+        </div>
+        <div>
+          <v-btn color="primary" @click="patchUserInfo">Submit</v-btn>
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -37,13 +39,25 @@ export default {
     this.getUserInfo()
   },
   methods: {
+    ...mapActions('Auth', ['PATCH_AUTH']),
     getUserInfo() {
       this.name = this.TokenUser.name
       this.e_mail = this.TokenUser.email
       this.phone = this.TokenUser.phone_number
     },
-    updateUserInfo() {
+    patchUserInfo() {
       // 유저 정보 수정 API 호출하기
+      console.log('회원정보 수정 가즈아')
+      console.log(this.TokenUser.id, this.e_mail, this.name, this.phone)
+      let patchData = {
+        id: this.TokenUser.id,
+        email: this.e_mail,
+        name: this.name,
+        phone_number: this.phone
+      }
+      this.PATCH_AUTH(patchData).then(() => {
+        this.getUserInfo()
+      })
     }
   }
 }

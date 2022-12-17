@@ -75,7 +75,7 @@
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
-            <div>{{ table_index / 10 }} / {{ parseInt(countAll / 10) }}</div>
+            <div>{{ table_index / 10 + 1 }} / {{ parseInt(countAll / 10) + 1 }}</div>
             <div class="history__card--icon">
               <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>

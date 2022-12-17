@@ -54,15 +54,17 @@ exports.join = async (req, res, next) => {
       });
     }
 
-    // const salt = await bcrypt.genSalt(12);
-    // const hashPassword = await bcrypt.hash(password, salt);
-    const hashPassword = await bcrypt.hash(password, 12);
+    const salt = await bcrypt.genSalt(12);
+    const hashPassword = await bcrypt.hash(password, salt);
+    // const hashPassword = await bcrypt.hash(password, 12);
     await User.create({
       employee_number,
       email,
       name,
       password: hashPassword,
       authorization,
+      phone_number,
+      user_image,
     });
 
     return res.status(resStatus.success.code).json({
@@ -112,6 +114,7 @@ exports.login = async (req, res, next) => {
           "name",
           "authorization",
           "user_image",
+          "phone_number",
         ],
       });
 

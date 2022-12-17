@@ -34,6 +34,12 @@ export const Auth = {
       // localStorage 에는 위에서 저장하고 다음 동작에 사용될 토큰을 미리 headers 에 저장
       setAuthInHeader(data.token) //header에 token 세팅
     },
+    PATCH(state, { email, name, phone_number }) {
+      state.TokenUser.email = email
+      state.TokenUser.name = name
+      state.TokenUser.phone_number = phone_number
+      console.log('check state value : ', state.TokenUser)
+    },
     LOGOUT(state, data) {
       state.TokenUser.id = data
       state.TokenUser.name = data
@@ -58,6 +64,17 @@ export const Auth = {
         })
         .catch(error => {
           console.log('Login 실패 : ', error)
+        })
+    },
+    PATCH_AUTH({ commit }, { id, email, name, phone_number }) {
+      console.log('회원 정보 수정 값이 잘 들어왔나 볼까요', id, email, name, phone_number)
+      return auth
+        .update_information(id, email, name, phone_number)
+        .then(() => {
+          commit('PATCH', { email, name, phone_number })
+        })
+        .catch(err => {
+          console.log('회원 정보 수정 실패')
         })
     },
     LOGOUT_AUTH({ commit }) {

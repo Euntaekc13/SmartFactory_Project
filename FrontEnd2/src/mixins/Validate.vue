@@ -24,6 +24,11 @@ extend('numeric', {
   message: '사번을 확인해주세요.'
 })
 
+extend('phone', {
+  ...numeric,
+  message: '숫자만 입력해주세요.'
+})
+
 // 최대 자릿수
 extend('max', {
   ...max,

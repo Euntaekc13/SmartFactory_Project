@@ -68,7 +68,7 @@
           <i class="fa-solid fa-right-to-bracket fa-xl"></i>
         </button>
       </router-link>
-      <router-link to="/configuration">
+      <router-link to="/teamInfoView">
         <button class="iconButton">
           <i class="fa-solid fa-gear fa-xl"></i>
         </button>
@@ -82,7 +82,7 @@
         <button class="spanButton" @click="routingToLine">
           <div class="buttonArea">
             <i class="fa-sharp fa-solid fa-industry fa-xl"></i>
-            <span>Line Management&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>Line Management&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </button>
       </div>
@@ -100,7 +100,7 @@
         <button class="spanButton" @click="routingToHistory">
           <div class="buttonArea">
             <i class="fa-sharp fa-solid fa-list fa-xl"></i>
-            <span>History Management</span>
+            <span>History Management&nbsp;</span>
           </div>
         </button>
       </div>

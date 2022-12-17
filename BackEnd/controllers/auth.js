@@ -18,15 +18,21 @@ exports.join = async (req, res, next) => {
       user_image,
     } = req.body;
 
-    const params = {
-      employee_number,
-      email,
-      name,
-      password,
-      authorization,
-      phone_number,
-      user_image,
-    };
+    if (!employee_number || !email || !name || !password || !authorization) {
+      return res.status(resStatus.invalid.code).json({
+        message: resStatus.invalid.message, // (206) req로 받은 data가 유효하지 않을 때
+      });
+    }
+
+    // const params = {
+    //   employee_number : req.body.employee_number,
+    //   email : ,
+    //   name,
+    //   password,
+    //   authorization,
+    //   phone_number,
+    //   user_image,
+    // };
 
     const userDuplication = await User.findAll({
       where: {
@@ -48,13 +54,14 @@ exports.join = async (req, res, next) => {
       });
     }
 
-    const salt = await bcrypt.genSalt(12);
-    const hash = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(12);
+    // const hashPassword = await bcrypt.hash(password, salt);
+    const hashPassword = await bcrypt.hash(password, 12);
     await User.create({
       employee_number,
       email,
       name,
-      password: hash,
+      password: hashPassword,
       authorization,
     });
 

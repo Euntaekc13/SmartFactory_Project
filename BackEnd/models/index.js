@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
   config.username,
   config.password,
   config,
-  { timezone: "+09:00" }
+  { timezone: "Asia/Seoul" }
 );
 
 db.sequelize = sequelize;

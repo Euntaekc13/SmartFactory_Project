@@ -1,10 +1,10 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <v-main style="box-sizing: border-box; heigth: 100vh; max-height: 100vh">
+    <v-main style="box-sizing: border-box; height: 100vh; max-height: 100vh">
       <div class="line__container">
         <div class="line__header">
-          <h1>공정 관리</h1>
+          <h1>Line Management</h1>
           <v-divider></v-divider>
         </div>
         <div class="line__content">
@@ -15,10 +15,10 @@
                   <h3>{{ Machine.machine_name }}</h3>
                 </div>
                 <span slot="status" style="font-size: 18px">
-                  <p v-if="Machine.machine_status === 0">&nbsp;● 대기 중</p>
-                  <p v-else-if="Machine.machine_status === 1" style="color: #81c784">&nbsp;● 동작 중</p>
-                  <p v-else-if="Machine.machine_status === 2" style="color: #e53935">&nbsp;● 고장 !!</p>
-                  <p v-else style="color: black">&nbsp;미정</p>
+                  <p v-if="Machine.machine_status === 0">&nbsp;● Waiting...</p>
+                  <p v-else-if="Machine.machine_status === 1" style="color: #81c784">&nbsp;● Run</p>
+                  <p v-else-if="Machine.machine_status === 2" style="color: #e53935">&nbsp;● Warning</p>
+                  <p v-else style="color: black">&nbsp;Undefined</p>
                 </span>
                 <div slot="name">
                   <p>{{ Machine.User.name }}</p>
@@ -99,6 +99,8 @@ export default {
 .line__content {
   width: 100%;
   height: 80%;
+  min-height: 80vh;
+  max-height: 80vh;
   overflow: scroll;
   overflow-x: hidden;
   box-sizing: border-box;

@@ -5,6 +5,14 @@ export const auth = {
   login(employee_number, password) {
     // console.log('auth api page : ', employee_number, password)
     return request('post', '/auth/login', { employee_number, password })
+  },
+  update_information(id, email, name, phone_number) {
+    console.log('auth update information : ', id, email, name, phone_number)
+    return request('put', `/mypage/update/information/${id}`, { email, name, phone_number })
+  },
+  update_password(id, currentPassword, newPassword) {
+    console.log('auth update password : ', id, currentPassword, newPassword)
+    return request('put', `/mypage/update/pw/${id}`, { currentPassword, newPassword })
   }
 }
 // axios에 토큰 정보를 넣을땐 token 값 뺄땐 null 값을 준다.

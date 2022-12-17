@@ -36,6 +36,22 @@ const routes = [
     originalPush
   },
   {
+    path: '/mypage',
+    name: 'mypage',
+    component: () => import('../views/MypageView.vue')
+    // children: [
+    //   { path: '/', name: 'profile', component: () => import('../components/Profile.vue') },
+    //   { path: '/password', name: 'password', component: () => import('../components/Password.vue') }
+    // ]
+  },
+  {
+    path: '/teamInfoView',
+    name: 'TeamInfoView',
+    component: () => import('../views/TeamInfoView.vue'),
+    beforeEnter: requireAuth,
+    originalPush
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginView.vue')

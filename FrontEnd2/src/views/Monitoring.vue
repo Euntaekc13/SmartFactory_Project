@@ -73,21 +73,21 @@ export default {
       firstFlag: false, // 1호기
       secondFlag: false, // 2호기
       thirdFlag: false, // 3호기
-      dataSignal: [
-        { tagId: '0', name: 'DataTime', value: '' },
+      defaultDataSignal: [
+        { tagId: '0', name: 'DataTime', value: 'Default' },
         { tagId: '1', name: 'Start', value: true },
         { tagId: '3', name: 'No1_Action', value: false },
-        { tagId: '4', name: 'No2_Action', value: true },
+        { tagId: '4', name: 'No2_Action', value: false },
         { tagId: '6', name: 'ColorSensor', value: false },
         { tagId: '7', name: 'Reset', value: false },
-        { tagId: '13', name: 'lamp_green', value: true },
-        { tagId: '14', name: 'lamp_yellow', value: true },
+        { tagId: '13', name: 'lamp_green', value: false },
+        { tagId: '14', name: 'lamp_yellow', value: false },
         { tagId: '15', name: 'lamp_red', value: false },
         { tagId: '16', name: 'No3Motor1', value: '0' },
         { tagId: '17', name: 'No3Motor2', value: '0' },
         { tagId: '18', name: 'No2Chip', value: false },
         { tagId: '21', name: 'No2SolAction', value: false },
-        { tagId: '23', name: 'Emergency', value: true },
+        { tagId: '23', name: 'Emergency', value: false },
         { tagId: '24', name: 'DiceValue', value: '0' },
         { tagId: '25', name: 'No3Gripper', value: false },
         { tagId: '26', name: 'belt', value: true }
@@ -181,7 +181,7 @@ export default {
 
           const machineElements = message.Wrapper
           // tagId 순서로 오름차순 정렬
-          const machineElementsSorts = machineElements.sort((a, b) => {
+          let machineElementsSorts = machineElements.sort((a, b) => {
             if (parseInt(a.tagId) > parseInt(b.tagId)) {
               return 1
             } else if (parseInt(a.tagId) < parseInt(b.tagId)) {
@@ -191,9 +191,18 @@ export default {
             }
           })
 
-          // console.log(machineElementsSorts)
+          if (machineElementsSorts.length == 17) {
+            // console.log('정상적으로 들어옴', machineElementsSorts)
+            this.defaultDataSignal = machineElementsSorts
+            // console.log('defaultDataSignal : ', this.defaultDataSignal)
+          } else {
+            console.log('에러난듯? 얼른 바꾸자', machineElementsSorts)
+            machineElementsSorts = this.defaultDataSignal
+            console.log('바뀐 값 : ', machineElementsSorts)
+          }
+
           let diceNumber = machineElementsSorts[14].value
-          if (diceNumber > 3) {
+          if (diceNumber > 2) {
             console.log('dice Number : ', diceNumber)
           }
 
@@ -281,6 +290,7 @@ export default {
             new MonitoringOB(EduStatus)
             this.No1Flag = true
           }
+
           if (EduStatus.product) {
             // console.log('EduStatus.product : ', EduStatus.product)
             const Product = [{ XendPoint: 9.8 }, { Zendpoint: 10 }]
@@ -293,7 +303,8 @@ export default {
               newObject.position.z += 0.19
             }
             //양품고품 판단
-            // console.log('######################')
+
+            console.log('EduStatus.product 체크 : ')
             // console.log('color센서 : ', machineElementsSorts[4].value)
             if (machineElementsSorts[4].value == true) {
               this.WhiteColor = true

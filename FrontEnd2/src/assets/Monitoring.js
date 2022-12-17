@@ -183,7 +183,6 @@ export class Scene {
     this.Object = {}
     this.setScene()
     this.setMesh()
-    // this.setGrid()
   }
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
@@ -206,24 +205,6 @@ export class Scene {
     this.mesh.receiveShadow = true
     this.scene.add(this.mesh)
 
-    // //동작 상태 기본 set
-    // const sphereGeometry = new THREE.SphereGeometry(0.5, 10, 10)
-    // const sphereMaterial = new THREE.MeshPhongMaterial({ color: '#FF0000' })
-    // // 1호기 연식 상태
-    // const Num1Status = (this.Object.Num1Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    // Num1Status.position.set(-12.5, 12, 10)
-    // this.scene.add(Num1Status)
-    // // 2호기 연식 상태
-    // const Num2Status = (this.Object.Num2Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    // Num2Status.position.set(-5.8, 12, 0)
-    // this.scene.add(Num2Status)
-
-    // // 3호기 연식 상태
-    // const Num3Status = (this.Object.Num3Status = new THREE.Mesh(sphereGeometry, sphereMaterial))
-    // Num3Status.position.set(5, 15, 0)
-    // this.scene.add(Num3Status)
-    //-------공정 상태------
-
     this.EduStatus = new Group()
 
     //뚜껑
@@ -234,7 +215,6 @@ export class Scene {
     header.castShadow = true
     header.receiveShadow = true
     header.position.set(0, 18.55, 0)
-    // this.scene.add(header)
     this.EduStatus.add(header)
     //빨간불
     const RedMetry = new THREE.CylinderGeometry(1, 1, 2, 20)
@@ -245,7 +225,6 @@ export class Scene {
     RedL.castShadow = true
     RedL.receiveShadow = true
     RedL.position.set(0, 17, 0)
-    // this.scene.add(RedL)
     this.EduStatus.add(RedL)
 
     //노란불
@@ -268,8 +247,6 @@ export class Scene {
     GreenL.castShadow = true
     GreenL.receiveShadow = true
     GreenL.position.set(0, 13, 0)
-    // this.Object.GreenLight = GreenL
-    // this.scene.add(GreenL)
     this.EduStatus.add(GreenL)
 
     //연결목
@@ -395,6 +372,13 @@ export class Render {
           this.edukit.staticMesh1.position.z -= 0.017
         }
       }
+      // let scene = new Scene('edukit')
+      try {
+        if (this.Object.product) console.log('Class scene', this.Object.product)
+      } catch {
+        console.log('Not Yet')
+      }
+
       this.start()
     })
   }

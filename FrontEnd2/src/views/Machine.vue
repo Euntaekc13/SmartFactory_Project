@@ -255,12 +255,19 @@ export default {
 @keyframes slide-out {
   0% {
     transform: translateY(0) translateX(-50px);
+    opacity: 1;
   }
   50% {
     transform: translateY(-170px) translateX(-50px);
+    opacity: 0;
+  }
+  95% {
+    transform: translateY(-170px) translateX(-580px);
+    opacity: 0;
   }
   100% {
     transform: translateY(-170px) translateX(-600px);
+    opacity: 1;
   }
 }
 .pa-4 {

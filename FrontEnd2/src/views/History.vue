@@ -123,6 +123,10 @@ export default {
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
       ],
+      // dates: [
+      //   new Intl.DateTimeFormat('ko').format(new Date(Date.now() - new Date().getTimezoneOffset() * 60000)),
+      //   new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toLocaleDateString('ko')
+      // ],
       history_data: [],
       headers: [
         {
@@ -259,7 +263,16 @@ export default {
             tempData.process_result = 'GoodSet'
           }
           tempData.machine_info = res.data.data.test_result[i].Machine.machine_name
-          tempData.test_date = res.data.data.test_result[i].createdAt
+          // tempData.test_date = res.data.data.test_result[i].createdAt
+          // tempData.test_date = new Date(res.data.data.test_result[i].createdAt).toLocaleString('ko')
+          tempData.test_date = new Date(res.data.data.test_result[i].createdAt).toLocaleDateString('ko', {
+            minute: 'numeric',
+            hour: 'numeric',
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            weekday: 'short'
+          })
           tempData.diceInfo = res.data.data.test_result[i].dice_num
           if (res.data.data.test_result[i].description == null) {
             tempData.description = ''

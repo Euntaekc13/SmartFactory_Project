@@ -84,11 +84,6 @@ export default {
       })
       // console.log(this.LOGIN_AUTH(id,password));
     }
-    // enterkey() {
-    //   if (window.event.keyCode == 13) {
-    //     this.login()
-    //   }
-    // }
   }
 }
 </script>

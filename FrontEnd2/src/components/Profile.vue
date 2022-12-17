@@ -1,30 +1,43 @@
 <template>
   <div>
     <div class="profile__content">
-      <form>
-        <div class="profile__box">
-          <div><span class="span__dot">*</span> Name</div>
-          <input v-model="name" class="profile__input" />
-        </div>
-        <div class="profile__box">
-          <div><span class="span__dot">*</span> E-mail</div>
-          <input v-model="e_mail" class="profile__input" />
-        </div>
-        <div class="profile__box">
-          <div><span class="span__dot">*</span> Phone Number</div>
-          <input v-model="phone" class="profile__input" />
-        </div>
-        <div>
-          <v-btn color="primary" @click="patchUserInfo">Submit</v-btn>
-        </div>
-      </form>
+      <ValidationObserver ref="loginForm" v-slot="{ handleSubmit, invalid, validate }">
+        <form @submit.prevent="handleSubmit(patchUserInfo)">
+          <div class="profile__box">
+            <div><span class="span__dot">*</span> Name</div>
+            <ValidationProvider v-slot="v" name="이름" rules="required">
+              <input v-model="name" class="profile__input" />
+              <div style="font-size: smaller">&nbsp;{{ v.errors[0] }}</div>
+            </ValidationProvider>
+          </div>
+          <div class="profile__box">
+            <div><span class="span__dot">*</span> E-mail</div>
+            <ValidationProvider v-slot="v" name="이메일" rules="required|email">
+              <input v-model="e_mail" class="profile__input" />
+              <div style="font-size: smaller">&nbsp;{{ v.errors[0] }}</div>
+            </ValidationProvider>
+          </div>
+          <div class="profile__box">
+            <div><span class="span__dot">*</span> Phone Number</div>
+            <ValidationProvider v-slot="v" name="핸드폰 번호">
+              <input v-model="phone" class="profile__input" />
+              <div style="font-size: smaller">&nbsp;{{ v.errors[0] }}</div>
+            </ValidationProvider>
+          </div>
+          <div>
+            <v-btn color="primary" :disabled="invalid || !validate" @click="patchUserInfo">Submit</v-btn>
+          </div>
+        </form>
+      </ValidationObserver>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Validate from '@/mixins/Validate.vue'
 export default {
+  mixins: [Validate],
   data() {
     return {
       name: '',
@@ -55,9 +68,15 @@ export default {
         name: this.name,
         phone_number: this.phone
       }
-      this.PATCH_AUTH(patchData).then(() => {
-        this.getUserInfo()
-      })
+      this.PATCH_AUTH(patchData)
+        .then(() => {
+          this.getUserInfo()
+          alert('회원 정보 수정 완료')
+        })
+        .catch(() => {
+          this.getUserInfo()
+          alert('회원 정보 수정 실패')
+        })
     }
   }
 }

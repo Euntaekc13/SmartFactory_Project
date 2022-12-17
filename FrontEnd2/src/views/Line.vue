@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <v-main style="box-sizing: border-box; heigth: 100vh; max-height: 100vh">
+    <v-main style="box-sizing: border-box; height: 100vh; max-height: 100vh">
       <div class="line__container">
         <div class="line__header">
           <h1>Line Management</h1>
@@ -15,7 +15,7 @@
                   <h3>{{ Machine.machine_name }}</h3>
                 </div>
                 <span slot="status" style="font-size: 18px">
-                  <p v-if="Machine.machine_status === 0">&nbsp;● Wating...</p>
+                  <p v-if="Machine.machine_status === 0">&nbsp;● Waiting...</p>
                   <p v-else-if="Machine.machine_status === 1" style="color: #81c784">&nbsp;● Run</p>
                   <p v-else-if="Machine.machine_status === 2" style="color: #e53935">&nbsp;● Warning</p>
                   <p v-else style="color: black">&nbsp;Undefined</p>

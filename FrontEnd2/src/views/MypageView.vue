@@ -8,7 +8,14 @@
           <v-divider></v-divider>
         </div>
         <div class="line__content">
-          <input />
+          <div style="margin-left: 3vw">
+            <v-tabs center-active>
+              <v-tab @click="goProfile">&nbsp;Profile</v-tab>
+              <v-tab @click="goPassword">Password</v-tab>
+            </v-tabs>
+          </div>
+          <Profile v-if="tab"></Profile>
+          <Password v-else></Password>
         </div>
       </div>
     </v-main>
@@ -18,33 +25,28 @@
 <script>
 // import Item from '../components/Item.vue'
 import Navbar from '@/components/Navbar.vue'
-import { mapGetters, mapActions, mapState } from 'vuex'
+import Profile from '@/components/Profile.vue'
+import Password from '@/components/Password.vue'
 
 export default {
   name: 'Machine',
   components: {
-    Navbar
+    Navbar,
+    Profile,
+    Password
   },
   data() {
     return {
-      url: '192.168.0.72',
-      port: '9001',
-      topic: 'machine',
-      Machines: []
+      tab: true
     }
   },
-  computed: {
-    ...mapGetters('Machine', ['Machine']),
-    ...mapState('Machine', ['Machine'])
-    // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
-  },
-  async mounted() {
-    await this.GET_MACHINE().then(() => {
-      this.Machines = this.Machine
-    })
-  },
   methods: {
-    ...mapActions('Machine', ['GET_MACHINE'])
+    goProfile() {
+      this.tab = true
+    },
+    goPassword() {
+      this.tab = false
+    }
   }
 }
 </script>
@@ -75,6 +77,7 @@ export default {
   overflow: scroll;
   overflow-x: hidden;
   box-sizing: border-box;
+  /* display: flex; */
   /* overflow-y: hidden; */
 }
 .line__content::-webkit-scrollbar {

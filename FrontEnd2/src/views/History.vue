@@ -75,7 +75,7 @@
                 <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
-            <div>{{ table_index / 10 }} / {{ parseInt(countAll / 10) }}</div>
+            <div>{{ table_index / 10 + 1 }} / {{ parseInt(countAll / 10) + 1 }}</div>
             <div class="history__card--icon">
               <button class="history__card--button" @click="leftBtn">
                 <i class="fa-solid fa-caret-left"></i>
@@ -123,6 +123,10 @@ export default {
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
       ],
+      // dates: [
+      //   new Intl.DateTimeFormat('ko').format(new Date(Date.now() - new Date().getTimezoneOffset() * 60000)),
+      //   new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toLocaleDateString('ko')
+      // ],
       history_data: [],
       headers: [
         {
@@ -135,7 +139,7 @@ export default {
         { text: 'machine_info', value: 'machine_info' },
         { text: 'process_result', value: 'process_result' },
         { text: 'test_date', value: 'test_date' },
-        { text: 'diceInfo', value: 'diceInfo' },
+        { text: 'category number', value: 'diceInfo' },
         { text: 'description', value: 'description' }
       ],
       details: []
@@ -187,7 +191,7 @@ export default {
     getFruitDataByJson() {
       let arr = []
       let tempArr = []
-      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'diceInfo', 'description'])
+      arr.push(['Serial information', 'process_result', 'machine_info', 'test_date', 'category number', 'description'])
       // arr.push({ 이름: '사과', 칼로리: 237, 지방: 9.0, 탄수화물: 37, 단백질: 2.3, 철분: '4' })
       // arr.push({ 이름: '오렌지', 칼로리: 78, 지방: 1.2, 탄수화물: 45, 단백질: 1.1, 철분: '3.3' })
       for (let i = 0; i < this.history_data.length; i++) {
@@ -259,7 +263,16 @@ export default {
             tempData.process_result = 'GoodSet'
           }
           tempData.machine_info = res.data.data.test_result[i].Machine.machine_name
-          tempData.test_date = res.data.data.test_result[i].createdAt
+          // tempData.test_date = res.data.data.test_result[i].createdAt
+          // tempData.test_date = new Date(res.data.data.test_result[i].createdAt).toLocaleString('ko')
+          tempData.test_date = new Date(res.data.data.test_result[i].createdAt).toLocaleDateString('ko', {
+            minute: 'numeric',
+            hour: 'numeric',
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            weekday: 'short'
+          })
           tempData.diceInfo = res.data.data.test_result[i].dice_num
           if (res.data.data.test_result[i].description == null) {
             tempData.description = ''

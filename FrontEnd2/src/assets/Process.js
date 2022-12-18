@@ -176,8 +176,15 @@ export class Resource {
           }
         })
         if (obj) this.num3Group.add(obj)
-        this.machine.Yup = true
-        this.machine.down = false
+        this.machine.Yup = false //y축 상승
+        this.machine.Ydown = false //y축 하강
+        this.machine.Xfold = false //접기
+        this.machine.Xunfold = false //풀기
+        this.machine.point1 = true
+        this.machine.point2 = false
+        this.machine.point3 = false
+        this.machine.point4 = false
+        this.machine.point5 = false
       })
       this.loader.load('/fbx/StaticMesh2.FBX', object => {
         let obj = (this.machine.num3XZ = object)
@@ -419,22 +426,89 @@ export class Render {
       //y상승
       try {
         if (num3XZ) {
-          if (num3catch.position.y > 10) {
-            this.machine.Yup = false
-            this.machine.Ydown = true
-          } else if (num3catch.position.y < 2) {
-            this.machine.Yup = true
-            this.machine.Ydown = false
+          //down
+          //y높이가 10보다 낮고 y축 up이 true 일때, 상승 (point4 => point5)
+          if (this.machine.point5 == true) {
+            if (num3Y.position.y < 2) {
+              this.machine.point5 = false
+              this.machine.Ydown = false
+              this.machine.point1 = true
+            } else {
+              this.machine.Ydown = true
+            }
+            //up
+            //y높이가 2보다 낮아지면 y축 up true (start => point1 )
+          } else if (this.machine.point1 == true) {
+            if (num3Y.position.y >= 9) {
+              this.machine.point1 = false
+              this.machine.point2 = true
+              this.machine.Yup = false
+            } else {
+              this.machine.Yup = true
+              this.machine.Ydown = false
+              this.machine.Xunfold = false
+              this.machine.Xfold = false
+            }
+
+            //y높이가 2보다 낮아지면 y축 up true
+          } else if (this.machine.point2 == true) {
+            if (num3catch.position.x < 1.2) {
+              this.machine.point2 = false
+              this.machine.point3 = true
+              this.machine.Xunfold = false
+            } else {
+              this.machine.Xunfold = true //풀기
+            }
+            // this.machine.Ydown = false //다운
+            // this.machine.Xfold = false //접기
+          } else if (this.machine.point3 == true) {
+            if (num3Y.position.y < 2) {
+              this.machine.Ydown = false
+              this.machine.point3 = false
+              this.machine.point4 = true
+            } else {
+              this.machine.Ydown = true //다운
+            }
+          } else if (this.machine.point4 == true) {
+            if (num3catch.position.x > 9.75) {
+              this.machine.point4 = false
+              this.machine.Yup = false
+              this.machine.Xfold = false
+              this.machine.point5 = true
+            } else {
+              this.machine.Yup = true //업
+              this.machine.Xfold = true //접기
+            }
           }
 
-          if (num3catch.position.y < 10 && this.machine.Yup == true) {
+          //y높이가 10보다 낮고 y축 up이 true 일때, 상승
+          if (this.machine.Yup == true) {
             num3catch.position.y += 0.02
             num3XZ.position.y += 0.02
             num3Y.position.y += 0.02
-          } else if (num3catch.position.y > 2 && this.machine.Ydown == true) {
+            //y높이가 2보다 높고 y축 down이 true 일때, 하강
+          }
+          if (this.machine.Ydown == true) {
+            //&& this.machine.Ydown == true
             num3catch.position.y -= 0.02
             num3XZ.position.y -= 0.02
             num3Y.position.y -= 0.02
+            // 펼치고
+          }
+          if (this.machine.Xunfold == true) {
+            num3catch.position.x -= 0.02
+            num3catch.position.z += 0.022
+            num3XZ.rotation.z -= 0.0037
+            num3XZ.position.x -= 0.006
+            num3XZ.position.z += 0.006
+            //오므리고
+          }
+          if (this.machine.Xfold == true) {
+            num3catch.position.x += 0.02
+            num3catch.position.z -= 0.022
+            num3XZ.rotation.z += 0.0037
+            num3XZ.position.x += 0.006
+            num3XZ.position.z -= 0.006
           }
         }
       } catch {
@@ -444,20 +518,6 @@ export class Render {
       // 1) 1,2,3,4 포인트 전역 값을 객체에 담는다
       // 2) 1,2,3,4 포인트에 도달하는 값에 따라 오름,내림,펼침,굽힘 boolean을 넣는다
 
-      // //다시 상승
-      // if (num3Y.position.y < 2.1) {
-      //   num3catch.position.y += 0.05
-      //   num3XZ.position.y += 0.05
-      //   num3Y.position.y += 0.05
-      // }
-      // //오므리고
-
-      // //하강
-      // else if (num3Y.position.y == 10 && ) {
-      //   num3catch.position.y -= 0.05
-      //   num3XZ.position.y -= 0.05
-      //   num3Y.position.y -= 0.05
-      // }
       // else if (num3Y.position.y < 11) {
       //   num3catch.position.x += 0.015
       //   num3XZ.rotation.z += 0.0048
@@ -470,6 +530,7 @@ export class Render {
       //   num3XZ.rotation.z -= 0.0048
       //   num3XZ.position.x -= 0.0055
       //   num3XZ.position.z += 0.005
+
       // } else if (xAxis < nowxAxisMoterValue) {
       //   num3catch.position.x += 0.015
       //   num3XZ.rotation.z += 0.0048

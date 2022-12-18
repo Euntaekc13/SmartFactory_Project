@@ -50,19 +50,21 @@ client.on("message", async (topic, message, packet) => {
       }
     });
     // console.log(machineElementsSorts);
+
     if (
       // tag 26(belt)가 true이거나 tag 1(Start)이 true이면, machine_status : 1 (동작 중)
       machineElementsSorts[16].value == true ||
       machineElementsSorts[1].value == true
     ) {
-      // await Machine.update(
-      //   { machine_status: 1 },
-      //   {
-      //     where: {
-      //       id: 1,
-      //     },
-      //   }
-      // );
+      console.log("****************");
+      await Machine.update(
+        { machine_status: 1 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
       // tag 3(No1_Action)이 true이면, firstFlag = true, thirdFlag = true, secondFlag와 goodsetFlag1, goodsetFlag2는 false로 초기화
       if (machineElementsSorts[2].value == true) {
         firstFlag = true;
@@ -117,26 +119,7 @@ client.on("message", async (topic, message, packet) => {
         }
       }
 
-      // if (arr.length != 0) {
-      //   result = arr.indexOf(Math.max(...arr)) + 1;
-
-      //   result = arr.reduce((accu, curr) => {
-      //     accu[curr] = (accu[curr] || 0) + 1;
-      //     return accu;
-      //   }, {});
-      //   console.log(result);
-      //   if (result) {
-      //     dice_num2 = Object.keys(result).reduce((a, b) =>
-      //       result[a] > result[b] ? a : b
-      //     );
-      //     console.log("dice_num2 : ", dice_num2);
-      //   }
-      // }
-
-      // arr = [];
-      // if (dice_num2 > 0) {
-      //   result = null;
-      // }
+      // console.log("@@@@@@@@@@@@@@@@@@@");
       // tag 25(No3Gripper)이 true이고, thirdFlag가 true이면,
       if (machineElementsSorts[15].value == true && thirdFlag == true) {
         console.log("first arr : ", arr, dice_num);
@@ -149,10 +132,29 @@ client.on("message", async (topic, message, packet) => {
         thirdFlag = false;
         // goodsetFlag1 = false;
         // goodsetFlag2 = false;
-        dice_num = arr.indexOf(Math.max(...arr)) + 1;
-        arr = [0, 0, 0, 0, 0, 0];
+        let count = 0;
+        arr.filter((element, index, array) => {
+          if (element > 0) {
+            count++;
+          }
+        });
+        // console.log(count);
 
-        console.log("second arr : ", arr, dice_num);
+        if (count == 1) {
+          dice_num = arr.indexOf(Math.max(...arr)) + 1;
+          console.log("count가 1인 경우 : ", dice_num);
+        }
+        if (count >= 2) {
+          let firstindex = arr.indexOf(Math.max(...arr));
+          arr[firstindex] = 0;
+          dice_num = arr.indexOf(Math.max(...arr)) + 1;
+          console.log("count가 2개 이상인 경우 : ", dice_num);
+        }
+
+        arr = [0, 0, 0, 0, 0, 0];
+        count = 0;
+
+        console.log("최종 dice_num : ", arr, dice_num);
 
         // 2) 1,2,3호기 DB count +=1
         await Part.increment({ count: 1 }, { where: { PartDefaultId: 1 } });
@@ -188,7 +190,7 @@ client.on("message", async (topic, message, packet) => {
         const test_result = await Test_result.findOne({
           where: { serial_number },
         });
-        console.log(test_result);
+        // console.log(test_result);
         //
         if (!test_result) {
           console.log("final_result : ", final_result);
@@ -207,19 +209,19 @@ client.on("message", async (topic, message, packet) => {
       machineElementsSorts[16].value == false &&
       machineElementsSorts[1].value == false
     ) {
-      // await Machine.update(
-      //   { machine_status: 0 },
-      //   {
-      //     where: {
-      //       id: 1,
-      //     },
-      //   }
-      // );
+      await Machine.update(
+        { machine_status: 0 },
+        {
+          where: {
+            id: 1,
+          },
+        }
+      );
     }
     // }
   } catch (error) {
-    // console.log("plc data 누수");
-    console.log(error);
+    console.log("plc data 누수");
+    // console.log(error);
   }
   // console.log("the end");
 });

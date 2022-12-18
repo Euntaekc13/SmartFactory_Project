@@ -33,6 +33,7 @@ module.exports = class User extends Sequelize.Model {
         user_image: {
           type: Sequelize.STRING(40),
           allowNull: true,
+          defaultValue: "LJK.jpg",
         },
       },
       {

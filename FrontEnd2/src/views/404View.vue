@@ -1,12 +1,15 @@
 <template>
   <div>
     <v-main>
-      <div class="text__error">
-        <p>{{ string404 }}</p>
-        <p></p>
-      </div>
-      <div class="text__link">
-        <a @click="goHome">{{ stringLink }} </a>
+      <div class="content2"></div>
+      <div class="content">
+        <div class="text__error">
+          <p>{{ string404 }}</p>
+          <p></p>
+        </div>
+        <div class="text__link" @click="goHome">
+          <a @click="goHome">{{ stringLink }} </a>
+        </div>
       </div>
     </v-main>
   </div>
@@ -132,14 +135,16 @@ a {
   margin-top: 35px;
   height: 30px;
   line-height: 30px;
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  font-size: 60px;
 }
 
 .text__link {
-  margin-top: 80px;
+  margin-top: 150px;
   height: 20px;
   line-height: 20px;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
+  font-size: 40px;
 }
 
 .text__button {
@@ -147,5 +152,15 @@ a {
   height: 20px;
   line-height: 20px;
   font-size: 1.4rem;
+}
+.content {
+  height: 70vh;
+}
+.content2 {
+  position: fixed;
+  top: 30%;
+  left: 28%;
+  border: 10px solid white;
+  padding: 10% 24% 8% 20%;
 }
 </style>

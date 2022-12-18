@@ -19,7 +19,7 @@
           </div>
           <div class="profile__box">
             <div><span class="span__dot">*</span> Confirm Password</div>
-            <ValidationProvider v-slot="v" name="비밀번호 확인" rules="required|min:3|confirmed">
+            <ValidationProvider v-slot="v" name="비밀번호 확인" rules="required|min:3">
               <input v-model="pw3" class="profile__input" type="password" autoComplete="off" />
               <div style="font-size: smaller">&nbsp;{{ v.errors[0] }}</div>
             </ValidationProvider>
@@ -54,6 +54,13 @@ export default {
     patchUserPassword() {
       // 유저 정보 수정 API 호출하기
       console.log(this.TokenUser.id, this.pw1, this.pw2, this.pw3)
+      if (this.pw2 != this.pw3) {
+        alert('비밀번호 확인이 일치하지 않습니다.')
+        this.pw1 = ''
+        this.pw2 = ''
+        this.pw3 = ''
+        return
+      }
       auth
         .update_password(this.TokenUser.id, this.pw1, this.pw2)
         .then(res => {

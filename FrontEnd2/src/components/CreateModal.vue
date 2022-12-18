@@ -9,44 +9,44 @@
           </div>
           <v-divider></v-divider>
           <div class="input_item">
-            <ValidationProvider v-slot="{ errors }" name="상세설명" rules="required|min:2">
+            <ValidationProvider v-slot="{ errors }" name="Name" rules="required|min:2">
               <v-text-field
-                v-model="name"
+                v-model="username"
                 label="Name"
-                placeholder="Placeholder"
+                placeholder="Name"
                 outlined
                 :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" name="상세설명" rules="required|numeric">
+            <ValidationProvider v-slot="{ errors }" name="EmployeeNumber" rules="required|numeric">
               <v-text-field
                 v-model="employee_number"
                 label="Employee Number"
-                placeholder="Placeholder"
+                placeholder="Employee Number"
                 outlined
                 :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" name="상세설명" rules="required|email">
+            <ValidationProvider v-slot="{ errors }" name="Email" rules="required|email">
               <v-text-field
                 v-model="Email"
                 label="E-mail"
-                placeholder="Placeholder"
+                placeholder="E-mail"
                 outlined
                 :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" name="상세설명" rules="required|phone">
+            <ValidationProvider v-slot="{ errors }" name="PhoneNumber" rules="required">
               <v-text-field
                 v-model="phone_number"
                 label="Phone"
-                placeholder="Placeholder"
+                placeholder="PhoneNumber"
                 outlined
                 :error-messages="errors"
               ></v-text-field>
             </ValidationProvider>
           </div>
-          <div class="input_file">
+          <!-- <div class="input_file">
             <v-file-input
               ref="image"
               v-model="user_image"
@@ -57,7 +57,7 @@
               label="User Img"
               @change="upload"
             ></v-file-input>
-          </div>
+          </div> -->
           <v-spacer></v-spacer>
           <div class="btn_box">
             <div class="add_btn">
@@ -81,7 +81,7 @@ export default {
   mixins: [Validate],
   data() {
     return {
-      name: '',
+      username: '',
       Email: '',
       employee_number: '',
       phone_number: '',
@@ -98,13 +98,15 @@ export default {
     },
     createUser() {
       this.CREATE_USER({
-        name: this.name,
+        name: this.username,
         employee_number: this.employee_number,
         phone_number: this.phone_number,
         password: '1234',
         authorization: 'user',
-        email: this.email,
-        user_image: this.user_image.name
+        email: this.Email
+        // user_image: this.user_image.name
+      }).then(() => {
+        this.closeModal()
       })
       console.log(this.name, this.user_image.name, this.Email, this.phone_number)
     },

@@ -157,44 +157,45 @@ export default {
   methods: {
     computedColor() {
       console.log('데이터 : ', this.cycleCount)
-      const process1Max = this.cycleCount.process1Max || 0
-      const process2Max = this.cycleCount.process2Max || 0
-      const process3Max = this.cycleCount.process3Max || 0
+      const process1Max = this.cycleCount.process1Max
+      const process2Max = this.cycleCount.process2Max
+      const process3Max = this.cycleCount.process3Max
+      console.log(process1Max, process2Max, process3Max) // null null null ?
 
-      this.output.process1Count = this.process1Count
-      this.output.process2Count = this.process2Count
-      this.output.process3Count = this.process3Count
+      // this.output.process1Count = this.process1Count
+      // this.output.process2Count = this.process2Count
+      // this.output.process3Count = this.process3Count
 
-      console.log(`1호기맥스:${process1Max} 2호기맥스: ${process2Max} 3호기맥스: ${process3Max}`)
-      const num1status = ((this.cycleCount.process1 + this.process1Count) / process1Max) * 100
-      const num2status = ((this.cycleCount.process2 + this.process2Count) / process2Max) * 100
-      const num3status = ((this.cycleCount.process3 + this.process3Count) / process3Max) * 100
+      // console.log(`1호기맥스:${process1Max} 2호기맥스: ${process2Max} 3호기맥스: ${process3Max}`)
+      // const num1status = ((this.cycleCount.process1 + this.process1Count) / process1Max) * 100
+      // const num2status = ((this.cycleCount.process2 + this.process2Count) / process2Max) * 100
+      // const num3status = ((this.cycleCount.process3 + this.process3Count) / process3Max) * 100
 
-      console.log(`1호기:${num1status} 2호기: ${num2status} 3호기: ${num3status}`)
+      // console.log(`1호기:${num1status} 2호기: ${num2status} 3호기: ${num3status}`)
 
-      if (num1status >= 90) {
-        this.num1Color = 'Green'
-      } else if (num1status < 90 && num1status > 20) {
-        this.num1Color = 'Yellow'
-      } else {
-        this.num1Color = 'Red'
-      }
+      // if (num1status >= 90) {
+      //   this.num1Color = 'Green'
+      // } else if (num1status < 90 && num1status > 20) {
+      //   this.num1Color = 'Yellow'
+      // } else {
+      //   this.num1Color = 'Red'
+      // }
 
-      if (num2status >= 50) {
-        this.num2Color = 'Green'
-      } else if (num2status < 50 && num2status > 20) {
-        this.num2Color = 'Yellow'
-      } else {
-        this.num2Color = 'Red'
-      }
+      // if (num2status >= 50) {
+      //   this.num2Color = 'Green'
+      // } else if (num2status < 50 && num2status > 20) {
+      //   this.num2Color = 'Yellow'
+      // } else {
+      //   this.num2Color = 'Red'
+      // }
 
-      if (num3status >= 50) {
-        this.num3Color = 'Green'
-      } else if (num3status < 50 && num3status > 20) {
-        this.num3Color = 'Yellow'
-      } else {
-        this.num3Color = 'Red'
-      }
+      // if (num3status >= 50) {
+      //   this.num3Color = 'Green'
+      // } else if (num3status < 50 && num3status > 20) {
+      //   this.num3Color = 'Yellow'
+      // } else {
+      //   this.num3Color = 'Red'
+      // }
     }
   }
 }

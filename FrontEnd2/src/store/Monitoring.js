@@ -134,7 +134,7 @@ export const Monitoring = {
       return getMonitoringInfoApi
         .taking(machineId)
         .then(result => {
-          // console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
+          console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
           commit('dailyProductivityUpdate', result.data.data)
           commit('cycleCountUpdate', result.data.data)
           commit('assignedUserUpdate', result.data.data)

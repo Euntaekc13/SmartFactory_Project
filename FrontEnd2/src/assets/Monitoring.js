@@ -113,6 +113,8 @@ export class Resource {
         obj.rotation.x = -90 * (Math.PI / 180)
         obj.rotation.z = -10 * (Math.PI / 180)
 
+        obj.rotation.x = 10
+
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
@@ -374,10 +376,14 @@ export class Render {
       // let scene = new Scene('edukit')
       try {
         const product = this.Object.product
-        if (product.position.z >= 10) {
-          product.position.x += 0.017
-        } else {
-          product.position.z += 0.018
+        if (product.position.x < -6) {
+          if (product.position.z <= 10) {
+            product.position.x += 0.02
+          } else {
+            product.position.z += 0.018
+          }
+        } else if (product.position.x >= -6 && product.position.x < 4) {
+          product.position.x += 0.02
         }
       } catch {
         console.log('Not Yet')

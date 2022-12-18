@@ -104,6 +104,15 @@
           </div>
         </button>
       </div>
+
+      <div v-if="TokenUser.authorization == 'admin'" class="innerList">
+        <button class="spanButton" @click="routingToAdmin">
+          <div class="buttonArea">
+            <i class="fa-sharp fa-solid fa-users fa-xl"></i>
+            <span>User Management&nbsp;</span>
+          </div>
+        </button>
+      </div>
     </div>
     <v-divider></v-divider>
   </v-navigation-drawer>
@@ -158,8 +167,11 @@ export default {
     routingToHistory() {
       this.$router.push('/history')
     },
+    routingToAdmin() {
+      this.$router.push('/admin')
+    },
     async navUserImgRenderFunction() {
-      // console.log('Sidebar this.TokenUser.user_image : ', this.TokenUser.user_image)
+      console.log('Sidebar this.TokenUser.author : ', this.TokenUser.authorization)
       this.navUserImage = await require(`../../public/img/${this.TokenUser.user_image}`)
       // this.navUserImgRender = ''
       // console.log('Nav', this.assignedUser.userImage)

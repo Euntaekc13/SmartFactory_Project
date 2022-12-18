@@ -1,7 +1,9 @@
 <template>
   <div class="machine-container">
     <div class="machine__Process__list">
-      <div :class="`ImgDiv${processData.processType}`"></div>
+      <div class="ImgDiv">
+        <div :class="`Img${processData.processType}`"></div>
+      </div>
       <div class="machine__Process__desc">
         <div class="desc__LineName">
           <div>
@@ -60,19 +62,19 @@ export default {
     },
 
     SetGraphics(data) {
-      const ImgDiv = document.querySelector(`.ImgDiv${this.processData.processType}`)
-      ImgDiv.style.width = '40%'
-      ImgDiv.style.height = '85%'
+      const Img = document.querySelector(`.Img${this.processData.processType}`)
+      Img.style.width = '100%'
+      Img.style.height = '85%'
 
       let scene = new Scene(data)
       let cameraElement = scene.camera.cameraElement
       let sceneElement = scene.sceneElement
-      let renderer = new Renderer(ImgDiv)
+      let renderer = new Renderer(Img)
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
 
       let render = new Render(sceneElement)
-      render.element = ImgDiv
+      render.element = Img
       render.render = renderElement
       render.scene = sceneElement
       render.machine = scene.resource.machine
@@ -108,14 +110,12 @@ export default {
   height: 100%;
 }
 .ImgDiv {
-  margin: 2% 1% 0 10%;
-  width: 30%;
+  margin: 2% 1% 0 0;
+  width: 40%;
   height: 100%;
-}
-.ImgDiv__Img {
-  margin: 10%;
 }
 .machine__Process__desc {
   margin: 10% 0 0 10%;
+  padding: 5% 0 0 5%;
 }
 </style>

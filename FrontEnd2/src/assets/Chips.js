@@ -13,7 +13,7 @@ export class MonitoringOB {
     Product.castShadow = true
     Product.receiveShadow = true
 
-    Product.position.set(-14, 2, 8)
+    Product.position.set(-12, 2, 8)
   }
 }
 
@@ -32,7 +32,7 @@ export class Process {
     Product.name = 'num1Chip'
     Product.castShadow = true
     Product.receiveShadow = true
-    Product.position.set(0, 1.4, 7)
+    Product.position.set(5, 4, 7)
     // console.log(this.machine)
     this.product.num1Chip = Product
   }
@@ -59,7 +59,7 @@ export class Process {
     Device.castShadow = true
     Device.receiveShadow = true
     //초기 setting
-    Device.position.set(-4.3, 6, 7.5)
+    Device.position.set(-2.3, 6, 7.5)
 
     // console.log(this.machine)
     this.product.Device = Device

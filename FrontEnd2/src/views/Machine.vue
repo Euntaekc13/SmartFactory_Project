@@ -247,30 +247,30 @@ export default {
   margin: 1% 0 0 3%;
   position: relative;
   animation: select-out 3s ease-out forwards;
-  top: 300px;
-  left: 36.1%;
-  /* top: 0px;
-  right: 0%; */
 }
 @keyframes select-out {
   0% {
-    transform: translateY(30px) translateX(-15%);
+    transform: translateY(300px) translateX(160%);
     opacity: 1;
   }
   25% {
-    transform: translateY(-100px) translateX(-15%);
+    transform: translateY(100px) translateX(160%);
     opacity: 0;
   }
   50% {
-    transform: translateY(-300px) translateX(-80%);
+    transform: translateY(50px) translateX(160%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(50px) translateX(160%);
     opacity: 0;
   }
   85% {
-    transform: translateY(-300px) translateX(-130%);
+    transform: translateY(0px) translateX(80%);
     opacity: 0;
   }
   100% {
-    transform: translateY(-300px) translateX(-170%);
+    transform: translateY(0px) translateX(0%);
     opacity: 1;
   }
 }

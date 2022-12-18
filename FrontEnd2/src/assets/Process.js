@@ -4,7 +4,6 @@ import { Group } from 'three'
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 import { AmbientLight, DirectionalLight } from 'three'
 import { WebGLRenderer } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Process } from './Chips'
 
 export class Camera {
@@ -14,7 +13,7 @@ export class Camera {
   }
   setCamera() {
     this.camera.position.set(25, 25, 45)
-    this.camera.lookAt(0, 0, 0)
+    this.camera.lookAt(-1, 6, 0)
   }
   get cameraElement() {
     return this.camera
@@ -35,24 +34,6 @@ export class Light {
 
   get lightElement() {
     return this.dirLight
-  }
-}
-export class Control {
-  constructor(camera, domElement) {
-    this.controls = new OrbitControls(camera, domElement)
-
-    this.setControl()
-  }
-
-  setControl() {
-    this.controls.minDistance = 10
-    this.controls.maxDistance = 50
-    this.controls.target.set(0, 0, 0)
-    this.controls.enableDamping = true
-  }
-
-  get controlElement() {
-    return this.controls
   }
 }
 export class Resource {
@@ -85,7 +66,9 @@ export class Resource {
         let obj = (this.machine.num1 = object)
         obj.name = 'machine'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.0004
-        obj.position.set(0, 7, 0)
+        obj.position.set(3, 9, 0)
+        obj.rotation.z = 0.1
+        obj.rotation.y = -0.15
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
@@ -110,7 +93,7 @@ export class Resource {
         let obj = (this.machine.num2Inner = object)
         obj.name = 'num2Inner'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.026
-        obj.position.set(-4.3, 4, 4.7)
+        obj.position.set(-2.3, 4, 4.7)
         //1. z축 start: 4.7 / end : 12
         obj.traverse(function (child) {
           if (child.isMesh) {
@@ -124,7 +107,7 @@ export class Resource {
         let obj = (this.machine.num2Out = object)
         obj.name = 'num2Out'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.017
-        obj.position.set(0, 13, 0)
+        obj.position.set(2, 13, 0)
         obj.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
@@ -305,7 +288,6 @@ export class Render {
   }
   start() {
     this.status = window.requestAnimationFrame(() => {
-      this.controls.update()
       this.renderer.render(this.scene, this.camera)
 
       // const Chip = this.scene.children[0].children[0]
@@ -328,6 +310,7 @@ export class Render {
             }
           } else {
             num1Chip.position.z += 0.07
+            num1Chip.position.x -= 0.02
           }
         }
       } catch {
@@ -359,12 +342,12 @@ export class Render {
         }
         num2Chip.position.x += 0.05
 
-        if (Device.position.x == -4.3) {
+        if (Device.position.x == -2.3) {
           if (num2Inner.position.z < 13) {
             num2Inner.position.z += 0.05
           }
         }
-        if (Device.position.x > -4.3 && num2Inner.position.z > 4.71) {
+        if (Device.position.x > -2.3 && num2Inner.position.z > 4.71) {
           num2Inner.position.z -= 0.05
           if (num2Inner.position.z == 4.7) {
             const pro = new Process()
@@ -389,41 +372,7 @@ export class Render {
       let num3Y = this.machine.num3Y
       let num3XZ = this.machine.num3XZ
       let num3catch = this.machine.num3catch
-
-      // let Ydown = false
-      // let Xup = false
-      // let Xdown = false
-
       //3호기 set-------------------------------
-      /*
-      start : 
-      1. num3Y : 0, 2 ,3.25
-      2. num3XZ : 3.5 -0.3 ,5.7
-      3. num3catch : 9.75, 0.4, 5.65
-      
-      point1
-      1. num3Y : 0, 10 ,3.25
-      2. num3ZX : 3.5 7.7 ,5.7
-      3. num3catch : 9.75, 8.4, 5.65
-
-      point2
-      1. num3Y : 0, 10 ,3.25
-      2. num3ZX : 3.5 7.7 ,5.7
-      3. num3catch : 9.75, 8.4, 5.65
-
-      point3
-      1. num3Y : 0, 10 ,3.25
-      2. num3ZX : 3.5 7.7 ,5.7
-      3. num3catch : 9.75, 8.4, 5.65
-
-      point3
-      1. num3Y : 0, 10 ,3.25
-      2. num3ZX : 3.5 7.7 ,5.7
-      3. num3catch : 9.75, 8.4, 5.65
-
-
-      */
-      //y상승
       try {
         if (num3XZ) {
           //down
@@ -514,36 +463,6 @@ export class Render {
       } catch {
         console.log('3호기')
       }
-
-      // 1) 1,2,3,4 포인트 전역 값을 객체에 담는다
-      // 2) 1,2,3,4 포인트에 도달하는 값에 따라 오름,내림,펼침,굽힘 boolean을 넣는다
-
-      // else if (num3Y.position.y < 11) {
-      //   num3catch.position.x += 0.015
-      //   num3XZ.rotation.z += 0.0048
-      //   num3XZ.position.x += 0.0055
-      //   num3XZ.position.z -= 0.005
-      // }
-
-      // if (xAxis > nowxAxisMoterValue) {
-      //   num3catch.position.x -= 0.015
-      //   num3XZ.rotation.z -= 0.0048
-      //   num3XZ.position.x -= 0.0055
-      //   num3XZ.position.z += 0.005
-
-      // } else if (xAxis < nowxAxisMoterValue) {
-      //   num3catch.position.x += 0.015
-      //   num3XZ.rotation.z += 0.0048
-      //   num3XZ.position.x += 0.0055
-      //   num3XZ.position.z -= 0.005
-      // }
-
-      // if (zAxis < nowzAxisMoterValue) {
-      //   num3catch.position.z += 0.017
-      // } else if (zAxis > nowzAxisMoterValue) {
-      //   num3catch.position.z -= 0.017
-      // }
-
       this.start()
     })
   }

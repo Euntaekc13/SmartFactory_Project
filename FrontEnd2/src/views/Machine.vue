@@ -278,11 +278,17 @@ export default {
   animation: comming 2s ease-out forwards;
 }
 @keyframes comming {
-  from {
+  0% {
     transform: translateY(800px);
+    opacity: 0;
   }
-  to {
+  50% {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+  100% {
     transform: translateY(0px);
+    opacity: 1;
   }
 }
 .machine__content {

@@ -127,6 +127,12 @@ export const Monitoring = {
       state.cycleCount.process1 = data
       state.cycleCount.process2 = data
       state.cycleCount.process3 = data
+    },
+    maxLifeUpdate(state, data) {
+      console.log(data)
+      state.cycleCount.process1Max = data[0].Part_default.max_life
+      state.cycleCount.process2Max = data[1].Part_default.max_life
+      state.cycleCount.process3Max = data[2].Part_default.max_life
     }
   },
   actions: {
@@ -134,10 +140,12 @@ export const Monitoring = {
       return getMonitoringInfoApi
         .taking(machineId)
         .then(result => {
-          // console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
+          console.log(result.data)
+          console.log('getMonitoringInfoStoreAction 성공??', result.data.data)
           commit('dailyProductivityUpdate', result.data.data)
           commit('cycleCountUpdate', result.data.data)
           commit('assignedUserUpdate', result.data.data)
+          commit('maxLifeUpdate', result.data.data.part)
         })
         .catch(error => {
           console.log('getMonitoringInfoStoreAction 실패 : ', error)

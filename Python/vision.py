@@ -125,4 +125,4 @@ while True:
             cv2.imwrite("After.png", im_with_keypoints)
             clientSocket.close()
             print('close PLC Success!')
-            sleep(1)
+            sleep(0.5)

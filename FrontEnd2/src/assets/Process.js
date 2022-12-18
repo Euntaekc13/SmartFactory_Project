@@ -4,7 +4,6 @@ import { Group } from 'three'
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 import { AmbientLight, DirectionalLight } from 'three'
 import { WebGLRenderer } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Process } from './Chips'
 
 export class Camera {
@@ -35,24 +34,6 @@ export class Light {
 
   get lightElement() {
     return this.dirLight
-  }
-}
-export class Control {
-  constructor(camera, domElement) {
-    this.controls = new OrbitControls(camera, domElement)
-
-    this.setControl()
-  }
-
-  setControl() {
-    this.controls.minDistance = 10
-    this.controls.maxDistance = 50
-    this.controls.target.set(0, 0, 0)
-    this.controls.enableDamping = true
-  }
-
-  get controlElement() {
-    return this.controls
   }
 }
 export class Resource {
@@ -305,7 +286,6 @@ export class Render {
   }
   start() {
     this.status = window.requestAnimationFrame(() => {
-      this.controls.update()
       this.renderer.render(this.scene, this.camera)
 
       // const Chip = this.scene.children[0].children[0]

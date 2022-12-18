@@ -25,7 +25,7 @@
 
 <script>
 // import * as THREE from 'three'
-import { Scene, Renderer, Render, Control } from '../assets/Process'
+import { Scene, Renderer, Render } from '../assets/Process'
 export default {
   name: 'MachineItem',
   props: {
@@ -71,13 +71,9 @@ export default {
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
 
-      let control = new Control(cameraElement, renderElement)
-      let controlElement = control.controlElement
-
       let render = new Render(sceneElement)
       render.element = ImgDiv
       render.render = renderElement
-      render.controls = controlElement
       render.scene = sceneElement
       render.machine = scene.resource.machine
       render.camera = cameraElement

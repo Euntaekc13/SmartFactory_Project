@@ -239,28 +239,39 @@ export default {
 }
 .Select__process {
   margin: 1% 5% 0 0%;
-  top: 170px;
+  top: 300px;
   left: 36.1%;
   position: relative;
 }
 .after_Select__process {
   margin: 1% 0 0 3%;
   position: relative;
-  animation: slide-out 3s ease-out forwards;
-  top: 170px;
-  left: 580px;
+  animation: select-out 3s ease-out forwards;
+  top: 300px;
+  left: 36.1%;
   /* top: 0px;
   right: 0%; */
 }
-@keyframes slide-out {
+@keyframes select-out {
   0% {
-    transform: translateY(0) translateX(-50px);
+    transform: translateY(30px) translateX(-15%);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-100px) translateX(-15%);
+    opacity: 0;
   }
   50% {
-    transform: translateY(-170px) translateX(-50px);
+    transform: translateY(-300px) translateX(-80%);
+    opacity: 0;
+  }
+  85% {
+    transform: translateY(-300px) translateX(-130%);
+    opacity: 0;
   }
   100% {
-    transform: translateY(-170px) translateX(-600px);
+    transform: translateY(-300px) translateX(-170%);
+    opacity: 1;
   }
 }
 .pa-4 {

@@ -53,6 +53,10 @@ export default {
         this.SetGraphics(data)
         return
       }
+      if (data == 3) {
+        this.SetGraphics(data)
+        return
+      }
     },
 
     SetGraphics(data) {

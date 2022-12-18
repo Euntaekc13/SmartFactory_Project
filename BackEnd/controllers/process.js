@@ -1,7 +1,7 @@
 const { Part, Part_default, Software_history } = require("../models");
 const { resStatus } = require("../lib/responseStatus");
 
-// // 설비 전체 정보 조회
+// 설비 전체 정보 조회
 exports.allMachineExplorer = async (req, res, next) => {
   console.log("GET /process/:MachineId 진입");
 

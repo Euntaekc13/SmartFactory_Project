@@ -1,7 +1,7 @@
 <template>
   <body class="Monitoring-body">
     <div class="div-back">
-      <button @click="deleteImg()">
+      <button @click="exit()">
         <router-link class="to-left" to="/" style="text-decoration: none"> </router-link>
       </button>
     </div>
@@ -138,19 +138,20 @@ export default {
       let renderer = new Renderer(container)
       let renderElement = renderer.domElement
       let rendererElement = renderer.rendererElement
-      let render = new Render()
+      let render = new Render(scene.Object)
       render.element = container
       // render.controls = controlElement
       render.render = renderElement
       render.scene = sceneElement
       render.edukit = scene.resource.edukit
+      render.Object = scene.Object
       render.camera = cameraElement
       render.renderer = rendererElement
 
       // console.log(scene.Object)
       // Rendering Start
+      this.setEvent(scene.resource.edukit, render.Object, render)
       render.start()
-      this.setEvent(scene.resource.edukit, scene.Object, render)
     },
     connectMqtt() {
       const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
@@ -171,12 +172,6 @@ export default {
           console.log(`토픽 연결 완료: ${this.topic}`)
         })
         this.client.on('message', (topic, payload) => {
-          // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`);
-          // let temp = JSON.parse(payload.toString())
-          // let num0 = temp.Wrapper[0]
-          // console.log('1차', num0)
-          // this.$store.commit('Machine/FETCH_DATA', num0)
-
           let message = JSON.parse(payload)
 
           const machineElements = message.Wrapper
@@ -192,13 +187,11 @@ export default {
           })
 
           if (machineElementsSorts.length == 17) {
-            // console.log('정상적으로 들어옴', machineElementsSorts)
             this.defaultDataSignal = machineElementsSorts
-            // console.log('defaultDataSignal : ', this.defaultDataSignal)
           } else {
-            console.log('에러난듯? 얼른 바꾸자', machineElementsSorts)
+            // console.log('에러난듯? 얼른 바꾸자', machineElementsSorts)
             machineElementsSorts = this.defaultDataSignal
-            console.log('바뀐 값 : ', machineElementsSorts)
+            // console.log('바뀐 값 : ', machineElementsSorts)
           }
 
           let diceNumber = machineElementsSorts[14].value
@@ -284,28 +277,21 @@ export default {
             EduStatus.RedLight.material = RedMatcapMaterial
           }
 
-          //1호시 동작시 product 생산
+          // 1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
-            // console.log(this.ActionNum1)
             new MonitoringOB(EduStatus)
             this.No1Flag = true
+          } else if (this.no2Action) {
+            EduStatus.product.position.set(-6, 2, 10)
+            new MonitoringOB(EduStatus, 2)
+          } else if (this.defaultDataSignal[15].value) {
+            render.scene.remove(EduStatus.product)
           }
 
+          // console.log('test:', EduStatus.product)
           if (EduStatus.product) {
-            // console.log('EduStatus.product : ', EduStatus.product)
-            const Product = [{ XendPoint: 9.8 }, { Zendpoint: 10 }]
             const newObject = EduStatus.product
-            Product.push(newObject)
-            render.scene.add(newObject)
-            if (newObject.position.z >= 10) {
-              newObject.position.x += 0.3
-            } else {
-              newObject.position.z += 0.19
-            }
             //양품고품 판단
-
-            console.log('EduStatus.product 체크 : ')
-            // console.log('color센서 : ', machineElementsSorts[4].value)
             if (machineElementsSorts[4].value == true) {
               this.WhiteColor = true
             }
@@ -321,11 +307,6 @@ export default {
             // 1 ~ 3까지 시간 16.8414
             // 336.828
             //end포인트 도달시 제거
-            if (newObject.position.x >= 9.8) {
-              Product.pop()
-              render.scene.remove(newObject)
-              this.No1Flag = false
-            }
           }
         })
       })
@@ -354,9 +335,11 @@ export default {
       this.userImgRender = require(`../../public/img/${this.assignedUser.userImage}`)
     },
     //스토어 리셋
-    deleteImg() {
+    exit() {
       this.$store.commit('Monitoring/assignedUserDelete', null)
-      // console.log(this.userImgRender)
+      this.client.on('close', function () {
+        console.log('mqtt close')
+      })
     },
     handleResize(event) {
       // const monitoring = document.querySelector('.Monitoring-body')

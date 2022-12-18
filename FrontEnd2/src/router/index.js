@@ -91,6 +91,13 @@ const routes = [
     originalPush
   },
   {
+    path: '/admin',
+    name: 'userManage',
+    component: () => import('../views/UserManage.vue'),
+    beforeEnter: requireAuth,
+    originalPush
+  },
+  {
     path: '/*',
     name: '404page',
     component: () => import('../views/404View.vue')

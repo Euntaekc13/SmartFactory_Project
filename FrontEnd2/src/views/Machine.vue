@@ -254,23 +254,23 @@ export default {
 }
 @keyframes select-out {
   0% {
-    transform: translateY(30px) translateX(-80px);
+    transform: translateY(30px) translateX(-15%);
     opacity: 1;
   }
   25% {
-    transform: translateY(-100px) translateX(-80px);
+    transform: translateY(-100px) translateX(-15%);
     opacity: 0;
   }
   50% {
-    transform: translateY(-300px) translateX(-80px);
+    transform: translateY(-300px) translateX(-80%);
     opacity: 0;
   }
-  95% {
-    transform: translateY(-300px) translateX(-580px);
+  85% {
+    transform: translateY(-300px) translateX(-130%);
     opacity: 0;
   }
   100% {
-    transform: translateY(-300px) translateX(-600px);
+    transform: translateY(-300px) translateX(-170%);
     opacity: 1;
   }
 }

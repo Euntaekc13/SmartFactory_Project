@@ -281,12 +281,16 @@ export default {
           if (this.ActionNum1 && this.No1Flag == false) {
             new MonitoringOB(EduStatus)
             this.No1Flag = true
+          } else if (this.no2Action) {
+            EduStatus.product.position.set(-6, 2, 10)
+            new MonitoringOB(EduStatus, 2)
+          } else if (this.defaultDataSignal[15].value) {
+            render.scene.remove(EduStatus.product)
           }
+
           // console.log('test:', EduStatus.product)
           if (EduStatus.product) {
             const newObject = EduStatus.product
-            render.scene.add(newObject)
-
             //양품고품 판단
             if (machineElementsSorts[4].value == true) {
               this.WhiteColor = true
@@ -303,10 +307,6 @@ export default {
             // 1 ~ 3까지 시간 16.8414
             // 336.828
             //end포인트 도달시 제거
-            if (newObject.position.x >= 9.8) {
-              render.scene.remove(newObject)
-              this.No1Flag = false
-            }
           }
         })
       })

@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import { Machine } from './Machine'
 import { Auth } from './Auth'
 import { Monitoring } from './Monitoring'
+import { User } from './User'
 
 // import { SampleStore } from './SampleStore'
 import { setAuthInHeader } from '../api/auth'
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
   modules: {
     Auth: Auth,
     Machine: Machine,
-    Monitoring: Monitoring
+    Monitoring: Monitoring,
+    User: User
     // SampleStore: SampleStore
   },
   plugins: [createPersistedState()],

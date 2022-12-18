@@ -166,7 +166,7 @@ export class Resource {
         let obj = (this.machine.num3Y = object)
         obj.name = 'num3Y'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.9
-        obj.position.set(0, 2, 1.75)
+        obj.position.set(0, 2, 3.25)
         obj.rotation.x = -90 * (Math.PI / 180)
         obj.rotation.z = -170 * (Math.PI / 180)
         obj.traverse(function (child) {
@@ -176,12 +176,14 @@ export class Resource {
           }
         })
         if (obj) this.num3Group.add(obj)
+        this.machine.Yup = true
+        this.machine.down = false
       })
       this.loader.load('/fbx/StaticMesh2.FBX', object => {
         let obj = (this.machine.num3XZ = object)
         obj.name = 'num3X'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.9
-        obj.position.set(2, 0.5, 3)
+        obj.position.set(3.5, -0.3, 5.7)
         obj.rotation.x = -90 * (Math.PI / 180)
         obj.rotation.z = -10 * (Math.PI / 180)
 
@@ -194,10 +196,10 @@ export class Resource {
         if (obj) this.num3Group.add(obj)
       })
       this.loader.load('/fbx/StaticMesh1.FBX', object => {
-        let obj = (this.machine.catch = object)
+        let obj = (this.machine.num3catch = object)
         obj.name = 'num3catch'
         obj.scale.x = obj.scale.y = obj.scale.z = 0.9
-        obj.position.set(5.5, 0.4, 3)
+        obj.position.set(9.75, 0.4, 5.65)
 
         obj.rotation.x = -90 * (Math.PI / 180)
         obj.rotation.z = -160 * (Math.PI / 180)
@@ -376,6 +378,110 @@ export class Render {
           this.scene.add(num2Chip)
         }
       }
+
+      let num3Y = this.machine.num3Y
+      let num3XZ = this.machine.num3XZ
+      let num3catch = this.machine.num3catch
+
+      // let Ydown = false
+      // let Xup = false
+      // let Xdown = false
+
+      //3호기 set-------------------------------
+      /*
+      start : 
+      1. num3Y : 0, 2 ,3.25
+      2. num3XZ : 3.5 -0.3 ,5.7
+      3. num3catch : 9.75, 0.4, 5.65
+      
+      point1
+      1. num3Y : 0, 10 ,3.25
+      2. num3ZX : 3.5 7.7 ,5.7
+      3. num3catch : 9.75, 8.4, 5.65
+
+      point2
+      1. num3Y : 0, 10 ,3.25
+      2. num3ZX : 3.5 7.7 ,5.7
+      3. num3catch : 9.75, 8.4, 5.65
+
+      point3
+      1. num3Y : 0, 10 ,3.25
+      2. num3ZX : 3.5 7.7 ,5.7
+      3. num3catch : 9.75, 8.4, 5.65
+
+      point3
+      1. num3Y : 0, 10 ,3.25
+      2. num3ZX : 3.5 7.7 ,5.7
+      3. num3catch : 9.75, 8.4, 5.65
+
+
+      */
+      //y상승
+      try {
+        if (num3XZ) {
+          if (num3catch.position.y > 10) {
+            this.machine.Yup = false
+            this.machine.Ydown = true
+          } else if (num3catch.position.y < 2) {
+            this.machine.Yup = true
+            this.machine.Ydown = false
+          }
+
+          if (num3catch.position.y < 10 && this.machine.Yup == true) {
+            num3catch.position.y += 0.02
+            num3XZ.position.y += 0.02
+            num3Y.position.y += 0.02
+          } else if (num3catch.position.y > 2 && this.machine.Ydown == true) {
+            num3catch.position.y -= 0.02
+            num3XZ.position.y -= 0.02
+            num3Y.position.y -= 0.02
+          }
+        }
+      } catch {
+        console.log('3호기')
+      }
+
+      // 1) 1,2,3,4 포인트 전역 값을 객체에 담는다
+      // 2) 1,2,3,4 포인트에 도달하는 값에 따라 오름,내림,펼침,굽힘 boolean을 넣는다
+
+      // //다시 상승
+      // if (num3Y.position.y < 2.1) {
+      //   num3catch.position.y += 0.05
+      //   num3XZ.position.y += 0.05
+      //   num3Y.position.y += 0.05
+      // }
+      // //오므리고
+
+      // //하강
+      // else if (num3Y.position.y == 10 && ) {
+      //   num3catch.position.y -= 0.05
+      //   num3XZ.position.y -= 0.05
+      //   num3Y.position.y -= 0.05
+      // }
+      // else if (num3Y.position.y < 11) {
+      //   num3catch.position.x += 0.015
+      //   num3XZ.rotation.z += 0.0048
+      //   num3XZ.position.x += 0.0055
+      //   num3XZ.position.z -= 0.005
+      // }
+
+      // if (xAxis > nowxAxisMoterValue) {
+      //   num3catch.position.x -= 0.015
+      //   num3XZ.rotation.z -= 0.0048
+      //   num3XZ.position.x -= 0.0055
+      //   num3XZ.position.z += 0.005
+      // } else if (xAxis < nowxAxisMoterValue) {
+      //   num3catch.position.x += 0.015
+      //   num3XZ.rotation.z += 0.0048
+      //   num3XZ.position.x += 0.0055
+      //   num3XZ.position.z -= 0.005
+      // }
+
+      // if (zAxis < nowzAxisMoterValue) {
+      //   num3catch.position.z += 0.017
+      // } else if (zAxis > nowzAxisMoterValue) {
+      //   num3catch.position.z -= 0.017
+      // }
 
       this.start()
     })

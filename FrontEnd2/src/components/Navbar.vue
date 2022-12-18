@@ -48,6 +48,12 @@
       </v-btn>
     </v-list-item-avatar>
 
+    <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px 0px 15px 5px">
+      <v-btn size="42" icon style="color: darkgray" @click.stop="sideBarOpen = !sideBarOpen">
+        <i class="fa-sharp fa-solid fa-users fa-xl"></i>
+      </v-btn>
+    </v-list-item-avatar>
+
     <v-list v-show="!sideBarOpen">
       <v-list-item class="UserInfo">
         <span style="color: white">{{ TokenUser.name }}</span>
@@ -70,7 +76,8 @@
       </router-link>
       <router-link to="/teamInfoView">
         <button class="iconButton">
-          <i class="fa-solid fa-gear fa-xl"></i>
+          <!-- <i class="fa-solid fa-gear fa-xl"></i> -->
+          <i class="fa-solid fa-address-card fa-xl"></i>
         </button>
       </router-link>
     </div>
@@ -109,7 +116,7 @@
         <button class="spanButton" @click="routingToAdmin">
           <div class="buttonArea">
             <i class="fa-sharp fa-solid fa-users fa-xl"></i>
-            <span>User Management&nbsp;</span>
+            <span>User Management&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </button>
       </div>

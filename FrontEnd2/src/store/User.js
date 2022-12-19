@@ -27,9 +27,9 @@ export const User = {
           console.log('store fetch userall: ', err)
         })
     },
-    CREATE_USER({ dispatch }, { name, employee_number, phone_number, password, authorization, email, user_image }) {
+    CREATE_USER({ dispatch }, { name, employee_number, phone_number, password, authorization, email }) {
       return user
-        .create(name, employee_number, phone_number, password, authorization, email, user_image)
+        .create(name, employee_number, phone_number, password, authorization, email)
         .then(() => {
           console.log('store create user')
           dispatch('FETCH_ALL')

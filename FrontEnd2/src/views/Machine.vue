@@ -175,8 +175,6 @@ export default {
           this.processData.processStart = this.Machine[realMachineId].Parts[i].Part_default.createdAt
           this.processes.push(this.processData)
 
-          // console.log('은택이 가보자구 ~~', this.processes)
-
           this.processData = {
             processId: 0,
             processType: 0,

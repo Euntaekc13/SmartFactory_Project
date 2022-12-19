@@ -279,28 +279,36 @@ export default {
 
           // 1호시 동작시 product 생산
           if (this.ActionNum1 && this.No1Flag == false) {
+            console.log('num1동작 and 생성되야함')
             new MonitoringOB(EduStatus)
+            render.scene.add(EduStatus.product)
             this.No1Flag = true
           } else if (this.no2Action) {
-            EduStatus.product.position.set(-6, 2, 10)
-            new MonitoringOB(EduStatus, 2)
+            console.log('num2동작 & 위치변경')
+            console.log('생성된 product : ', EduStatus.product)
           } else if (this.defaultDataSignal[15].value) {
             render.scene.remove(EduStatus.product)
+            this.No1Flag = false
+            this.WhiteColor = false
           }
 
           // console.log('test:', EduStatus.product)
           if (EduStatus.product) {
             const newObject = EduStatus.product
+
             //양품고품 판단
-            if (machineElementsSorts[4].value == true) {
+            if (machineElementsSorts[4].value === true) {
               this.WhiteColor = true
+              console.log('칼라센서 통과', this.WhiteColor)
             }
-            if (machineElementsSorts[11].value == true) {
-              if (this.WhiteColor == true) {
-                newObject.material.color.set('#FFFFFF')
-                this.WhiteColor = false
+            if (machineElementsSorts[11].value === true) {
+              console.log('2호기 판단, 색깔은? ', this.WhiteColor)
+              if (this.WhiteColor === false) {
+                console.log('칼라 판단', this.WhiteColor)
+                newObject.material.color.set('#FF0000') //빨간색
               } else {
-                newObject.material.color.set('#FF0000')
+                newObject.material.color.set('#FFFFFF') //흰색
+                //
               }
             }
 

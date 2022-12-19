@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 
 export class MonitoringOB {
-  constructor(object, number) {
-    this.setMonitoring(object, number)
+  constructor(object) {
+    this.setMonitoring(object)
   }
-  setMonitoring(object, number) {
+  setMonitoring(object) {
+    console.log('클래스 호출')
     const ProGeometry = new THREE.CylinderGeometry(1, 1, 1.5, 20)
     const ProMeterial = new THREE.MeshPhongMaterial({ color: '#FFFFFF' })
     ProMeterial.metalness = true
@@ -12,7 +13,6 @@ export class MonitoringOB {
 
     Product.castShadow = true
     Product.receiveShadow = true
-
     Product.position.set(-12, 2, 8)
   }
 }

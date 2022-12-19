@@ -378,12 +378,13 @@ export class Render {
         const product = this.Object.product
         if (product.position.x < -6) {
           if (product.position.z <= 10) {
-            product.position.x += 0.02
-          } else {
             product.position.z += 0.018
           }
-        } else if (product.position.x >= -6 && product.position.x < 4) {
-          product.position.x += 0.02
+          if (product.position.z > 10 && product.position.x < -6) {
+            product.position.x += 0.008
+          }
+        } else if (product.position.x >= -6 && product.position.x < 9.8) {
+          product.position.x += 0.018
         }
       } catch {
         console.log('pass')

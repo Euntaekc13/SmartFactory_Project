@@ -5,13 +5,12 @@ const morgan = require("morgan");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const cors = require("cors");
+
 const { corsConfig } = require("./config/corsConfig");
+const indexRouter = require("./routes");
+const { sequelize } = require("./models");
 
 dotenv.config({ path: "./config/.env" });
-
-const indexRouter = require("./routes");
-
-const { sequelize } = require("./models");
 
 const app = express();
 
@@ -34,11 +33,6 @@ if (process.env.NODE_ENV === "development") {
 
 // CORS 처리
 app.use(cors(corsConfig));
-// app.use(
-//     cors({
-//         credentials: true,
-//     })
-// );
 
 app.use(express.static(path.join(__dirname, "public")));
 

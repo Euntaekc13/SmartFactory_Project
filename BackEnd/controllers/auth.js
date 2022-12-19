@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const authservice = require("../service/authService");
 const { resStatus } = require("../lib/responseStatus");
 
 // 로그인(admin, user 모두)

@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const User = require("../models/user");
-const authservice = require("../service/authService");
 const { resStatus } = require("../lib/responseStatus");
 
 // 사용자 리스트 조회 (admin만 가능)
@@ -21,7 +20,7 @@ exports.listUser = async (req, res, next) => {
       attributes: ["id", "name", "employee_number"],
     });
     // user 정보가 없는 경우
-    if (!user) {
+    if (user.length == 0) {
       return res.status(resStatus.insufficient.code).json({
         message: resStatus.insufficient.message, // (206) 보낼 data가 없거나 부족할 때
       });
@@ -57,10 +56,18 @@ exports.joinUser = async (req, res, next) => {
       name,
       phone_number,
       email,
-      user_image,
       password,
       authorization,
     } = req.body;
+
+    console.log(
+      employee_number,
+      name,
+      phone_number,
+      email,
+      password,
+      authorization
+    );
 
     // 입력값 null인지 체크
     if (!employee_number || !email || !name || !password || !authorization) {
@@ -115,7 +122,6 @@ exports.joinUser = async (req, res, next) => {
       password: hashPassword,
       authorization,
       phone_number,
-      user_image,
     });
 
     // 성공

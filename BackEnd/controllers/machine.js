@@ -45,7 +45,7 @@ exports.machine = async (req, res, next) => {
     // const software_history = machine.dataValues.Software_histories
     // console.log("~~~ : ", machine[0]);
 
-    if (!machine) {
+    if (machine.length == 0) {
       return res.status(resStatus.insufficient.code).json({
         message: resStatus.insufficient.message, // (206) 보낼 data가 없거나 부족할 때
       });

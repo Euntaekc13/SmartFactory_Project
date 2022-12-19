@@ -37,7 +37,7 @@ client.subscribe(["machine", "machine1"]);
 client.on("message", async (topic, message, packet) => {
   // topic이 machine인 공정
   if (topic == "machine") {
-    // console.log("###########");
+    // console.log("machin2222222222222222e");
     try {
       // message가 buffer로 오므로 JSON 형식으로 변환
       const rareElements = await JSON.parse(message.toString());
@@ -59,7 +59,7 @@ client.on("message", async (topic, message, packet) => {
         machineElementsSorts[16].value == true ||
         machineElementsSorts[1].value == true
       ) {
-        console.log("****************");
+        // console.log("****************");
         await Machine.update(
           { machine_status: 1 },
           {
@@ -122,7 +122,6 @@ client.on("message", async (topic, message, packet) => {
           }
         }
 
-        // console.log("@@@@@@@@@@@@@@@@@@@");
         // tag 25(No3Gripper)이 true이고, thirdFlag가 true이면,
         if (machineElementsSorts[15].value == true && thirdFlag == true) {
           console.log("first arr : ", arr, dice_num);
@@ -135,6 +134,7 @@ client.on("message", async (topic, message, packet) => {
           thirdFlag = false;
           // goodsetFlag1 = false;
           // goodsetFlag2 = false;
+
           let count = 0;
 
           let arr2 = arr.filter((element, index, array) => {
@@ -158,22 +158,35 @@ client.on("message", async (topic, message, packet) => {
             let firstindex = arr2.indexOf(Math.max(...arr2));
             arr2[firstindex] = 0;
 
-            // 두번째로 큰 값이 10보다 크면
-            if (Math.max(...arr2) > 9) {
+            // 두번째로 큰 값이 7보다 크면, 두번째로 큰 값의 주사위 눈이 dice_num 이다.
+            if (Math.max(...arr2) > 7) {
               let firstindex = arr.indexOf(Math.max(...arr));
               arr[firstindex] = 0;
               dice_num = arr.indexOf(Math.max(...arr)) + 1;
               console.log(
-                "count가 2개 이상이고 두번째로 큰 값이 9보다 큰 경우 : ",
+                "count가 2개 이상이고 두번째로 큰 값이 7보다 큰 경우 : ",
                 dice_num
               );
-              // 두번째로 큰 값이 10보다 작거나 같으면
+              // 두번째로 큰 값이 7보다 작거나 같은 경우
             } else {
-              dice_num = arr.indexOf(Math.max(...arr)) + 1;
-              console.log(
-                "count가 2개 이상이고 두번째로 큰 값이 9보다 작거나 같은 경우 : ",
-                dice_num
-              );
+              // 두번쨰로 큰 값이 6이나 7인데, 그 값이 Max보다 큰 index에 있는 경우, 두 번째로 큰 값을 가지는 주사위 눈이 dice_num 이다
+              if (
+                (Math.max(...arr2) == 7 || Math.max(...arr2) == 6) &&
+                arr.indexOf(Math.max(...arr2)) > arr.indexOf(Math.max(...arr))
+              ) {
+                dice_num = arr.indexOf(Math.max(...arr2)) + 1;
+                console.log(
+                  "count가 2개 이상이고 두번째로 큰 값이 6이나 7인데, 그 값이 Max보다 큰 index에 있는 경우, 두 번째로 큰 값을 가지는 주사위 눈이 dice_num ",
+                  dice_num
+                );
+              } else {
+                // 그 이외의 경우, 가장 큰 값을 가지는 주사위 눈이 dice_num 이다
+                dice_num = arr.indexOf(Math.max(...arr)) + 1;
+                console.log(
+                  "count가 2개 이상이고 두번째로 큰 값이 7보다 작거나 같은데, 마지막 조건에 부합하는 경우 : ",
+                  dice_num
+                );
+              }
             }
           }
 
@@ -260,7 +273,7 @@ client.on("message", async (topic, message, packet) => {
     }
   } else if (topic == "machine1") {
     // topic이 machine1인 공정
-    // console.log("###########");
+    // console.log("machine1");
     try {
       // message가 buffer로 오므로 JSON 형식으로 변환
       const rareElements = await JSON.parse(message.toString());

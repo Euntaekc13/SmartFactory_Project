@@ -32,7 +32,7 @@ import DashBoard from '../components/Dashboard.vue'
 import { Scene, Renderer, Render } from '../assets/Monitoring'
 import { MonitoringOB } from '../assets/Chips'
 import mqtt from 'mqtt'
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import * as THREE from 'three'
 
 export default {
@@ -95,13 +95,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('Machine', {
+    ...mapGetters('Machine', {
       Machine: 'Machine'
     }),
-    ...mapState('Auth', {
+    ...mapGetters('Auth', {
       TokenUser: 'TokenUser'
     }),
-    ...mapState('Monitoring', {
+    ...mapGetters('Monitoring', {
       assignedUser: 'assignedUser',
       cycleCount: 'cycleCount'
     })
@@ -111,17 +111,17 @@ export default {
     this.connectMqtt()
     await this.getMonitoringInfo()
     this.userImgRenderFunction()
-    // console.log('Monitoring created value : ', this.userImgRender)
-    //(this.port = '9001'), (this.hostname = '192.168.0.58'), (this.topic = 'machine')
   },
   mounted() {
     this.connection()
     window.addEventListener('resize', this.handleResize)
   },
   beforeDestroy() {
-    // console.log("beforeDestroy...");
     window.removeEventListener('resize', this.handleResize)
   },
+  // destroyed() {
+  //   this.$store.commit('Monitoring/maxLifeUpdate', null)
+  // },
   methods: {
     ...mapActions('Monitoring', ['getMonitoringInfoStoreAction']),
     connection() {

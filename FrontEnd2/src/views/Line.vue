@@ -63,8 +63,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Machine', ['Machine']),
-    ...mapState('Machine', ['Machine'])
+    ...mapGetters('Machine', ['Machine'])
     // store에서 사용한 변수명과 component에서 사용할 변수명이 같을 경우
   },
   async mounted() {

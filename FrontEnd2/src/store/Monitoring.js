@@ -123,16 +123,19 @@ export const Monitoring = {
       state.dailyProductivity.total = data
       state.dailyProductivity.goodSet = data
       state.dailyProductivity.failure = data
-
-      state.cycleCount.process1 = data
-      state.cycleCount.process2 = data
-      state.cycleCount.process3 = data
     },
     maxLifeUpdate(state, data) {
       console.log(data)
-      state.cycleCount.process1Max = data[0].Part_default.max_life
-      state.cycleCount.process2Max = data[1].Part_default.max_life
-      state.cycleCount.process3Max = data[2].Part_default.max_life
+      if (data) {
+        state.cycleCount.process1Max = data[0].Part_default.max_life
+        state.cycleCount.process2Max = data[1].Part_default.max_life
+        state.cycleCount.process3Max = data[2].Part_default.max_life
+      } else {
+        console.log('null로바꿈')
+        state.cycleCount.process1 = null
+        state.cycleCount.process2 = null
+        state.cycleCount.process3 = null
+      }
     }
   },
   actions: {

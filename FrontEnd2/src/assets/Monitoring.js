@@ -386,9 +386,8 @@ export class Render {
           product.position.x += 0.02
         }
       } catch {
-        console.log('Not Yet')
+        console.log('pass')
       }
-
       this.start()
     })
   }

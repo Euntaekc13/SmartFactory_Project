@@ -27,7 +27,7 @@
 
 <script>
 // import * as THREE from 'three'
-import { Scene, Renderer, Render } from '../assets/Process'
+import { Scene, Renderer, Render } from '../WebGL/Process'
 export default {
   name: 'MachineItem',
   props: {

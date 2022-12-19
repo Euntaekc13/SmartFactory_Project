@@ -48,7 +48,11 @@
       </v-btn>
     </v-list-item-avatar>
 
-    <v-list-item-avatar v-if="sideBarOpen" size="42" style="margin: 15px 0px 15px 5px">
+    <v-list-item-avatar
+      v-if="sideBarOpen && TokenUser.authorization == 'admin'"
+      size="42"
+      style="margin: 15px 0px 15px 5px"
+    >
       <v-btn size="42" icon style="color: darkgray" @click.stop="sideBarOpen = !sideBarOpen">
         <i class="fa-sharp fa-solid fa-users fa-xl"></i>
       </v-btn>

@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <v-main>
       <div class="box">
         <h1>안녕하세요.<br />Team LOCK 입니다.</h1>
@@ -45,11 +45,13 @@
         <h1>이준규 개발자입니다.</h1>
       </div>
       <div class="text">
-        <div><img src="../../public/img/LJK.jpg" alt="" /></div>
+        <div class="Img"><img src="../../public/img/LJK.jpg" alt="" /></div>
         <h2>
-          In charge of : IoT + Frontend<br /><br />
-          Github address : <br />
-          Short Introduction : <br />
+          In charge of : IoT + Frontend(UI/UX 총괄)<br /><br />
+
+          Short Introduction : Edukit과 스마트 커넥터 및 Front UI/UX 총괄<br />
+          <br /><br /><br /><br />
+          Github address : https://github.com/Lee-June-Kyu
         </h2>
       </div>
       <div class="box">
@@ -62,11 +64,12 @@
         <h1>옥윤성 개발자입니다.</h1>
       </div>
       <div class="text">
-        <h3><img src="../../public/img/OYS.jpg" alt="" /></h3>
+        <div class="Img"><img src="../../public/img/OYS.jpg" alt="" /></div>
         <h2>
-          In charge of : Backend <br /><br />
-          Github address : <br />
-          Short Introduction : <br />
+          In charge of : Backend<br /><br />
+          Github address : https://github.com/dev-Ock <br />
+          <br /><br /><br /><br />
+          Short Introduction : Backend 총괄 및 데이터 가공<br />
         </h2>
       </div>
       <div class="box">
@@ -79,11 +82,12 @@
         <h1>최은택 개발자입니다.</h1>
       </div>
       <div class="text">
-        <div><img src="../../public/img/CET.jpg" alt="" /></div>
+        <div class="Img"><img src="../../public/img/CET.jpg" alt="" /></div>
         <h2>
-          In charge of : WebGL + Frontend <br /><br />
-          Github address : <br />
-          Short Introduction : <br />
+          In charge of : WebGL 및 Frontend (대쉬보드, 기본기능) <br /><br />
+          Github address : https://github.com/Euntaekc13 <br />
+          <br /><br /><br /><br />
+          Short Introduction : WebGL 및 Front 기본 기능, 대쉬보드<br />
         </h2>
       </div>
       <div class="box">
@@ -96,11 +100,12 @@
         <h1>김민혁 개발자입니다.</h1>
       </div>
       <div class="text">
-        <h3><img src="../../public/img/KMH.jpg" alt="" /></h3>
-        <h2>
-          In charge of : Frontend <br /><br />
-          Github address : <br />
-          Short Introduction : <br />
+        <div class="Img"><img src="../../public/img/KMH.jpg" alt="" /></div>
+        <h2 class="desc">
+          In charge of : 기획담당, Frontend <br /><br />
+          Github address : https://github.com/IvaninITworld <br />
+          <br /><br /><br /><br />
+          Short Introduction :기획 총괄 및 Front 핵심기능, 데이터 가공<br />
         </h2>
       </div>
       <div class="box">
@@ -114,11 +119,11 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+// import Navbar from '@/components/Navbar.vue'
 export default {
   name: 'TeamInfoView',
   components: {
-    Navbar
+    // Navbar
   },
   provide() {
     return {}
@@ -272,4 +277,10 @@ img.active {
   background: #000;
   font-size: 0.9rem;
 }
+.Img {
+  margin-right: 10%;
+}
+/* .desc {
+  margin-left: 50%;
+} */
 </style>

@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <v-main>
-      <div class="content2"></div>
-      <div class="content">
-        <div class="text__error">
-          <p>{{ string404 }}</p>
-          <p></p>
+  <v-app>
+    <div>
+      <v-main>
+        <div class="content2"></div>
+        <div class="content">
+          <div class="text__error">
+            <p>{{ string404 }}</p>
+            <p></p>
+          </div>
+          <div class="text__link" @click="goHome">
+            <a @click="goHome">{{ stringLink }} </a>
+          </div>
         </div>
-        <div class="text__link" @click="goHome">
-          <a @click="goHome">{{ stringLink }} </a>
-        </div>
-      </div>
-    </v-main>
-  </div>
+      </v-main>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -94,6 +96,12 @@ export default {
 </script>
 
 <style scoped>
+* {
+  background-color: #000;
+}
+.theme--light.v-application {
+  background-color: #000;
+}
 *,
 *:before,
 *:after {

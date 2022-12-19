@@ -104,22 +104,9 @@ export default {
         password: '1234',
         authorization: 'user',
         email: this.Email
-        // user_image: this.user_image.name
       }).then(() => {
         this.closeModal()
       })
-      console.log(this.name, this.user_image.name, this.Email, this.phone_number)
-    },
-    upload() {
-      let file = this.user_image
-      let reader = new FileReader()
-
-      console.log(file)
-      reader.readAsDataURL(file)
-      reader.onload = e => {
-        console.log(e.target.result)
-        this.imgFolder = e.target.result
-      }
     }
   }
 }

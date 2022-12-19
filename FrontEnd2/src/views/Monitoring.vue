@@ -29,8 +29,8 @@
 
 <script>
 import DashBoard from '../components/Dashboard.vue'
-import { Scene, Renderer, Render } from '../assets/Monitoring'
-import { MonitoringOB } from '../assets/Chips'
+import { Scene, Renderer, Render } from '../WebGL/Monitoring'
+import { MonitoringOB } from '../WebGL/Chips'
 import mqtt from 'mqtt'
 import { mapActions, mapGetters } from 'vuex'
 import * as THREE from 'three'

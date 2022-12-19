@@ -133,22 +133,45 @@ client.on("message", async (topic, message, packet) => {
         // goodsetFlag1 = false;
         // goodsetFlag2 = false;
         let count = 0;
-        arr.filter((element, index, array) => {
+
+        let arr2 = arr.filter((element, index, array) => {
           if (element > 0) {
             count++;
+            return element;
           }
         });
-        // console.log(count);
 
+        // count가 0보다 큰 값이 하나이면, 그 값이 정답
         if (count == 1) {
           dice_num = arr.indexOf(Math.max(...arr)) + 1;
           console.log("count가 1인 경우 : ", dice_num);
         }
+
+        // count가 0보다 큰 값이 2개 이상이면
         if (count >= 2) {
-          let firstindex = arr.indexOf(Math.max(...arr));
-          arr[firstindex] = 0;
-          dice_num = arr.indexOf(Math.max(...arr)) + 1;
-          console.log("count가 2개 이상인 경우 : ", dice_num);
+          arr2.sort(function (a, b) {
+            return b - a;
+          });
+          let firstindex = arr2.indexOf(Math.max(...arr2));
+          arr2[firstindex] = 0;
+
+          // 두번째로 큰 값이 10보다 크면
+          if (Math.max(...arr2) > 10) {
+            let firstindex = arr.indexOf(Math.max(...arr));
+            arr[firstindex] = 0;
+            dice_num = arr.indexOf(Math.max(...arr)) + 1;
+            console.log(
+              "count가 2개 이상이고 두번째로 큰 값이 10보다 큰 경우 : ",
+              dice_num
+            );
+            // 두번째로 큰 값이 10보다 작거나 같으면
+          } else {
+            dice_num = arr.indexOf(Math.max(...arr)) + 1;
+            console.log(
+              "count가 2개 이상이고 두번째로 큰 값이 10보다 작거나 같은 경우 : ",
+              dice_num
+            );
+          }
         }
 
         arr = [0, 0, 0, 0, 0, 0];

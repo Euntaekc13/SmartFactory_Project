@@ -45,7 +45,7 @@
               <div class="battery-item" style="display: flex">
                 <div class="battery">
                   <div class="battery_subTitle">
-                    <h3 class="blocktitle">No.1</h3>
+                    <h3 class="blocktitle">{{ process1Battery }}%</h3>
                   </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="battery">
                   <div class="battery_subTitle">
-                    <h3 class="blocktitle">No.2</h3>
+                    <h3 class="blocktitle">{{ process2Battery }}%</h3>
                   </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="battery">
                   <div class="battery_subTitle">
-                    <h3 class="blocktitle">No.3</h3>
+                    <h3 class="blocktitle">{{ process3Battery }}%</h3>
                   </div>
                   <div id="batery--container">
                     <div id="batery--container-body">
@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
@@ -138,64 +138,99 @@ export default {
       num1Color: null,
       num2Color: null,
       num3Color: null,
-      process1Count: 0,
-      process2Count: 0,
-      process3Count: 0
+      process1Battery: 0,
+      process2Battery: 0,
+      process3Battery: 0
+
       // num1MaxCycle:this.cycleCount.process1Max,
     }
   },
   computed: {
-    ...mapState('Monitoring', {
+    // ...mapState('Monitoring', {
+    //   dailyProductivity: 'dailyProductivity',
+    //   cycleCount: 'cycleCount'
+    //   // assignedUser: 'assignedUser'
+    // }),
+    ...mapGetters('Monitoring', {
       dailyProductivity: 'dailyProductivity',
       cycleCount: 'cycleCount'
-      // assignedUser: 'assignedUser'
+    }),
+    ...mapGetters('Machine', {
+      machine1: 'machine1',
+      machine2: 'machine2',
+      machine3: 'machine3',
+      machine4: 'machine4'
     })
   },
-  mounted() {
-    this.computedColor()
+  async mounted() {
+    await this.computedColor()
   },
   methods: {
     computedColor() {
-      console.log('데이터 : ', this.cycleCount)
-      const process1Max = this.cycleCount.process1Max
-      const process2Max = this.cycleCount.process2Max
-      const process3Max = this.cycleCount.process3Max
-      console.log(process1Max, process2Max, process3Max) // null null null ?
+      const ProcessList = this.matchingId(this.$route.params.id).Parts
 
-      // this.output.process1Count = this.process1Count
-      // this.output.process2Count = this.process2Count
-      // this.output.process3Count = this.process3Count
+      //각 호기마다 maxlife
+      const process1Max = ProcessList[0].Part_default.max_life
+      const process2Max = ProcessList[1].Part_default.max_life
+      const process3Max = ProcessList[2].Part_default.max_life
 
-      // console.log(`1호기맥스:${process1Max} 2호기맥스: ${process2Max} 3호기맥스: ${process3Max}`)
-      // const num1status = ((this.cycleCount.process1 + this.process1Count) / process1Max) * 100
-      // const num2status = ((this.cycleCount.process2 + this.process2Count) / process2Max) * 100
-      // const num3status = ((this.cycleCount.process3 + this.process3Count) / process3Max) * 100
+      //현재까지 count
+      const process1Count = ProcessList[0].count
+      const process2Count = ProcessList[1].count
+      const process3Count = ProcessList[2].count
 
-      // console.log(`1호기:${num1status} 2호기: ${num2status} 3호기: ${num3status}`)
+      //배터리 퍼센트
+      const num1percent = 100 - ((process1Count + this.output.process1Count) / process1Max) * 100
+      const num2percent = 100 - ((process2Count + this.output.process2Count) / process2Max) * 100
+      const num3percent = 100 - ((process3Count + this.output.process3Count) / process3Max) * 100
+      // const num1percent = 100 - num1status
+      // const num2percent = 100 - num2status
+      // const num3percent = 100 - num3status
 
-      // if (num1status >= 90) {
-      //   this.num1Color = 'Green'
-      // } else if (num1status < 90 && num1status > 20) {
-      //   this.num1Color = 'Yellow'
-      // } else {
-      //   this.num1Color = 'Red'
-      // }
+      if (num1percent > 0) {
+        this.process1Battery = Math.floor(num1percent)
+      }
+      if (num2percent > 0) {
+        this.process2Battery = Math.floor(num2percent)
+      }
+      if (num3percent > 0) {
+        this.process3Battery = Math.floor(num3percent)
+      }
 
-      // if (num2status >= 50) {
-      //   this.num2Color = 'Green'
-      // } else if (num2status < 50 && num2status > 20) {
-      //   this.num2Color = 'Yellow'
-      // } else {
-      //   this.num2Color = 'Red'
-      // }
+      if (this.process1Battery >= 70) {
+        this.num1Color = 'Green'
+      } else if (this.process1Battery < 70 && this.process1Battery > 20) {
+        this.num1Color = 'Yellow'
+      } else {
+        this.num1Color = 'Red'
+      }
 
-      // if (num3status >= 50) {
-      //   this.num3Color = 'Green'
-      // } else if (num3status < 50 && num3status > 20) {
-      //   this.num3Color = 'Yellow'
-      // } else {
-      //   this.num3Color = 'Red'
-      // }
+      if (this.process2Battery >= 70) {
+        this.num2Color = 'Green'
+      } else if (this.process2Battery < 70 && this.process2Battery > 20) {
+        this.num2Color = 'Yellow'
+      } else {
+        this.num2Color = 'Red'
+      }
+
+      if (this.process3Battery >= 70) {
+        this.num3Color = 'Green'
+      } else if (this.process3Battery < 70 && this.process3Battery > 20) {
+        this.num3Color = 'Yellow'
+      } else {
+        this.num3Color = 'Red'
+      }
+    },
+    matchingId(id) {
+      if (id == 1) {
+        return this.machine1
+      } else if (id == 2) {
+        return this.machine2
+      } else if (id == 3) {
+        return this.machine3
+      } else if (id == 4) {
+        return this.machine4
+      }
     }
   }
 }

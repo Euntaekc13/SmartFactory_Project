@@ -117,5 +117,6 @@ export default {
 .machine__Process__desc {
   margin: 10% 0 0 10%;
   padding: 5% 0 0 5%;
+  font-weight: 500;
 }
 </style>

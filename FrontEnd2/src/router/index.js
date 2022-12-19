@@ -62,12 +62,6 @@ const routes = [
     name: 'Dashboard',
     component: () => import('../components/Dashboard.vue')
   },
-  // {
-  //   path: '/monitoring/:id',
-  //   name: 'monitoring',
-  //   component: () => import('../views/Monitoring.vue')
-  //   // requireAuth
-  // },
   {
     path: '/monitoring/:id',
     name: 'monitoring',

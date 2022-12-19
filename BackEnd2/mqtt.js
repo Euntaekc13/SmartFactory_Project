@@ -145,10 +145,25 @@ client.on("message", async (topic, message, packet) => {
           console.log("count가 1인 경우 : ", dice_num);
         }
         if (count >= 2) {
-          let firstindex = arr.indexOf(Math.max(...arr));
-          arr[firstindex] = 0;
-          dice_num = arr.indexOf(Math.max(...arr)) + 1;
-          console.log("count가 2개 이상인 경우 : ", dice_num);
+          arr.sort(function (a, b) {
+            return b - a;
+          });
+
+          if (arr[1] > 10) {
+            let firstindex = arr.indexOf(Math.max(...arr));
+            arr[firstindex] = 0;
+            dice_num = arr.indexOf(Math.max(...arr)) + 1;
+            console.log(
+              "count가 2개 이상이고 두번째로 큰 값이 10보다 큰 경우 : ",
+              dice_num
+            );
+          } else {
+            dice_num = arr.indexOf(Math.max(...arr)) + 1;
+            console.log(
+              "count가 2개 이상이고 두번째로 큰 값이 10보다 작거나 같은 경우 : ",
+              dice_num
+            );
+          }
         }
 
         arr = [0, 0, 0, 0, 0, 0];

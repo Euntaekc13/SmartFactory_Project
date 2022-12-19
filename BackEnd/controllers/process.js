@@ -27,7 +27,7 @@ exports.allMachineExplorer = async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     });
 
-    if (!part && !software_history) {
+    if (part.length == 0 && !software_history.length == 0) {
       return res.status(resStatus.insufficient.code).json({
         message: resStatus.insufficient.message, // (206) 보낼 data가 없거나 부족할 때
       });

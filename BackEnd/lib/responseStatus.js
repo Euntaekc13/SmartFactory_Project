@@ -11,12 +11,6 @@ insufficient : 보낼 data가 없거나 부족할 때
 same : 같으면 안 되는데 같을 경우
 notadmin : 관리자가 아님
 
-invalide : invalid email
-invalidp : invalid pw
-invalidu : invalid user	
-different : different UserId
-
-
 401
 expired : token 만료
 
@@ -71,21 +65,4 @@ exports.resStatus = {
     code: 498,
     message: "invalidt", // invalid token
   },
-
-  // invalide: {
-  //   code: 204,
-  //   message: "invalide",
-  // },
-  // invalidp: {
-  //   code: 204,
-  //   message: "invalidp",
-  // },
-  // invalidu: {
-  //   code: 204,
-  //   message: "invalidu",
-  // },
-  // different: {
-  //   code: 204,
-  //   message: "different",
-  // },
 };

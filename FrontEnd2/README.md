@@ -4,30 +4,31 @@
 ```
 ├── .vscode                         # VSCode 관련 환경 세팅 디렉토리
 │   └── settings.json
-├── dist                            # 'npm run build'시 js로 변환된 파일 디렉토리
-│   └── ...                         # 실제 nginx를 통해 서비스 되는 파일들(js, css, html)
 ├── node_modules                    # 'npm install'을 통해 설치되는 모듈 파일 디렉토리
 │   └── ...
-├── public                          # index.html 관련 파일이 들어가는 공간
+├── public                          # index.html 관련 파일 및 FBX파일이 들어가는 공간
 │   └── ...
 ├── src                             # 각종 vue파일과 js파일들이 작성되는 공간
-│   ├── assets                      # 정적파일 서비스 공간
-│   │   └── style                   # css파일들
+│   ├── api                         
+│   │   └── ...                     # 기능에 따라 api들을 분류하여 함수로 저장
 │   ├── components                  # 각종 component 공간
-│   │   ├── chart                   # 차트관련 컴포넌트
-│   │   │   └── lineChart.js        # 라인차트 컴포넌트
-│   │   ├── layout                  # 레이아웃 컴포넌트(헤더, 사이드바)
-│   │   │   ├── Header.vue          # 헤더 컴포넌트
-│   │   │   └── Sidebar.vue         # 사이드바 컴포넌트
-│   │   └── NotFound.vue            # File Not Found 컴포넌트(404 처리 컴포넌트)
+│   │   ├── CreateModal.vue         # 신규 유저 추가 컴포넌트
+│   │   ├── Navbar.vue              # 사이드바 컴포넌트
+│   │   ├── DashBoard.vue           # 모니터링 페이지 대쉬보드 컴포넌트 
+│   │   ├── Item.vue                # 공정관리 컴포넌트
+│   │   ├── Item2.vue               # 공정관리 컴포넌트
+│   │   ├── MachineItem.vue         # Process Management 페이지 Process 컴포넌트 
+│   │   ├── Profile.vue             # 프로필 수정 컴포넌트
+│   │   └── Password.vue            # 비밀번호 변경 컴포넌트
+│   ├── mixins                      # 벨리데이션 기능
+│   │   └── ...                     # validation & Setformat
 │   ├── router                      # 라우터 관련 디텍토리
-│   │   └── index.ts                # 라우터 파일
+│   │   └── index.js                # 라우터 파일
 │   ├── store                       # Store 공간
-│   │   ├── models                  # Store에서 사용할 각종 모델들 디렉토리
-│   │   │   ├── auth.js             # 로그인 관련 Store
-│   │   │   └── ...                 # 각종 모델 파일
-│   │   ├── apiUtil.js              # axios 처리 유틸 파일
-│   │   └── index.js                # Store의 인덱스 파일
+│   │   ├── index.js                # Store에서 사용할 각종 모델들 디렉토리
+│   │   ├── Auth.js                 # 로그인 및 회원 관련 Store
+│   │   ├── ...                     # axios 처리 유틸 파일
+│   │   └── User.js                 # 유저 정보 store
 │   ├── views                       # 페이지 뷰(화면)파일 디렉토리
 │   │   ├── auth                    # 로그인 화면 처리디렉토리
 │   │   │   └── ...                 # 로그인 처리 파일들

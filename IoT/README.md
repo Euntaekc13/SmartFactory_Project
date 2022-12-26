@@ -1,8 +1,9 @@
 # IoT
 PLC를 이용한 Mini Smart Factory Edukit </br>
 
-- 에듀킷 이미지
-- 에듀킷 정보 기입 ( 몇 버전의 어떤 걸 쓰고 있는지 자세하게 기입하기 )
+- Edukit
+![edukit](https://user-images.githubusercontent.com/80251711/209537987-e1fb78eb-a18a-4444-ba8a-bcb0688dad91.jpg)
+- 기기 정보 : exp40-TTA
 
 </br>
 </br>
@@ -15,9 +16,7 @@ PLC를 이용한 Mini Smart Factory Edukit </br>
 </br>
 
 ## XG5000
----
-XG5000에 대한 설명 </br>
-XG5000 설정
+XG5000으로 PLC 정보에 대한 수정이 가능하다.
 
 </br>
 </br>

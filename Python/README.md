@@ -22,3 +22,8 @@ cap = cv2.VideoCapture(0) # 0 or 1
 ```
 우선 카메라가 연결되어 있는지 확인한다. <br />
 0과 1 중에서 되는 것을 사용한다.
+
+4. 코드 실행
+```
+python vision.py
+```

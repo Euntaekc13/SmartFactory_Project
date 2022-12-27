@@ -178,6 +178,7 @@ module.exports = corsConfig;
 
 ```
 <br>
+
 4. whitelist.json
 
 ```
